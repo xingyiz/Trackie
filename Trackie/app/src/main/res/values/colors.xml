@@ -7,8 +7,15 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="colorPrimary">#CECECE</color>
-    <color name="colorPrimaryDark">#707070</color>
-    <color name="colorPrimaryLight">#F1F1F1</color>
-    <color name="colorAlertRed">#B80000</color>
+
+    <!--red color theme-->
+    <color name="maroon">#800000</color>
+    <color name="darkred">#8B0000</color>
+    <color name="firebrick">#B22222</color>
+    <color name="crimsom">#DC143C</color>
+    
+    <!--grayscale color theme-->
+    <color name="gray">#CECECE</color>
+    <color name="dark_gray">#707070</color>
+    <color name="light_gray">#F1F1F1</color>
 </resources>
