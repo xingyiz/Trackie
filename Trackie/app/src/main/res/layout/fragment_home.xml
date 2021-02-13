@@ -14,7 +14,7 @@
         android:layout_marginTop="42dp"
         android:layout_marginEnd="64dp"
         android:foreground="?attr/selectableItemBackground"
-        android:text="Map Mode"
+        android:text="@string/map_mode"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -27,7 +27,7 @@
         android:layout_marginTop="22dp"
         android:layout_marginEnd="64dp"
         android:foreground="?attr/selectableItemBackground"
-        android:text="Test Mode"
+        android:text="@string/test_mode"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
