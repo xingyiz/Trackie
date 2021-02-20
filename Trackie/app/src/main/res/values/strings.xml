@@ -2,7 +2,7 @@
     <string name="app_name">Trackie</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_subtitle">Edit content in strings.xml</string>
+    <string name="nav_header_subtitle">Current Privileges</string>
     <string name="action_settings">Settings</string>
 
     <string name="menu_home">Home</string>
@@ -10,5 +10,12 @@
     <string name="menu_settings">Settings</string>
 
     <string name="map_mode">Map Mode</string>
+    <string name="confirm_mapping_location">Confirm Location</string>
+    <string name="end_mapping">End Mapping</string>
+    <string name="collected_data">Collected Data:</string>
+    <string name="move_5_meters_guide">Move about 5 metres away</string>
+
     <string name="test_mode">Test Mode</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
