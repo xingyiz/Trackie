@@ -49,7 +49,7 @@ public class Location implements MapEntry {
     @NonNull
     @Override
     public String toString() {
-        return "Location[x=" + this.x + " , y=" + this.y + " , z=" + this.z + " ]";
+        return "Location[ x=" + this.x + " , y=" + this.y + " , z=" + this.z + " ]";
     }
 
     @Override
