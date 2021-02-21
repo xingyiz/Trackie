@@ -9,8 +9,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Trackie">
+
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.testmode.TestModeActivity"
+            android:label="@string/test_mode"
+            android:theme="@style/Theme.Trackie.NoActionBar">
+        </activity>
+
+        <activity
+            android:name=".ui.mapmode.MapModeActivity"
+            android:label="@string/map_mode"
+            android:theme="@style/Theme.Trackie.NoActionBar">
+        </activity>
+
+        <activity
+            android:name=".ui.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/Theme.Trackie.NoActionBar">
             <intent-filter>

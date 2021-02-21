@@ -2,13 +2,16 @@
     <!-- Base application theme. -->
     <style name="Theme.Trackie" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/gray</item>
-        <item name="colorPrimaryVariant">@color/dark_gray</item>
+        <item name="colorPrimary">@color/darkred</item>
+        <item name="colorPrimaryVariant">@color/black</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/crimsom</item>
         <item name="colorSecondaryVariant">@color/firebrick</item>
         <item name="colorOnSecondary">@color/black</item>
+        <!-- Enable transitions -->
+        <item name="android:windowActivityTransitions">true</item>
+        <item name="android:windowContentTransitions">true</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
@@ -22,7 +25,7 @@
 
     <style name="Theme.Trackie.MainButton" parent="Widget.AppCompat.Button">
         <item name="android:background">@drawable/button_border</item>
-        <item name="android:textColor">@color/dark_gray</item>
+        <item name="android:textColor">?attr/colorPrimary</item>
         <item name="android:textSize">@dimen/button_text_size</item>
     </style>
 

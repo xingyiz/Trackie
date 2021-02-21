@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/test_mode_navigation"
+    app:startDestination="@id/testingMainFragment">
+
+    <fragment
+        android:id="@+id/testingMainFragment"
+        android:name="com.example.trackie.ui.testmode.TestingMainFragment"
+        android:label="fragment_testing_main"
+        tools:layout="@layout/fragment_testing_main" />
+</navigation>
