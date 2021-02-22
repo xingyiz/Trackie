@@ -6,22 +6,24 @@ import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class FirestoreHelper {
     private static final String TAG = "FirestoreHelper";
     private static FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-    public static ArrayList<MapData> GetMapData(String mapID) {
+    public static List<MapData> GetMapData(String mapName) {
 
-        ArrayList<MapData> mapData = new ArrayList<>();
+        List<MapData> mapData = new ArrayList<>();
 
         db.collection("MapData")
-                .whereEqualTo("name", mapID)
+                .whereEqualTo("name", mapName)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -40,16 +42,16 @@ public class FirestoreHelper {
         return mapData;
     }
 
-    public static void SetMapData(MapData mapData, String mapID) {
-        db.collection("MapData").document(mapID)
-                .set(mapData)
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
+    public static void SetMapData(MapData mapData) {
+        db.collection("MapData")
+                .add(mapData)
+                .addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
                     @Override
-                    public void onComplete(@NonNull Task<Void> task) {
+                    public void onComplete(@NonNull Task<DocumentReference> task) {
                         if (task.isSuccessful()) {
-                            Log.d(TAG, "SetMapData successful" + mapData.toString());
+                            Log.i(TAG, "SetMapData successful");
                         } else {
-                            Log.d(TAG, "SetMapData unsuccessful" + mapData.toString());
+                            Log.e(TAG, "SetMapData unsuccessful");
                         }
                     }
                 });

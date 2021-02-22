@@ -42,13 +42,13 @@
             <LayoutPositions>
               <option name="myPositions">
                 <map>
-                  <entry key="mapModeFragment">
+                  <entry key="databaseTestFragment2">
                     <value>
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="245" />
-                            <option name="y" value="5" />
+                            <option name="x" value="-652" />
+                            <option name="y" value="56" />
                           </Point>
                         </option>
                       </LayoutPositions>

@@ -6,33 +6,46 @@ import androidx.annotation.NonNull;
 
 import com.google.firebase.Timestamp;
 
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class MapData implements MapRep {
     private static final String TAG = "MapData";
 
-    private Map<String, ArrayList<Integer>> data;   // String = BSSID of WAP, ArrayList<Integer> = RSSI values associated with WAP
+    private String name;
+    private Map<String, List<Integer>> data;   // String = BSSID of WAP, ArrayList<Integer> = RSSI values associated with WAP
     private Point location;                         // (x, y) location of user
+    private double z;                               // z location of user, doesn't really change if on the same floor
     private String device;
     private Timestamp timestamp;
 
     public MapData() {}
 
-    public MapData(Map<String, ArrayList<Integer>> data, Point location, String device, Timestamp timestamp) {
+    public MapData(String name, Map<String, List<Integer>> data, Point location, double z, String device, Timestamp timestamp) {
+        this.name = name;
         this.data = data;
         this.location = location;
+        this.z = z;
         this.device = device;
         this.timestamp = timestamp;
     }
 
     // Getters and Setters
-    public Map<String, ArrayList<Integer>> getData() {
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Map<String, List<Integer>> getData() {
         return data;
     }
 
-    public void setData(Map<String, ArrayList<Integer>> data) {
+    public void setData(Map<String, List<Integer>> data) {
         this.data = data;
     }
 
@@ -42,6 +55,14 @@ public class MapData implements MapRep {
 
     public void setLocation(Point location) {
         this.location = location;
+    }
+
+    public double getZ() {
+        return z;
+    }
+
+    public void setZ(double z) {
+        this.z = z;
     }
 
     public String getDevice() {
@@ -73,8 +94,9 @@ public class MapData implements MapRep {
     @NonNull
     @Override
     public String toString() {
-        return "MapData[ location = " + location.toString() +
-                ", device = " + device + ", timestamp = " +
-                timestamp.toString() + " ]";
+        return "MapData[ location = " + location.toString()
+                + ", z = " + z
+                + ", device = " + device + ", timestamp = "
+                + timestamp.toString() + " ]";
     }
 }

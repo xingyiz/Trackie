@@ -57,7 +57,7 @@
         android:layout_height="423dp"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
-        android:src="@drawable/sample_floor_plan"
+        android:src="@drawable/ic_keyboard_arrow_down_24px"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mapping_complete_textview" />
