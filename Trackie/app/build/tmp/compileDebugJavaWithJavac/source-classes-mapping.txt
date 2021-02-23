@@ -1,0 +1,42 @@
+com/example/trackie/ui/mapmode/MappingMainFragment.java
+ com.example.trackie.ui.mapmode.MappingMainFragment
+com/example/trackie/database/AsyncGetter.java
+ com.example.trackie.database.AsyncGetter
+ com.example.trackie.database.AsyncGetter$1
+com/example/trackie/database/Location.java
+ com.example.trackie.database.Location
+com/example/trackie/ui/settings/SettingsViewModel.java
+ com.example.trackie.ui.settings.SettingsViewModel
+com/example/trackie/ui/locations/LocationsViewModel.java
+ com.example.trackie.ui.locations.LocationsViewModel
+com/example/trackie/database/MapEntry.java
+ com.example.trackie.database.MapEntry
+com/example/trackie/ui/home/HomeViewModel.java
+ com.example.trackie.ui.home.HomeViewModel
+com/example/trackie/ui/testmode/TestingMainFragment.java
+ com.example.trackie.ui.testmode.TestingMainFragment
+com/example/trackie/database/MapData.java
+ com.example.trackie.database.MapData
+com/example/trackie/ui/MainActivity.java
+ com.example.trackie.ui.MainActivity
+com/example/trackie/BuildConfig.java
+ com.example.trackie.BuildConfig
+com/example/trackie/database/WiFi.java
+ com.example.trackie.database.WiFi
+com/example/trackie/ui/locations/LocationsFragment.java
+ com.example.trackie.ui.locations.LocationsFragment
+ com.example.trackie.ui.locations.LocationsFragment$1
+com/example/trackie/ui/mapmode/MappingCompleteFragment.java
+ com.example.trackie.ui.mapmode.MappingCompleteFragment
+com/example/trackie/ui/settings/SettingsFragment.java
+ com.example.trackie.ui.settings.SettingsFragment
+ com.example.trackie.ui.settings.SettingsFragment$1
+com/example/trackie/ui/mapmode/MapModeActivity.java
+ com.example.trackie.ui.mapmode.MapModeActivity
+com/example/trackie/ui/testmode/TestModeActivity.java
+ com.example.trackie.ui.testmode.TestModeActivity
+com/example/trackie/ui/home/HomeFragment.java
+ com.example.trackie.ui.home.HomeFragment
+ com.example.trackie.ui.home.HomeFragment$1
+ com.example.trackie.ui.home.HomeFragment$2
+ com.example.trackie.ui.home.HomeFragment$3
