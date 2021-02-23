@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="default_web_client_id" translatable="false">127894804352-n5lffmq38tuqoubv4lfav97h5diap4no.apps.googleusercontent.com</string>
+    <string name="gcm_defaultSenderId" translatable="false">127894804352</string>
+    <string name="google_api_key" translatable="false">AIzaSyDUNY3EdTGBho_bIY6dM_RyhEhRULPhJCc</string>
+    <string name="google_app_id" translatable="false">1:127894804352:android:d93a350cdd46f08e939365</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyDUNY3EdTGBho_bIY6dM_RyhEhRULPhJCc</string>
+    <string name="google_storage_bucket" translatable="false">trackie-2e28a.appspot.com</string>
+    <string name="project_id" translatable="false">trackie-2e28a</string>
+</resources>
