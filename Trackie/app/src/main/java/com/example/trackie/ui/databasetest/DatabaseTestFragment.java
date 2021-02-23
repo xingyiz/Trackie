@@ -16,15 +16,18 @@ import com.example.trackie.R;
 import com.example.trackie.database.FirestoreHelper;
 import com.example.trackie.database.MapData;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.textview.MaterialTextView;
 import com.google.firebase.Timestamp;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class DatabaseTestFragment extends Fragment {
     private MaterialButton getButton;
     private MaterialButton setButton;
+    private MaterialTextView textView;
     private Map<String, List<Integer>> data;
     private Point location = new Point(13, 15);
     private double z = 1.0;
@@ -46,6 +49,8 @@ public class DatabaseTestFragment extends Fragment {
         });
         getButton = view.findViewById(R.id.get_button);
         setButton = view.findViewById(R.id.set_button);
+        textView = view.findViewById(R.id.database_display);
+        data = new HashMap<>();
         data.put("SUTD", Arrays.asList(-82, -84, -83, 100, -86));
         data.put("Hostel", Arrays.asList(-83, -84, -83, -90, -85));
         return view;
@@ -58,7 +63,8 @@ public class DatabaseTestFragment extends Fragment {
         getButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FirestoreHelper.GetMapData("HELLO WORLD");
+                List<MapData> mapData = FirestoreHelper.GetMapData("HELLO WORLD");
+                textView.setText(mapData.toString());
             }
         });
 

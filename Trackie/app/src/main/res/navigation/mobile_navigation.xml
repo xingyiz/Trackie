@@ -23,9 +23,8 @@
         android:name="com.example.trackie.ui.settings.SettingsFragment"
         android:label="@string/menu_settings"
         tools:layout="@layout/fragment_settings" />
-
     <fragment
-        android:id="@+id/databaseTestFragment"
+        android:id="@+id/nav_database"
         android:name="com.example.trackie.ui.databasetest.DatabaseTestFragment"
         android:label="DatabaseTestFragment"
         tools:layout="@layout/fragment_databasetest"/>
