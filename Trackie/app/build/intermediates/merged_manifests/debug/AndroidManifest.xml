@@ -27,11 +27,13 @@
         <activity
             android:name="com.example.trackie.ui.testmode.TestModeActivity"
             android:label="@string/test_mode"
+            android:parentActivityName="com.example.trackie.ui.MainActivity"
             android:theme="@style/Theme.Trackie.NoActionBar" >
         </activity>
         <activity
             android:name="com.example.trackie.ui.mapmode.MapModeActivity"
             android:label="@string/map_mode"
+            android:parentActivityName="com.example.trackie.ui.MainActivity"
             android:theme="@style/Theme.Trackie.NoActionBar" >
         </activity>
         <activity

@@ -4,22 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     tools:context=".ui.testmode.TestModeActivity">
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/use_mode_toolbar"
-        android:layout_width="0dp"
+
+    <include
+        android:id="@+id/include_app_bar_test_mode"
+        layout="@layout/app_bar_main"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        android:layout_margin="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"/>
 
-        <include layout="@layout/use_mode_toolbar_layout"></include>
-
-    </androidx.appcompat.widget.Toolbar>
 
     <fragment
         android:id="@+id/test_mode_host_fragment"
@@ -31,7 +27,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/use_mode_toolbar"
+        app:layout_constraintTop_toBottomOf="@id/include_app_bar_test_mode"
         app:layout_constraintVertical_bias="0.0"
         app:navGraph="@navigation/test_mode_navigation" />
 </androidx.constraintlayout.widget.ConstraintLayout>

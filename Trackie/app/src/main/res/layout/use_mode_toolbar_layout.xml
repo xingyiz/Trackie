@@ -1,24 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/use_mode_toolbar"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:transitionName="slide">
+    android:layout_height="wrap_content"
+    android:layout_margin="0dp"
+    android:background="?attr/colorPrimary"
+    android:minHeight="?attr/actionBarSize"
+    android:theme="?attr/actionBarTheme"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:popupTheme="@style/Theme.Trackie.PopupOverlay">
 
-    <ImageButton
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_centerVertical="true"
-        android:background="@drawable/ic_keyboard_return_24px"
-        android:backgroundTint="?attr/colorOnPrimary"></ImageButton>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:transitionName="slide">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:fontFamily="@font/segoeui"
-        android:text="Current Location"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textSize="@dimen/alert_text_size"></TextView>
+        <ImageButton
+            android:id="@+id/back_to_home_button"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:background="@drawable/ic_keyboard_return_24px"
+            android:backgroundTint="?attr/colorOnPrimary"></ImageButton>
 
-</RelativeLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/back_to_home_button"
+            android:fontFamily="@font/segoeui"
+            android:text="Current Location"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="@dimen/alert_text_size"></TextView>
+
+    </RelativeLayout>
+</androidx.appcompat.widget.Toolbar>

@@ -3,8 +3,11 @@ package com.example.trackie.ui;
 import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
+import android.transition.Fade;
+import android.transition.Transition;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.Window;
 
 import com.example.trackie.R;
 import com.example.trackie.ui.databasetest.DatabaseTestFragment;
@@ -26,7 +29,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
+
+        // set up action bar
         Toolbar toolbar = findViewById(R.id.top_toolbar);
         setSupportActionBar(toolbar);
 

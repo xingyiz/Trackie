@@ -13,13 +13,15 @@
         <activity
             android:name=".ui.testmode.TestModeActivity"
             android:label="@string/test_mode"
-            android:theme="@style/Theme.Trackie.NoActionBar">
+            android:theme="@style/Theme.Trackie.NoActionBar"
+            android:parentActivityName=".ui.MainActivity">
         </activity>
 
         <activity
             android:name=".ui.mapmode.MapModeActivity"
             android:label="@string/map_mode"
-            android:theme="@style/Theme.Trackie.NoActionBar">
+            android:theme="@style/Theme.Trackie.NoActionBar"
+            android:parentActivityName=".ui.MainActivity">
         </activity>
 
         <activity

@@ -9,6 +9,7 @@
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/app_bar_layout"
         android:theme="@style/Theme.Trackie.AppBarOverlay">
 
         <androidx.appcompat.widget.Toolbar
@@ -20,7 +21,5 @@
             android:transitionName="slide"/>
 
     </com.google.android.material.appbar.AppBarLayout>
-
-    <include layout="@layout/content_main" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

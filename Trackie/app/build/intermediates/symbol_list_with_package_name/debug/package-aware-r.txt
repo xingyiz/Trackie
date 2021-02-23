@@ -1478,6 +1478,7 @@ drawable notification_template_icon_bg
 drawable notification_template_icon_low_bg
 drawable notification_tile_bg
 drawable notify_panel_notification_icon_bg
+drawable sample_floor_plan
 drawable side_nav_bar
 drawable test_custom_background
 drawable tooltip_frame_dark
@@ -1556,8 +1557,10 @@ id adjust_width
 id alertTitle
 id all
 id always
+id app_bar_layout
 id async
 id auto
+id back_to_home_button
 id barrier
 id beginning
 id blocking
@@ -1639,6 +1642,9 @@ id icon_group
 id icon_only
 id ifRoom
 id image
+id include_app_bar_home
+id include_app_bar_map_mode
+id include_app_bar_test_mode
 id info
 id invisible
 id italic
@@ -1764,6 +1770,7 @@ id snackbar_action
 id snackbar_text
 id snap
 id snapMargins
+id something_smt
 id spacer
 id split_action_bar
 id spread
@@ -2904,6 +2911,7 @@ styleable View android_theme android_focusable paddingEnd paddingStart theme
 styleable ViewBackgroundHelper android_background backgroundTint backgroundTintMode
 styleable ViewPager2 android_orientation
 styleable ViewStubCompat android_id android_layout android_inflatedId
+transition fade
 xml standalone_badge
 xml standalone_badge_gravity_bottom_end
 xml standalone_badge_gravity_bottom_start

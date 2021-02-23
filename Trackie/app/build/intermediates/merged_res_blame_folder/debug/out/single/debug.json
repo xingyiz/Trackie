@@ -1,194 +1,202 @@
 [
     {
-        "merged": "C:\\Users\\xingyiz\\Documents\\SUTD STUFF\\TERM 5\\50.003 Elements of Software Construction\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi_ic_launcher_round.png.flat",
-        "source": "C:\\Users\\xingyiz\\Documents\\SUTD STUFF\\TERM 5\\50.003 Elements of Software Construction\\Trackie\\Trackie\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher_round.png"
+        "merged": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_launcher_background.xml.flat",
+        "source": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\src\\main\\res\\drawable\\ic_launcher_background.xml"
     },
     {
-        "merged": "C:\\Users\\xingyiz\\Documents\\SUTD STUFF\\TERM 5\\50.003 Elements of Software Construction\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi_ic_launcher.png.flat",
-        "source": "C:\\Users\\xingyiz\\Documents\\SUTD STUFF\\TERM 5\\50.003 Elements of Software Construction\\Trackie\\Trackie\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher.png"
+        "merged": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_menu_camera.xml.flat",
+        "source": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\src\\main\\res\\drawable\\ic_menu_camera.xml"
     },
     {
-        "merged": "C:\\Users\\xingyiz\\Documents\\SUTD STUFF\\TERM 5\\50.003 Elements of Software Construction\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_keyboard_return_24px.xml.flat",
-        "source": "C:\\Users\\xingyiz\\Documents\\SUTD STUFF\\TERM 5\\50.003 Elements of Software Construction\\Trackie\\Trackie\\app\\src\\main\\res\\drawable\\ic_keyboard_return_24px.xml"
+        "merged": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\layout_fragment_databasetest.xml.flat",
+        "source": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\src\\main\\res\\layout\\fragment_databasetest.xml"
     },
     {
-        "merged": "C:\\Users\\xingyiz\\Documents\\SUTD STUFF\\TERM 5\\50.003 Elements of Software Construction\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\layout_use_mode_toolbar_layout.xml.flat",
-        "source": "C:\\Users\\xingyiz\\Documents\\SUTD STUFF\\TERM 5\\50.003 Elements of Software Construction\\Trackie\\Trackie\\app\\src\\main\\res\\layout\\use_mode_toolbar_layout.xml"
+        "merged": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-hdpi_ic_launcher.png.flat",
+        "source": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher.png"
     },
     {
-        "merged": "C:\\Users\\xingyiz\\Documents\\SUTD STUFF\\TERM 5\\50.003 Elements of Software Construction\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_menu_gallery.xml.flat",
-        "source": "C:\\Users\\xingyiz\\Documents\\SUTD STUFF\\TERM 5\\50.003 Elements of Software Construction\\Trackie\\Trackie\\app\\src\\main\\res\\drawable\\ic_menu_gallery.xml"
+        "merged": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_add_24px.xml.flat",
+        "source": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\src\\main\\res\\drawable\\ic_add_24px.xml"
     },
     {
-        "merged": "C:\\Users\\xingyiz\\Documents\\SUTD STUFF\\TERM 5\\50.003 Elements of Software Construction\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-anydpi-v26_ic_launcher.xml.flat",
-        "source": "C:\\Users\\xingyiz\\Documents\\SUTD STUFF\\TERM 5\\50.003 Elements of Software Construction\\Trackie\\Trackie\\app\\src\\main\\res\\mipmap-anydpi-v26\\ic_launcher.xml"
+        "merged": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\layout_fragment_settings.xml.flat",
+        "source": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\src\\main\\res\\layout\\fragment_settings.xml"
     },
     {
-        "merged": "C:\\Users\\xingyiz\\Documents\\SUTD STUFF\\TERM 5\\50.003 Elements of Software Construction\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\font_bsegoeui.TTF.flat",
-        "source": "C:\\Users\\xingyiz\\Documents\\SUTD STUFF\\TERM 5\\50.003 Elements of Software Construction\\Trackie\\Trackie\\app\\src\\main\\res\\font\\bsegoeui.TTF"
+        "merged": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_keyboard_return_24px.xml.flat",
+        "source": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\src\\main\\res\\drawable\\ic_keyboard_return_24px.xml"
     },
     {
-        "merged": "C:\\Users\\xingyiz\\Documents\\SUTD STUFF\\TERM 5\\50.003 Elements of Software Construction\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_launcher_background.xml.flat",
-        "source": "C:\\Users\\xingyiz\\Documents\\SUTD STUFF\\TERM 5\\50.003 Elements of Software Construction\\Trackie\\Trackie\\app\\src\\main\\res\\drawable\\ic_launcher_background.xml"
+        "merged": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_settings_24px.xml.flat",
+        "source": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\src\\main\\res\\drawable\\ic_settings_24px.xml"
     },
     {
-        "merged": "C:\\Users\\xingyiz\\Documents\\SUTD STUFF\\TERM 5\\50.003 Elements of Software Construction\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_launcher_foreground.xml.flat",
-        "source": "C:\\Users\\xingyiz\\Documents\\SUTD STUFF\\TERM 5\\50.003 Elements of Software Construction\\Trackie\\Trackie\\app\\src\\main\\res\\drawable\\ic_launcher_foreground.xml"
+        "merged": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_main.xml.flat",
+        "source": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\src\\main\\res\\layout\\activity_main.xml"
     },
     {
-        "merged": "C:\\Users\\xingyiz\\Documents\\SUTD STUFF\\TERM 5\\50.003 Elements of Software Construction\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\layout_fragment_home.xml.flat",
-        "source": "C:\\Users\\xingyiz\\Documents\\SUTD STUFF\\TERM 5\\50.003 Elements of Software Construction\\Trackie\\Trackie\\app\\src\\main\\res\\layout\\fragment_home.xml"
+        "merged": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_launcher_foreground.xml.flat",
+        "source": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\src\\main\\res\\drawable\\ic_launcher_foreground.xml"
     },
     {
-        "merged": "C:\\Users\\xingyiz\\Documents\\SUTD STUFF\\TERM 5\\50.003 Elements of Software Construction\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\layout_nav_header_main.xml.flat",
-        "source": "C:\\Users\\xingyiz\\Documents\\SUTD STUFF\\TERM 5\\50.003 Elements of Software Construction\\Trackie\\Trackie\\app\\src\\main\\res\\layout\\nav_header_main.xml"
+        "merged": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\font_bsegoeui.TTF.flat",
+        "source": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\src\\main\\res\\font\\bsegoeui.TTF"
     },
     {
-        "merged": "C:\\Users\\xingyiz\\Documents\\SUTD STUFF\\TERM 5\\50.003 Elements of Software Construction\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_main.xml.flat",
-        "source": "C:\\Users\\xingyiz\\Documents\\SUTD STUFF\\TERM 5\\50.003 Elements of Software Construction\\Trackie\\Trackie\\app\\src\\main\\res\\layout\\activity_main.xml"
+        "merged": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-hdpi_ic_launcher_round.png.flat",
+        "source": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher_round.png"
     },
     {
-        "merged": "C:\\Users\\xingyiz\\Documents\\SUTD STUFF\\TERM 5\\50.003 Elements of Software Construction\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\drawable_side_nav_bar.xml.flat",
-        "source": "C:\\Users\\xingyiz\\Documents\\SUTD STUFF\\TERM 5\\50.003 Elements of Software Construction\\Trackie\\Trackie\\app\\src\\main\\res\\drawable\\side_nav_bar.xml"
+        "merged": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\layout_fragment_locations.xml.flat",
+        "source": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\src\\main\\res\\layout\\fragment_locations.xml"
     },
     {
-        "merged": "C:\\Users\\xingyiz\\Documents\\SUTD STUFF\\TERM 5\\50.003 Elements of Software Construction\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\layout_fragment_databasetest.xml.flat",
-        "source": "C:\\Users\\xingyiz\\Documents\\SUTD STUFF\\TERM 5\\50.003 Elements of Software Construction\\Trackie\\Trackie\\app\\src\\main\\res\\layout\\fragment_databasetest.xml"
+        "merged": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxxhdpi_ic_launcher_round.png.flat",
+        "source": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\src\\main\\res\\mipmap-xxxhdpi\\ic_launcher_round.png"
     },
     {
-        "merged": "C:\\Users\\xingyiz\\Documents\\SUTD STUFF\\TERM 5\\50.003 Elements of Software Construction\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_menu_slideshow.xml.flat",
-        "source": "C:\\Users\\xingyiz\\Documents\\SUTD STUFF\\TERM 5\\50.003 Elements of Software Construction\\Trackie\\Trackie\\app\\src\\main\\res\\drawable\\ic_menu_slideshow.xml"
+        "merged": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_menu_gallery.xml.flat",
+        "source": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\src\\main\\res\\drawable\\ic_menu_gallery.xml"
     },
     {
-        "merged": "C:\\Users\\xingyiz\\Documents\\SUTD STUFF\\TERM 5\\50.003 Elements of Software Construction\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxxhdpi_ic_launcher_round.png.flat",
-        "source": "C:\\Users\\xingyiz\\Documents\\SUTD STUFF\\TERM 5\\50.003 Elements of Software Construction\\Trackie\\Trackie\\app\\src\\main\\res\\mipmap-xxxhdpi\\ic_launcher_round.png"
+        "merged": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\layout_app_bar_main.xml.flat",
+        "source": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\src\\main\\res\\layout\\app_bar_main.xml"
     },
     {
-        "merged": "C:\\Users\\xingyiz\\Documents\\SUTD STUFF\\TERM 5\\50.003 Elements of Software Construction\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_settings_24px.xml.flat",
-        "source": "C:\\Users\\xingyiz\\Documents\\SUTD STUFF\\TERM 5\\50.003 Elements of Software Construction\\Trackie\\Trackie\\app\\src\\main\\res\\drawable\\ic_settings_24px.xml"
+        "merged": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi_ic_launcher_round.png.flat",
+        "source": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher_round.png"
     },
     {
-        "merged": "C:\\Users\\xingyiz\\Documents\\SUTD STUFF\\TERM 5\\50.003 Elements of Software Construction\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi_ic_launcher.png.flat",
-        "source": "C:\\Users\\xingyiz\\Documents\\SUTD STUFF\\TERM 5\\50.003 Elements of Software Construction\\Trackie\\Trackie\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher.png"
+        "merged": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\layout_use_mode_toolbar_layout.xml.flat",
+        "source": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\src\\main\\res\\layout\\use_mode_toolbar_layout.xml"
     },
     {
-        "merged": "C:\\Users\\xingyiz\\Documents\\SUTD STUFF\\TERM 5\\50.003 Elements of Software Construction\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_add_24px.xml.flat",
-        "source": "C:\\Users\\xingyiz\\Documents\\SUTD STUFF\\TERM 5\\50.003 Elements of Software Construction\\Trackie\\Trackie\\app\\src\\main\\res\\drawable\\ic_add_24px.xml"
+        "merged": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\layout_fragment_mapping_main.xml.flat",
+        "source": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\src\\main\\res\\layout\\fragment_mapping_main.xml"
     },
     {
-        "merged": "C:\\Users\\xingyiz\\Documents\\SUTD STUFF\\TERM 5\\50.003 Elements of Software Construction\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\layout_app_bar_main.xml.flat",
-        "source": "C:\\Users\\xingyiz\\Documents\\SUTD STUFF\\TERM 5\\50.003 Elements of Software Construction\\Trackie\\Trackie\\app\\src\\main\\res\\layout\\app_bar_main.xml"
+        "merged": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\menu_main.xml.flat",
+        "source": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\src\\main\\res\\menu\\main.xml"
     },
     {
-        "merged": "C:\\Users\\xingyiz\\Documents\\SUTD STUFF\\TERM 5\\50.003 Elements of Software Construction\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_map_24px.xml.flat",
-        "source": "C:\\Users\\xingyiz\\Documents\\SUTD STUFF\\TERM 5\\50.003 Elements of Software Construction\\Trackie\\Trackie\\app\\src\\main\\res\\drawable\\ic_map_24px.xml"
+        "merged": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi_ic_launcher.png.flat",
+        "source": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher.png"
     },
     {
-        "merged": "C:\\Users\\xingyiz\\Documents\\SUTD STUFF\\TERM 5\\50.003 Elements of Software Construction\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_menu_camera.xml.flat",
-        "source": "C:\\Users\\xingyiz\\Documents\\SUTD STUFF\\TERM 5\\50.003 Elements of Software Construction\\Trackie\\Trackie\\app\\src\\main\\res\\drawable\\ic_menu_camera.xml"
+        "merged": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\navigation_mobile_navigation.xml.flat",
+        "source": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\src\\main\\res\\navigation\\mobile_navigation.xml"
     },
     {
-        "merged": "C:\\Users\\xingyiz\\Documents\\SUTD STUFF\\TERM 5\\50.003 Elements of Software Construction\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\menu_activity_main_drawer.xml.flat",
-        "source": "C:\\Users\\xingyiz\\Documents\\SUTD STUFF\\TERM 5\\50.003 Elements of Software Construction\\Trackie\\Trackie\\app\\src\\main\\res\\menu\\activity_main_drawer.xml"
+        "merged": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\layout_fragment_mapping_complete.xml.flat",
+        "source": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\src\\main\\res\\layout\\fragment_mapping_complete.xml"
     },
     {
-        "merged": "C:\\Users\\xingyiz\\Documents\\SUTD STUFF\\TERM 5\\50.003 Elements of Software Construction\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\font_segoeui.TTF.flat",
-        "source": "C:\\Users\\xingyiz\\Documents\\SUTD STUFF\\TERM 5\\50.003 Elements of Software Construction\\Trackie\\Trackie\\app\\src\\main\\res\\font\\segoeui.TTF"
+        "merged": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\drawable_button_border.xml.flat",
+        "source": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\src\\main\\res\\drawable\\button_border.xml"
     },
     {
-        "merged": "C:\\Users\\xingyiz\\Documents\\SUTD STUFF\\TERM 5\\50.003 Elements of Software Construction\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi_ic_launcher.png.flat",
-        "source": "C:\\Users\\xingyiz\\Documents\\SUTD STUFF\\TERM 5\\50.003 Elements of Software Construction\\Trackie\\Trackie\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher.png"
+        "merged": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\menu_activity_main_drawer.xml.flat",
+        "source": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\src\\main\\res\\menu\\activity_main_drawer.xml"
     },
     {
-        "merged": "C:\\Users\\xingyiz\\Documents\\SUTD STUFF\\TERM 5\\50.003 Elements of Software Construction\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\navigation_map_mode_navigation.xml.flat",
-        "source": "C:\\Users\\xingyiz\\Documents\\SUTD STUFF\\TERM 5\\50.003 Elements of Software Construction\\Trackie\\Trackie\\app\\src\\main\\res\\navigation\\map_mode_navigation.xml"
+        "merged": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi_ic_launcher.png.flat",
+        "source": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher.png"
     },
     {
-        "merged": "C:\\Users\\xingyiz\\Documents\\SUTD STUFF\\TERM 5\\50.003 Elements of Software Construction\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxxhdpi_ic_launcher.png.flat",
-        "source": "C:\\Users\\xingyiz\\Documents\\SUTD STUFF\\TERM 5\\50.003 Elements of Software Construction\\Trackie\\Trackie\\app\\src\\main\\res\\mipmap-xxxhdpi\\ic_launcher.png"
+        "merged": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\transition_fade.xml.flat",
+        "source": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\src\\main\\res\\transition\\fade.xml"
     },
     {
-        "merged": "C:\\Users\\xingyiz\\Documents\\SUTD STUFF\\TERM 5\\50.003 Elements of Software Construction\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_keyboard_arrow_down_24px.xml.flat",
-        "source": "C:\\Users\\xingyiz\\Documents\\SUTD STUFF\\TERM 5\\50.003 Elements of Software Construction\\Trackie\\Trackie\\app\\src\\main\\res\\drawable\\ic_keyboard_arrow_down_24px.xml"
+        "merged": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\font_segoeui.TTF.flat",
+        "source": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\src\\main\\res\\font\\segoeui.TTF"
     },
     {
-        "merged": "C:\\Users\\xingyiz\\Documents\\SUTD STUFF\\TERM 5\\50.003 Elements of Software Construction\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\navigation_test_mode_navigation.xml.flat",
-        "source": "C:\\Users\\xingyiz\\Documents\\SUTD STUFF\\TERM 5\\50.003 Elements of Software Construction\\Trackie\\Trackie\\app\\src\\main\\res\\navigation\\test_mode_navigation.xml"
+        "merged": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_map_24px.xml.flat",
+        "source": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\src\\main\\res\\drawable\\ic_map_24px.xml"
     },
     {
-        "merged": "C:\\Users\\xingyiz\\Documents\\SUTD STUFF\\TERM 5\\50.003 Elements of Software Construction\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_test_mode.xml.flat",
-        "source": "C:\\Users\\xingyiz\\Documents\\SUTD STUFF\\TERM 5\\50.003 Elements of Software Construction\\Trackie\\Trackie\\app\\src\\main\\res\\layout\\activity_test_mode.xml"
+        "merged": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_my_location_24px.xml.flat",
+        "source": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\src\\main\\res\\drawable\\ic_my_location_24px.xml"
     },
     {
-        "merged": "C:\\Users\\xingyiz\\Documents\\SUTD STUFF\\TERM 5\\50.003 Elements of Software Construction\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\layout_content_main.xml.flat",
-        "source": "C:\\Users\\xingyiz\\Documents\\SUTD STUFF\\TERM 5\\50.003 Elements of Software Construction\\Trackie\\Trackie\\app\\src\\main\\res\\layout\\content_main.xml"
+        "merged": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_test_mode.xml.flat",
+        "source": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\src\\main\\res\\layout\\activity_test_mode.xml"
     },
     {
-        "merged": "C:\\Users\\xingyiz\\Documents\\SUTD STUFF\\TERM 5\\50.003 Elements of Software Construction\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-hdpi_ic_launcher_round.png.flat",
-        "source": "C:\\Users\\xingyiz\\Documents\\SUTD STUFF\\TERM 5\\50.003 Elements of Software Construction\\Trackie\\Trackie\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher_round.png"
+        "merged": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\layout_fragment_testing_main.xml.flat",
+        "source": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\src\\main\\res\\layout\\fragment_testing_main.xml"
     },
     {
-        "merged": "C:\\Users\\xingyiz\\Documents\\SUTD STUFF\\TERM 5\\50.003 Elements of Software Construction\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-hdpi_ic_launcher.png.flat",
-        "source": "C:\\Users\\xingyiz\\Documents\\SUTD STUFF\\TERM 5\\50.003 Elements of Software Construction\\Trackie\\Trackie\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher.png"
+        "merged": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi_ic_launcher.png.flat",
+        "source": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher.png"
     },
     {
-        "merged": "C:\\Users\\xingyiz\\Documents\\SUTD STUFF\\TERM 5\\50.003 Elements of Software Construction\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-anydpi-v26_ic_launcher_round.xml.flat",
-        "source": "C:\\Users\\xingyiz\\Documents\\SUTD STUFF\\TERM 5\\50.003 Elements of Software Construction\\Trackie\\Trackie\\app\\src\\main\\res\\mipmap-anydpi-v26\\ic_launcher_round.xml"
+        "merged": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\navigation_map_mode_navigation.xml.flat",
+        "source": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\src\\main\\res\\navigation\\map_mode_navigation.xml"
     },
     {
-        "merged": "C:\\Users\\xingyiz\\Documents\\SUTD STUFF\\TERM 5\\50.003 Elements of Software Construction\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi_ic_launcher_round.png.flat",
-        "source": "C:\\Users\\xingyiz\\Documents\\SUTD STUFF\\TERM 5\\50.003 Elements of Software Construction\\Trackie\\Trackie\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher_round.png"
+        "merged": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\layout_content_main.xml.flat",
+        "source": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\src\\main\\res\\layout\\content_main.xml"
     },
     {
-        "merged": "C:\\Users\\xingyiz\\Documents\\SUTD STUFF\\TERM 5\\50.003 Elements of Software Construction\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_my_location_24px.xml.flat",
-        "source": "C:\\Users\\xingyiz\\Documents\\SUTD STUFF\\TERM 5\\50.003 Elements of Software Construction\\Trackie\\Trackie\\app\\src\\main\\res\\drawable\\ic_my_location_24px.xml"
+        "merged": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\src\\main\\res\\mipmap-anydpi-v26\\ic_launcher_round.xml"
     },
     {
-        "merged": "C:\\Users\\xingyiz\\Documents\\SUTD STUFF\\TERM 5\\50.003 Elements of Software Construction\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\menu_main.xml.flat",
-        "source": "C:\\Users\\xingyiz\\Documents\\SUTD STUFF\\TERM 5\\50.003 Elements of Software Construction\\Trackie\\Trackie\\app\\src\\main\\res\\menu\\main.xml"
+        "merged": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi_ic_launcher_round.png.flat",
+        "source": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher_round.png"
     },
     {
-        "merged": "C:\\Users\\xingyiz\\Documents\\SUTD STUFF\\TERM 5\\50.003 Elements of Software Construction\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\layout_fragment_testing_main.xml.flat",
-        "source": "C:\\Users\\xingyiz\\Documents\\SUTD STUFF\\TERM 5\\50.003 Elements of Software Construction\\Trackie\\Trackie\\app\\src\\main\\res\\layout\\fragment_testing_main.xml"
+        "merged": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi_ic_launcher_round.png.flat",
+        "source": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher_round.png"
     },
     {
-        "merged": "C:\\Users\\xingyiz\\Documents\\SUTD STUFF\\TERM 5\\50.003 Elements of Software Construction\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_map_mode.xml.flat",
-        "source": "C:\\Users\\xingyiz\\Documents\\SUTD STUFF\\TERM 5\\50.003 Elements of Software Construction\\Trackie\\Trackie\\app\\src\\main\\res\\layout\\activity_map_mode.xml"
+        "merged": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_map_mode.xml.flat",
+        "source": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\src\\main\\res\\layout\\activity_map_mode.xml"
     },
     {
-        "merged": "C:\\Users\\xingyiz\\Documents\\SUTD STUFF\\TERM 5\\50.003 Elements of Software Construction\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\layout_fragment_mapping_complete.xml.flat",
-        "source": "C:\\Users\\xingyiz\\Documents\\SUTD STUFF\\TERM 5\\50.003 Elements of Software Construction\\Trackie\\Trackie\\app\\src\\main\\res\\layout\\fragment_mapping_complete.xml"
+        "merged": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\layout_nav_header_main.xml.flat",
+        "source": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\src\\main\\res\\layout\\nav_header_main.xml"
     },
     {
-        "merged": "C:\\Users\\xingyiz\\Documents\\SUTD STUFF\\TERM 5\\50.003 Elements of Software Construction\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\navigation_mobile_navigation.xml.flat",
-        "source": "C:\\Users\\xingyiz\\Documents\\SUTD STUFF\\TERM 5\\50.003 Elements of Software Construction\\Trackie\\Trackie\\app\\src\\main\\res\\navigation\\mobile_navigation.xml"
+        "merged": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\navigation_test_mode_navigation.xml.flat",
+        "source": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\src\\main\\res\\navigation\\test_mode_navigation.xml"
     },
     {
-        "merged": "C:\\Users\\xingyiz\\Documents\\SUTD STUFF\\TERM 5\\50.003 Elements of Software Construction\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\layout_fragment_settings.xml.flat",
-        "source": "C:\\Users\\xingyiz\\Documents\\SUTD STUFF\\TERM 5\\50.003 Elements of Software Construction\\Trackie\\Trackie\\app\\src\\main\\res\\layout\\fragment_settings.xml"
+        "merged": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxxhdpi_ic_launcher.png.flat",
+        "source": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\src\\main\\res\\mipmap-xxxhdpi\\ic_launcher.png"
     },
     {
-        "merged": "C:\\Users\\xingyiz\\Documents\\SUTD STUFF\\TERM 5\\50.003 Elements of Software Construction\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\drawable_button_border.xml.flat",
-        "source": "C:\\Users\\xingyiz\\Documents\\SUTD STUFF\\TERM 5\\50.003 Elements of Software Construction\\Trackie\\Trackie\\app\\src\\main\\res\\drawable\\button_border.xml"
+        "merged": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\font_isegoeui.ttf.flat",
+        "source": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\src\\main\\res\\font\\isegoeui.ttf"
     },
     {
-        "merged": "C:\\Users\\xingyiz\\Documents\\SUTD STUFF\\TERM 5\\50.003 Elements of Software Construction\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\layout_fragment_locations.xml.flat",
-        "source": "C:\\Users\\xingyiz\\Documents\\SUTD STUFF\\TERM 5\\50.003 Elements of Software Construction\\Trackie\\Trackie\\app\\src\\main\\res\\layout\\fragment_locations.xml"
+        "merged": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_menu_slideshow.xml.flat",
+        "source": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\src\\main\\res\\drawable\\ic_menu_slideshow.xml"
     },
     {
-        "merged": "C:\\Users\\xingyiz\\Documents\\SUTD STUFF\\TERM 5\\50.003 Elements of Software Construction\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\font_segoeuiz.ttf.flat",
-        "source": "C:\\Users\\xingyiz\\Documents\\SUTD STUFF\\TERM 5\\50.003 Elements of Software Construction\\Trackie\\Trackie\\app\\src\\main\\res\\font\\segoeuiz.ttf"
+        "merged": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\layout_fragment_home.xml.flat",
+        "source": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\src\\main\\res\\layout\\fragment_home.xml"
     },
     {
-        "merged": "C:\\Users\\xingyiz\\Documents\\SUTD STUFF\\TERM 5\\50.003 Elements of Software Construction\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\layout_fragment_mapping_main.xml.flat",
-        "source": "C:\\Users\\xingyiz\\Documents\\SUTD STUFF\\TERM 5\\50.003 Elements of Software Construction\\Trackie\\Trackie\\app\\src\\main\\res\\layout\\fragment_mapping_main.xml"
+        "merged": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\src\\main\\res\\mipmap-anydpi-v26\\ic_launcher.xml"
     },
     {
-        "merged": "C:\\Users\\xingyiz\\Documents\\SUTD STUFF\\TERM 5\\50.003 Elements of Software Construction\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi_ic_launcher_round.png.flat",
-        "source": "C:\\Users\\xingyiz\\Documents\\SUTD STUFF\\TERM 5\\50.003 Elements of Software Construction\\Trackie\\Trackie\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher_round.png"
+        "merged": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\drawable_side_nav_bar.xml.flat",
+        "source": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\src\\main\\res\\drawable\\side_nav_bar.xml"
     },
     {
-        "merged": "C:\\Users\\xingyiz\\Documents\\SUTD STUFF\\TERM 5\\50.003 Elements of Software Construction\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\font_isegoeui.ttf.flat",
-        "source": "C:\\Users\\xingyiz\\Documents\\SUTD STUFF\\TERM 5\\50.003 Elements of Software Construction\\Trackie\\Trackie\\app\\src\\main\\res\\font\\isegoeui.ttf"
+        "merged": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\font_segoeuiz.ttf.flat",
+        "source": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\src\\main\\res\\font\\segoeuiz.ttf"
+    },
+    {
+        "merged": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_keyboard_arrow_down_24px.xml.flat",
+        "source": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\src\\main\\res\\drawable\\ic_keyboard_arrow_down_24px.xml"
+    },
+    {
+        "merged": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\drawable_sample_floor_plan.jpg.flat",
+        "source": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\src\\main\\res\\drawable\\sample_floor_plan.jpg"
     }
 ]
