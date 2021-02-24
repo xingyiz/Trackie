@@ -2,13 +2,18 @@ package com.example.trackie.ui.mapmode;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.trackie.R;
+import com.ortiz.touchview.TouchImageView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -62,5 +67,20 @@ public class MappingMainFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_mapping_main, container, false);
+    }
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        TouchImageView mapping_image = (TouchImageView) view.findViewById(R.id.mapping_indoor_map_view);
+        mapping_image.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                float x = motionEvent.getX();
+                float y = motionEvent.getY();
+                String s = "x: " + x + ", y: " + y;
+                Toast.makeText(getActivity(), s,Toast.LENGTH_SHORT).show();
+                return true;
+            }
+        });
     }
 }

@@ -11,6 +11,7 @@ import android.transition.Fade;
 import android.transition.Slide;
 import android.transition.Transition;
 import android.view.Gravity;
+import android.view.MenuItem;
 import android.view.Window;
 
 import com.example.trackie.R;
@@ -34,9 +35,7 @@ public class TestModeActivity extends AppCompatActivity {
 
     @Override
     public boolean onSupportNavigateUp() {
-        Intent homeIntent = new Intent(TestModeActivity.this, MainActivity.class);
-        startActivity(homeIntent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
-        finish();
+        onBackPressed();
         return true;
     }
 }

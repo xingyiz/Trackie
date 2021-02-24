@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9936a3cc-4dd0-4601-a0d5-15c894b48a04" name="Default Changelist" comment="" />
+    <list default="true" id="9936a3cc-4dd0-4601-a0d5-15c894b48a04" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/Trackie.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Trackie.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -43,8 +46,6 @@
       <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
       <option name="FORCE_STOP_RUNNING_APP" value="true" />
       <option name="TARGET_SELECTION_MODE" value="SHOW_DIALOG" />
-      <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="-1" />
-      <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
       <option name="DEBUGGER_TYPE" value="Auto" />
       <Auto>
         <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
@@ -97,13 +98,15 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state x="414" y="174" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1613142791091">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="191" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1614131637274">
+      <screen x="0" y="0" width="1280" height="680" />
     </state>
+    <state x="191" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1280.680@0.0.1280.680" timestamp="1614131637274" />
     <state x="414" y="174" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1613142791091" />
-    <state x="1220" y="278" key="FileChooserDialogImpl" timestamp="1613142940094">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="813" y="182" key="FileChooserDialogImpl" timestamp="1614131717909">
+      <screen x="0" y="0" width="1280" height="680" />
     </state>
+    <state x="813" y="182" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1614131717909" />
     <state x="1220" y="278" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1613142940094" />
     <state x="552" y="252" key="Vcs.Push.Dialog.v2" timestamp="1612449980493">
       <screen x="0" y="0" width="1920" height="1040" />
