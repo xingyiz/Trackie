@@ -39,9 +39,7 @@ public class MapModeActivity extends AppCompatActivity {
 
     @Override
     public boolean onSupportNavigateUp() {
-        Intent homeIntent = new Intent(MapModeActivity.this, MainActivity.class);
-        startActivity(homeIntent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
-        finish();
+        onBackPressed();
         return true;
     }
 }
