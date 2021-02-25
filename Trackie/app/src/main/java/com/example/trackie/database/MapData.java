@@ -19,6 +19,8 @@ public class MapData implements MapRep {
     private double z;                               // z location of user, doesn't really change if on the same floor
     private String device;
     private Timestamp timestamp;
+    // TODO: Implement floor plan
+    private String floorplan;
 
     public MapData() {}
 

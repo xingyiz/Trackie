@@ -1,6 +1,5 @@
 package com.example.trackie.database;
 
-import android.os.AsyncTask;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -19,7 +18,7 @@ public class FirestoreHelper {
     private static final String TAG = "FirestoreHelper";
     private static FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-    public abstract static class GetMapData  {
+    public static class GetMapData {
         private String mapName;
         private List<MapData> mapData = new ArrayList<>();
 
@@ -27,7 +26,7 @@ public class FirestoreHelper {
             this.mapName = mapName;
         }
 
-        public void runMainBody() {
+        public void getMapData(DataReceivedCallback callback) {
             db.collection("MapData")
                     .whereEqualTo("name", mapName)
                     .get()
@@ -38,6 +37,7 @@ public class FirestoreHelper {
                                 for (QueryDocumentSnapshot snapshot : task.getResult()) {
                                     MapData data = snapshot.toObject(MapData.class);
                                     mapData.add(data);
+                                    callback.onDataReceived();
                                 }
                             } else {
                                 Log.d(TAG, "GetMapData unsuccessful");
@@ -45,32 +45,47 @@ public class FirestoreHelper {
                         }
                     });
         }
+
+        public List<MapData> getResult() {return this.mapData;}
+
+        public boolean isSuccessful() {return this.mapData != null;}
     }
 
-    public abstract static class SetMapData {
+    public static class SetMapData{
         private MapData mapData;
+        private boolean successful;
 
         public SetMapData(MapData mapData) {
             this.mapData = mapData;
         }
 
-        public void runMainBody() {
+        public void setMapData(DataReceivedCallback callback) {
             db.collection("MapData")
                     .add(mapData)
                     .addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
                         @Override
                         public void onComplete(@NonNull Task<DocumentReference> task) {
                             if (task.isSuccessful()) {
+                                successful = true;
                                 Log.i(TAG, "SetMapData successful");
+                                callback.onDataReceived();
                             } else {
                                 Log.e(TAG, "SetMapData unsuccessful");
                             }
                         }
                     });
         }
+
+        public boolean isSuccessful() {
+            return successful;
+        }
     }
 
     public static void UpdateMapData() {
         // TODO
+    }
+
+    public static class GetImage {
+
     }
 }
