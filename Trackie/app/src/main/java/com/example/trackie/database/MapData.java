@@ -1,10 +1,18 @@
 package com.example.trackie.database;
 
 import android.graphics.Point;
+import android.net.Uri;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.util.HashMap;
 import java.util.List;
@@ -19,18 +27,69 @@ public class MapData implements MapRep {
     private double z;                               // z location of user, doesn't really change if on the same floor
     private String device;
     private Timestamp timestamp;
-    // TODO: Implement floor plan
     private String floorplan;
+    FirebaseStorage storage = FirebaseStorage.getInstance();
+    StorageReference storageReference = storage.getReference();
 
     public MapData() {}
 
-    public MapData(String name, Map<String, List<Integer>> data, Point location, double z, String device, Timestamp timestamp) {
+    /**
+     * Constructor for MapData, consists of all things associated with MapData
+     * @param name
+     * @param data
+     * @param location
+     * @param z
+     * @param device
+     * @param timestamp
+     * @param floorplan     Uri String, set to null if already exists
+     */
+    public MapData(String name, Map<String, List<Integer>> data, Point location, double z,
+                   String device, Timestamp timestamp, String floorplan) {
         this.name = name;
         this.data = data;
         this.location = location;
         this.z = z;
         this.device = device;
         this.timestamp = timestamp;
+        if (floorplan != null) {
+            uploadFloorplan();
+        } else {
+            // retrieve floorplan from storage
+        }
+    }
+
+    private void uploadFloorplan() {
+        try {
+            Uri filePath = Uri.parse(floorplan);
+            StorageReference ref = storageReference.child(name);
+            ref.putFile(filePath).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            floorplan = uri.toString();
+                        }
+                    });
+                }
+            });
+        } catch (Exception e) {
+            // error handling
+        }
+    }
+
+    private void retrieveFloorplan() {
+        try {
+            StorageReference ref = storageReference.child(name);
+            ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                @Override
+                public void onSuccess(Uri uri) {
+                    floorplan = uri.toString();
+                }
+            });
+        } catch (Exception e) {
+            // error handling
+        }
     }
 
     // Getters and Setters
@@ -83,6 +142,10 @@ public class MapData implements MapRep {
         this.timestamp = timestamp;
     }
 
+    public String getFloorplan() { return floorplan; }
+
+    public void setFloorplan(String floorplan) { this.floorplan = floorplan; }
+
     @Override
     public Map<String, Object> retrieveRepresentation() {
         Map<String, Object> map = new HashMap<>();
@@ -98,7 +161,8 @@ public class MapData implements MapRep {
     public String toString() {
         return "MapData[ location = " + location.toString()
                 + ", z = " + z
-                + ", device = " + device + ", timestamp = "
-                + timestamp.toString() + " ]";
+                + ", device = " + device
+                + ", timestamp = " + timestamp.toString()
+                + ", floorplan = " + floorplan + " ]";
     }
 }

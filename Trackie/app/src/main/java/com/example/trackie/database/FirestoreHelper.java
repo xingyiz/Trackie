@@ -16,34 +16,38 @@ import java.util.List;
 
 public class FirestoreHelper {
     private static final String TAG = "FirestoreHelper";
-    private static FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     public static class GetMapData {
         private String mapName;
         private List<MapData> mapData = new ArrayList<>();
+        private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         public GetMapData(String mapName) {
             this.mapName = mapName;
         }
 
         public void getMapData(DataReceivedCallback callback) {
-            db.collection("MapData")
-                    .whereEqualTo("name", mapName)
-                    .get()
-                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                            if (task.isSuccessful()) {
-                                for (QueryDocumentSnapshot snapshot : task.getResult()) {
-                                    MapData data = snapshot.toObject(MapData.class);
-                                    mapData.add(data);
+            try {
+                db.collection("MapData")
+                        .whereEqualTo("name", mapName)
+                        .get()
+                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                if (task.isSuccessful()) {
+                                    for (QueryDocumentSnapshot snapshot : task.getResult()) {
+                                        MapData data = snapshot.toObject(MapData.class);
+                                        mapData.add(data);
+                                    }
                                     callback.onDataReceived();
+                                } else {
+                                    Log.d(TAG, "GetMapData unsuccessful");
                                 }
-                            } else {
-                                Log.d(TAG, "GetMapData unsuccessful");
                             }
-                        }
-                    });
+                        });
+            } catch (Exception e) {
+                // error handling
+            }
         }
 
         public List<MapData> getResult() {return this.mapData;}
@@ -54,26 +58,31 @@ public class FirestoreHelper {
     public static class SetMapData{
         private MapData mapData;
         private boolean successful;
+        private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         public SetMapData(MapData mapData) {
             this.mapData = mapData;
         }
 
         public void setMapData(DataReceivedCallback callback) {
-            db.collection("MapData")
-                    .add(mapData)
-                    .addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
-                        @Override
-                        public void onComplete(@NonNull Task<DocumentReference> task) {
-                            if (task.isSuccessful()) {
-                                successful = true;
-                                Log.i(TAG, "SetMapData successful");
-                                callback.onDataReceived();
-                            } else {
-                                Log.e(TAG, "SetMapData unsuccessful");
+            try {
+                db.collection("MapData")
+                        .add(mapData)
+                        .addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentReference> task) {
+                                if (task.isSuccessful()) {
+                                    successful = true;
+                                    Log.i(TAG, "SetMapData successful");
+                                    callback.onDataReceived();
+                                } else {
+                                    Log.e(TAG, "SetMapData unsuccessful");
+                                }
                             }
-                        }
-                    });
+                        });
+            } catch (Exception e) {
+                // error handling
+            }
         }
 
         public boolean isSuccessful() {
@@ -81,11 +90,8 @@ public class FirestoreHelper {
         }
     }
 
-    public static void UpdateMapData() {
+    public static class UpdateMapData {
+        private FirebaseFirestore db = FirebaseFirestore.getInstance();
         // TODO
-    }
-
-    public static class GetImage {
-
     }
 }

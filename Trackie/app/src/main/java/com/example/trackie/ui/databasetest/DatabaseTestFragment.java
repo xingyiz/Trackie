@@ -83,7 +83,7 @@ public class DatabaseTestFragment extends Fragment {
         setButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MapData mapData = new MapData("HELLO WORLD", data, location, z, device, timestamp);
+                MapData mapData = new MapData("HELLO WORLD", data, location, z, device, timestamp, null);
                 FirestoreHelper.SetMapData setter = new FirestoreHelper.SetMapData(mapData);
                 setter.setMapData(new DataReceivedCallback() {
                     @Override
