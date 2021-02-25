@@ -35,6 +35,7 @@ public class DatabaseTestFragment extends Fragment {
     private double z = 1.0;
     private String device = "Samsung Galaxy S20";
     private Timestamp timestamp = Timestamp.now();
+    private String floorplan = "test floorplan";
 
     private DatabaseTestViewModel viewModel;
 
@@ -65,6 +66,7 @@ public class DatabaseTestFragment extends Fragment {
         getButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Toast.makeText(getContext(), "Clicked", Toast.LENGTH_SHORT).show();
                 FirestoreHelper.GetMapData getter = new FirestoreHelper.GetMapData("HELLO WORLD");
                 getter.getMapData(new DataReceivedCallback() {
                     @Override
@@ -83,6 +85,7 @@ public class DatabaseTestFragment extends Fragment {
         setButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Toast.makeText(getContext(), "Clicked", Toast.LENGTH_SHORT).show();
                 MapData mapData = new MapData("HELLO WORLD", data, location, z, device, timestamp, null);
                 FirestoreHelper.SetMapData setter = new FirestoreHelper.SetMapData(mapData);
                 setter.setMapData(new DataReceivedCallback() {

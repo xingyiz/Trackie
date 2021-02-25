@@ -51,8 +51,9 @@ public class MapData implements MapRep {
         this.z = z;
         this.device = device;
         this.timestamp = timestamp;
+        this.floorplan = floorplan;
         if (floorplan != null) {
-            uploadFloorplan();
+            // uploadFloorplan();
         } else {
             // retrieve floorplan from storage
         }
