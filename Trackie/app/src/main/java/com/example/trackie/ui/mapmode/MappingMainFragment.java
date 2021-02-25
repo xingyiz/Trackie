@@ -1,5 +1,7 @@
 package com.example.trackie.ui.mapmode;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -12,8 +14,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
 import com.example.trackie.R;
-import com.ortiz.touchview.TouchImageView;
+import com.example.trackie.ui.TouchMapView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -71,16 +74,8 @@ public class MappingMainFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        TouchImageView mapping_image = (TouchImageView) view.findViewById(R.id.mapping_indoor_map_view);
-        mapping_image.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                float x = motionEvent.getX();
-                float y = motionEvent.getY();
-                String s = "x: " + x + ", y: " + y;
-                Toast.makeText(getActivity(), s,Toast.LENGTH_SHORT).show();
-                return true;
-            }
-        });
+        SubsamplingScaleImageView mapping_image = (SubsamplingScaleImageView) view.findViewById(R.id.mapping_indoor_map_view);
+        Bitmap mapBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.sample_floor_plan);
+        TouchMapView mapView = new TouchMapView(getActivity(), TouchMapView.MAP_MODE, mapping_image, mapBitmap.copy(mapBitmap.getConfig(), false));
     }
 }

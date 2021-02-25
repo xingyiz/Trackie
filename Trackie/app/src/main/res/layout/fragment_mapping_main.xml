@@ -6,17 +6,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.mapmode.MappingMainFragment">
 
-    <com.ortiz.touchview.TouchImageView
+    <com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView
         android:id="@+id/mapping_indoor_map_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:src="@drawable/sample_floor_plan"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-    </com.ortiz.touchview.TouchImageView>
+    </com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView>
 
     <androidx.appcompat.widget.AppCompatButton
         android:elevation="2dp"
