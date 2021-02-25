@@ -65,17 +65,18 @@ public class DatabaseTestFragment extends Fragment {
         getButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new FirestoreHelper.GetMapData("HELLO WORLD") {
+                FirestoreHelper.GetMapData getter = new FirestoreHelper.GetMapData("HELLO WORLD");
+                getter.getMapData(new DataReceivedCallback() {
                     @Override
-                    public void getMapData(DataReceivedCallback callback) {
-                        if (isSuccessful()) {
-                            List<MapData> mapData = getResult();
+                    public void onDataReceived() {
+                        if (getter.isSuccessful()) {
+                            List<MapData> mapData = getter.getResult();
                             textView.setText(mapData.toString());
                         } else {
                             Toast.makeText(getContext(), "No data received", Toast.LENGTH_LONG).show();
                         }
                     }
-                };
+                });
             }
         });
 
@@ -83,16 +84,17 @@ public class DatabaseTestFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 MapData mapData = new MapData("HELLO WORLD", data, location, z, device, timestamp);
-                new FirestoreHelper.SetMapData(mapData) {
+                FirestoreHelper.SetMapData setter = new FirestoreHelper.SetMapData(mapData);
+                setter.setMapData(new DataReceivedCallback() {
                     @Override
-                    public void setMapData(DataReceivedCallback callback) {
-                        if (isSuccessful()) {
+                    public void onDataReceived() {
+                        if (setter.isSuccessful()) {
                             Toast.makeText(getContext(), "Data set success", Toast.LENGTH_LONG).show();
                         } else {
                             Toast.makeText(getContext(), "Data set fail :(", Toast.LENGTH_LONG).show();
                         }
                     }
-                };
+                });
             }
         });
     }
