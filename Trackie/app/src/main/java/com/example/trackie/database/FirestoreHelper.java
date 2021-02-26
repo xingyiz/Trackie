@@ -30,8 +30,7 @@ public class FirestoreHelper {
         @Override
         public void execute(OnCompleteCallback callback) {
             try {
-                db.collection("MapData")
-                        .whereEqualTo("name", mapName)
+                db.collection(mapName)
                         .get()
                         .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                             @Override
@@ -69,9 +68,9 @@ public class FirestoreHelper {
         @Override
         public void execute(OnCompleteCallback callback) {
             try {
-                id = db.collection("MapData").document().getId();
+                id = db.collection(mapData.getName()).document().getId();
                 mapData.setId(id);
-                db.collection("MapData")
+                db.collection(mapData.getName())
                         .document(id)
                         .set(mapData)
                         .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -92,17 +91,17 @@ public class FirestoreHelper {
     }
 
     public static class RemoveMapData implements FirestoreExecute{
-        private String id;
+        private MapData mapData;
         private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-        public RemoveMapData(String id) {
-            this.id = id;
+        public RemoveMapData(MapData mapData) {
+            this.mapData = mapData;
         }
 
         @Override
         public void execute(OnCompleteCallback callback) {
             try {
-                db.collection("MapData").document(id)
+                db.collection(mapData.getName()).document(mapData.getId())
                         .delete()
                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
