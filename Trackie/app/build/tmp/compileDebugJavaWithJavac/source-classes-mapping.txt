@@ -41,6 +41,13 @@ com/example/trackie/ui/locations/LocationsFragment.java
  com.example.trackie.ui.locations.LocationsFragment$1
 com/example/trackie/database/FirestoreExecute.java
  com.example.trackie.database.FirestoreExecute
+com/example/trackie/database/TestData.java
+ com.example.trackie.database.TestData
+com/example/trackie/database/MapData.java
+ com.example.trackie.database.MapData
+ com.example.trackie.database.MapData$1
+ com.example.trackie.database.MapData$1$1
+ com.example.trackie.database.MapData$2
 com/example/trackie/ui/databasetest/DatabaseTestFragment.java
  com.example.trackie.ui.databasetest.DatabaseTestFragment
  com.example.trackie.ui.databasetest.DatabaseTestFragment$1
@@ -57,10 +64,3 @@ com/example/trackie/database/FirestoreHelper.java
  com.example.trackie.database.FirestoreHelper$SetMapData
  com.example.trackie.database.FirestoreHelper$SetMapData$1
  com.example.trackie.database.FirestoreHelper$UpdateMapData
-com/example/trackie/database/MapData.java
- com.example.trackie.database.MapData
- com.example.trackie.database.MapData$1
- com.example.trackie.database.MapData$1$1
- com.example.trackie.database.MapData$2
-com/example/trackie/database/TestData.java
- com.example.trackie.database.TestData

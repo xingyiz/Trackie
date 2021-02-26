@@ -1,6 +1,7 @@
 package com.example.trackie.ui.databasetest;
 
 import android.graphics.Point;
+import android.graphics.PointF;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,7 +32,7 @@ public class DatabaseTestFragment extends Fragment {
     private MaterialButton setButton;
     private MaterialTextView textView;
     private Map<String, List<Integer>> data;
-    private Point location = new Point(13, 15);
+    private PointF location = new PointF((float) 13.0, (float) 15.0);
     private double z = 1.0;
     private String device = "Samsung Galaxy S20";
     private Timestamp timestamp = Timestamp.now();
@@ -54,8 +55,8 @@ public class DatabaseTestFragment extends Fragment {
         setButton = view.findViewById(R.id.set_button);
         textView = view.findViewById(R.id.database_display);
         data = new HashMap<>();
-        data.put("SUTD", Arrays.asList(-82, -84, -83, 100, -86));
-        data.put("Hostel", Arrays.asList(-83, -84, -83, -90, -85));
+        data.put("BSSID OF WIFI AP", Arrays.asList(-82, -84, -83, 100, -86));
+        data.put("ANOTHER BSSID", Arrays.asList(-83, -84, -83, -90, -85));
         return view;
     }
 

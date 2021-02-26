@@ -1,6 +1,7 @@
 package com.example.trackie.database;
 
 import android.graphics.Point;
+import android.graphics.PointF;
 import android.net.Uri;
 import android.widget.Toast;
 
@@ -22,13 +23,14 @@ public class MapData implements MapRep {
     private static final String TAG = "MapData";
 
     private String id;
-    private String name;
-    private Map<String, List<Integer>> data;   // String = BSSID of WAP, ArrayList<Integer> = RSSI values associated with WAP
-    private Point location;                         // (x, y) location of user
+    private String name;                            // Name of Location
+    private Map<String, List<Integer>> data;        // String = BSSID of WAP, ArrayList<Integer> = RSSI values associated with WAP
+    private PointF location;                        // (x, y) location of user
     private double z;                               // z location of user, doesn't really change if on the same floor
     private String device;
     private Timestamp timestamp;
     private String floorplan;
+
     FirebaseStorage storage = FirebaseStorage.getInstance();
     StorageReference storageReference = storage.getReference();
 
@@ -44,7 +46,7 @@ public class MapData implements MapRep {
      * @param timestamp
      * @param floorplan     Uri String, set to null if already exists
      */
-    public MapData(String name, Map<String, List<Integer>> data, Point location, double z,
+    public MapData(String name, Map<String, List<Integer>> data, PointF location, double z,
                    String device, Timestamp timestamp, String floorplan) {
         this.name = name;
         this.data = data;
@@ -119,11 +121,11 @@ public class MapData implements MapRep {
         this.data = data;
     }
 
-    public Point getLocation() {
+    public PointF getLocation() {
         return location;
     }
 
-    public void setLocation(Point location) {
+    public void setLocation(PointF location) {
         this.location = location;
     }
 
