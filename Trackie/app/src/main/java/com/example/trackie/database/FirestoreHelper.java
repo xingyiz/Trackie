@@ -13,11 +13,12 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class FirestoreHelper {
     private static final String TAG = "FirestoreHelper";
 
-    public static class GetMapData {
+    public static class GetMapData implements FirestoreExecute {
         private String mapName;
         private List<MapData> mapData = new ArrayList<>();
         private FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -26,7 +27,8 @@ public class FirestoreHelper {
             this.mapName = mapName;
         }
 
-        public void getMapData(DataReceivedCallback callback) {
+        @Override
+        public void execute(OnCompleteCallback callback) {
             try {
                 db.collection("MapData")
                         .whereEqualTo("name", mapName)
@@ -39,54 +41,82 @@ public class FirestoreHelper {
                                         MapData data = snapshot.toObject(MapData.class);
                                         mapData.add(data);
                                     }
-                                    callback.onDataReceived();
+                                    callback.onSuccess();
                                 } else {
                                     Log.d(TAG, "GetMapData unsuccessful");
+                                    callback.onFailure();
                                 }
                             }
                         });
             } catch (Exception e) {
                 // error handling
+                callback.onError();
             }
         }
 
         public List<MapData> getResult() {return this.mapData;}
-
-        public boolean isSuccessful() {return this.mapData != null;}
     }
 
-    public static class SetMapData{
+    public static class SetMapData implements FirestoreExecute {
+        private String id;
         private MapData mapData;
-        private boolean successful;
         private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         public SetMapData(MapData mapData) {
             this.mapData = mapData;
         }
 
-        public void setMapData(DataReceivedCallback callback) {
+        @Override
+        public void execute(OnCompleteCallback callback) {
             try {
+                id = db.collection("MapData").document().getId();
+                mapData.setId(id);
                 db.collection("MapData")
-                        .add(mapData)
-                        .addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                        .document(id)
+                        .set(mapData)
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
-                            public void onComplete(@NonNull Task<DocumentReference> task) {
+                            public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()) {
-                                    successful = true;
-                                    Log.i(TAG, "SetMapData successful");
-                                    callback.onDataReceived();
+                                    callback.onSuccess();
                                 } else {
-                                    Log.e(TAG, "SetMapData unsuccessful");
+                                    callback.onFailure();
                                 }
                             }
                         });
             } catch (Exception e) {
                 // error handling
+                callback.onError();
             }
         }
+    }
 
-        public boolean isSuccessful() {
-            return successful;
+    public static class RemoveMapData implements FirestoreExecute{
+        private String id;
+        private FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        public RemoveMapData(String id) {
+            this.id = id;
+        }
+
+        @Override
+        public void execute(OnCompleteCallback callback) {
+            try {
+                db.collection("MapData").document(id)
+                        .delete()
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()) {
+                                    callback.onSuccess();
+                                } else {
+                                    callback.onFailure();
+                                }
+                            }
+                        });
+            } catch (Exception e) {
+                callback.onError();
+            }
         }
     }
 

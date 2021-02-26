@@ -21,6 +21,7 @@ import java.util.Map;
 public class MapData implements MapRep {
     private static final String TAG = "MapData";
 
+    private String id;
     private String name;
     private Map<String, List<Integer>> data;   // String = BSSID of WAP, ArrayList<Integer> = RSSI values associated with WAP
     private Point location;                         // (x, y) location of user
@@ -94,6 +95,13 @@ public class MapData implements MapRep {
     }
 
     // Getters and Setters
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -160,7 +168,9 @@ public class MapData implements MapRep {
     @NonNull
     @Override
     public String toString() {
-        return "MapData[ location = " + location.toString()
+        return "MapData[ id = " + id
+                + ", name = " + name
+                + ", location = " + location.toString()
                 + ", z = " + z
                 + ", device = " + device
                 + ", timestamp = " + timestamp.toString()
