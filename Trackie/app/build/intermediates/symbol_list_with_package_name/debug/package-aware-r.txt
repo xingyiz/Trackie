@@ -1122,6 +1122,7 @@ dimen design_tab_text_size_2line
 dimen design_textinput_caption_translate_y
 dimen disabled_alpha_material_dark
 dimen disabled_alpha_material_light
+dimen edit_text_height
 dimen fab_margin
 dimen fastscroll_default_thickness
 dimen fastscroll_margin
@@ -1635,7 +1636,6 @@ id filter_chip
 id final_map_result_imageview
 id fitToContents
 id fixed
-id floatingActionButton
 id forever
 id fragment_container_view_tag
 id get_button
@@ -1670,6 +1670,7 @@ id line3
 id listMode
 id list_item
 id location_description_textview
+id location_name_edittext
 id location_name_textview
 id location_options_button
 id locations_fragment_container
@@ -1847,6 +1848,7 @@ id unchecked
 id uniform
 id unlabeled
 id up
+id upload_location_button
 id upload_to_database_status_textview
 id useLogo
 id use_mode_toolbar
@@ -1941,6 +1943,7 @@ layout design_navigation_menu
 layout design_navigation_menu_item
 layout design_text_input_end_icon
 layout design_text_input_start_icon
+layout fragment_add_location
 layout fragment_databasetest
 layout fragment_home
 layout fragment_locations

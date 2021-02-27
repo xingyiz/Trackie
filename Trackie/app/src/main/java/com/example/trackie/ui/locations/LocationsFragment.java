@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -17,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.trackie.R;
 import com.example.trackie.database.MapData;
 import com.example.trackie.ui.home.LocationsAdapter;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
@@ -49,5 +51,17 @@ public class LocationsFragment extends Fragment {
         RecyclerView.Adapter locationsAdapter = new LocationsAdapter(getActivity(), mapDatas);
         locationsRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         locationsRecyclerView.setAdapter(locationsAdapter);
+
+        FloatingActionButton addLocationButton = view.findViewById(R.id.upload_location_button);
+        addLocationButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.locations_fragment_container, new AddLocationFragment());
+                fragmentTransaction.addToBackStack(null).commit();
+            }
+        });
     }
+
+
 }
