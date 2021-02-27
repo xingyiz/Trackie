@@ -26,7 +26,7 @@ import com.google.android.material.textview.MaterialTextView;
 
 import java.util.List;
 
-public class RSSITest extends Fragment {
+public class RSSITestFragment extends Fragment {
 
     private ListView listView;
 

@@ -1497,11 +1497,15 @@ font segoeuiz
 id ALT
 id BOTTOM_END
 id BOTTOM_START
+id BSSID
 id CTRL
 id FUNCTION
 id META
+id RSSI
 id SHIFT
+id SSID
 id SYM
+id TIME
 id TOP_END
 id TOP_START
 id accessibility_action_clickable_span
@@ -1649,6 +1653,7 @@ id icon_group
 id icon_only
 id ifRoom
 id image
+id image_database
 id include_app_bar_home
 id include_app_bar_map_mode
 id include_app_bar_test_mode
@@ -1670,6 +1675,7 @@ id location_options_button
 id locations_fragment_container
 id locations_indicator_imageview
 id locations_recycler_view
+id map_listview
 id map_mode_button
 id map_mode_host_fragment
 id map_mode_navigation
@@ -1743,6 +1749,7 @@ id privileges_spinner
 id progress_circular
 id progress_horizontal
 id radio
+id remove_button
 id return_home_button
 id right
 id right_icon
@@ -1938,6 +1945,7 @@ layout fragment_home
 layout fragment_locations
 layout fragment_mapping_complete
 layout fragment_mapping_main
+layout fragment_rssitest
 layout fragment_settings
 layout fragment_testing_main
 layout locations_recycler_layout
@@ -1985,6 +1993,7 @@ layout notification_template_media
 layout notification_template_media_custom
 layout notification_template_part_chronometer
 layout notification_template_part_time
+layout rssi_listview
 layout select_dialog_item_material
 layout select_dialog_multichoice_material
 layout select_dialog_singlechoice_material

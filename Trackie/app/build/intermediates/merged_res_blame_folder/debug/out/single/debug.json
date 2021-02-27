@@ -60,12 +60,16 @@
         "source": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\src\\main\\res\\drawable\\ic_menu_gallery.xml"
     },
     {
+        "merged": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\layout_app_bar_main.xml.flat",
+        "source": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\src\\main\\res\\layout\\app_bar_main.xml"
+    },
+    {
         "merged": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi_ic_launcher_round.png.flat",
         "source": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher_round.png"
     },
     {
-        "merged": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\layout_app_bar_main.xml.flat",
-        "source": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\src\\main\\res\\layout\\app_bar_main.xml"
+        "merged": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\layout_rssi_listview.xml.flat",
+        "source": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\src\\main\\res\\layout\\rssi_listview.xml"
     },
     {
         "merged": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\layout_use_mode_toolbar_layout.xml.flat",
@@ -88,16 +92,16 @@
         "source": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\src\\main\\res\\navigation\\mobile_navigation.xml"
     },
     {
-        "merged": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\layout_fragment_mapping_complete.xml.flat",
-        "source": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\src\\main\\res\\layout\\fragment_mapping_complete.xml"
+        "merged": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\menu_activity_main_drawer.xml.flat",
+        "source": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\src\\main\\res\\menu\\activity_main_drawer.xml"
     },
     {
         "merged": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\drawable_button_border.xml.flat",
         "source": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\src\\main\\res\\drawable\\button_border.xml"
     },
     {
-        "merged": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\menu_activity_main_drawer.xml.flat",
-        "source": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\src\\main\\res\\menu\\activity_main_drawer.xml"
+        "merged": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\layout_fragment_mapping_complete.xml.flat",
+        "source": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\src\\main\\res\\layout\\fragment_mapping_complete.xml"
     },
     {
         "merged": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\transition_fade.xml.flat",
@@ -186,6 +190,10 @@
     {
         "merged": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\layout_fragment_home.xml.flat",
         "source": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\src\\main\\res\\layout\\fragment_home.xml"
+    },
+    {
+        "merged": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\layout_fragment_rssitest.xml.flat",
+        "source": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\src\\main\\res\\layout\\fragment_rssitest.xml"
     },
     {
         "merged": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-anydpi-v26_ic_launcher.xml.flat",
