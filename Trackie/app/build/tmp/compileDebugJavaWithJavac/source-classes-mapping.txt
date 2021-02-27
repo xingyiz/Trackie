@@ -34,10 +34,6 @@ com/example/trackie/database/TestData.java
 com/example/trackie/ui/home/LocationsAdapter.java
  com.example.trackie.ui.home.LocationsAdapter
  com.example.trackie.ui.home.LocationsAdapter$ViewHolder
-com/example/trackie/ui/mapmode/RSSIAdapter.java
- com.example.trackie.ui.mapmode.RSSIAdapter
- com.example.trackie.ui.mapmode.RSSIAdapter$1
- com.example.trackie.ui.mapmode.RSSIAdapter$ViewHolder
 com/example/trackie/ui/home/HomeViewModel.java
  com.example.trackie.ui.home.HomeViewModel
 com/example/trackie/ui/settings/SettingsFragment.java
@@ -45,12 +41,16 @@ com/example/trackie/ui/settings/SettingsFragment.java
  com.example.trackie.ui.settings.SettingsFragment$1
 com/example/trackie/database/FirestoreExecute.java
  com.example.trackie.database.FirestoreExecute
-com/example/trackie/ui/testmode/TestModeActivity.java
- com.example.trackie.ui.testmode.TestModeActivity
+com/example/trackie/ui/mapmode/MappingMainFragment.java
+ com.example.trackie.ui.mapmode.MappingMainFragment
 com/example/trackie/database/OnCompleteCallback.java
  com.example.trackie.database.OnCompleteCallback
 com/example/trackie/ui/locations/LocationsViewModel.java
  com.example.trackie.ui.locations.LocationsViewModel
+com/example/trackie/ui/mapmode/RSSIAdapter.java
+ com.example.trackie.ui.mapmode.RSSIAdapter
+ com.example.trackie.ui.mapmode.RSSIAdapter$1
+ com.example.trackie.ui.mapmode.RSSIAdapter$ViewHolder
 com/example/trackie/ui/MainActivity.java
  com.example.trackie.ui.MainActivity
 com/example/trackie/database/MapRep.java
@@ -71,8 +71,8 @@ com/example/trackie/ui/locations/LocationsFragment.java
  com.example.trackie.ui.locations.LocationsFragment$1
 com/example/trackie/ui/mapmode/MappingCompleteFragment.java
  com.example.trackie.ui.mapmode.MappingCompleteFragment
+com/example/trackie/ui/testmode/TestModeActivity.java
+ com.example.trackie.ui.testmode.TestModeActivity
 com/example/trackie/ui/mapmode/RSSITestFragment.java
  com.example.trackie.ui.mapmode.RSSITestFragment
  com.example.trackie.ui.mapmode.RSSITestFragment$1
-com/example/trackie/ui/mapmode/MappingMainFragment.java
- com.example.trackie.ui.mapmode.MappingMainFragment

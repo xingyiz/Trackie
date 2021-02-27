@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
@@ -34,18 +35,22 @@ public class RSSITestFragment extends Fragment {
     private WifiManager wifiManager;
     private RSSIAdapter adapter;
 
+    private static int ACCESS_WIFI_STATE_REQUEST = 1;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_rssitest, container, false);
 
+        if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_WIFI_STATE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_WIFI_STATE}, ACCESS_WIFI_STATE_REQUEST);
+        }
+
+        wifiManager = (WifiManager) getActivity().getSystemService(Context.WIFI_SERVICE);
         if (!wifiManager.isWifiEnabled()) {
             Toast.makeText(getContext(), "WiFi is currently disabled. \nWe will enable it.", Toast.LENGTH_LONG).show();
             wifiManager.setWifiEnabled(true);
         }
-
-        wifiManager = (WifiManager) getActivity().getSystemService(Context.WIFI_SERVICE);
-
         listView = view.findViewById(R.id.map_listview);
 
         wifiReceiver = new BroadcastReceiver() {
@@ -73,6 +78,18 @@ public class RSSITestFragment extends Fragment {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, 87);
+            }
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == ACCESS_WIFI_STATE_REQUEST) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(getActivity(), "Change WiFi State Permission Granted", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(getActivity(), "Change WiFi State Permission Denied", Toast.LENGTH_SHORT).show();
             }
         }
     }

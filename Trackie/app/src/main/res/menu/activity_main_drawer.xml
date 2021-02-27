@@ -21,5 +21,10 @@
             android:id="@+id/nav_database"
             android:icon="@drawable/common_full_open_on_phone"
             android:title="Database"/>
+
+        <item
+            android:id="@+id/nav_test_rssi"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="rssi test"/>
     </group>
 </menu>
