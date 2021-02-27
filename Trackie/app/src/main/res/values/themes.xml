@@ -17,7 +17,7 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
-        <item name="buttonStyle">@style/Theme.Trackie.MainButton</item>
+        <item name="buttonStyle">@style/Theme.Trackie.MainTextButton</item>
     </style>
 
     <style name="Theme.Trackie.NoActionBar">
@@ -31,7 +31,13 @@
         <item name="android:textColor">?attr/colorPrimary</item>
     </style>
 
-    <style name="Theme.Trackie.MainButton" parent="Widget.AppCompat.Button">
+    <style name="Theme.Trackie.TitleText" parent="Widget.AppCompat.TextView">
+        <item name="android:textSize">@dimen/button_text_size</item>
+        <item name="android:fontFamily">@font/bsegoeui</item>
+        <item name="android:textColor">?attr/colorPrimaryVariant</item>
+    </style>
+
+    <style name="Theme.Trackie.MainTextButton" parent="Widget.AppCompat.Button">
         <item name="android:background">@drawable/button_border</item>
         <item name="android:textColor">?attr/colorPrimary</item>
         <item name="android:textSize">@dimen/button_text_size</item>

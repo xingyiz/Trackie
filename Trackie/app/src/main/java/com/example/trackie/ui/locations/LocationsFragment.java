@@ -11,8 +11,14 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.trackie.R;
+import com.example.trackie.database.MapData;
+import com.example.trackie.ui.home.LocationsAdapter;
+
+import java.util.ArrayList;
 
 public class LocationsFragment extends Fragment {
 
@@ -29,5 +35,19 @@ public class LocationsFragment extends Fragment {
             }
         });
         return root;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        RecyclerView locationsRecyclerView = (RecyclerView) view.findViewById(R.id.locations_recycler_view);
+        ArrayList<MapData> mapDatas = new ArrayList<>();
+        mapDatas.add(new MapData("Bedroom"));
+        mapDatas.add(new MapData("Living Room"));
+        mapDatas.add(new MapData("Study Room"));
+        RecyclerView.Adapter locationsAdapter = new LocationsAdapter(getActivity(), mapDatas);
+        locationsRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        locationsRecyclerView.setAdapter(locationsAdapter);
     }
 }

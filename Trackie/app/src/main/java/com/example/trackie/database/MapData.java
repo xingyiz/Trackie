@@ -60,6 +60,11 @@ public class MapData implements MapRep {
         }
     }
 
+    // test function pls delete
+    public MapData(String name) {
+        this.name = name;
+    }
+
     private void uploadFloorplan() {
         try {
             Uri filePath = Uri.parse(floorplan);

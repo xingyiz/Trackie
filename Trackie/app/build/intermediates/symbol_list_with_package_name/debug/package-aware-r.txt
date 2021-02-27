@@ -1456,6 +1456,7 @@ drawable ic_menu_arrow_up_black_24dp
 drawable ic_menu_camera
 drawable ic_menu_gallery
 drawable ic_menu_slideshow
+drawable ic_more_vert_24px
 drawable ic_mtrl_checked_circle
 drawable ic_mtrl_chip_checked_black
 drawable ic_mtrl_chip_checked_circle
@@ -1663,7 +1664,11 @@ id line1
 id line3
 id listMode
 id list_item
+id location_description_textview
+id location_name_textview
+id location_options_button
 id locations_fragment_container
+id locations_indicator_imageview
 id locations_recycler_view
 id map_mode_button
 id map_mode_host_fragment
@@ -1935,6 +1940,7 @@ layout fragment_mapping_complete
 layout fragment_mapping_main
 layout fragment_settings
 layout fragment_testing_main
+layout locations_recycler_layout
 layout mtrl_alert_dialog
 layout mtrl_alert_dialog_actions
 layout mtrl_alert_dialog_title
@@ -2586,9 +2592,10 @@ style Theme_MaterialComponents_NoActionBar_Bridge
 style Theme_Trackie
 style Theme_Trackie_AlertText
 style Theme_Trackie_AppBarOverlay
-style Theme_Trackie_MainButton
+style Theme_Trackie_MainTextButton
 style Theme_Trackie_NoActionBar
 style Theme_Trackie_PopupOverlay
+style Theme_Trackie_TitleText
 style ThemeOverlay_AppCompat
 style ThemeOverlay_AppCompat_ActionBar
 style ThemeOverlay_AppCompat_Dark
