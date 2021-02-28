@@ -7,7 +7,7 @@
     tools:context=".ui.locations.AddLocationFragment">
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout"
+        android:id="@+id/upload_location_input_layout"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -29,12 +29,38 @@
         android:id="@+id/upload_floorplan_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="@string/upload_floorplan_here"
+        android:layout_marginTop="24dp"
         android:paddingLeft="@dimen/nav_header_vertical_spacing"
         android:paddingRight="@dimen/nav_header_vertical_spacing"
-        app:layout_constraintEnd_toEndOf="@+id/textInputLayout"
-        app:layout_constraintStart_toStartOf="@+id/textInputLayout"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
+        android:text="@string/upload_floorplan_here"
+        android:foreground="?attr/selectableItemBackground"
+        app:layout_constraintEnd_toEndOf="@+id/upload_location_input_layout"
+        app:layout_constraintStart_toStartOf="@+id/upload_location_input_layout"
+        app:layout_constraintTop_toBottomOf="@+id/upload_location_input_layout" />
+
+    <ImageView
+        android:id="@+id/upload_floorplan_imageview"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="32dp"
+        android:src="@drawable/sample_floor_plan"
+        app:layout_constraintBottom_toTopOf="@id/confirm_floorplan_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/upload_floorplan_button" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/confirm_floorplan_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:text="@string/confirm_floorplan"
+        android:foreground="?attr/selectableItemBackground"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/upload_floorplan_button"
+        app:layout_constraintStart_toStartOf="@+id/upload_floorplan_button" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

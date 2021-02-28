@@ -45,19 +45,6 @@ public class TouchMapView {
         mapImageView.setOnTouchListener(createMappingTouchListener());
     }
 
-//    public TouchMapView(Context context, int mode, SubsamplingScaleImageView mapImageView) {
-//        this.context = context;
-//        this.mode = mode;
-//        this.mapImageView = mapImageView;
-//        Bitmap temp = ((BitmapDrawable)mapImageView.getDrawable()).getBitmap();
-//        this.mapBitmap = temp.copy(temp.getConfig(), true);
-//        this.mapCanvas = new Canvas(mapBitmap);
-////        Bitmap paddedBitmap = makeFillerPadding(temp, 0.8, 0.8);
-////        mapImageView.setImageBitmap(paddedBitmap.copy(paddedBitmap.getConfig(), true));
-//        mapImageView.setOnTouchListener(createMappingTouchListener());
-//    }
-
-
     private Bitmap makeFillerPadding(Bitmap bitmap, double scalePaddingX, double scalePaddingY) {
         int padding_w = (int) (bitmap.getWidth() * (scalePaddingX));
         int padding_h = (int) (bitmap.getHeight() * (scalePaddingY));

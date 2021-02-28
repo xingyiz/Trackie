@@ -23,4 +23,5 @@
     <string name="test_mode">Test Mode</string>
 
     <string name="upload_floorplan_here">Upload image floorplan here</string>
+    <string name="confirm_floorplan">Confirm Floorplan</string>
 </resources>

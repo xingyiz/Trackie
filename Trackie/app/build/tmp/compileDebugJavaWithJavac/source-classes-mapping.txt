@@ -19,7 +19,6 @@ com/example/trackie/ui/home/HomeFragment.java
  com.example.trackie.ui.home.HomeFragment
  com.example.trackie.ui.home.HomeFragment$1
  com.example.trackie.ui.home.HomeFragment$2
- com.example.trackie.ui.home.HomeFragment$3
 com/example/trackie/ui/testmode/TestingMainFragment.java
  com.example.trackie.ui.testmode.TestingMainFragment
 com/example/trackie/database/MapData.java
@@ -34,8 +33,6 @@ com/example/trackie/database/TestData.java
 com/example/trackie/ui/locations/LocationsAdapter.java
  com.example.trackie.ui.locations.LocationsAdapter
  com.example.trackie.ui.locations.LocationsAdapter$ViewHolder
-com/example/trackie/ui/home/HomeViewModel.java
- com.example.trackie.ui.home.HomeViewModel
 com/example/trackie/ui/settings/SettingsFragment.java
  com.example.trackie.ui.settings.SettingsFragment
  com.example.trackie.ui.settings.SettingsFragment$1
@@ -49,6 +46,8 @@ com/example/trackie/ui/locations/LocationsViewModel.java
  com.example.trackie.ui.locations.LocationsViewModel
 com/example/trackie/ui/locations/AddLocationFragment.java
  com.example.trackie.ui.locations.AddLocationFragment
+ com.example.trackie.ui.locations.AddLocationFragment$1
+ com.example.trackie.ui.locations.AddLocationFragment$2
 com/example/trackie/ui/mapmode/RSSITestFragment.java
  com.example.trackie.ui.mapmode.RSSITestFragment
  com.example.trackie.ui.mapmode.RSSITestFragment$1

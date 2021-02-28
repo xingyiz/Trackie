@@ -1595,6 +1595,7 @@ id clip_vertical
 id collapseActionView
 id collected_data_textview
 id confirm_button
+id confirm_floorplan_button
 id confirm_location_button
 id container
 id content
@@ -1822,7 +1823,6 @@ id testingMainFragment
 id text
 id text2
 id textEnd
-id textInputLayout
 id textSpacerNoButtons
 id textSpacerNoTitle
 id textStart
@@ -1850,7 +1850,9 @@ id uniform
 id unlabeled
 id up
 id upload_floorplan_button
+id upload_floorplan_imageview
 id upload_location_button
+id upload_location_input_layout
 id upload_to_database_status_textview
 id useLogo
 id use_mode_toolbar
@@ -2080,6 +2082,7 @@ string common_google_play_services_wear_update_text
 string common_open_on_phone
 string common_signin_button_text
 string common_signin_button_text_long
+string confirm_floorplan
 string confirm_mapping_location
 string default_web_client_id
 string end_mapping
