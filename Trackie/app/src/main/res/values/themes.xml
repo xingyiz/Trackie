@@ -7,8 +7,8 @@
         <item name="colorPrimaryVariant">@color/skyBlue</item>
         <item name="colorOnPrimary">@color/opal</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/darkmaroon</item>
-        <item name="colorSecondaryVariant">@color/coolBlack</item>
+        <item name="colorSecondary">@color/coolBlack</item>
+        <item name="colorSecondaryVariant">@color/darkmaroon</item>
         <item name="colorOnSecondary">@color/beauBlue</item>
 
         <item name="colorAccent">@color/darkPink</item>

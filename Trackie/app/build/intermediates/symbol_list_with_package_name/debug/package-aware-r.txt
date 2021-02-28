@@ -1411,6 +1411,8 @@ drawable abc_textfield_search_material
 drawable abc_vector_test
 drawable avd_hide_password
 drawable avd_show_password
+drawable b2_l1
+drawable b2_l2
 drawable btn_checkbox_checked_mtrl
 drawable btn_checkbox_checked_to_unchecked_mtrl_animation
 drawable btn_checkbox_unchecked_mtrl
@@ -1423,6 +1425,7 @@ drawable button_border
 drawable button_border_clicked
 drawable button_colour
 drawable button_text_colour
+drawable cc_l1
 drawable common_full_open_on_phone
 drawable common_google_signin_btn_icon_dark
 drawable common_google_signin_btn_icon_dark_focused
