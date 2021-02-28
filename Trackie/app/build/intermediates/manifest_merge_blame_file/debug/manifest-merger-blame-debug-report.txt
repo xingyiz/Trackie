@@ -6,146 +6,146 @@
 6
 7    <uses-sdk
 8        android:minSdkVersion="26"
-8-->C:\Users\xingyiz\Documents\SUTD STUFF\TERM 5\50.003 Elements of Software Construction\Trackie\Trackie\app\src\main\AndroidManifest.xml
+8-->C:\Users\victo\SynologyDrive\Drive\School\Term 5\003 Elements of Software Construction\Trackie\Trackie\app\src\main\AndroidManifest.xml
 9        android:targetSdkVersion="30" />
-9-->C:\Users\xingyiz\Documents\SUTD STUFF\TERM 5\50.003 Elements of Software Construction\Trackie\Trackie\app\src\main\AndroidManifest.xml
+9-->C:\Users\victo\SynologyDrive\Drive\School\Term 5\003 Elements of Software Construction\Trackie\Trackie\app\src\main\AndroidManifest.xml
 10
 11    <!-- Although the *SdkVersion is captured in gradle build files, this is required for non gradle builds -->
 12    <!-- <uses-sdk android:minSdkVersion="14"/> -->
 13    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-13-->[com.google.firebase:firebase-database:19.6.0] C:\Users\xingyiz\.gradle\caches\transforms-2\files-2.1\f820e3cdf5524f5905c0bd0b836c9605\jetified-firebase-database-19.6.0\AndroidManifest.xml:25:5-79
-13-->[com.google.firebase:firebase-database:19.6.0] C:\Users\xingyiz\.gradle\caches\transforms-2\files-2.1\f820e3cdf5524f5905c0bd0b836c9605\jetified-firebase-database-19.6.0\AndroidManifest.xml:25:22-76
+13-->[com.google.firebase:firebase-database:19.6.0] C:\Users\victo\.gradle\caches\transforms-2\files-2.1\f820e3cdf5524f5905c0bd0b836c9605\jetified-firebase-database-19.6.0\AndroidManifest.xml:25:5-79
+13-->[com.google.firebase:firebase-database:19.6.0] C:\Users\victo\.gradle\caches\transforms-2\files-2.1\f820e3cdf5524f5905c0bd0b836c9605\jetified-firebase-database-19.6.0\AndroidManifest.xml:25:22-76
 14    <uses-permission android:name="android.permission.INTERNET" />
-14-->[com.google.firebase:firebase-database:19.6.0] C:\Users\xingyiz\.gradle\caches\transforms-2\files-2.1\f820e3cdf5524f5905c0bd0b836c9605\jetified-firebase-database-19.6.0\AndroidManifest.xml:26:5-67
-14-->[com.google.firebase:firebase-database:19.6.0] C:\Users\xingyiz\.gradle\caches\transforms-2\files-2.1\f820e3cdf5524f5905c0bd0b836c9605\jetified-firebase-database-19.6.0\AndroidManifest.xml:26:22-64
+14-->[com.google.firebase:firebase-database:19.6.0] C:\Users\victo\.gradle\caches\transforms-2\files-2.1\f820e3cdf5524f5905c0bd0b836c9605\jetified-firebase-database-19.6.0\AndroidManifest.xml:26:5-67
+14-->[com.google.firebase:firebase-database:19.6.0] C:\Users\victo\.gradle\caches\transforms-2\files-2.1\f820e3cdf5524f5905c0bd0b836c9605\jetified-firebase-database-19.6.0\AndroidManifest.xml:26:22-64
 15
 16    <application
-16-->C:\Users\xingyiz\Documents\SUTD STUFF\TERM 5\50.003 Elements of Software Construction\Trackie\Trackie\app\src\main\AndroidManifest.xml:5:5-37:19
+16-->C:\Users\victo\SynologyDrive\Drive\School\Term 5\003 Elements of Software Construction\Trackie\Trackie\app\src\main\AndroidManifest.xml:5:5-37:19
 17        android:allowBackup="true"
-17-->C:\Users\xingyiz\Documents\SUTD STUFF\TERM 5\50.003 Elements of Software Construction\Trackie\Trackie\app\src\main\AndroidManifest.xml:6:9-35
+17-->C:\Users\victo\SynologyDrive\Drive\School\Term 5\003 Elements of Software Construction\Trackie\Trackie\app\src\main\AndroidManifest.xml:6:9-35
 18        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
-18-->[androidx.core:core:1.1.0] C:\Users\xingyiz\.gradle\caches\transforms-2\files-2.1\acf285bdb061b554b0b237a51cb64393\core-1.1.0\AndroidManifest.xml:24:18-86
+18-->[androidx.core:core:1.1.0] C:\Users\victo\.gradle\caches\transforms-2\files-2.1\acf285bdb061b554b0b237a51cb64393\core-1.1.0\AndroidManifest.xml:24:18-86
 19        android:debuggable="true"
 20        android:extractNativeLibs="false"
 21        android:icon="@mipmap/ic_launcher"
-21-->C:\Users\xingyiz\Documents\SUTD STUFF\TERM 5\50.003 Elements of Software Construction\Trackie\Trackie\app\src\main\AndroidManifest.xml:7:9-43
+21-->C:\Users\victo\SynologyDrive\Drive\School\Term 5\003 Elements of Software Construction\Trackie\Trackie\app\src\main\AndroidManifest.xml:7:9-43
 22        android:label="@string/app_name"
-22-->C:\Users\xingyiz\Documents\SUTD STUFF\TERM 5\50.003 Elements of Software Construction\Trackie\Trackie\app\src\main\AndroidManifest.xml:8:9-41
+22-->C:\Users\victo\SynologyDrive\Drive\School\Term 5\003 Elements of Software Construction\Trackie\Trackie\app\src\main\AndroidManifest.xml:8:9-41
 23        android:roundIcon="@mipmap/ic_launcher_round"
-23-->C:\Users\xingyiz\Documents\SUTD STUFF\TERM 5\50.003 Elements of Software Construction\Trackie\Trackie\app\src\main\AndroidManifest.xml:9:9-54
+23-->C:\Users\victo\SynologyDrive\Drive\School\Term 5\003 Elements of Software Construction\Trackie\Trackie\app\src\main\AndroidManifest.xml:9:9-54
 24        android:supportsRtl="true"
-24-->C:\Users\xingyiz\Documents\SUTD STUFF\TERM 5\50.003 Elements of Software Construction\Trackie\Trackie\app\src\main\AndroidManifest.xml:10:9-35
+24-->C:\Users\victo\SynologyDrive\Drive\School\Term 5\003 Elements of Software Construction\Trackie\Trackie\app\src\main\AndroidManifest.xml:10:9-35
 25        android:testOnly="true"
 26        android:theme="@style/Theme.Trackie" >
-26-->C:\Users\xingyiz\Documents\SUTD STUFF\TERM 5\50.003 Elements of Software Construction\Trackie\Trackie\app\src\main\AndroidManifest.xml:11:9-45
+26-->C:\Users\victo\SynologyDrive\Drive\School\Term 5\003 Elements of Software Construction\Trackie\Trackie\app\src\main\AndroidManifest.xml:11:9-45
 27        <activity
-27-->C:\Users\xingyiz\Documents\SUTD STUFF\TERM 5\50.003 Elements of Software Construction\Trackie\Trackie\app\src\main\AndroidManifest.xml:13:9-18:20
+27-->C:\Users\victo\SynologyDrive\Drive\School\Term 5\003 Elements of Software Construction\Trackie\Trackie\app\src\main\AndroidManifest.xml:13:9-18:20
 28            android:name="com.example.trackie.ui.testmode.TestModeActivity"
-28-->C:\Users\xingyiz\Documents\SUTD STUFF\TERM 5\50.003 Elements of Software Construction\Trackie\Trackie\app\src\main\AndroidManifest.xml:14:13-57
+28-->C:\Users\victo\SynologyDrive\Drive\School\Term 5\003 Elements of Software Construction\Trackie\Trackie\app\src\main\AndroidManifest.xml:14:13-57
 29            android:label="@string/test_mode"
-29-->C:\Users\xingyiz\Documents\SUTD STUFF\TERM 5\50.003 Elements of Software Construction\Trackie\Trackie\app\src\main\AndroidManifest.xml:15:13-46
+29-->C:\Users\victo\SynologyDrive\Drive\School\Term 5\003 Elements of Software Construction\Trackie\Trackie\app\src\main\AndroidManifest.xml:15:13-46
 30            android:parentActivityName="com.example.trackie.ui.MainActivity"
-30-->C:\Users\xingyiz\Documents\SUTD STUFF\TERM 5\50.003 Elements of Software Construction\Trackie\Trackie\app\src\main\AndroidManifest.xml:17:13-58
+30-->C:\Users\victo\SynologyDrive\Drive\School\Term 5\003 Elements of Software Construction\Trackie\Trackie\app\src\main\AndroidManifest.xml:17:13-58
 31            android:theme="@style/Theme.Trackie.NoActionBar" >
-31-->C:\Users\xingyiz\Documents\SUTD STUFF\TERM 5\50.003 Elements of Software Construction\Trackie\Trackie\app\src\main\AndroidManifest.xml:16:13-61
+31-->C:\Users\victo\SynologyDrive\Drive\School\Term 5\003 Elements of Software Construction\Trackie\Trackie\app\src\main\AndroidManifest.xml:16:13-61
 32        </activity>
 33        <activity
-33-->C:\Users\xingyiz\Documents\SUTD STUFF\TERM 5\50.003 Elements of Software Construction\Trackie\Trackie\app\src\main\AndroidManifest.xml:20:9-25:20
+33-->C:\Users\victo\SynologyDrive\Drive\School\Term 5\003 Elements of Software Construction\Trackie\Trackie\app\src\main\AndroidManifest.xml:20:9-25:20
 34            android:name="com.example.trackie.ui.mapmode.MapModeActivity"
-34-->C:\Users\xingyiz\Documents\SUTD STUFF\TERM 5\50.003 Elements of Software Construction\Trackie\Trackie\app\src\main\AndroidManifest.xml:21:13-55
+34-->C:\Users\victo\SynologyDrive\Drive\School\Term 5\003 Elements of Software Construction\Trackie\Trackie\app\src\main\AndroidManifest.xml:21:13-55
 35            android:label="@string/map_mode"
-35-->C:\Users\xingyiz\Documents\SUTD STUFF\TERM 5\50.003 Elements of Software Construction\Trackie\Trackie\app\src\main\AndroidManifest.xml:22:13-45
+35-->C:\Users\victo\SynologyDrive\Drive\School\Term 5\003 Elements of Software Construction\Trackie\Trackie\app\src\main\AndroidManifest.xml:22:13-45
 36            android:parentActivityName="com.example.trackie.ui.MainActivity"
-36-->C:\Users\xingyiz\Documents\SUTD STUFF\TERM 5\50.003 Elements of Software Construction\Trackie\Trackie\app\src\main\AndroidManifest.xml:24:13-58
+36-->C:\Users\victo\SynologyDrive\Drive\School\Term 5\003 Elements of Software Construction\Trackie\Trackie\app\src\main\AndroidManifest.xml:24:13-58
 37            android:theme="@style/Theme.Trackie.NoActionBar" >
-37-->C:\Users\xingyiz\Documents\SUTD STUFF\TERM 5\50.003 Elements of Software Construction\Trackie\Trackie\app\src\main\AndroidManifest.xml:23:13-61
+37-->C:\Users\victo\SynologyDrive\Drive\School\Term 5\003 Elements of Software Construction\Trackie\Trackie\app\src\main\AndroidManifest.xml:23:13-61
 38        </activity>
 39        <activity
-39-->C:\Users\xingyiz\Documents\SUTD STUFF\TERM 5\50.003 Elements of Software Construction\Trackie\Trackie\app\src\main\AndroidManifest.xml:27:9-36:20
+39-->C:\Users\victo\SynologyDrive\Drive\School\Term 5\003 Elements of Software Construction\Trackie\Trackie\app\src\main\AndroidManifest.xml:27:9-36:20
 40            android:name="com.example.trackie.ui.MainActivity"
-40-->C:\Users\xingyiz\Documents\SUTD STUFF\TERM 5\50.003 Elements of Software Construction\Trackie\Trackie\app\src\main\AndroidManifest.xml:28:13-44
+40-->C:\Users\victo\SynologyDrive\Drive\School\Term 5\003 Elements of Software Construction\Trackie\Trackie\app\src\main\AndroidManifest.xml:28:13-44
 41            android:label="@string/app_name"
-41-->C:\Users\xingyiz\Documents\SUTD STUFF\TERM 5\50.003 Elements of Software Construction\Trackie\Trackie\app\src\main\AndroidManifest.xml:29:13-45
+41-->C:\Users\victo\SynologyDrive\Drive\School\Term 5\003 Elements of Software Construction\Trackie\Trackie\app\src\main\AndroidManifest.xml:29:13-45
 42            android:theme="@style/Theme.Trackie.NoActionBar" >
-42-->C:\Users\xingyiz\Documents\SUTD STUFF\TERM 5\50.003 Elements of Software Construction\Trackie\Trackie\app\src\main\AndroidManifest.xml:30:13-61
+42-->C:\Users\victo\SynologyDrive\Drive\School\Term 5\003 Elements of Software Construction\Trackie\Trackie\app\src\main\AndroidManifest.xml:30:13-61
 43            <intent-filter>
-43-->C:\Users\xingyiz\Documents\SUTD STUFF\TERM 5\50.003 Elements of Software Construction\Trackie\Trackie\app\src\main\AndroidManifest.xml:31:13-35:29
+43-->C:\Users\victo\SynologyDrive\Drive\School\Term 5\003 Elements of Software Construction\Trackie\Trackie\app\src\main\AndroidManifest.xml:31:13-35:29
 44                <action android:name="android.intent.action.MAIN" />
-44-->C:\Users\xingyiz\Documents\SUTD STUFF\TERM 5\50.003 Elements of Software Construction\Trackie\Trackie\app\src\main\AndroidManifest.xml:32:17-69
-44-->C:\Users\xingyiz\Documents\SUTD STUFF\TERM 5\50.003 Elements of Software Construction\Trackie\Trackie\app\src\main\AndroidManifest.xml:32:25-66
+44-->C:\Users\victo\SynologyDrive\Drive\School\Term 5\003 Elements of Software Construction\Trackie\Trackie\app\src\main\AndroidManifest.xml:32:17-69
+44-->C:\Users\victo\SynologyDrive\Drive\School\Term 5\003 Elements of Software Construction\Trackie\Trackie\app\src\main\AndroidManifest.xml:32:25-66
 45
 46                <category android:name="android.intent.category.LAUNCHER" />
-46-->C:\Users\xingyiz\Documents\SUTD STUFF\TERM 5\50.003 Elements of Software Construction\Trackie\Trackie\app\src\main\AndroidManifest.xml:34:17-77
-46-->C:\Users\xingyiz\Documents\SUTD STUFF\TERM 5\50.003 Elements of Software Construction\Trackie\Trackie\app\src\main\AndroidManifest.xml:34:27-74
+46-->C:\Users\victo\SynologyDrive\Drive\School\Term 5\003 Elements of Software Construction\Trackie\Trackie\app\src\main\AndroidManifest.xml:34:17-77
+46-->C:\Users\victo\SynologyDrive\Drive\School\Term 5\003 Elements of Software Construction\Trackie\Trackie\app\src\main\AndroidManifest.xml:34:27-74
 47            </intent-filter>
 48        </activity>
 49
 50        <service
-50-->[com.google.firebase:firebase-database:19.6.0] C:\Users\xingyiz\.gradle\caches\transforms-2\files-2.1\f820e3cdf5524f5905c0bd0b836c9605\jetified-firebase-database-19.6.0\AndroidManifest.xml:29:9-35:19
+50-->[com.google.firebase:firebase-database:19.6.0] C:\Users\victo\.gradle\caches\transforms-2\files-2.1\f820e3cdf5524f5905c0bd0b836c9605\jetified-firebase-database-19.6.0\AndroidManifest.xml:29:9-35:19
 51            android:name="com.google.firebase.components.ComponentDiscoveryService"
-51-->[com.google.firebase:firebase-database:19.6.0] C:\Users\xingyiz\.gradle\caches\transforms-2\files-2.1\f820e3cdf5524f5905c0bd0b836c9605\jetified-firebase-database-19.6.0\AndroidManifest.xml:30:13-84
+51-->[com.google.firebase:firebase-database:19.6.0] C:\Users\victo\.gradle\caches\transforms-2\files-2.1\f820e3cdf5524f5905c0bd0b836c9605\jetified-firebase-database-19.6.0\AndroidManifest.xml:30:13-84
 52            android:directBootAware="true"
-52-->[com.google.firebase:firebase-common:19.5.0] C:\Users\xingyiz\.gradle\caches\transforms-2\files-2.1\9b2ec3a49389295e09fe37e42c5e30ad\jetified-firebase-common-19.5.0\AndroidManifest.xml:35:13-43
+52-->[com.google.firebase:firebase-common:19.5.0] C:\Users\victo\.gradle\caches\transforms-2\files-2.1\9b2ec3a49389295e09fe37e42c5e30ad\jetified-firebase-common-19.5.0\AndroidManifest.xml:35:13-43
 53            android:exported="false" >
-53-->[com.google.firebase:firebase-database:19.6.0] C:\Users\xingyiz\.gradle\caches\transforms-2\files-2.1\f820e3cdf5524f5905c0bd0b836c9605\jetified-firebase-database-19.6.0\AndroidManifest.xml:31:13-37
+53-->[com.google.firebase:firebase-database:19.6.0] C:\Users\victo\.gradle\caches\transforms-2\files-2.1\f820e3cdf5524f5905c0bd0b836c9605\jetified-firebase-database-19.6.0\AndroidManifest.xml:31:13-37
 54            <meta-data
-54-->[com.google.firebase:firebase-database:19.6.0] C:\Users\xingyiz\.gradle\caches\transforms-2\files-2.1\f820e3cdf5524f5905c0bd0b836c9605\jetified-firebase-database-19.6.0\AndroidManifest.xml:32:13-34:85
+54-->[com.google.firebase:firebase-database:19.6.0] C:\Users\victo\.gradle\caches\transforms-2\files-2.1\f820e3cdf5524f5905c0bd0b836c9605\jetified-firebase-database-19.6.0\AndroidManifest.xml:32:13-34:85
 55                android:name="com.google.firebase.components:com.google.firebase.database.DatabaseRegistrar"
-55-->[com.google.firebase:firebase-database:19.6.0] C:\Users\xingyiz\.gradle\caches\transforms-2\files-2.1\f820e3cdf5524f5905c0bd0b836c9605\jetified-firebase-database-19.6.0\AndroidManifest.xml:33:17-109
+55-->[com.google.firebase:firebase-database:19.6.0] C:\Users\victo\.gradle\caches\transforms-2\files-2.1\f820e3cdf5524f5905c0bd0b836c9605\jetified-firebase-database-19.6.0\AndroidManifest.xml:33:17-109
 56                android:value="com.google.firebase.components.ComponentRegistrar" />
-56-->[com.google.firebase:firebase-database:19.6.0] C:\Users\xingyiz\.gradle\caches\transforms-2\files-2.1\f820e3cdf5524f5905c0bd0b836c9605\jetified-firebase-database-19.6.0\AndroidManifest.xml:34:17-82
+56-->[com.google.firebase:firebase-database:19.6.0] C:\Users\victo\.gradle\caches\transforms-2\files-2.1\f820e3cdf5524f5905c0bd0b836c9605\jetified-firebase-database-19.6.0\AndroidManifest.xml:34:17-82
 57            <meta-data
-57-->[com.google.firebase:firebase-firestore:22.1.0] C:\Users\xingyiz\.gradle\caches\transforms-2\files-2.1\ac89e9665ef5012d573ba0af674aa11e\jetified-firebase-firestore-22.1.0\AndroidManifest.xml:20:13-22:85
+57-->[com.google.firebase:firebase-firestore:22.1.0] C:\Users\victo\.gradle\caches\transforms-2\files-2.1\ac89e9665ef5012d573ba0af674aa11e\jetified-firebase-firestore-22.1.0\AndroidManifest.xml:20:13-22:85
 58                android:name="com.google.firebase.components:com.google.firebase.firestore.FirestoreRegistrar"
-58-->[com.google.firebase:firebase-firestore:22.1.0] C:\Users\xingyiz\.gradle\caches\transforms-2\files-2.1\ac89e9665ef5012d573ba0af674aa11e\jetified-firebase-firestore-22.1.0\AndroidManifest.xml:21:17-111
+58-->[com.google.firebase:firebase-firestore:22.1.0] C:\Users\victo\.gradle\caches\transforms-2\files-2.1\ac89e9665ef5012d573ba0af674aa11e\jetified-firebase-firestore-22.1.0\AndroidManifest.xml:21:17-111
 59                android:value="com.google.firebase.components.ComponentRegistrar" />
-59-->[com.google.firebase:firebase-firestore:22.1.0] C:\Users\xingyiz\.gradle\caches\transforms-2\files-2.1\ac89e9665ef5012d573ba0af674aa11e\jetified-firebase-firestore-22.1.0\AndroidManifest.xml:22:17-82
+59-->[com.google.firebase:firebase-firestore:22.1.0] C:\Users\victo\.gradle\caches\transforms-2\files-2.1\ac89e9665ef5012d573ba0af674aa11e\jetified-firebase-firestore-22.1.0\AndroidManifest.xml:22:17-82
 60            <meta-data
-60-->[com.google.firebase:firebase-storage:19.2.1] C:\Users\xingyiz\.gradle\caches\transforms-2\files-2.1\4fe024a2b334d8544f8eaa9cab7ed523\jetified-firebase-storage-19.2.1\AndroidManifest.xml:33:13-35:85
+60-->[com.google.firebase:firebase-storage:19.2.1] C:\Users\victo\.gradle\caches\transforms-2\files-2.1\4fe024a2b334d8544f8eaa9cab7ed523\jetified-firebase-storage-19.2.1\AndroidManifest.xml:33:13-35:85
 61                android:name="com.google.firebase.components:com.google.firebase.storage.StorageRegistrar"
-61-->[com.google.firebase:firebase-storage:19.2.1] C:\Users\xingyiz\.gradle\caches\transforms-2\files-2.1\4fe024a2b334d8544f8eaa9cab7ed523\jetified-firebase-storage-19.2.1\AndroidManifest.xml:34:17-107
+61-->[com.google.firebase:firebase-storage:19.2.1] C:\Users\victo\.gradle\caches\transforms-2\files-2.1\4fe024a2b334d8544f8eaa9cab7ed523\jetified-firebase-storage-19.2.1\AndroidManifest.xml:34:17-107
 62                android:value="com.google.firebase.components.ComponentRegistrar" />
-62-->[com.google.firebase:firebase-storage:19.2.1] C:\Users\xingyiz\.gradle\caches\transforms-2\files-2.1\4fe024a2b334d8544f8eaa9cab7ed523\jetified-firebase-storage-19.2.1\AndroidManifest.xml:35:17-82
+62-->[com.google.firebase:firebase-storage:19.2.1] C:\Users\victo\.gradle\caches\transforms-2\files-2.1\4fe024a2b334d8544f8eaa9cab7ed523\jetified-firebase-storage-19.2.1\AndroidManifest.xml:35:17-82
 63            <!--
 64                This registrar is not defined in the dynamic-module-support sdk itself to allow non-firebase
 65                clients to use it as well, by defining this registrar in their own core/common library.
 66            -->
 67            <meta-data
-67-->[com.google.firebase:firebase-common:19.5.0] C:\Users\xingyiz\.gradle\caches\transforms-2\files-2.1\9b2ec3a49389295e09fe37e42c5e30ad\jetified-firebase-common-19.5.0\AndroidManifest.xml:43:13-45:85
+67-->[com.google.firebase:firebase-common:19.5.0] C:\Users\victo\.gradle\caches\transforms-2\files-2.1\9b2ec3a49389295e09fe37e42c5e30ad\jetified-firebase-common-19.5.0\AndroidManifest.xml:43:13-45:85
 68                android:name="com.google.firebase.components:com.google.firebase.dynamicloading.DynamicLoadingRegistrar"
-68-->[com.google.firebase:firebase-common:19.5.0] C:\Users\xingyiz\.gradle\caches\transforms-2\files-2.1\9b2ec3a49389295e09fe37e42c5e30ad\jetified-firebase-common-19.5.0\AndroidManifest.xml:44:17-121
+68-->[com.google.firebase:firebase-common:19.5.0] C:\Users\victo\.gradle\caches\transforms-2\files-2.1\9b2ec3a49389295e09fe37e42c5e30ad\jetified-firebase-common-19.5.0\AndroidManifest.xml:44:17-121
 69                android:value="com.google.firebase.components.ComponentRegistrar" />
-69-->[com.google.firebase:firebase-common:19.5.0] C:\Users\xingyiz\.gradle\caches\transforms-2\files-2.1\9b2ec3a49389295e09fe37e42c5e30ad\jetified-firebase-common-19.5.0\AndroidManifest.xml:45:17-82
+69-->[com.google.firebase:firebase-common:19.5.0] C:\Users\victo\.gradle\caches\transforms-2\files-2.1\9b2ec3a49389295e09fe37e42c5e30ad\jetified-firebase-common-19.5.0\AndroidManifest.xml:45:17-82
 70        </service>
 71
 72        <provider
-72-->[com.google.firebase:firebase-common:19.5.0] C:\Users\xingyiz\.gradle\caches\transforms-2\files-2.1\9b2ec3a49389295e09fe37e42c5e30ad\jetified-firebase-common-19.5.0\AndroidManifest.xml:26:9-31:39
+72-->[com.google.firebase:firebase-common:19.5.0] C:\Users\victo\.gradle\caches\transforms-2\files-2.1\9b2ec3a49389295e09fe37e42c5e30ad\jetified-firebase-common-19.5.0\AndroidManifest.xml:26:9-31:39
 73            android:name="com.google.firebase.provider.FirebaseInitProvider"
-73-->[com.google.firebase:firebase-common:19.5.0] C:\Users\xingyiz\.gradle\caches\transforms-2\files-2.1\9b2ec3a49389295e09fe37e42c5e30ad\jetified-firebase-common-19.5.0\AndroidManifest.xml:27:13-77
+73-->[com.google.firebase:firebase-common:19.5.0] C:\Users\victo\.gradle\caches\transforms-2\files-2.1\9b2ec3a49389295e09fe37e42c5e30ad\jetified-firebase-common-19.5.0\AndroidManifest.xml:27:13-77
 74            android:authorities="com.example.trackie.firebaseinitprovider"
-74-->[com.google.firebase:firebase-common:19.5.0] C:\Users\xingyiz\.gradle\caches\transforms-2\files-2.1\9b2ec3a49389295e09fe37e42c5e30ad\jetified-firebase-common-19.5.0\AndroidManifest.xml:28:13-72
+74-->[com.google.firebase:firebase-common:19.5.0] C:\Users\victo\.gradle\caches\transforms-2\files-2.1\9b2ec3a49389295e09fe37e42c5e30ad\jetified-firebase-common-19.5.0\AndroidManifest.xml:28:13-72
 75            android:directBootAware="true"
-75-->[com.google.firebase:firebase-common:19.5.0] C:\Users\xingyiz\.gradle\caches\transforms-2\files-2.1\9b2ec3a49389295e09fe37e42c5e30ad\jetified-firebase-common-19.5.0\AndroidManifest.xml:29:13-43
+75-->[com.google.firebase:firebase-common:19.5.0] C:\Users\victo\.gradle\caches\transforms-2\files-2.1\9b2ec3a49389295e09fe37e42c5e30ad\jetified-firebase-common-19.5.0\AndroidManifest.xml:29:13-43
 76            android:exported="false"
-76-->[com.google.firebase:firebase-common:19.5.0] C:\Users\xingyiz\.gradle\caches\transforms-2\files-2.1\9b2ec3a49389295e09fe37e42c5e30ad\jetified-firebase-common-19.5.0\AndroidManifest.xml:30:13-37
+76-->[com.google.firebase:firebase-common:19.5.0] C:\Users\victo\.gradle\caches\transforms-2\files-2.1\9b2ec3a49389295e09fe37e42c5e30ad\jetified-firebase-common-19.5.0\AndroidManifest.xml:30:13-37
 77            android:initOrder="100" />
-77-->[com.google.firebase:firebase-common:19.5.0] C:\Users\xingyiz\.gradle\caches\transforms-2\files-2.1\9b2ec3a49389295e09fe37e42c5e30ad\jetified-firebase-common-19.5.0\AndroidManifest.xml:31:13-36
+77-->[com.google.firebase:firebase-common:19.5.0] C:\Users\victo\.gradle\caches\transforms-2\files-2.1\9b2ec3a49389295e09fe37e42c5e30ad\jetified-firebase-common-19.5.0\AndroidManifest.xml:31:13-36
 78
 79        <activity
-79-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\xingyiz\.gradle\caches\transforms-2\files-2.1\8de479e3923cdb06e513556595304162\jetified-play-services-base-17.0.0\AndroidManifest.xml:23:9-26:75
+79-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\victo\.gradle\caches\transforms-2\files-2.1\8de479e3923cdb06e513556595304162\jetified-play-services-base-17.0.0\AndroidManifest.xml:23:9-26:75
 80            android:name="com.google.android.gms.common.api.GoogleApiActivity"
-80-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\xingyiz\.gradle\caches\transforms-2\files-2.1\8de479e3923cdb06e513556595304162\jetified-play-services-base-17.0.0\AndroidManifest.xml:24:13-79
+80-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\victo\.gradle\caches\transforms-2\files-2.1\8de479e3923cdb06e513556595304162\jetified-play-services-base-17.0.0\AndroidManifest.xml:24:13-79
 81            android:exported="false"
-81-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\xingyiz\.gradle\caches\transforms-2\files-2.1\8de479e3923cdb06e513556595304162\jetified-play-services-base-17.0.0\AndroidManifest.xml:25:13-37
+81-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\victo\.gradle\caches\transforms-2\files-2.1\8de479e3923cdb06e513556595304162\jetified-play-services-base-17.0.0\AndroidManifest.xml:25:13-37
 82            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-82-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\xingyiz\.gradle\caches\transforms-2\files-2.1\8de479e3923cdb06e513556595304162\jetified-play-services-base-17.0.0\AndroidManifest.xml:26:13-72
+82-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\victo\.gradle\caches\transforms-2\files-2.1\8de479e3923cdb06e513556595304162\jetified-play-services-base-17.0.0\AndroidManifest.xml:26:13-72
 83
 84        <meta-data
-84-->[com.google.android.gms:play-services-basement:17.0.0] C:\Users\xingyiz\.gradle\caches\transforms-2\files-2.1\830f40744a6b50d3acce285cce8599db\jetified-play-services-basement-17.0.0\AndroidManifest.xml:23:9-25:69
+84-->[com.google.android.gms:play-services-basement:17.0.0] C:\Users\victo\.gradle\caches\transforms-2\files-2.1\830f40744a6b50d3acce285cce8599db\jetified-play-services-basement-17.0.0\AndroidManifest.xml:23:9-25:69
 85            android:name="com.google.android.gms.version"
-85-->[com.google.android.gms:play-services-basement:17.0.0] C:\Users\xingyiz\.gradle\caches\transforms-2\files-2.1\830f40744a6b50d3acce285cce8599db\jetified-play-services-basement-17.0.0\AndroidManifest.xml:24:13-58
+85-->[com.google.android.gms:play-services-basement:17.0.0] C:\Users\victo\.gradle\caches\transforms-2\files-2.1\830f40744a6b50d3acce285cce8599db\jetified-play-services-basement-17.0.0\AndroidManifest.xml:24:13-58
 86            android:value="@integer/google_play_services_version" />
-86-->[com.google.android.gms:play-services-basement:17.0.0] C:\Users\xingyiz\.gradle\caches\transforms-2\files-2.1\830f40744a6b50d3acce285cce8599db\jetified-play-services-basement-17.0.0\AndroidManifest.xml:25:13-66
+86-->[com.google.android.gms:play-services-basement:17.0.0] C:\Users\victo\.gradle\caches\transforms-2\files-2.1\830f40744a6b50d3acce285cce8599db\jetified-play-services-basement-17.0.0\AndroidManifest.xml:25:13-66
 87    </application>
 88
 89</manifest>

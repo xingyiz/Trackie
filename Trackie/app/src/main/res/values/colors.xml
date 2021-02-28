@@ -18,4 +18,14 @@
     <color name="gray">#CECECE</color>
     <color name="dark_gray">#707070</color>
     <color name="light_gray">#F1F1F1</color>
+
+    <!--theme palette-->
+    <color name="coolBlack">#1A281F</color>
+    <color name="darkmaroon">#281A28</color>
+    <color name="darkearth">#435255</color>
+    <color name="darkPink">#CE7B91</color>
+    <color name="opal">#B8D3D1</color>
+    <color name="beauBlue">#B8CCD4</color>
+    <color name="skyBlue">#C0E8F9</color>
+
 </resources>

@@ -792,6 +792,7 @@ color background_floating_material_dark
 color background_floating_material_light
 color background_material_dark
 color background_material_light
+color beauBlue
 color black
 color bright_foreground_disabled_material_dark
 color bright_foreground_disabled_material_light
@@ -817,8 +818,12 @@ color common_google_signin_btn_text_light_disabled
 color common_google_signin_btn_text_light_focused
 color common_google_signin_btn_text_light_pressed
 color common_google_signin_btn_tint
+color coolBlack
 color crimsom
+color darkPink
 color dark_gray
+color darkearth
+color darkmaroon
 color darkred
 color design_bottom_navigation_shadow_color
 color design_box_stroke_color
@@ -948,6 +953,7 @@ color mtrl_textinput_hovered_box_stroke_color
 color notification_action_color_filter
 color notification_icon_bg_color
 color notification_material_background_media_default_color
+color opal
 color primary_dark_material_dark
 color primary_dark_material_light
 color primary_material_dark
@@ -965,6 +971,7 @@ color secondary_text_default_material_dark
 color secondary_text_default_material_light
 color secondary_text_disabled_material_dark
 color secondary_text_disabled_material_light
+color skyBlue
 color switch_thumb_disabled_material_dark
 color switch_thumb_disabled_material_light
 color switch_thumb_material_dark
@@ -1413,6 +1420,9 @@ drawable btn_radio_off_to_on_mtrl_animation
 drawable btn_radio_on_mtrl
 drawable btn_radio_on_to_off_mtrl_animation
 drawable button_border
+drawable button_border_clicked
+drawable button_colour
+drawable button_text_colour
 drawable common_full_open_on_phone
 drawable common_google_signin_btn_icon_dark
 drawable common_google_signin_btn_icon_dark_focused
@@ -2060,6 +2070,7 @@ string common_open_on_phone
 string common_signin_button_text
 string common_signin_button_text_long
 string confirm_mapping_location
+string database
 string default_web_client_id
 string end_mapping
 string error_icon_content_description

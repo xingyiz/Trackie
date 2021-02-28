@@ -44,7 +44,7 @@
         android:fontFamily="@font/segoeui"
         android:text="@string/mapping_complete"
         android:textAlignment="center"
-        android:textColor="?attr/colorPrimaryVariant"
+        android:textColor="?attr/colorAccent"
         android:textSize="@dimen/alert_text_size"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
