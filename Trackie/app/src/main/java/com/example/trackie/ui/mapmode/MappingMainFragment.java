@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -16,23 +17,23 @@ import android.widget.Toast;
 
 import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
 import com.example.trackie.R;
+import com.example.trackie.database.MapData;
 import com.example.trackie.ui.TouchMapView;
+
+import java.util.Observable;
+import java.util.Observer;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link MappingMainFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MappingMainFragment extends Fragment {
+public class MappingMainFragment extends Fragment implements Observer {
 
-    // TODO: Rename parameter arguments, choose names that match
+
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private static final String MAP_DATA_KEY = "MapData";
+    private static MapData mapData;
 
     public MappingMainFragment() {
         // Required empty public constructor
@@ -50,8 +51,7 @@ public class MappingMainFragment extends Fragment {
     public static MappingMainFragment newInstance(String param1, String param2) {
         MappingMainFragment fragment = new MappingMainFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putParcelable(MAP_DATA_KEY, mapData);
         fragment.setArguments(args);
         return fragment;
     }
@@ -60,8 +60,7 @@ public class MappingMainFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            mapData = getArguments().getParcelable(MAP_DATA_KEY);
         }
     }
 
@@ -77,5 +76,12 @@ public class MappingMainFragment extends Fragment {
         SubsamplingScaleImageView mapping_image = (SubsamplingScaleImageView) view.findViewById(R.id.mapping_indoor_map_view);
         Bitmap mapBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.sample_floor_plan);
         TouchMapView mapView = new TouchMapView(getActivity(), TouchMapView.MAP_MODE, mapping_image, mapBitmap.copy(mapBitmap.getConfig(), false));
+    }
+
+    // Observer method to detect when current coordinates in the TouchMapView has changed
+    // Reads the RSSI values and updates the current data
+    @Override
+    public void update(Observable o, Object arg) {
+
     }
 }

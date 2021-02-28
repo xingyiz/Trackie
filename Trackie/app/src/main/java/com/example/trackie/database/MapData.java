@@ -3,6 +3,8 @@ package com.example.trackie.database;
 import android.graphics.Point;
 import android.graphics.PointF;
 import android.net.Uri;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -19,7 +21,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class MapData implements MapRep {
+public class MapData implements MapRep, Parcelable {
     private static final String TAG = "MapData";
 
     private String id;
@@ -65,6 +67,16 @@ public class MapData implements MapRep {
     // test function pls delete
     public MapData(String name) {
         this.name = name;
+    }
+
+    protected MapData(Parcel in) {
+        id = in.readString();
+        name = in.readString();
+        location = in.readParcelable(PointF.class.getClassLoader());
+        z = in.readDouble();
+        device = in.readString();
+        timestamp = in.readParcelable(Timestamp.class.getClassLoader());
+        floorplan = in.readString();
     }
 
     private void uploadFloorplan() {
@@ -182,5 +194,34 @@ public class MapData implements MapRep {
                 + ", device = " + device
                 + ", timestamp = " + timestamp.toString()
                 + ", floorplan = " + floorplan + " ]";
+    }
+
+    public static final Creator<MapData> CREATOR = new Creator<MapData>() {
+        @Override
+        public MapData createFromParcel(Parcel in) {
+            return new MapData(in);
+        }
+
+        @Override
+        public MapData[] newArray(int size) {
+            return new MapData[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+
+        dest.writeString(id);
+        dest.writeString(name);
+        dest.writeParcelable(location, flags);
+        dest.writeDouble(z);
+        dest.writeString(device);
+        dest.writeParcelable(timestamp, flags);
+        dest.writeString(floorplan);
     }
 }

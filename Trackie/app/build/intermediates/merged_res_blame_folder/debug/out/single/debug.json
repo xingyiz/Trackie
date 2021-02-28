@@ -60,6 +60,14 @@
         "source": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\src\\main\\res\\drawable\\ic_menu_gallery.xml"
     },
     {
+        "merged": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\drawable-v24_sample_floor_plan_2.png.flat",
+        "source": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\src\\main\\res\\drawable-v24\\sample_floor_plan_2.png"
+    },
+    {
+        "merged": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_location_on_24px.xml.flat",
+        "source": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\src\\main\\res\\drawable\\ic_location_on_24px.xml"
+    },
+    {
         "merged": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi_ic_launcher_round.png.flat",
         "source": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher_round.png"
     },

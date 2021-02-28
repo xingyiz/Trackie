@@ -1451,6 +1451,7 @@ drawable ic_keyboard_arrow_right_black_24dp
 drawable ic_keyboard_return_24px
 drawable ic_launcher_background
 drawable ic_launcher_foreground
+drawable ic_location_on_24px
 drawable ic_map_24px
 drawable ic_menu_arrow_down_black_24dp
 drawable ic_menu_arrow_up_black_24dp
@@ -1487,6 +1488,7 @@ drawable notification_template_icon_low_bg
 drawable notification_tile_bg
 drawable notify_panel_notification_icon_bg
 drawable sample_floor_plan
+drawable sample_floor_plan_2
 drawable side_nav_bar
 drawable test_custom_background
 drawable tooltip_frame_dark
