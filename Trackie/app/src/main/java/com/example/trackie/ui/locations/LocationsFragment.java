@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,7 +16,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.trackie.R;
 import com.example.trackie.database.MapData;
-import com.example.trackie.ui.home.LocationsAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -31,9 +29,10 @@ public class LocationsFragment extends Fragment {
         locationsViewModel =
                 new ViewModelProvider(this).get(LocationsViewModel.class);
         View root = inflater.inflate(R.layout.fragment_locations, container, false);
-        locationsViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        locationsViewModel.getLocationsData().observe(getViewLifecycleOwner(), new Observer<ArrayList<MapData>>() {
             @Override
-            public void onChanged(@Nullable String s) {
+            public void onChanged(ArrayList<MapData> mapData) {
+
             }
         });
         return root;
@@ -56,12 +55,12 @@ public class LocationsFragment extends Fragment {
         addLocationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.locations_fragment_container, new AddLocationFragment());
+                FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().
+                        beginTransaction()
+                        .setCustomAnimations(R.anim.fragment_fade_enter, R.anim.fragment_fade_exit);
+                fragmentTransaction.replace(view.getId(), new AddLocationFragment());
                 fragmentTransaction.addToBackStack(null).commit();
             }
         });
     }
-
-
 }

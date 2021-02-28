@@ -31,9 +31,9 @@ com/example/trackie/BuildConfig.java
  com.example.trackie.BuildConfig
 com/example/trackie/database/TestData.java
  com.example.trackie.database.TestData
-com/example/trackie/ui/home/LocationsAdapter.java
- com.example.trackie.ui.home.LocationsAdapter
- com.example.trackie.ui.home.LocationsAdapter$ViewHolder
+com/example/trackie/ui/locations/LocationsAdapter.java
+ com.example.trackie.ui.locations.LocationsAdapter
+ com.example.trackie.ui.locations.LocationsAdapter$ViewHolder
 com/example/trackie/ui/home/HomeViewModel.java
  com.example.trackie.ui.home.HomeViewModel
 com/example/trackie/ui/settings/SettingsFragment.java
@@ -67,15 +67,15 @@ com/example/trackie/database/FirestoreHelper.java
  com.example.trackie.database.FirestoreHelper$SetMapData
  com.example.trackie.database.FirestoreHelper$SetMapData$1
  com.example.trackie.database.FirestoreHelper$UpdateMapData
-com/example/trackie/ui/mapmode/RSSIAdapter.java
- com.example.trackie.ui.mapmode.RSSIAdapter
- com.example.trackie.ui.mapmode.RSSIAdapter$1
- com.example.trackie.ui.mapmode.RSSIAdapter$ViewHolder
-com/example/trackie/ui/mapmode/MappingCompleteFragment.java
- com.example.trackie.ui.mapmode.MappingCompleteFragment
-com/example/trackie/ui/testmode/TestModeActivity.java
- com.example.trackie.ui.testmode.TestModeActivity
 com/example/trackie/ui/locations/LocationsFragment.java
  com.example.trackie.ui.locations.LocationsFragment
  com.example.trackie.ui.locations.LocationsFragment$1
  com.example.trackie.ui.locations.LocationsFragment$2
+com/example/trackie/ui/mapmode/MappingCompleteFragment.java
+ com.example.trackie.ui.mapmode.MappingCompleteFragment
+com/example/trackie/ui/testmode/TestModeActivity.java
+ com.example.trackie.ui.testmode.TestModeActivity
+com/example/trackie/ui/mapmode/RSSIAdapter.java
+ com.example.trackie.ui.mapmode.RSSIAdapter
+ com.example.trackie.ui.mapmode.RSSIAdapter$1
+ com.example.trackie.ui.mapmode.RSSIAdapter$ViewHolder

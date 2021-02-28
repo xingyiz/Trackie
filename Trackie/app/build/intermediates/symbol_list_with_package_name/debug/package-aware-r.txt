@@ -1822,6 +1822,7 @@ id testingMainFragment
 id text
 id text2
 id textEnd
+id textInputLayout
 id textSpacerNoButtons
 id textSpacerNoTitle
 id textStart
@@ -1848,6 +1849,7 @@ id unchecked
 id uniform
 id unlabeled
 id up
+id upload_floorplan_button
 id upload_location_button
 id upload_to_database_status_textview
 id useLogo
@@ -2090,7 +2092,6 @@ string google_api_key
 string google_app_id
 string google_crash_reporting_api_key
 string google_storage_bucket
-string hello_blank_fragment
 string hide_bottom_view_on_scroll_behavior
 string icon_content_description
 string map_mode
@@ -2149,6 +2150,7 @@ string search_menu_title
 string show_results
 string status_bar_notification_info_overflow
 string test_mode
+string upload_floorplan_here
 string uploading_to_database
 style AlertDialog_AppCompat
 style AlertDialog_AppCompat_Light
