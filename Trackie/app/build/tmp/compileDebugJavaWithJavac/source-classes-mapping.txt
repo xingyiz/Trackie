@@ -37,6 +37,7 @@ com/example/trackie/ui/locations/LocationsAdapter.java
 com/example/trackie/ui/settings/SettingsFragment.java
  com.example.trackie.ui.settings.SettingsFragment
  com.example.trackie.ui.settings.SettingsFragment$1
+ com.example.trackie.ui.settings.SettingsFragment$2
 com/example/trackie/database/FirestoreExecute.java
  com.example.trackie.database.FirestoreExecute
 com/example/trackie/ui/mapmode/MappingMainFragment.java

@@ -12,16 +12,20 @@
         "source": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\src\\main\\res\\layout\\fragment_databasetest.xml"
     },
     {
-        "merged": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-hdpi_ic_launcher.png.flat",
-        "source": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher.png"
+        "merged": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\layout_fragment_settings.xml.flat",
+        "source": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\src\\main\\res\\layout\\fragment_settings.xml"
     },
     {
         "merged": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_add_24px.xml.flat",
         "source": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\src\\main\\res\\drawable\\ic_add_24px.xml"
     },
     {
-        "merged": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\layout_fragment_settings.xml.flat",
-        "source": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\src\\main\\res\\layout\\fragment_settings.xml"
+        "merged": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-hdpi_ic_launcher.png.flat",
+        "source": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\drawable_cc_l1.png.flat",
+        "source": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\src\\main\\res\\drawable\\cc_l1.png"
     },
     {
         "merged": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_keyboard_return_24px.xml.flat",
@@ -56,12 +60,12 @@
         "source": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\src\\main\\res\\mipmap-xxxhdpi\\ic_launcher_round.png"
     },
     {
-        "merged": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_menu_gallery.xml.flat",
-        "source": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\src\\main\\res\\drawable\\ic_menu_gallery.xml"
-    },
-    {
         "merged": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\drawable-v24_sample_floor_plan_2.png.flat",
         "source": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\src\\main\\res\\drawable-v24\\sample_floor_plan_2.png"
+    },
+    {
+        "merged": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_menu_gallery.xml.flat",
+        "source": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\src\\main\\res\\drawable\\ic_menu_gallery.xml"
     },
     {
         "merged": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_location_on_24px.xml.flat",
@@ -112,12 +116,12 @@
         "source": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\src\\main\\res\\layout\\fragment_mapping_complete.xml"
     },
     {
-        "merged": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\transition_fade.xml.flat",
-        "source": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\src\\main\\res\\transition\\fade.xml"
-    },
-    {
         "merged": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi_ic_launcher.png.flat",
         "source": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\transition_fade.xml.flat",
+        "source": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\src\\main\\res\\transition\\fade.xml"
     },
     {
         "merged": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\layout_fragment_add_location.xml.flat",
@@ -130,6 +134,10 @@
     {
         "merged": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_map_24px.xml.flat",
         "source": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\src\\main\\res\\drawable\\ic_map_24px.xml"
+    },
+    {
+        "merged": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_baseline_cloud_24.xml.flat",
+        "source": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\src\\main\\res\\drawable\\ic_baseline_cloud_24.xml"
     },
     {
         "merged": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_my_location_24px.xml.flat",
@@ -168,6 +176,14 @@
         "source": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher_round.png"
     },
     {
+        "merged": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\drawable_b2_l1.png.flat",
+        "source": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\src\\main\\res\\drawable\\b2_l1.png"
+    },
+    {
+        "merged": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\drawable_menu_item_background.xml.flat",
+        "source": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\src\\main\\res\\drawable\\menu_item_background.xml"
+    },
+    {
         "merged": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi_ic_launcher_round.png.flat",
         "source": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher_round.png"
     },
@@ -180,6 +196,10 @@
         "source": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\src\\main\\res\\layout\\nav_header_main.xml"
     },
     {
+        "merged": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\drawable_pink_gradient.xml.flat",
+        "source": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\src\\main\\res\\drawable\\pink_gradient.xml"
+    },
+    {
         "merged": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\navigation_test_mode_navigation.xml.flat",
         "source": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\src\\main\\res\\navigation\\test_mode_navigation.xml"
     },
@@ -190,6 +210,10 @@
     {
         "merged": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_more_vert_24px.xml.flat",
         "source": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\src\\main\\res\\drawable\\ic_more_vert_24px.xml"
+    },
+    {
+        "merged": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\drawable_button_border_clicked.xml.flat",
+        "source": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\src\\main\\res\\drawable\\button_border_clicked.xml"
     },
     {
         "merged": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\font_isegoeui.ttf.flat",
@@ -224,7 +248,19 @@
         "source": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\src\\main\\res\\drawable\\ic_keyboard_arrow_down_24px.xml"
     },
     {
+        "merged": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\drawable_b2_l2.png.flat",
+        "source": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\src\\main\\res\\drawable\\b2_l2.png"
+    },
+    {
+        "merged": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\drawable_button_text_colour.xml.flat",
+        "source": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\src\\main\\res\\drawable\\button_text_colour.xml"
+    },
+    {
         "merged": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\drawable_sample_floor_plan.jpg.flat",
         "source": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\src\\main\\res\\drawable\\sample_floor_plan.jpg"
+    },
+    {
+        "merged": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\drawable_button_colour.xml.flat",
+        "source": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\src\\main\\res\\drawable\\button_colour.xml"
     }
 ]
