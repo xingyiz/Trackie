@@ -1,13 +1,18 @@
 package com.example.trackie.ui.settings;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -15,6 +20,8 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.trackie.R;
 
 public class SettingsFragment extends Fragment {
+
+    SwitchCompat darkModeSwitch;
 
     private SettingsViewModel settingsViewModel;
 
@@ -30,6 +37,23 @@ public class SettingsFragment extends Fragment {
                 textView.setText(s);
             }
         });
+
+        darkModeSwitch = root.findViewById(R.id.toggle_dark_mode);
+        darkModeSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+                //set to dark mode if true
+                if (isChecked) {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                } else {
+                    // light mode if false
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                }
+                Log.v("Switch State=", ""+isChecked);
+            }
+        });
+
         return root;
     }
+
 }

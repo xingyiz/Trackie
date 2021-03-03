@@ -64,6 +64,10 @@
         "source": "C:\\Users\\victo\\SynologyDrive\\Drive\\School\\Term 5\\003 Elements of Software Construction\\Trackie\\Trackie\\app\\src\\main\\res\\drawable\\ic_menu_camera.xml"
     },
     {
+        "merged": "C:\\Users\\victo\\SynologyDrive\\Drive\\School\\Term 5\\003 Elements of Software Construction\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\drawable_pink_gradient.xml.flat",
+        "source": "C:\\Users\\victo\\SynologyDrive\\Drive\\School\\Term 5\\003 Elements of Software Construction\\Trackie\\Trackie\\app\\src\\main\\res\\drawable\\pink_gradient.xml"
+    },
+    {
         "merged": "C:\\Users\\victo\\SynologyDrive\\Drive\\School\\Term 5\\003 Elements of Software Construction\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\layout_nav_header_main.xml.flat",
         "source": "C:\\Users\\victo\\SynologyDrive\\Drive\\School\\Term 5\\003 Elements of Software Construction\\Trackie\\Trackie\\app\\src\\main\\res\\layout\\nav_header_main.xml"
     },

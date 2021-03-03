@@ -2,16 +2,19 @@
     <!-- Base application theme. -->
     <style name="Theme.Trackie" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Theme Colours. -->
+        <item name="backgroundColor">@color/white</item>
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/darkearth</item>
-        <item name="colorPrimaryVariant">@color/skyBlue</item>
-        <item name="colorOnPrimary">@color/opal</item>
+        <item name="colorPrimary">@color/airBlue</item>
+        <item name="colorPrimaryVariant">@color/blueGray</item>
+        <item name="colorOnPrimary">@color/beauBlue</item>
+        <item name="colorOnBackground">@color/airBlue</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/coolBlack</item>
-        <item name="colorSecondaryVariant">@color/darkmaroon</item>
+        <item name="colorSecondary">@color/charcoal</item>
+        <item name="colorSecondaryVariant">@color/coolBlack</item>
         <item name="colorOnSecondary">@color/beauBlue</item>
 
-        <item name="colorAccent">@color/darkPink</item>
+        <item name="colorAccent">@color/barbiePink</item>
+        <item name="colorControlHighlight">@color/darkPink</item>
 
         <!-- Enable transitions -->
         <item name="android:windowActivityTransitions">true</item>

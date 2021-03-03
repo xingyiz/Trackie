@@ -44,7 +44,7 @@
         android:fontFamily="@font/segoeui"
         android:text="@string/mapping_complete"
         android:textAlignment="center"
-        android:textColor="?attr/colorAccent"
+        android:textColor="?attr/colorOnBackground"
         android:textSize="@dimen/alert_text_size"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -58,6 +58,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
         android:src="@drawable/ic_keyboard_arrow_down_24px"
+        android:tint="?attr/colorControlHighlight"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mapping_complete_textview" />

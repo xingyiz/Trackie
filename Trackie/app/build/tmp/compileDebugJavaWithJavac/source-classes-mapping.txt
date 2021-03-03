@@ -7,9 +7,8 @@ com/example/trackie/ui/databasetest/DatabaseTestFragment.java
  com.example.trackie.ui.databasetest.DatabaseTestFragment$2$1
  com.example.trackie.ui.databasetest.DatabaseTestFragment$3
  com.example.trackie.ui.databasetest.DatabaseTestFragment$3$1
-com/example/trackie/ui/settings/SettingsFragment.java
- com.example.trackie.ui.settings.SettingsFragment
- com.example.trackie.ui.settings.SettingsFragment$1
+com/example/trackie/ui/mapmode/MappingMainFragment.java
+ com.example.trackie.ui.mapmode.MappingMainFragment
 com/example/trackie/database/OnCompleteCallback.java
  com.example.trackie.database.OnCompleteCallback
 com/example/trackie/ui/mapmode/MapModeActivity.java
@@ -62,5 +61,7 @@ com/example/trackie/ui/testmode/TestModeActivity.java
  com.example.trackie.ui.testmode.TestModeActivity
 com/example/trackie/ui/home/HomeViewModel.java
  com.example.trackie.ui.home.HomeViewModel
-com/example/trackie/ui/mapmode/MappingMainFragment.java
- com.example.trackie.ui.mapmode.MappingMainFragment
+com/example/trackie/ui/settings/SettingsFragment.java
+ com.example.trackie.ui.settings.SettingsFragment
+ com.example.trackie.ui.settings.SettingsFragment$1
+ com.example.trackie.ui.settings.SettingsFragment$2
