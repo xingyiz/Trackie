@@ -10,7 +10,8 @@
         android:id="@+id/mapping_indoor_map_view"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:src="@drawable/sample_floor_plan"
+        android:src="@drawable/b2_l1"
+        android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -52,6 +53,7 @@
     <TextView
         android:elevation="2dp"
         android:id="@+id/move_5_meter_alert_textview"
+       android:textColor="?attr/colorControlHighlight"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"

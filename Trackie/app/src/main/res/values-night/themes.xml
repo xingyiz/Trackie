@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Trackie</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -6,4 +6,29 @@
     <string name="action_settings">Settings</string>
 
     <string name="menu_home">Home</string>
+
+    <style name="Theme.Trackie.Night" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <item name="android:windowBackground">@color/jet</item>
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/charcoal</item>
+        <item name="colorPrimaryVariant">@color/blueGray</item>
+        <item name="colorOnPrimary">@color/beauBlue</item>
+        <item name="colorOnBackground">@color/beauBlue</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/coolBlack</item>
+        <item name="colorSecondaryVariant">@color/coolBlack</item>
+        <item name="colorOnSecondary">@color/beauBlue</item>
+
+        <item name="colorAccent">@color/barbiePink</item>
+        <item name="colorControlHighlight">@color/darkPink</item>
+
+        <!-- Enable transitions -->
+        <item name="android:windowActivityTransitions">true</item>
+        <item name="android:windowContentTransitions">true</item>
+        <item name="android:windowEnterTransition">@transition/fade</item>
+        <item name="android:windowExitTransition">@transition/fade</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorSecondary</item>
+    </style>
+
 </resources>
