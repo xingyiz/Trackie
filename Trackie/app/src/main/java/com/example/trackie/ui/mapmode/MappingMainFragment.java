@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
@@ -76,6 +77,14 @@ public class MappingMainFragment extends Fragment implements Observer {
         SubsamplingScaleImageView mapping_image = (SubsamplingScaleImageView) view.findViewById(R.id.mapping_indoor_map_view);
         Bitmap mapBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.sample_floor_plan);
         TouchMapView mapView = new TouchMapView(getActivity(), TouchMapView.MAP_MODE, mapping_image, mapBitmap.copy(mapBitmap.getConfig(), false));
+
+        Button confirmMappingClickButton = (Button) view.findViewById(R.id.confirm_mapping_click_button);
+        confirmMappingClickButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mapView.setHasUnconfirmedPoint(false);
+            }
+        });
     }
 
     // Observer method to detect when current coordinates in the TouchMapView has changed

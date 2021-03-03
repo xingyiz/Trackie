@@ -2,6 +2,7 @@ package com.example.trackie.ui;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
@@ -38,8 +39,9 @@ public class TouchMapView extends Observable {
     private SubsamplingScaleImageView mapImageView;
     private Bitmap mMapBitmap;
     private Canvas mapCanvas;
+    private Bitmap previousBitmap;
     private PointF currentSelectedPoint;
-
+    private boolean hasUnconfirmedPoint;
 
     public TouchMapView(Context context, int mode, SubsamplingScaleImageView mapImageView, Bitmap mapBitmap) {
         this.context = context;
@@ -49,18 +51,7 @@ public class TouchMapView extends Observable {
         this.mapCanvas = new Canvas(mMapBitmap);
         mapImageView.setImage(ImageSource.bitmap(mapBitmap));
         mapImageView.setOnTouchListener(createMappingTouchListener());
-    }
-
-    private Bitmap makeFillerPadding(Bitmap bitmap, double scalePaddingX, double scalePaddingY) {
-        int padding_w = (int) (bitmap.getWidth() * (scalePaddingX));
-        int padding_h = (int) (bitmap.getHeight() * (scalePaddingY));
-        Bitmap outputBitmap = Bitmap.createBitmap(padding_w + (int)bitmap.getWidth(),
-                padding_h + (int)bitmap.getHeight(), Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(outputBitmap);
-        canvas.drawColor(context.getColor(R.color.white));
-        canvas.drawBitmap(bitmap.copy(bitmap.getConfig(), false),
-                0, 0, null);
-        return outputBitmap;
+        hasUnconfirmedPoint = false;
     }
 
     // create touch listener for mapping of points. Main use - create mapping of point when user long presses on the map
@@ -89,6 +80,13 @@ public class TouchMapView extends Observable {
             @Override
             public void onLongPress(MotionEvent e) {
                 if (mapImageView.isReady()) {
+                    if (hasUnconfirmedPoint && previousBitmap != null) {
+                        mapCanvas = new Canvas(previousBitmap);
+
+                        mMapBitmap = previousBitmap.copy(previousBitmap.getConfig(), true);
+                        mapImageView.setImage(ImageSource.bitmap(mMapBitmap));
+                    }
+                    hasUnconfirmedPoint = true;
                     currentSelectedPoint = mapImageView.viewToSourceCoord(e.getX(), e.getY());
                     String s = "Pressed - x: " + currentSelectedPoint.x + ", y: " + currentSelectedPoint.y;
                     Toast.makeText(context, s, Toast.LENGTH_SHORT).show();
@@ -112,6 +110,7 @@ public class TouchMapView extends Observable {
     }
 
     private void setMarker(PointF coords) {
+        mapCanvas.save();
         Drawable marker = context.getDrawable(R.drawable.ic_location_on_24px);
         marker.setBounds((int) (coords.x - 45.0),
                          (int) (coords.y - 45.0),
@@ -120,11 +119,17 @@ public class TouchMapView extends Observable {
         marker.draw(mapCanvas);
         float currentScale = mapImageView.getScale();
         PointF currentCenter = mapImageView.getCenter();
-        mapImageView.setImage(ImageSource.bitmap(mMapBitmap.copy(mMapBitmap.getConfig(), true)));
+        mapImageView.setImage(ImageSource.bitmap(mMapBitmap));
         mapImageView.setScaleAndCenter(currentScale, currentCenter);
     }
 
     public Bitmap getImmutableMapBitmap() {
-        return mMapBitmap.copy(mMapBitmap.getConfig(), true);
+        return mMapBitmap.copy(mMapBitmap.getConfig(), false);
+    }
+
+
+    public void setHasUnconfirmedPoint(boolean hasUnconfirmedPoint) {
+        this.hasUnconfirmedPoint = hasUnconfirmedPoint;
+        previousBitmap = mMapBitmap.copy(mMapBitmap.getConfig(), true);
     }
 }

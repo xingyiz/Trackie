@@ -1598,7 +1598,7 @@ id collapseActionView
 id collected_data_textview
 id confirm_button
 id confirm_floorplan_button
-id confirm_location_button
+id confirm_mapping_click_button
 id container
 id content
 id contentPanel
