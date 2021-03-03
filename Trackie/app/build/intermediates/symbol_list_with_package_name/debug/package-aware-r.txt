@@ -544,6 +544,7 @@ attr menu
 attr minTouchTargetSize
 attr multiChoiceItemLayout
 attr navGraph
+attr navIconColour
 attr navigationContentDescription
 attr navigationIcon
 attr navigationMode
@@ -877,6 +878,7 @@ color foreground_material_light
 color gray
 color highlighted_text_material_dark
 color highlighted_text_material_light
+color jet
 color maroon
 color material_blue_grey_800
 color material_blue_grey_900
@@ -1457,6 +1459,7 @@ drawable design_snackbar_background
 drawable googleg_disabled_color_18
 drawable googleg_standard_color_18
 drawable ic_add_24px
+drawable ic_baseline_cloud_24
 drawable ic_calendar_black_24dp
 drawable ic_clear_black_24dp
 drawable ic_edit_black_24dp
@@ -1478,6 +1481,7 @@ drawable ic_mtrl_chip_checked_circle
 drawable ic_mtrl_chip_close_circle
 drawable ic_my_location_24px
 drawable ic_settings_24px
+drawable menu_item_background
 drawable mtrl_dialog_background
 drawable mtrl_dropdown_arrow
 drawable mtrl_ic_arrow_drop_down
@@ -2606,6 +2610,7 @@ style Theme_Trackie
 style Theme_Trackie_AlertText
 style Theme_Trackie_AppBarOverlay
 style Theme_Trackie_MainButton
+style Theme_Trackie_NavMenu
 style Theme_Trackie_Night
 style Theme_Trackie_NoActionBar
 style Theme_Trackie_PopupOverlay

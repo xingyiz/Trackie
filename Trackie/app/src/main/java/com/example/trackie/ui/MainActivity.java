@@ -1,19 +1,12 @@
 package com.example.trackie.ui;
 
-import android.app.ActivityOptions;
-import android.content.Intent;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.transition.Fade;
-import android.transition.Transition;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.Window;
 
 import com.example.trackie.R;
-import com.example.trackie.ui.databasetest.DatabaseTestFragment;
 import com.google.android.material.navigation.NavigationView;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -26,10 +19,25 @@ import androidx.appcompat.widget.Toolbar;
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editPrefs;
+    String pFile = "com.example.trackie.ui.preferences";
+    boolean darkModeEnabled;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // set shared preferences and theme
+        sharedPreferences = getSharedPreferences(pFile, Context.MODE_PRIVATE);
+        darkModeEnabled = sharedPreferences.getBoolean("dark_mode_state", false);
+
+        if (darkModeEnabled) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        }
+
 
         setContentView(R.layout.activity_main);
 

@@ -27,6 +27,13 @@
         <item name="buttonStyle">@style/Theme.Trackie.MainButton</item>
     </style>
 
+    <style name="Theme.Trackie.NavMenu" parent="Widget.MaterialComponents.NavigationView">
+        <item name="itemIconTint">?attr/colorOnBackground</item>
+        <item name="itemTextColor">?attr/colorOnBackground</item>
+        <item name="selectableItemBackground">@drawable/menu_item_background</item>
+
+    </style>
+
     <style name="Theme.Trackie.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
@@ -44,6 +51,7 @@
         <item name="android:textColor">@drawable/button_text_colour</item>
         <item name="android:textSize">@dimen/button_text_size</item>
     </style>
+
 
     <style name="Theme.Trackie.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 

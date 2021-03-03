@@ -1,5 +1,7 @@
 package com.example.trackie.ui.settings;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,6 +24,10 @@ import com.example.trackie.R;
 public class SettingsFragment extends Fragment {
 
     SwitchCompat darkModeSwitch;
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editPrefs;
+    String pFile = "com.example.trackie.ui.preferences";
+    boolean buttonState;
 
     private SettingsViewModel settingsViewModel;
 
@@ -38,10 +44,14 @@ public class SettingsFragment extends Fragment {
             }
         });
 
+        sharedPreferences = this.getActivity().getSharedPreferences(pFile, Context.MODE_PRIVATE);
+        editPrefs = sharedPreferences.edit();
+        buttonState = sharedPreferences.getBoolean("dark_mode_state", false);
+
         darkModeSwitch = root.findViewById(R.id.toggle_dark_mode);
+        darkModeSwitch.setChecked(buttonState);
         darkModeSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
                 //set to dark mode if true
                 if (isChecked) {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
@@ -49,7 +59,8 @@ public class SettingsFragment extends Fragment {
                     // light mode if false
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
                 }
-                Log.v("Switch State=", ""+isChecked);
+                editPrefs.putBoolean("dark_mode_state", isChecked);
+                editPrefs.apply();
             }
         });
 
