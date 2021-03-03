@@ -10,7 +10,7 @@ public class SettingsViewModel extends ViewModel {
 
     public SettingsViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("Edit text value in ViewModel class");
+        //mText.setValue("Edit text value in ViewModel class");
     }
 
     public LiveData<String> getText() {
