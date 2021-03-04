@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PointF;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.GestureDetector;
@@ -14,6 +15,7 @@ import android.widget.Toast;
 
 import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
 import com.example.trackie.R;
+import com.example.trackie.Utils;
 import com.example.trackie.database.MapData;
 
 import java.util.ArrayList;
@@ -43,7 +45,7 @@ public class PinImageMapView extends SubsamplingScaleImageView {
         invalidate();
     }
 
-    public void removeAllCategories() {
+    public void removeAllPoints() {
         this.mapPoints.clear();
         invalidate();
     }
@@ -54,25 +56,19 @@ public class PinImageMapView extends SubsamplingScaleImageView {
         if (!isReady()) {
             return;
         }
+        System.out.println("getSHeight: " + getSHeight());
+        System.out.println("getHeight: " + getHeight());
+        System.out.println("getSWidth: " + getSWidth());
+        System.out.println("getWidth: " + getWidth());
         paint.setAntiAlias(true);
         for (PointF point : mapPoints) {
-
-//            if (categoryPoint.getPointF() != null && categoryPoint.getImage() != null) {
-//                PointF point = sourceToViewCoord(categoryPoint.getPointF());
-//                float vX = point.x - (pinIcon.getWidth()/2);
-//                float vY = point.y - pinIcon.getHeight();
-//                canvas.drawBitmap(pinIcon, vX, vY, paint);
-//            }
-
-            Drawable drawable = getContext().getDrawable(R.drawable.ic_location_on_24px);
-            float vX = point.x - (30/2);
-            float vY = point.y - 30;
-            drawable.setBounds((int) (point.x - 45.0),
-                               (int) (point.y -  45.0),
-                               (int) (point.x + 45.0),
-                               (int) (point.y + 45.0));
-            drawable.draw(canvas);
-//            canvas.drawD(unconfirmedPointerBitmap, vX, vY, paint);
+            Drawable pinDrawable = getContext().getDrawable(R.drawable.ic_location_on_24px);
+            Bitmap pinBitmap = Utils.drawableToBitmap(pinDrawable);
+            PointF vPoint = sourceToViewCoord(point);
+            PointF sourceBound = sourceToViewCoord(0,0);
+            float vX = vPoint.x - (pinBitmap.getWidth()/2);
+            float vY = vPoint.y- pinBitmap.getHeight();
+            canvas.drawBitmap(pinBitmap, vX, vY, paint);
         }
     }
 
@@ -81,23 +77,8 @@ public class PinImageMapView extends SubsamplingScaleImageView {
             @Override
             public boolean onSingleTapConfirmed(MotionEvent e) {
                 boolean isPointTapped = false;
-                PointF tappedCoordinate = new PointF(e.getX(), e.getY());
+                PointF tappedCoordinate = viewToSourceCoord(new PointF(e.getX(), e.getY()));
                 if (isReady() && mapPoints != null) {
-//                    Bitmap clickArea = mapPoints.get(0).getImage();
-//                    int clickAreaWidth = clickArea.getWidth();
-//                    int clickAreaHeight = clickArea.getHeight();
-//                    for (MapPoint categoryPoint : mapPoints) {
-//                        PointF categoryCoordinate = sourceToViewCoord(categoryPoint.getPointF());
-//                        int categoryX = (int) (categoryCoordinate.x);
-//                        int categoryY = (int) (categoryCoordinate.y - clickAreaHeight / 2);
-//                        if (tappedCoordinate.x >= categoryX - clickAreaWidth / 2
-//                                && tappedCoordinate.x <= categoryX + clickAreaWidth / 2
-//                                && tappedCoordinate.y >= categoryY - clickAreaHeight / 2
-//                                && tappedCoordinate.y <= categoryY + clickAreaHeight / 2) {
-//                            onPinClickListener.onPinClick(categoryPoint);
-//                            break;
-//                        }
-//                    }
                     for (PointF point : mapPoints) {
                         int pointX = (int) point.x;
                         int pointY = (int) point.y;
@@ -105,7 +86,7 @@ public class PinImageMapView extends SubsamplingScaleImageView {
                                 && tappedCoordinate.x <= pointX + 30 / 2
                                 && tappedCoordinate.y >= pointY - 30 / 2
                                 && tappedCoordinate.y <= pointY + 30 / 2) {
-                            Toast.makeText(getContext(), "Tapped point", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), "Tapped point " + tappedCoordinate.toString(), Toast.LENGTH_SHORT).show();
                             isPointTapped = true;
                             break;
                         }
@@ -113,7 +94,7 @@ public class PinImageMapView extends SubsamplingScaleImageView {
                 }
                 if (!isPointTapped) {
                     addPoint(tappedCoordinate);
-                    Toast.makeText(getContext(), "Made point", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Made point " + tappedCoordinate.toString(), Toast.LENGTH_SHORT).show();
 
                 }
                 return true;
@@ -121,4 +102,6 @@ public class PinImageMapView extends SubsamplingScaleImageView {
         });
         setOnTouchListener((v, event) -> gestureDetector.onTouchEvent(event));
     }
+
+
 }

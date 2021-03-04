@@ -76,17 +76,6 @@ public class MappingMainFragment extends Fragment implements Observer {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-//        SubsamplingScaleImageView mapping_image = (SubsamplingScaleImageView) view.findViewById(R.id.mapping_indoor_map_view);
-//        Bitmap mapBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.b2_l1);
-//        TouchMapView mapView = new TouchMapView(getActivity(), TouchMapView.MAP_MODE, mapping_image, mapBitmap.copy(mapBitmap.getConfig(), false));
-
-//        Button confirmMappingClickButton = (Button) view.findViewById(R.id.confirm_mapping_click_button);
-//        confirmMappingClickButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                mapView.setHasUnconfirmedPoint(false);
-//            }
-//        });
 
         PinImageMapView mapping_image = (PinImageMapView) view.findViewById(R.id.mapping_indoor_map_view);
         Bitmap mapBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.b2_l1);
