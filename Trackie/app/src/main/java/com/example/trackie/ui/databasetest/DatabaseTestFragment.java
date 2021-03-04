@@ -127,11 +127,6 @@ public class DatabaseTestFragment extends Fragment {
                     @Override
                     public void onSuccess() {
                         Toast.makeText(getContext(), "Successfully removed", Toast.LENGTH_SHORT).show();
-
-                        // reload fragment
-                        FragmentTransaction ft = getParentFragmentManager().beginTransaction();
-                        assert getParentFragment() != null;
-                        ft.detach(getParentFragment()).attach(getParentFragment()).commit();
                     }
 
                     @Override
