@@ -26,6 +26,8 @@
     <color name="beauBlue">#C8D8DE</color>
     <color name="airBlue">#7D9AB0</color>
     <color name="blueGray">#505378</color>
+    <color name="maxBluePurple">#B3A2F0</color>
+    <color name="mauve">#C4A6FD</color>
 
     <color name="charcoal">#435255</color>
     <color name="coolBlack">#1A281F</color>
@@ -33,5 +35,7 @@
 
     <color name="darkPink">#CE7B91</color>
     <color name="barbiePink">#E661B1</color>
+    <color name="yellowGreenCrayola">#C8D787</color>
+    <color name="androidGreen">#A5CB5E</color>
 
 </resources>

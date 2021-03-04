@@ -790,6 +790,7 @@ color abc_tint_switch_track
 color accent_material_dark
 color accent_material_light
 color airBlue
+color androidGreen
 color background_floating_material_dark
 color background_floating_material_light
 color background_material_dark
@@ -901,6 +902,8 @@ color material_on_primary_emphasis_medium
 color material_on_surface_disabled
 color material_on_surface_emphasis_high_type
 color material_on_surface_emphasis_medium
+color mauve
+color maxBluePurple
 color midtone
 color mtrl_bottom_nav_colored_item_tint
 color mtrl_bottom_nav_colored_ripple_color
@@ -989,6 +992,7 @@ color tooltip_background_light
 color tuftsBlue
 color white
 color white_gray
+color yellowGreenCrayola
 dimen abc_action_bar_content_inset_material
 dimen abc_action_bar_content_inset_with_nav
 dimen abc_action_bar_default_height_material
@@ -1986,6 +1990,7 @@ layout mtrl_picker_header_toggle
 layout mtrl_picker_text_input_date
 layout mtrl_picker_text_input_date_range
 layout nav_header_main
+layout nav_header_main_dark
 layout notification_action
 layout notification_action_tombstone
 layout notification_media_action
@@ -2611,7 +2616,6 @@ style Theme_Trackie_AlertText
 style Theme_Trackie_AppBarOverlay
 style Theme_Trackie_MainButton
 style Theme_Trackie_NavMenu
-style Theme_Trackie_Night
 style Theme_Trackie_NoActionBar
 style Theme_Trackie_PopupOverlay
 style ThemeOverlay_AppCompat

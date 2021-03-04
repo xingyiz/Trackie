@@ -20,7 +20,6 @@ public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     SharedPreferences sharedPreferences;
-    SharedPreferences.Editor editPrefs;
     String pFile = "com.example.trackie.ui.preferences";
     boolean darkModeEnabled;
 
@@ -34,10 +33,9 @@ public class MainActivity extends AppCompatActivity {
 
         if (darkModeEnabled) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-        } else {
+        } else if (!darkModeEnabled) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         }
-
 
         setContentView(R.layout.activity_main);
 

@@ -2,7 +2,7 @@
     <!-- Base application theme. -->
     <style name="Theme.Trackie" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Theme Colours. -->
-        <item name="backgroundColor">@color/white</item>
+
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/airBlue</item>
         <item name="colorPrimaryVariant">@color/blueGray</item>
@@ -30,6 +30,7 @@
     <style name="Theme.Trackie.NavMenu" parent="Widget.MaterialComponents.NavigationView">
         <item name="itemIconTint">?attr/colorOnBackground</item>
         <item name="itemTextColor">?attr/colorOnBackground</item>
+        <item name="headerLayout">@layout/nav_header_main</item>
         <item name="selectableItemBackground">@drawable/menu_item_background</item>
 
     </style>
