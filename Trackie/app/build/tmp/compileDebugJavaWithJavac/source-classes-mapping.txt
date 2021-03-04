@@ -1,7 +1,6 @@
-com/example/trackie/ui/mapmode/RSSIAdapter.java
- com.example.trackie.ui.mapmode.RSSIAdapter
- com.example.trackie.ui.mapmode.RSSIAdapter$1
- com.example.trackie.ui.mapmode.RSSIAdapter$ViewHolder
+com/example/trackie/ui/PinImageMapView.java
+ com.example.trackie.ui.PinImageMapView
+ com.example.trackie.ui.PinImageMapView$1
 com/example/trackie/ui/databasetest/DatabaseTestFragment.java
  com.example.trackie.ui.databasetest.DatabaseTestFragment
  com.example.trackie.ui.databasetest.DatabaseTestFragment$1
@@ -48,8 +47,8 @@ com/example/trackie/ui/settings/SettingsFragment.java
  com.example.trackie.ui.settings.SettingsFragment$2
 com/example/trackie/database/FirestoreExecute.java
  com.example.trackie.database.FirestoreExecute
-com/example/trackie/ui/testmode/TestModeActivity.java
- com.example.trackie.ui.testmode.TestModeActivity
+com/example/trackie/ui/mapmode/MappingMainFragment.java
+ com.example.trackie.ui.mapmode.MappingMainFragment
 com/example/trackie/database/OnCompleteCallback.java
  com.example.trackie.database.OnCompleteCallback
 com/example/trackie/ui/locations/LocationsViewModel.java
@@ -82,8 +81,9 @@ com/example/trackie/ui/locations/LocationsFragment.java
  com.example.trackie.ui.locations.LocationsFragment$2
 com/example/trackie/ui/mapmode/MappingCompleteFragment.java
  com.example.trackie.ui.mapmode.MappingCompleteFragment
-com/example/trackie/ui/PinImageMapView.java
- com.example.trackie.ui.PinImageMapView
- com.example.trackie.ui.PinImageMapView$1
-com/example/trackie/ui/mapmode/MappingMainFragment.java
- com.example.trackie.ui.mapmode.MappingMainFragment
+com/example/trackie/ui/testmode/TestModeActivity.java
+ com.example.trackie.ui.testmode.TestModeActivity
+com/example/trackie/ui/mapmode/RSSIAdapter.java
+ com.example.trackie.ui.mapmode.RSSIAdapter
+ com.example.trackie.ui.mapmode.RSSIAdapter$1
+ com.example.trackie.ui.mapmode.RSSIAdapter$ViewHolder

@@ -2010,6 +2010,7 @@ layout mtrl_picker_header_toggle
 layout mtrl_picker_text_input_date
 layout mtrl_picker_text_input_date_range
 layout nav_header_main
+layout nav_header_main_dark
 layout notification_action
 layout notification_action_tombstone
 layout notification_media_action

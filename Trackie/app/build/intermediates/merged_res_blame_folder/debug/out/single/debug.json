@@ -208,6 +208,10 @@
         "source": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\src\\main\\res\\mipmap-xxxhdpi\\ic_launcher.png"
     },
     {
+        "merged": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\layout_nav_header_main_dark.xml.flat",
+        "source": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\src\\main\\res\\layout\\nav_header_main_dark.xml"
+    },
+    {
         "merged": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_more_vert_24px.xml.flat",
         "source": "C:\\Users\\Admin\\Documents\\SampleAndroidProjects\\Trackie\\Trackie\\app\\src\\main\\res\\drawable\\ic_more_vert_24px.xml"
     },
