@@ -46,7 +46,7 @@ public class DatabaseTestFragment extends Fragment {
     private double z = 1.0;
     private String device = "Samsung Galaxy S20";
     private Timestamp timestamp = Timestamp.now();
-    private String floorplan = "https://firebasestorage.googleapis.com/v0/b/trackie-2e28a.appspot.com/o/hello%20sutd?alt=media&token=8b0f84e5-fbdc-46cf-b60f-f779adb8eaa5";
+    private String floorplan = "https://firebasestorage.googleapis.com/v0/b/trackie-2e28a.appspot.com/o/lol?alt=media&token=894c0926-e575-4591-a5b0-92745427a1a6";
 
     private DatabaseTestViewModel viewModel;
 
@@ -120,7 +120,9 @@ public class DatabaseTestFragment extends Fragment {
                                 .into(image);
                     }
                 } else {
-                    removeData();
+                    if (mapDataList != null) {
+                        removeData();
+                    }
                 }
             }
 
