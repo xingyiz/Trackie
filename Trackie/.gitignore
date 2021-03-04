@@ -1,4 +1,7 @@
 app/build/*
 local.properties
 *.json
-.gradle/*
+.gradle/buildOutputCleanup
+.gradle/6.5
+.gradle
+.idea/caches/
