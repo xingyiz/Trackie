@@ -25,26 +25,30 @@
         android:testOnly="true"
         android:theme="@style/Theme.Trackie" >
         <activity
-            android:name="com.example.trackie.ui.testmode.TestModeActivity"
-            android:label="@string/test_mode"
-            android:parentActivityName="com.example.trackie.ui.MainActivity"
-            android:theme="@style/Theme.Trackie.NoActionBar" >
-        </activity>
-        <activity
-            android:name="com.example.trackie.ui.mapmode.MapModeActivity"
-            android:label="@string/map_mode"
-            android:parentActivityName="com.example.trackie.ui.MainActivity"
-            android:theme="@style/Theme.Trackie.NoActionBar" >
-        </activity>
-        <activity
-            android:name="com.example.trackie.ui.MainActivity"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.Trackie.NoActionBar" >
+            android:name="com.example.trackie.ui.SplashActivity"
+            android:label="splash"
+            android:noHistory="true"
+            android:theme="@style/Theme.Trackie.Splash" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name="com.example.trackie.ui.testmode.TestModeActivity"
+            android:label="@string/test_mode"
+            android:parentActivityName="com.example.trackie.ui.MainActivity"
+            android:theme="@style/Theme.Trackie.NoActionBar" />
+        <activity
+            android:name="com.example.trackie.ui.mapmode.MapModeActivity"
+            android:label="@string/map_mode"
+            android:parentActivityName="com.example.trackie.ui.MainActivity"
+            android:theme="@style/Theme.Trackie.NoActionBar" />
+        <activity
+            android:name="com.example.trackie.ui.MainActivity"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.Trackie.NoActionBar" >
         </activity>
 
         <service

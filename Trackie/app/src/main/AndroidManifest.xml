@@ -9,30 +9,31 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Trackie">
-
-        <activity
-            android:name=".ui.testmode.TestModeActivity"
-            android:label="@string/test_mode"
-            android:theme="@style/Theme.Trackie.NoActionBar"
-            android:parentActivityName=".ui.MainActivity">
-        </activity>
-
-        <activity
-            android:name=".ui.mapmode.MapModeActivity"
-            android:label="@string/map_mode"
-            android:theme="@style/Theme.Trackie.NoActionBar"
-            android:parentActivityName=".ui.MainActivity">
-        </activity>
-
-        <activity
-            android:name=".ui.MainActivity"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.Trackie.NoActionBar">
+        <activity android:name=".ui.SplashActivity"
+            android:label="splash"
+            android:theme="@style/Theme.Trackie.Splash"
+            android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.testmode.TestModeActivity"
+            android:label="@string/test_mode"
+            android:parentActivityName=".ui.MainActivity"
+            android:theme="@style/Theme.Trackie.NoActionBar"></activity>
+        <activity
+            android:name=".ui.mapmode.MapModeActivity"
+            android:label="@string/map_mode"
+            android:parentActivityName=".ui.MainActivity"
+            android:theme="@style/Theme.Trackie.NoActionBar"></activity>
+        <activity
+            android:name=".ui.MainActivity"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.Trackie.NoActionBar">
+
         </activity>
     </application>
 

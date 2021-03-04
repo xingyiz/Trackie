@@ -4,12 +4,24 @@
         "source": "C:\\Users\\victo\\SynologyDrive\\Drive\\School\\Term 5\\003 Elements of Software Construction\\Trackie\\Trackie\\app\\src\\main\\res\\drawable\\ic_my_location_24px.xml"
     },
     {
+        "merged": "C:\\Users\\victo\\SynologyDrive\\Drive\\School\\Term 5\\003 Elements of Software Construction\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\xml_activity_splash_scene.xml.flat",
+        "source": "C:\\Users\\victo\\SynologyDrive\\Drive\\School\\Term 5\\003 Elements of Software Construction\\Trackie\\Trackie\\app\\src\\main\\res\\xml\\activity_splash_scene.xml"
+    },
+    {
+        "merged": "C:\\Users\\victo\\SynologyDrive\\Drive\\School\\Term 5\\003 Elements of Software Construction\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\drawable_triangle_lldpi.png.flat",
+        "source": "C:\\Users\\victo\\SynologyDrive\\Drive\\School\\Term 5\\003 Elements of Software Construction\\Trackie\\Trackie\\app\\src\\main\\res\\drawable\\triangle_lldpi.png"
+    },
+    {
         "merged": "C:\\Users\\victo\\SynologyDrive\\Drive\\School\\Term 5\\003 Elements of Software Construction\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\layout_fragment_locations.xml.flat",
         "source": "C:\\Users\\victo\\SynologyDrive\\Drive\\School\\Term 5\\003 Elements of Software Construction\\Trackie\\Trackie\\app\\src\\main\\res\\layout\\fragment_locations.xml"
     },
     {
         "merged": "C:\\Users\\victo\\SynologyDrive\\Drive\\School\\Term 5\\003 Elements of Software Construction\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\drawable_sample_floor_plan.jpg.flat",
         "source": "C:\\Users\\victo\\SynologyDrive\\Drive\\School\\Term 5\\003 Elements of Software Construction\\Trackie\\Trackie\\app\\src\\main\\res\\drawable\\sample_floor_plan.jpg"
+    },
+    {
+        "merged": "C:\\Users\\victo\\SynologyDrive\\Drive\\School\\Term 5\\003 Elements of Software Construction\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\drawable_circle_3xhdpi.png.flat",
+        "source": "C:\\Users\\victo\\SynologyDrive\\Drive\\School\\Term 5\\003 Elements of Software Construction\\Trackie\\Trackie\\app\\src\\main\\res\\drawable\\circle_3xhdpi.png"
     },
     {
         "merged": "C:\\Users\\victo\\SynologyDrive\\Drive\\School\\Term 5\\003 Elements of Software Construction\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\drawable_b2_l1.png.flat",
@@ -22,6 +34,10 @@
     {
         "merged": "C:\\Users\\victo\\SynologyDrive\\Drive\\School\\Term 5\\003 Elements of Software Construction\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\drawable_menu_item_background.xml.flat",
         "source": "C:\\Users\\victo\\SynologyDrive\\Drive\\School\\Term 5\\003 Elements of Software Construction\\Trackie\\Trackie\\app\\src\\main\\res\\drawable\\menu_item_background.xml"
+    },
+    {
+        "merged": "C:\\Users\\victo\\SynologyDrive\\Drive\\School\\Term 5\\003 Elements of Software Construction\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\drawable_cloud_ldpi.png.flat",
+        "source": "C:\\Users\\victo\\SynologyDrive\\Drive\\School\\Term 5\\003 Elements of Software Construction\\Trackie\\Trackie\\app\\src\\main\\res\\drawable\\cloud_ldpi.png"
     },
     {
         "merged": "C:\\Users\\victo\\SynologyDrive\\Drive\\School\\Term 5\\003 Elements of Software Construction\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\font_segoeuiz.ttf.flat",
@@ -42,6 +58,10 @@
     {
         "merged": "C:\\Users\\victo\\SynologyDrive\\Drive\\School\\Term 5\\003 Elements of Software Construction\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\menu_main.xml.flat",
         "source": "C:\\Users\\victo\\SynologyDrive\\Drive\\School\\Term 5\\003 Elements of Software Construction\\Trackie\\Trackie\\app\\src\\main\\res\\menu\\main.xml"
+    },
+    {
+        "merged": "C:\\Users\\victo\\SynologyDrive\\Drive\\School\\Term 5\\003 Elements of Software Construction\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\drawable_map_ldpi.png.flat",
+        "source": "C:\\Users\\victo\\SynologyDrive\\Drive\\School\\Term 5\\003 Elements of Software Construction\\Trackie\\Trackie\\app\\src\\main\\res\\drawable\\map_ldpi.png"
     },
     {
         "merged": "C:\\Users\\victo\\SynologyDrive\\Drive\\School\\Term 5\\003 Elements of Software Construction\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_map_mode.xml.flat",
@@ -68,20 +88,20 @@
         "source": "C:\\Users\\victo\\SynologyDrive\\Drive\\School\\Term 5\\003 Elements of Software Construction\\Trackie\\Trackie\\app\\src\\main\\res\\drawable\\ic_menu_camera.xml"
     },
     {
-        "merged": "C:\\Users\\victo\\SynologyDrive\\Drive\\School\\Term 5\\003 Elements of Software Construction\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\layout_fragment_testing_main.xml.flat",
-        "source": "C:\\Users\\victo\\SynologyDrive\\Drive\\School\\Term 5\\003 Elements of Software Construction\\Trackie\\Trackie\\app\\src\\main\\res\\layout\\fragment_testing_main.xml"
-    },
-    {
-        "merged": "C:\\Users\\victo\\SynologyDrive\\Drive\\School\\Term 5\\003 Elements of Software Construction\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\navigation_map_mode_navigation.xml.flat",
-        "source": "C:\\Users\\victo\\SynologyDrive\\Drive\\School\\Term 5\\003 Elements of Software Construction\\Trackie\\Trackie\\app\\src\\main\\res\\navigation\\map_mode_navigation.xml"
+        "merged": "C:\\Users\\victo\\SynologyDrive\\Drive\\School\\Term 5\\003 Elements of Software Construction\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\layout_nav_header_main.xml.flat",
+        "source": "C:\\Users\\victo\\SynologyDrive\\Drive\\School\\Term 5\\003 Elements of Software Construction\\Trackie\\Trackie\\app\\src\\main\\res\\layout\\nav_header_main.xml"
     },
     {
         "merged": "C:\\Users\\victo\\SynologyDrive\\Drive\\School\\Term 5\\003 Elements of Software Construction\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\drawable_pink_gradient.xml.flat",
         "source": "C:\\Users\\victo\\SynologyDrive\\Drive\\School\\Term 5\\003 Elements of Software Construction\\Trackie\\Trackie\\app\\src\\main\\res\\drawable\\pink_gradient.xml"
     },
     {
-        "merged": "C:\\Users\\victo\\SynologyDrive\\Drive\\School\\Term 5\\003 Elements of Software Construction\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\layout_nav_header_main.xml.flat",
-        "source": "C:\\Users\\victo\\SynologyDrive\\Drive\\School\\Term 5\\003 Elements of Software Construction\\Trackie\\Trackie\\app\\src\\main\\res\\layout\\nav_header_main.xml"
+        "merged": "C:\\Users\\victo\\SynologyDrive\\Drive\\School\\Term 5\\003 Elements of Software Construction\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\navigation_map_mode_navigation.xml.flat",
+        "source": "C:\\Users\\victo\\SynologyDrive\\Drive\\School\\Term 5\\003 Elements of Software Construction\\Trackie\\Trackie\\app\\src\\main\\res\\navigation\\map_mode_navigation.xml"
+    },
+    {
+        "merged": "C:\\Users\\victo\\SynologyDrive\\Drive\\School\\Term 5\\003 Elements of Software Construction\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\layout_fragment_testing_main.xml.flat",
+        "source": "C:\\Users\\victo\\SynologyDrive\\Drive\\School\\Term 5\\003 Elements of Software Construction\\Trackie\\Trackie\\app\\src\\main\\res\\layout\\fragment_testing_main.xml"
     },
     {
         "merged": "C:\\Users\\victo\\SynologyDrive\\Drive\\School\\Term 5\\003 Elements of Software Construction\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\menu_activity_main_drawer.xml.flat",
@@ -102,6 +122,10 @@
     {
         "merged": "C:\\Users\\victo\\SynologyDrive\\Drive\\School\\Term 5\\003 Elements of Software Construction\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\font_bsegoeui.TTF.flat",
         "source": "C:\\Users\\victo\\SynologyDrive\\Drive\\School\\Term 5\\003 Elements of Software Construction\\Trackie\\Trackie\\app\\src\\main\\res\\font\\bsegoeui.TTF"
+    },
+    {
+        "merged": "C:\\Users\\victo\\SynologyDrive\\Drive\\School\\Term 5\\003 Elements of Software Construction\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\drawable_circle_mdpi.png.flat",
+        "source": "C:\\Users\\victo\\SynologyDrive\\Drive\\School\\Term 5\\003 Elements of Software Construction\\Trackie\\Trackie\\app\\src\\main\\res\\drawable\\circle_mdpi.png"
     },
     {
         "merged": "C:\\Users\\victo\\SynologyDrive\\Drive\\School\\Term 5\\003 Elements of Software Construction\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxxhdpi_ic_launcher_round.png.flat",
@@ -134,6 +158,14 @@
     {
         "merged": "C:\\Users\\victo\\SynologyDrive\\Drive\\School\\Term 5\\003 Elements of Software Construction\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\layout_content_main.xml.flat",
         "source": "C:\\Users\\victo\\SynologyDrive\\Drive\\School\\Term 5\\003 Elements of Software Construction\\Trackie\\Trackie\\app\\src\\main\\res\\layout\\content_main.xml"
+    },
+    {
+        "merged": "C:\\Users\\victo\\SynologyDrive\\Drive\\School\\Term 5\\003 Elements of Software Construction\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\drawable_main_base_ldpi.png.flat",
+        "source": "C:\\Users\\victo\\SynologyDrive\\Drive\\School\\Term 5\\003 Elements of Software Construction\\Trackie\\Trackie\\app\\src\\main\\res\\drawable\\main_base_ldpi.png"
+    },
+    {
+        "merged": "C:\\Users\\victo\\SynologyDrive\\Drive\\School\\Term 5\\003 Elements of Software Construction\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\drawable_main_base_mdpi.png.flat",
+        "source": "C:\\Users\\victo\\SynologyDrive\\Drive\\School\\Term 5\\003 Elements of Software Construction\\Trackie\\Trackie\\app\\src\\main\\res\\drawable\\main_base_mdpi.png"
     },
     {
         "merged": "C:\\Users\\victo\\SynologyDrive\\Drive\\School\\Term 5\\003 Elements of Software Construction\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_map_24px.xml.flat",
@@ -172,12 +204,20 @@
         "source": "C:\\Users\\victo\\SynologyDrive\\Drive\\School\\Term 5\\003 Elements of Software Construction\\Trackie\\Trackie\\app\\src\\main\\res\\layout\\fragment_home.xml"
     },
     {
+        "merged": "C:\\Users\\victo\\SynologyDrive\\Drive\\School\\Term 5\\003 Elements of Software Construction\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_splash.xml.flat",
+        "source": "C:\\Users\\victo\\SynologyDrive\\Drive\\School\\Term 5\\003 Elements of Software Construction\\Trackie\\Trackie\\app\\src\\main\\res\\layout\\activity_splash.xml"
+    },
+    {
         "merged": "C:\\Users\\victo\\SynologyDrive\\Drive\\School\\Term 5\\003 Elements of Software Construction\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_menu_gallery.xml.flat",
         "source": "C:\\Users\\victo\\SynologyDrive\\Drive\\School\\Term 5\\003 Elements of Software Construction\\Trackie\\Trackie\\app\\src\\main\\res\\drawable\\ic_menu_gallery.xml"
     },
     {
         "merged": "C:\\Users\\victo\\SynologyDrive\\Drive\\School\\Term 5\\003 Elements of Software Construction\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\navigation_mobile_navigation.xml.flat",
         "source": "C:\\Users\\victo\\SynologyDrive\\Drive\\School\\Term 5\\003 Elements of Software Construction\\Trackie\\Trackie\\app\\src\\main\\res\\navigation\\mobile_navigation.xml"
+    },
+    {
+        "merged": "C:\\Users\\victo\\SynologyDrive\\Drive\\School\\Term 5\\003 Elements of Software Construction\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\drawable_circle_ldpi.png.flat",
+        "source": "C:\\Users\\victo\\SynologyDrive\\Drive\\School\\Term 5\\003 Elements of Software Construction\\Trackie\\Trackie\\app\\src\\main\\res\\drawable\\circle_ldpi.png"
     },
     {
         "merged": "C:\\Users\\victo\\SynologyDrive\\Drive\\School\\Term 5\\003 Elements of Software Construction\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\layout_app_bar_main.xml.flat",
@@ -200,6 +240,10 @@
         "source": "C:\\Users\\victo\\SynologyDrive\\Drive\\School\\Term 5\\003 Elements of Software Construction\\Trackie\\Trackie\\app\\src\\main\\res\\mipmap-anydpi-v26\\ic_launcher_round.xml"
     },
     {
+        "merged": "C:\\Users\\victo\\SynologyDrive\\Drive\\School\\Term 5\\003 Elements of Software Construction\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\drawable_triangle_mdpi.png.flat",
+        "source": "C:\\Users\\victo\\SynologyDrive\\Drive\\School\\Term 5\\003 Elements of Software Construction\\Trackie\\Trackie\\app\\src\\main\\res\\drawable\\triangle_mdpi.png"
+    },
+    {
         "merged": "C:\\Users\\victo\\SynologyDrive\\Drive\\School\\Term 5\\003 Elements of Software Construction\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_menu_slideshow.xml.flat",
         "source": "C:\\Users\\victo\\SynologyDrive\\Drive\\School\\Term 5\\003 Elements of Software Construction\\Trackie\\Trackie\\app\\src\\main\\res\\drawable\\ic_menu_slideshow.xml"
     },
@@ -208,28 +252,48 @@
         "source": "C:\\Users\\victo\\SynologyDrive\\Drive\\School\\Term 5\\003 Elements of Software Construction\\Trackie\\Trackie\\app\\src\\main\\res\\navigation\\test_mode_navigation.xml"
     },
     {
+        "merged": "C:\\Users\\victo\\SynologyDrive\\Drive\\School\\Term 5\\003 Elements of Software Construction\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\drawable_main_logo_xxhdpi.png.flat",
+        "source": "C:\\Users\\victo\\SynologyDrive\\Drive\\School\\Term 5\\003 Elements of Software Construction\\Trackie\\Trackie\\app\\src\\main\\res\\drawable\\main_logo_xxhdpi.png"
+    },
+    {
         "merged": "C:\\Users\\victo\\SynologyDrive\\Drive\\School\\Term 5\\003 Elements of Software Construction\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxxhdpi_ic_launcher.png.flat",
         "source": "C:\\Users\\victo\\SynologyDrive\\Drive\\School\\Term 5\\003 Elements of Software Construction\\Trackie\\Trackie\\app\\src\\main\\res\\mipmap-xxxhdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "C:\\Users\\victo\\SynologyDrive\\Drive\\School\\Term 5\\003 Elements of Software Construction\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\drawable_triangle_ldpi.png.flat",
+        "source": "C:\\Users\\victo\\SynologyDrive\\Drive\\School\\Term 5\\003 Elements of Software Construction\\Trackie\\Trackie\\app\\src\\main\\res\\drawable\\triangle_ldpi.png"
     },
     {
         "merged": "C:\\Users\\victo\\SynologyDrive\\Drive\\School\\Term 5\\003 Elements of Software Construction\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_keyboard_return_24px.xml.flat",
         "source": "C:\\Users\\victo\\SynologyDrive\\Drive\\School\\Term 5\\003 Elements of Software Construction\\Trackie\\Trackie\\app\\src\\main\\res\\drawable\\ic_keyboard_return_24px.xml"
     },
     {
+        "merged": "C:\\Users\\victo\\SynologyDrive\\Drive\\School\\Term 5\\003 Elements of Software Construction\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\drawable_main_logo_mdpi.png.flat",
+        "source": "C:\\Users\\victo\\SynologyDrive\\Drive\\School\\Term 5\\003 Elements of Software Construction\\Trackie\\Trackie\\app\\src\\main\\res\\drawable\\main_logo_mdpi.png"
+    },
+    {
         "merged": "C:\\Users\\victo\\SynologyDrive\\Drive\\School\\Term 5\\003 Elements of Software Construction\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\layout_fragment_settings.xml.flat",
         "source": "C:\\Users\\victo\\SynologyDrive\\Drive\\School\\Term 5\\003 Elements of Software Construction\\Trackie\\Trackie\\app\\src\\main\\res\\layout\\fragment_settings.xml"
     },
     {
-        "merged": "C:\\Users\\victo\\SynologyDrive\\Drive\\School\\Term 5\\003 Elements of Software Construction\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\layout_use_mode_toolbar_layout.xml.flat",
-        "source": "C:\\Users\\victo\\SynologyDrive\\Drive\\School\\Term 5\\003 Elements of Software Construction\\Trackie\\Trackie\\app\\src\\main\\res\\layout\\use_mode_toolbar_layout.xml"
+        "merged": "C:\\Users\\victo\\SynologyDrive\\Drive\\School\\Term 5\\003 Elements of Software Construction\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\drawable_main_logo_ldpi.png.flat",
+        "source": "C:\\Users\\victo\\SynologyDrive\\Drive\\School\\Term 5\\003 Elements of Software Construction\\Trackie\\Trackie\\app\\src\\main\\res\\drawable\\main_logo_ldpi.png"
     },
     {
         "merged": "C:\\Users\\victo\\SynologyDrive\\Drive\\School\\Term 5\\003 Elements of Software Construction\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-anydpi-v26_ic_launcher.xml.flat",
         "source": "C:\\Users\\victo\\SynologyDrive\\Drive\\School\\Term 5\\003 Elements of Software Construction\\Trackie\\Trackie\\app\\src\\main\\res\\mipmap-anydpi-v26\\ic_launcher.xml"
     },
     {
+        "merged": "C:\\Users\\victo\\SynologyDrive\\Drive\\School\\Term 5\\003 Elements of Software Construction\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\layout_use_mode_toolbar_layout.xml.flat",
+        "source": "C:\\Users\\victo\\SynologyDrive\\Drive\\School\\Term 5\\003 Elements of Software Construction\\Trackie\\Trackie\\app\\src\\main\\res\\layout\\use_mode_toolbar_layout.xml"
+    },
+    {
         "merged": "C:\\Users\\victo\\SynologyDrive\\Drive\\School\\Term 5\\003 Elements of Software Construction\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\drawable_button_colour.xml.flat",
         "source": "C:\\Users\\victo\\SynologyDrive\\Drive\\School\\Term 5\\003 Elements of Software Construction\\Trackie\\Trackie\\app\\src\\main\\res\\drawable\\button_colour.xml"
+    },
+    {
+        "merged": "C:\\Users\\victo\\SynologyDrive\\Drive\\School\\Term 5\\003 Elements of Software Construction\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\drawable_main_base_xxhdpi.png.flat",
+        "source": "C:\\Users\\victo\\SynologyDrive\\Drive\\School\\Term 5\\003 Elements of Software Construction\\Trackie\\Trackie\\app\\src\\main\\res\\drawable\\main_base_xxhdpi.png"
     },
     {
         "merged": "C:\\Users\\victo\\SynologyDrive\\Drive\\School\\Term 5\\003 Elements of Software Construction\\Trackie\\Trackie\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-hdpi_ic_launcher.png.flat",

@@ -4,7 +4,17 @@
             "outputFile": "C:\\Users\\victo\\SynologyDrive\\Drive\\School\\Term 5\\003 Elements of Software Construction\\Trackie\\Trackie\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v16\\values-v16.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\victo\\.gradle\\caches\\transforms-2\\files-2.1\\655dc37091b53a1d451eef0026f359d4\\appcompat-1.1.0\\res\\values-v16\\values-v16.xml",
+                    "source": "C:\\Users\\victo\\.gradle\\caches\\transforms-2\\files-2.1\\67144f8b09a953df3e7278900fce8670\\core-1.3.2\\res\\values-v16\\values-v16.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "65",
+                        "endOffsets": "116"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\victo\\.gradle\\caches\\transforms-2\\files-2.1\\994d5787a0c5e3a9050593b6e3088631\\appcompat-1.2.0\\res\\values-v16\\values-v16.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -20,16 +30,6 @@
                         "endLines": "6",
                         "endColumns": "12",
                         "endOffsets": "289"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\victo\\.gradle\\caches\\transforms-2\\files-2.1\\acf285bdb061b554b0b237a51cb64393\\core-1.1.0\\res\\values-v16\\values-v16.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "65",
-                        "endOffsets": "116"
                     }
                 }
             ]

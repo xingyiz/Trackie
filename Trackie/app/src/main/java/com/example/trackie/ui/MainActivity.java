@@ -19,23 +19,11 @@ import androidx.appcompat.widget.Toolbar;
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
-    SharedPreferences sharedPreferences;
-    String pFile = "com.example.trackie.ui.preferences";
-    boolean darkModeEnabled;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // set shared preferences and theme
-        sharedPreferences = getSharedPreferences(pFile, Context.MODE_PRIVATE);
-        darkModeEnabled = sharedPreferences.getBoolean("dark_mode_state", false);
-
-        if (darkModeEnabled) {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-        } else if (!darkModeEnabled) {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-        }
 
         setContentView(R.layout.activity_main);
 

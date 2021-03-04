@@ -16,8 +16,8 @@
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
-        app:srcCompat="@drawable/ic_my_location_24px"
-        android:tint="@color/beauBlue"/>
+        app:srcCompat="@drawable/main_logo_ldpi"
+        android:background="@android:color/transparent"/>
 
     <TextView
         android:layout_width="match_parent"

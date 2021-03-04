@@ -28,13 +28,17 @@ com/example/trackie/ui/home/HomeFragment.java
  com.example.trackie.ui.home.HomeFragment$3
 com/example/trackie/ui/testmode/TestingMainFragment.java
  com.example.trackie.ui.testmode.TestingMainFragment
+com/example/trackie/ui/settings/SettingsFragment.java
+ com.example.trackie.ui.settings.SettingsFragment
+ com.example.trackie.ui.settings.SettingsFragment$1
+ com.example.trackie.ui.settings.SettingsFragment$2
 com/example/trackie/database/MapData.java
  com.example.trackie.database.MapData
  com.example.trackie.database.MapData$1
  com.example.trackie.database.MapData$1$1
  com.example.trackie.database.MapData$2
-com/example/trackie/ui/MainActivity.java
- com.example.trackie.ui.MainActivity
+com/example/trackie/ui/home/HomeViewModel.java
+ com.example.trackie.ui.home.HomeViewModel
 com/example/trackie/BuildConfig.java
  com.example.trackie.BuildConfig
 com/example/trackie/database/TestData.java
@@ -59,9 +63,8 @@ com/example/trackie/ui/mapmode/MappingCompleteFragment.java
  com.example.trackie.ui.mapmode.MappingCompleteFragment
 com/example/trackie/ui/testmode/TestModeActivity.java
  com.example.trackie.ui.testmode.TestModeActivity
-com/example/trackie/ui/home/HomeViewModel.java
- com.example.trackie.ui.home.HomeViewModel
-com/example/trackie/ui/settings/SettingsFragment.java
- com.example.trackie.ui.settings.SettingsFragment
- com.example.trackie.ui.settings.SettingsFragment$1
- com.example.trackie.ui.settings.SettingsFragment$2
+com/example/trackie/ui/SplashActivity.java
+ com.example.trackie.ui.SplashActivity
+ com.example.trackie.ui.SplashActivity$1
+com/example/trackie/ui/MainActivity.java
+ com.example.trackie.ui.MainActivity
