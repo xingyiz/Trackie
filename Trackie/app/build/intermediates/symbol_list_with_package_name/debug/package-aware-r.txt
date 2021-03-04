@@ -2634,7 +2634,7 @@ style Theme_MaterialComponents_NoActionBar_Bridge
 style Theme_Trackie
 style Theme_Trackie_AlertText
 style Theme_Trackie_AppBarOverlay
-style Theme_Trackie_MainTextButton
+style Theme_Trackie_MainButton
 style Theme_Trackie_NavMenu
 style Theme_Trackie_Night
 style Theme_Trackie_NoActionBar

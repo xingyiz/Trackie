@@ -80,13 +80,6 @@ public class TouchMapView extends Observable {
             @Override
             public void onLongPress(MotionEvent e) {
                 if (mapImageView.isReady()) {
-                    if (hasUnconfirmedPoint && previousBitmap != null) {
-                        mapCanvas = new Canvas(previousBitmap);
-
-                        mMapBitmap = previousBitmap.copy(previousBitmap.getConfig(), true);
-                        mapImageView.setImage(ImageSource.bitmap(mMapBitmap));
-                    }
-                    hasUnconfirmedPoint = true;
                     currentSelectedPoint = mapImageView.viewToSourceCoord(e.getX(), e.getY());
                     String s = "Pressed - x: " + currentSelectedPoint.x + ", y: " + currentSelectedPoint.y;
                     Toast.makeText(context, s, Toast.LENGTH_SHORT).show();
@@ -127,9 +120,4 @@ public class TouchMapView extends Observable {
         return mMapBitmap.copy(mMapBitmap.getConfig(), false);
     }
 
-
-    public void setHasUnconfirmedPoint(boolean hasUnconfirmedPoint) {
-        this.hasUnconfirmedPoint = hasUnconfirmedPoint;
-        previousBitmap = mMapBitmap.copy(mMapBitmap.getConfig(), true);
-    }
 }

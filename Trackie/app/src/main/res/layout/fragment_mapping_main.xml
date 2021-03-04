@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.mapmode.MappingMainFragment">
 
-    <com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView
+    <com.example.trackie.ui.PinImageMapView
         android:id="@+id/mapping_indoor_map_view"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -15,9 +15,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-    </com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView>
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <androidx.appcompat.widget.AppCompatButton
         android:elevation="2dp"

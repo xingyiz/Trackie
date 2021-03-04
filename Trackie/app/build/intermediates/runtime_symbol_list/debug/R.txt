@@ -2633,7 +2633,7 @@ int style Theme_MaterialComponents_NoActionBar_Bridge 0x7f1201c3
 int style Theme_Trackie 0x7f1201c4
 int style Theme_Trackie_AlertText 0x7f1201c5
 int style Theme_Trackie_AppBarOverlay 0x7f1201c6
-int style Theme_Trackie_MainTextButton 0x7f1201c7
+int style Theme_Trackie_MainButton 0x7f1201c7
 int style Theme_Trackie_NavMenu 0x7f1201c8
 int style Theme_Trackie_Night 0x7f1201c9
 int style Theme_Trackie_NoActionBar 0x7f1201ca
