@@ -24,12 +24,15 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.trackie.R;
+import com.example.trackie.database.MapData;
+import com.example.trackie.database.OnCompleteCallback;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -44,11 +47,23 @@ public class AddLocationFragment extends Fragment {
 
     private Bitmap floorplanBitmap = null;
 
+    private MapData mapData;
+    private Uri filePath;
+
     public static final int GET_FROM_GALLERY = 3;
     private static final int READ_EXTERNAL_STORAGE_REQUEST = 2;
 
     public AddLocationFragment() {
         // Required empty public constructor
+    }
+
+    public AddLocationFragment(MapData mapData) {
+        this.mapData = mapData;
+    }
+
+    // getter for MapData
+    public MapData getMapData() {
+        return mapData;
     }
 
     /**
@@ -97,9 +112,10 @@ public class AddLocationFragment extends Fragment {
             public void onClick(View v) {
                 if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
                     ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, READ_EXTERNAL_STORAGE_REQUEST);
+                } else {
+                    startActivityForResult(new Intent(Intent.ACTION_PICK,
+                            MediaStore.Images.Media.INTERNAL_CONTENT_URI), GET_FROM_GALLERY);
                 }
-                startActivityForResult(new Intent(Intent.ACTION_PICK,
-                        MediaStore.Images.Media.INTERNAL_CONTENT_URI), GET_FROM_GALLERY);
             }
         });
 
@@ -109,8 +125,27 @@ public class AddLocationFragment extends Fragment {
                 Date currentTime = Calendar.getInstance().getTime();
                 SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy hh:mm");
                 String outputDateString = dateFormat.format(currentTime);
-                Toast.makeText(getActivity(), "Time is: " + outputDateString, Toast.LENGTH_SHORT).show();
+                // Toast.makeText(getActivity(), "Time is: " + outputDateString, Toast.LENGTH_SHORT).show();
                 // set upload to database code here
+                mapData.setName(locationNameEditText.getText().toString());
+                mapData.setFloorplan(filePath.toString(), new OnCompleteCallback() {
+                    @Override
+                    public void onSuccess() {
+                        Toast.makeText(getContext(), "Upload success", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onFailure() {
+                        Toast.makeText(getContext(), "Upload failure", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onError() {
+
+                    }
+                });
+
+                // TODO: Create a new entry in LocationsFragment haha
             }
         });
     }
@@ -120,9 +155,9 @@ public class AddLocationFragment extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == GET_FROM_GALLERY && resultCode == Activity.RESULT_OK) {
-            Uri floorplanImage = data.getData();
+            filePath = data.getData();
             try {
-                floorplanBitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), floorplanImage);
+                floorplanBitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), filePath);
                 uploadFloorplanImageView.setImageBitmap(floorplanBitmap);
                 uploadFloorplanImageView.setVisibility(View.VISIBLE);
             } catch (FileNotFoundException e) {
@@ -138,7 +173,8 @@ public class AddLocationFragment extends Fragment {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == READ_EXTERNAL_STORAGE_REQUEST) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(getActivity(), "Access Storage Permission Granted", Toast.LENGTH_SHORT).show();
+                startActivityForResult(new Intent(Intent.ACTION_PICK,
+                        MediaStore.Images.Media.INTERNAL_CONTENT_URI), GET_FROM_GALLERY);
             } else {
                 Toast.makeText(getActivity(), "Access Storage Permission Denied", Toast.LENGTH_SHORT).show();
             }
