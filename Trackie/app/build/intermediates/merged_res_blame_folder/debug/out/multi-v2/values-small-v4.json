@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\victo\\SynologyDrive\\Drive\\School\\Term 5\\003 Elements of Software Construction\\Trackie\\Trackie\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-small-v4\\values-small-v4.xml",
+            "outputFile": "C:\\Users\\xingyiz\\Documents\\SUTD STUFF\\TERM 5\\50.003 Elements of Software Construction\\Trackie\\Trackie\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-small-v4\\values-small-v4.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\victo\\.gradle\\caches\\transforms-2\\files-2.1\\c81d39a79fa402136a8544175df432ff\\material-1.1.0\\res\\values-small-v4\\values-small-v4.xml",
+                    "source": "C:\\Users\\xingyiz\\.gradle\\caches\\transforms-2\\files-2.1\\c81d39a79fa402136a8544175df432ff\\material-1.1.0\\res\\values-small-v4\\values-small-v4.xml",
                     "from": {
                         "startLines": "2,3,4,5",
                         "startColumns": "4,4,4,4",
