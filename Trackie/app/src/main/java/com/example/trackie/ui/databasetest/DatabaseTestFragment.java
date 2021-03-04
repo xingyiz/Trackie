@@ -1,6 +1,7 @@
 package com.example.trackie.ui.databasetest;
 
 import android.graphics.Point;
+import android.graphics.PointF;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -30,8 +32,11 @@ public class DatabaseTestFragment extends Fragment {
     private MaterialButton getButton;
     private MaterialButton setButton;
     private MaterialTextView textView;
+    private MaterialButton removeButton;
+    private List<MapData> mapDataList;
+
     private Map<String, List<Integer>> data;
-    private Point location = new Point(13, 15);
+    private PointF location = new PointF((float) 13.0, (float) 15.0);
     private double z = 1.0;
     private String device = "Samsung Galaxy S20";
     private Timestamp timestamp = Timestamp.now();
@@ -52,10 +57,11 @@ public class DatabaseTestFragment extends Fragment {
         });
         getButton = view.findViewById(R.id.get_button);
         setButton = view.findViewById(R.id.set_button);
+        removeButton = view.findViewById(R.id.remove_button);
         textView = view.findViewById(R.id.database_display);
         data = new HashMap<>();
-        data.put("SUTD", Arrays.asList(-82, -84, -83, 100, -86));
-        data.put("Hostel", Arrays.asList(-83, -84, -83, -90, -85));
+        data.put("BSSID OF WIFI AP", Arrays.asList(-82, -84, -83, 100, -86));
+        data.put("ANOTHER BSSID", Arrays.asList(-83, -84, -83, -90, -85));
         return view;
     }
 
@@ -71,8 +77,8 @@ public class DatabaseTestFragment extends Fragment {
                 getter.execute(new OnCompleteCallback() {
                     @Override
                     public void onSuccess() {
-                        List<MapData> mapData = getter.getResult();
-                        textView.setText(mapData.toString());
+                        mapDataList = getter.getResult();
+                        textView.setText(mapDataList.toString());
                         }
 
                     @Override
@@ -108,6 +114,34 @@ public class DatabaseTestFragment extends Fragment {
                     @Override
                     public void onError() {
                         // error handling
+                    }
+                });
+            }
+        });
+
+        removeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirestoreHelper.RemoveMapData remover = new FirestoreHelper.RemoveMapData(mapDataList.get(0));
+                remover.execute(new OnCompleteCallback() {
+                    @Override
+                    public void onSuccess() {
+                        Toast.makeText(getContext(), "Successfully removed", Toast.LENGTH_SHORT).show();
+
+                        // reload fragment
+                        FragmentTransaction ft = getParentFragmentManager().beginTransaction();
+                        assert getParentFragment() != null;
+                        ft.detach(getParentFragment()).attach(getParentFragment()).commit();
+                    }
+
+                    @Override
+                    public void onFailure() {
+
+                    }
+
+                    @Override
+                    public void onError() {
+
                     }
                 });
             }

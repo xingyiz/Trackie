@@ -19,8 +19,9 @@
     <string name="show_results">Show Results</string>
     <string name="return_home">Return Home</string>
 
+
     <string name="test_mode">Test Mode</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="database">Database</string>
+
+    <string name="upload_floorplan_here">Upload image floorplan here</string>
+    <string name="confirm_floorplan">Confirm Floorplan</string>
 </resources>

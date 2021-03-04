@@ -8,6 +8,7 @@ import android.graphics.Matrix;
 import android.graphics.Point;
 import android.graphics.PointF;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
@@ -17,46 +18,38 @@ import android.widget.Toast;
 import com.davemorrissey.labs.subscaleview.ImageSource;
 import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
 import com.example.trackie.R;
+import com.example.trackie.database.MapData;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.ArrayList;
+import java.util.Observable;
 
 // wrapper class for the map image, which is to be used in both map and test mode in the app
 // builds the existing TouchImageView class by Mike Ortiz
 // inlcudes more functionality such
 
-public class TouchMapView {
+public class TouchMapView extends Observable {
     private Context context;
     private int mode;
     public final static int TEST_MODE = 0;
     public final static int MAP_MODE = 1;
     private SubsamplingScaleImageView mapImageView;
-    private Bitmap mapBitmap;
+    private Bitmap mMapBitmap;
     private Canvas mapCanvas;
+    private PointF currentSelectedPoint;
 
 
     public TouchMapView(Context context, int mode, SubsamplingScaleImageView mapImageView, Bitmap mapBitmap) {
         this.context = context;
         this.mode = mode;
         this.mapImageView = mapImageView;
-        this.mapBitmap = mapBitmap;
-        this.mapCanvas = new Canvas(mapBitmap.copy(mapBitmap.getConfig(), true));
+        this.mMapBitmap = mapBitmap.copy(mapBitmap.getConfig(), true);
+        this.mapCanvas = new Canvas(mMapBitmap);
         mapImageView.setImage(ImageSource.bitmap(mapBitmap));
         mapImageView.setOnTouchListener(createMappingTouchListener());
     }
-
-//    public TouchMapView(Context context, int mode, SubsamplingScaleImageView mapImageView) {
-//        this.context = context;
-//        this.mode = mode;
-//        this.mapImageView = mapImageView;
-//        Bitmap temp = ((BitmapDrawable)mapImageView.getDrawable()).getBitmap();
-//        this.mapBitmap = temp.copy(temp.getConfig(), true);
-//        this.mapCanvas = new Canvas(mapBitmap);
-////        Bitmap paddedBitmap = makeFillerPadding(temp, 0.8, 0.8);
-////        mapImageView.setImageBitmap(paddedBitmap.copy(paddedBitmap.getConfig(), true));
-//        mapImageView.setOnTouchListener(createMappingTouchListener());
-//    }
-
 
     private Bitmap makeFillerPadding(Bitmap bitmap, double scalePaddingX, double scalePaddingY) {
         int padding_w = (int) (bitmap.getWidth() * (scalePaddingX));
@@ -69,7 +62,6 @@ public class TouchMapView {
                 0, 0, null);
         return outputBitmap;
     }
-
 
     // create touch listener for mapping of points. Main use - create mapping of point when user long presses on the map
     private View.OnTouchListener createMappingTouchListener() {
@@ -97,9 +89,10 @@ public class TouchMapView {
             @Override
             public void onLongPress(MotionEvent e) {
                 if (mapImageView.isReady()) {
-                    PointF sCoord = mapImageView.viewToSourceCoord(e.getX(), e.getY());
-                    String s = "Pressed - x: " + sCoord.x + ", y: " + sCoord.y;
+                    currentSelectedPoint = mapImageView.viewToSourceCoord(e.getX(), e.getY());
+                    String s = "Pressed - x: " + currentSelectedPoint.x + ", y: " + currentSelectedPoint.y;
                     Toast.makeText(context, s, Toast.LENGTH_SHORT).show();
+                    setMarker(currentSelectedPoint);
                 }
             }
 
@@ -118,4 +111,20 @@ public class TouchMapView {
 
     }
 
+    private void setMarker(PointF coords) {
+        Drawable marker = context.getDrawable(R.drawable.ic_location_on_24px);
+        marker.setBounds((int) (coords.x - 45.0),
+                         (int) (coords.y - 45.0),
+                         (int) (coords.x + 45.0),
+                         (int) (coords.y + 45.0));
+        marker.draw(mapCanvas);
+        float currentScale = mapImageView.getScale();
+        PointF currentCenter = mapImageView.getCenter();
+        mapImageView.setImage(ImageSource.bitmap(mMapBitmap.copy(mMapBitmap.getConfig(), true)));
+        mapImageView.setScaleAndCenter(currentScale, currentCenter);
+    }
+
+    public Bitmap getImmutableMapBitmap() {
+        return mMapBitmap.copy(mMapBitmap.getConfig(), true);
+    }
 }

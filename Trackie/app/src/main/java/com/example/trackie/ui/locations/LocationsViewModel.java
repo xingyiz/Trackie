@@ -4,16 +4,21 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.trackie.database.MapData;
+
+import java.util.ArrayList;
+
 public class LocationsViewModel extends ViewModel {
 
-    private MutableLiveData<String> mText;
+    private MutableLiveData<ArrayList<MapData>> locationsData;
 
     public LocationsViewModel() {
-        mText = new MutableLiveData<>();
-        mText.setValue("This is gallery fragment");
+
+        locationsData = new MutableLiveData<>();
+
     }
 
-    public LiveData<String> getText() {
-        return mText;
+    public LiveData<ArrayList<MapData>> getLocationsData() {
+        return locationsData;
     }
 }

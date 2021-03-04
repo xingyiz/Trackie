@@ -34,7 +34,6 @@ public class MapModeActivity extends AppCompatActivity {
 
 
         NavController navController = Navigation.findNavController(this, R.id.map_mode_host_fragment);
-
     }
 
     @Override
