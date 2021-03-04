@@ -10,12 +10,13 @@
         android:id="@+id/mapping_indoor_map_view"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:src="@drawable/b2_l1"
-        android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+        app:srcCompat="@drawable/b2_l1"
+        android:layout_marginHorizontal="22dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        >
 
     </com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView>
 

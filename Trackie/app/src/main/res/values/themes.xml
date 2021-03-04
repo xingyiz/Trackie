@@ -70,4 +70,9 @@
         <item name="android:windowEnterTransition">@transition/fade</item>
         <item name="android:windowExitTransition">@transition/fade</item>
     </style>
+
+    <style name="Theme.Trackie.SubscaleView">
+        <item name="android:tint">@color/darkmaroon</item>
+    </style>
+
 </resources>

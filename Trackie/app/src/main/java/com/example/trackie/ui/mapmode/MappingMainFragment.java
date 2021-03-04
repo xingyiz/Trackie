@@ -1,11 +1,14 @@
 package com.example.trackie.ui.mapmode;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -33,6 +36,10 @@ public class MappingMainFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    SharedPreferences sharedPreferences;
+    String pFile = "com.example.trackie.ui.preferences";
+    boolean darkModeEnabled;
 
     public MappingMainFragment() {
         // Required empty public constructor
@@ -69,7 +76,24 @@ public class MappingMainFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_mapping_main, container, false);
+        View root = inflater.inflate(R.layout.fragment_mapping_main, container, false);
+
+
+        // TODO: Code for getting and loading in correct map + correct colour
+        SubsamplingScaleImageView map = root.findViewById(R.id.mapping_indoor_map_view);
+        // set shared preferences and theme
+        sharedPreferences = this.getActivity().getSharedPreferences(pFile, Context.MODE_PRIVATE);
+        darkModeEnabled = sharedPreferences.getBoolean("dark_mode_state", false);
+
+        if (darkModeEnabled) {
+            // get white image
+
+        } else {
+            // get dark image
+        }
+
+        return root;
+
     }
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
