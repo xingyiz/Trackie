@@ -15,6 +15,8 @@ import android.widget.Toolbar;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import com.example.trackie.R;
 import com.example.trackie.Utils;
@@ -26,6 +28,8 @@ public class HomeFragment extends Fragment {
     TextView currentLocationTextview;
     Button mapModeButton;
     Button testModeButton;
+    Button setLocationButton;
+    NavController controller;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -41,6 +45,8 @@ public class HomeFragment extends Fragment {
         String currentLocationName = preferences.getString(Utils.CURRENT_LOCATION_KEY, "nil");
         currentLocationTextview = (TextView) view.findViewById(R.id.home_current_location_textview);
         currentLocationTextview.setText("Current Location: " + currentLocationName);
+
+        controller = Navigation.findNavController(view);
 
         mapModeButton = (Button) view.findViewById(R.id.map_mode_button);
         Toolbar top_toolbar = (Toolbar) view.findViewById(R.id.top_toolbar);
@@ -58,6 +64,14 @@ public class HomeFragment extends Fragment {
             public void onClick(View v) {
                 Intent testIntent = new Intent(getActivity(), TestModeActivity.class);
                 startActivity(testIntent, ActivityOptions.makeSceneTransitionAnimation(getActivity()).toBundle());
+            }
+        });
+
+        setLocationButton = (Button) view.findViewById(R.id.set_location_button);
+        setLocationButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                controller.navigate(R.id.nav_locations);
             }
         });
     }
