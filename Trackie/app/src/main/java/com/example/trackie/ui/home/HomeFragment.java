@@ -12,15 +12,15 @@ import android.widget.Toolbar;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.example.trackie.R;
-import com.example.trackie.ui.MainActivity;
 import com.example.trackie.ui.mapmode.MapModeActivity;
 import com.example.trackie.ui.testmode.TestModeActivity;
 
 public class HomeFragment extends Fragment {
+
+    Button mapModeButton;
+    Button testModeButton;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -32,9 +32,9 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        Button map_mode_button = (Button) view.findViewById(R.id.map_mode_button);
+        mapModeButton = (Button) view.findViewById(R.id.map_mode_button);
         Toolbar top_toolbar = (Toolbar) view.findViewById(R.id.top_toolbar);
-        map_mode_button.setOnClickListener(new View.OnClickListener() {
+        mapModeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent mapIntent = new Intent(getActivity(), MapModeActivity.class);
@@ -42,8 +42,8 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        Button test_mode_button = (Button) view.findViewById(R.id.test_mode_button);
-        test_mode_button.setOnClickListener(new View.OnClickListener() {
+        testModeButton = (Button) view.findViewById(R.id.test_mode_button);
+        testModeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent testIntent = new Intent(getActivity(), TestModeActivity.class);

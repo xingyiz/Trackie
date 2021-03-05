@@ -8,38 +8,30 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 
-import android.os.Parcelable;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.davemorrissey.labs.subscaleview.ImageSource;
 import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
 import com.example.trackie.R;
 import com.example.trackie.database.MapData;
 import com.example.trackie.ui.PinImageMapView;
-import com.example.trackie.ui.TouchMapView;
-
-import java.util.Observable;
-import java.util.Observer;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link MappingMainFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MappingMainFragment extends Fragment implements Observer {
-
+public class MappingMainFragment extends Fragment{
 
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String MAP_DATA_KEY = "MapData";
     private static MapData mapData;
+    private PinImageMapView mappingImageView;
 
     SharedPreferences sharedPreferences;
     String pFile = "com.example.trackie.ui.preferences";
@@ -101,7 +93,7 @@ public class MappingMainFragment extends Fragment implements Observer {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        PinImageMapView mappingImageView = (PinImageMapView) view.findViewById(R.id.mapping_indoor_map_view);
+        mappingImageView = (PinImageMapView) view.findViewById(R.id.mapping_indoor_map_view);
         Bitmap mapBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.b2_l1);
         mappingImageView.setImage(ImageSource.bitmap(mapBitmap));
 
@@ -110,15 +102,10 @@ public class MappingMainFragment extends Fragment implements Observer {
             @Override
             public void onClick(View v) {
                 mappingImageView.setConfirmedPoint(true);
+                // map RSSI values here
             }
         });
 
     }
 
-    // Observer method to detect when current coordinates in the TouchMapView has changed
-    // Reads the RSSI values and updates the current data
-    @Override
-    public void update(Observable o, Object arg) {
-
-    }
 }

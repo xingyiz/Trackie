@@ -18,6 +18,10 @@ import com.example.trackie.Utils;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+    TODO: rotation of image using 2 finger gesture
+    TODO: pop up menu when clicking on existiing point
+ */
 public class PinImageMapView extends SubsamplingScaleImageView {
     private final Paint paint = new Paint();
     private List<PointF> mapPoints;
@@ -99,15 +103,16 @@ public class PinImageMapView extends SubsamplingScaleImageView {
             @Override
             public boolean onSingleTapConfirmed(MotionEvent e) {
                 boolean isPointTapped = false;
-                PointF tappedCoordinate = viewToSourceCoord(new PointF(e.getX(), e.getY()));
+                PointF tappedCoordinate = new PointF(e.getX(), e.getY());
                 if (isReady() && mapPoints != null) {
                     for (PointF point : mapPoints) {
-                        int pointX = (int) point.x;
-                        int pointY = (int) point.y;
-                        if (tappedCoordinate.x >= pointX - pinBitmap.getWidth()
-                                && tappedCoordinate.x <= pointX + pinBitmap.getWidth()
-                                && tappedCoordinate.y >= pointY - pinBitmap.getHeight()
-                                && tappedCoordinate.y <= pointY + pinBitmap.getHeight()) {
+                        PointF vPoint = sourceToViewCoord(point);
+                        int pointX = (int) vPoint.x;
+                        int pointY = (int) vPoint.y;
+                        if (tappedCoordinate.x >= pointX - (pinBitmap.getWidth() / 2)
+                                && tappedCoordinate.x <= pointX + (pinBitmap.getWidth() / 2)
+                                && tappedCoordinate.y >= pointY - (pinBitmap.getHeight() / 2)
+                                && tappedCoordinate.y <= pointY + (pinBitmap.getHeight() / 2)) {
                             Toast.makeText(getContext(), "Tapped point " + tappedCoordinate.toString(), Toast.LENGTH_SHORT).show();
                             isPointTapped = true;
                             break;
@@ -115,7 +120,7 @@ public class PinImageMapView extends SubsamplingScaleImageView {
                     }
                 }
                 if (!isPointTapped) {
-                    addPoint(tappedCoordinate);
+                    addPoint(viewToSourceCoord(tappedCoordinate));
                 }
                 return true;
             }

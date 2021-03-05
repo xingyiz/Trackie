@@ -22,8 +22,8 @@ import java.util.ArrayList;
 
 public class LocationsFragment extends Fragment {
 
-    private MapData mapData;
-
+    private ArrayList<MapData> mapData;
+    private RecyclerView locationsRecyclerView;
     private LocationsViewModel locationsViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -44,7 +44,7 @@ public class LocationsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        RecyclerView locationsRecyclerView = (RecyclerView) view.findViewById(R.id.locations_recycler_view);
+        locationsRecyclerView = (RecyclerView) view.findViewById(R.id.locations_recycler_view);
         ArrayList<MapData> mapDatas = new ArrayList<>();
         mapDatas.add(new MapData("Bedroom"));
         mapDatas.add(new MapData("Living Room"));
