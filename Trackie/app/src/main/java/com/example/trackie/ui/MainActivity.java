@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import com.example.trackie.R;
+import com.example.trackie.Utils;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.appcompat.app.AppCompatDelegate;
@@ -21,7 +22,6 @@ public class MainActivity extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editPrefs;
-    String pFile = "com.example.trackie.ui.preferences";
     boolean darkModeEnabled;
 
     @Override
@@ -29,8 +29,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         // set shared preferences and theme
-        sharedPreferences = getSharedPreferences(pFile, Context.MODE_PRIVATE);
-        darkModeEnabled = sharedPreferences.getBoolean("dark_mode_state", false);
+        sharedPreferences = getSharedPreferences(Utils.P_FILE, Context.MODE_PRIVATE);
+        darkModeEnabled = sharedPreferences.getBoolean(Utils.DARK_MODE_STATE_KEY, false);
 
         if (darkModeEnabled) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
@@ -64,5 +64,7 @@ public class MainActivity extends AppCompatActivity {
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
     }
+
+
 
 }

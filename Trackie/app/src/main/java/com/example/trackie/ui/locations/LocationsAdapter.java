@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -54,6 +55,8 @@ public class LocationsAdapter extends RecyclerView.Adapter {
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putString(Utils.CURRENT_LOCATION_KEY, floorplanData.getName());
                 editor.apply();
+
+                Toast.makeText(context, "Location set: " + floorplanData.getName(), Toast.LENGTH_SHORT).show();
             }
         });
     }
