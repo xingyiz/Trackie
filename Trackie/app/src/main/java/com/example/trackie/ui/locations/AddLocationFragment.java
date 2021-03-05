@@ -117,7 +117,8 @@ public class AddLocationFragment extends Fragment {
                 // String outputDateString = dateFormat.format(currentTime);
                 // Toast.makeText(getActivity(), "Time is: " + outputDateString, Toast.LENGTH_SHORT).show();
                 // set upload to database code here
-                FloorplanHelper.UploadFloorplan uploadFloorplan = new FloorplanHelper.UploadFloorplan(locationNameEditText.getText().toString(), filePath);
+                FloorplanHelper.UploadFloorplan uploadFloorplan = new FloorplanHelper.UploadFloorplan(
+                        locationNameEditText.getText().toString(), filePath, 0);
                 uploadFloorplan.execute(new OnCompleteCallback() {
                     @Override
                     public void onSuccess() {

@@ -57,13 +57,15 @@ public class FloorplanHelper {
 
         private String name;
         private Uri floorplan;
+        private int darkmode;
 
         private final FirebaseStorage storage = FirebaseStorage.getInstance();
         private final FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-        public UploadFloorplan(String name, Uri floorplan) {
+        public UploadFloorplan(String name, Uri floorplan, int darkmode) {
             this.name = name;
             this.floorplan = floorplan;
+            this.darkmode = darkmode;
         }
 
         @Override
@@ -78,7 +80,7 @@ public class FloorplanHelper {
                             public void onSuccess(Uri uri) {
                                 floorplan = uri;
                                 db.collection(name + "_floorplan").document(name)
-                                        .set(new FloorplanData(name, floorplan.toString()), SetOptions.merge())
+                                        .set(new FloorplanData(name, floorplan.toString(), darkmode), SetOptions.merge())
                                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
