@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.Image;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -17,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.davemorrissey.labs.subscaleview.ImageSource;
 import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
 import com.example.trackie.R;
 import com.example.trackie.ui.TouchMapView;
@@ -78,19 +80,9 @@ public class MappingMainFragment extends Fragment {
         // Inflate the layout for this fragment
         View root = inflater.inflate(R.layout.fragment_mapping_main, container, false);
 
-
-        // TODO: Code for getting and loading in correct map + correct colour
-        SubsamplingScaleImageView map = root.findViewById(R.id.mapping_indoor_map_view);
         // set shared preferences and theme
         sharedPreferences = this.getActivity().getSharedPreferences(pFile, Context.MODE_PRIVATE);
         darkModeEnabled = sharedPreferences.getBoolean("dark_mode_state", false);
-
-        if (darkModeEnabled) {
-            // get white image
-
-        } else {
-            // get dark image
-        }
 
         return root;
 
@@ -99,7 +91,14 @@ public class MappingMainFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         SubsamplingScaleImageView mapping_image = (SubsamplingScaleImageView) view.findViewById(R.id.mapping_indoor_map_view);
-        Bitmap mapBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.b2_l1);
+        Bitmap mapBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.b2_l1_light);
+
+        if (!darkModeEnabled) {
+            mapBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.b2_l1);
+        }
+
         TouchMapView mapView = new TouchMapView(getActivity(), TouchMapView.MAP_MODE, mapping_image, mapBitmap.copy(mapBitmap.getConfig(), false));
+
+
     }
 }

@@ -42,13 +42,15 @@
     </style>
 
     <style name="Theme.Trackie.Splash" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <item name="android:windowFullscreen">true</item>
         <item name="android:background">@drawable/pink_gradient</item>
+        <item name="android:windowFullscreen">true</item>
         <item name="android:windowAnimationStyle">@style/WindowAnimationStyle</item>
         <item name="android:windowActivityTransitions">true</item>
         <item name="android:windowContentTransitions">true</item>
         <item name="android:windowEnterTransition">@transition/fade</item>
         <item name="android:windowExitTransition">@transition/fade</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorSecondary</item>
     </style>
 
     <style name="Theme.Trackie.SubscaleView">
