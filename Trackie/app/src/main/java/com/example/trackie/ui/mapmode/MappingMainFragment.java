@@ -80,19 +80,9 @@ public class MappingMainFragment extends Fragment implements Observer {
         // Inflate the layout for this fragment
         View root = inflater.inflate(R.layout.fragment_mapping_main, container, false);
 
-
-        // TODO: Code for getting and loading in correct map + correct colour
-        SubsamplingScaleImageView map = root.findViewById(R.id.mapping_indoor_map_view);
         // set shared preferences and theme
         sharedPreferences = this.getActivity().getSharedPreferences(pFile, Context.MODE_PRIVATE);
         darkModeEnabled = sharedPreferences.getBoolean("dark_mode_state", false);
-
-        if (darkModeEnabled) {
-            // get white image
-
-        } else {
-            // get dark image
-        }
 
         return root;
 
@@ -102,7 +92,16 @@ public class MappingMainFragment extends Fragment implements Observer {
         super.onViewCreated(view, savedInstanceState);
 
         PinImageMapView mappingImageView = (PinImageMapView) view.findViewById(R.id.mapping_indoor_map_view);
-        Bitmap mapBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.b2_l1);
+        Bitmap mapBitmap;
+
+        if (darkModeEnabled) {
+            // get white image
+            mapBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.b2_l1_light);
+
+        } else {
+            // get dark image
+            mapBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.b2_l1);
+        }
         mappingImageView.setImage(ImageSource.bitmap(mapBitmap));
 
         Button confirmMappingClickButton = (Button) view.findViewById(R.id.confirm_mapping_click_button);
