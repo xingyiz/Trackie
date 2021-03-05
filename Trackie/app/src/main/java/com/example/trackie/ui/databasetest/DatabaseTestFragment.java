@@ -18,6 +18,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.bumptech.glide.Glide;
 import com.example.trackie.R;
+import com.example.trackie.database.FloorplanHelper;
 import com.example.trackie.database.OnCompleteCallback;
 import com.example.trackie.database.FirestoreHelper;
 import com.example.trackie.database.MapData;
@@ -46,7 +47,6 @@ public class DatabaseTestFragment extends Fragment {
     private double z = 1.0;
     private String device = "Samsung Galaxy S20";
     private Timestamp timestamp = Timestamp.now();
-    private String floorplan = "https://firebasestorage.googleapis.com/v0/b/trackie-2e28a.appspot.com/o/lol?alt=media&token=894c0926-e575-4591-a5b0-92745427a1a6";
 
     private DatabaseTestViewModel viewModel;
 
@@ -114,10 +114,27 @@ public class DatabaseTestFragment extends Fragment {
                     textView.setText(mapDataList.toString());
 
                     if (mapDataList.size() > 0) {
-                        StorageReference ref = FirebaseStorage.getInstance().getReferenceFromUrl(mapDataList.get(0).getFloorplan());
-                        Glide.with(requireContext())
-                                .load(ref)
-                                .into(image);
+                        FloorplanHelper.RetrieveFloorplan retrieveFloorplan = new FloorplanHelper.RetrieveFloorplan(mapDataList.get(0).getName());
+                        retrieveFloorplan.execute(new OnCompleteCallback() {
+                            @Override
+                            public void onSuccess() {
+                                StorageReference ref = FirebaseStorage.getInstance().getReferenceFromUrl(retrieveFloorplan.getFloorplanURL());
+                                Glide.with(requireContext())
+                                        .load(ref)
+                                        .into(image);
+                            }
+
+                            @Override
+                            public void onFailure() {
+                                Toast.makeText(getContext(), "Can't Retrieve Floorplan", Toast.LENGTH_SHORT).show();
+                            }
+
+                            @Override
+                            public void onError() {
+
+                            }
+                        });
+
                     }
                 } else {
                     if (mapDataList != null) {
@@ -139,7 +156,7 @@ public class DatabaseTestFragment extends Fragment {
     }
 
     public void setData() {
-        MapData mapData = new MapData("HELLO WORLD", data, location, z, device, timestamp, floorplan);
+        MapData mapData = new MapData("HELLO WORLD", data, location, z, device, timestamp);
         FirestoreHelper.SetMapData setter = new FirestoreHelper.SetMapData(mapData);
         setter.execute(new OnCompleteCallback() {
             @Override

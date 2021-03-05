@@ -11,15 +11,17 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.trackie.R;
+import com.example.trackie.database.FloorplanData;
 import com.example.trackie.database.MapData;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class LocationsAdapter extends RecyclerView.Adapter {
     private Context context;
-    private ArrayList<MapData> locationsList;
+    private List<FloorplanData> locationsList;
 
-    public LocationsAdapter(Context context, ArrayList<MapData> locationsList) {
+    public LocationsAdapter(Context context, List<FloorplanData> locationsList) {
         this.context = context;
         this.locationsList = locationsList;
     }
@@ -37,9 +39,9 @@ public class LocationsAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         final ViewHolder viewHolder = (ViewHolder) holder;
-        MapData mapData = locationsList.get(position);
-        viewHolder.locationNameTextview.setText(mapData.getName());
-        System.out.println("Nameee: " + mapData.getName());
+        FloorplanData floorplanData = locationsList.get(position);
+        viewHolder.locationNameTextview.setText(floorplanData.getName());
+        System.out.println("Nameee: " + floorplanData.getName());
     }
 
     private class ViewHolder extends RecyclerView.ViewHolder {
