@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.provider.MediaStore;
@@ -141,10 +142,12 @@ public class AddLocationFragment extends Fragment {
                     }
                 });
 
-                // TODO: Create a new entry in LocationsFragment haha
+                getActivity().onBackPressed();
+
             }
         });
     }
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {

@@ -25,11 +25,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LocationsFragment extends Fragment {
-
-    private MapData mapData;
-
     private LocationsViewModel locationsViewModel;
     private List<FloorplanData> floorplanDataList;
+    RecyclerView locationsRecyclerView;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -49,7 +47,7 @@ public class LocationsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        RecyclerView locationsRecyclerView = (RecyclerView) view.findViewById(R.id.locations_recycler_view);
+        locationsRecyclerView = (RecyclerView) view.findViewById(R.id.locations_recycler_view);
         FloorplanHelper.GetFloorplanList getFloorplanList = new FloorplanHelper.GetFloorplanList();
         getFloorplanList.execute(new OnCompleteCallback() {
             @Override
@@ -79,7 +77,7 @@ public class LocationsFragment extends Fragment {
                         beginTransaction()
                         .setCustomAnimations(R.anim.fragment_fade_enter, R.anim.fragment_fade_exit);
                 fragmentTransaction.replace(view.getId(), new AddLocationFragment());
-                fragmentTransaction.addToBackStack(null).commit();
+                fragmentTransaction.addToBackStack("Locations").commit();
             }
         });
     }

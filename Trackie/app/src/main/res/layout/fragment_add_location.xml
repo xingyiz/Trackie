@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.locations.AddLocationFragment">
+    tools:context=".ui.locations.AddLocationFragment"
+    android:id="@+id/add_location_fragment_location">
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/upload_location_input_layout"

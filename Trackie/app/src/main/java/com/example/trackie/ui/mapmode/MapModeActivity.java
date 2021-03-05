@@ -30,7 +30,7 @@ import com.example.trackie.ui.locations.LocationsAdapter;
 import com.example.trackie.ui.testmode.TestModeActivity;
 
 public class MapModeActivity extends AppCompatActivity {
-
+// TODO: if preferences empty (no current location) tell user to go back and select location
     String floorplanName;
     boolean darkModeEnabled;
 

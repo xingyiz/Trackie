@@ -20,7 +20,7 @@ import java.util.List;
 
 /*
     TODO: rotation of image using 2 finger gesture
-    TODO: pop up menu when clicking on existiing point
+    TODO: pop up menu when clicking on existing point
  */
 public class PinImageMapView extends SubsamplingScaleImageView {
     private final Paint paint = new Paint();
@@ -28,7 +28,6 @@ public class PinImageMapView extends SubsamplingScaleImageView {
     private Bitmap pinBitmap;
     private Bitmap unconfirmedPinBitmap;
     private boolean isConfirmedPoint;
-
     public PinImageMapView(Context context) {
         this(context, null);
         initialise();
@@ -41,6 +40,7 @@ public class PinImageMapView extends SubsamplingScaleImageView {
 
     // helper function to set up some varaibles in the class
     private void initialise() {
+        setMaxScale(155);
         mapPoints = new ArrayList<>();
         initTouchListener();
 
@@ -79,7 +79,7 @@ public class PinImageMapView extends SubsamplingScaleImageView {
     }
 
     @Override
-    protected void onDraw(Canvas canvas) {
+    protected synchronized void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         if (!isReady()) {
             return;
