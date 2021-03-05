@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.provider.MediaStore;
 import android.view.LayoutInflater;
@@ -111,9 +112,9 @@ public class AddLocationFragment extends Fragment {
         confirmFloorplanButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Date currentTime = Calendar.getInstance().getTime();
-                SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy hh:mm");
-                String outputDateString = dateFormat.format(currentTime);
+                // Date currentTime = Calendar.getInstance().getTime();
+                // SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy hh:mm");
+                // String outputDateString = dateFormat.format(currentTime);
                 // Toast.makeText(getActivity(), "Time is: " + outputDateString, Toast.LENGTH_SHORT).show();
                 // set upload to database code here
                 FloorplanHelper.UploadFloorplan uploadFloorplan = new FloorplanHelper.UploadFloorplan(locationNameEditText.getText().toString(), filePath);
@@ -133,6 +134,7 @@ public class AddLocationFragment extends Fragment {
 
                     }
                 });
+
                 // TODO: Create a new entry in LocationsFragment haha
             }
         });

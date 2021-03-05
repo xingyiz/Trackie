@@ -16,9 +16,6 @@ import com.google.firebase.storage.UploadTask;
 
 public class FloorplanHelper {
 
-    private static final FirebaseStorage storage = FirebaseStorage.getInstance();
-    private static final StorageReference storageReference = storage.getReference();
-
     public static class RetrieveFloorplan implements FirestoreExecute {
         private String name;
         private String floorplanURL;
@@ -60,6 +57,8 @@ public class FloorplanHelper {
 
         private String name;
         private Uri floorplan;
+
+        private final FirebaseStorage storage = FirebaseStorage.getInstance();
         private final FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         public UploadFloorplan(String name, Uri floorplan) {
@@ -70,7 +69,7 @@ public class FloorplanHelper {
         @Override
         public void execute(OnCompleteCallback callback) {
             try {
-                StorageReference ref = storageReference.child(name);
+                StorageReference ref = storage.getReference(name);
                 ref.putFile(floorplan).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -85,6 +84,8 @@ public class FloorplanHelper {
                                             public void onComplete(@NonNull Task<Void> task) {
                                                 if (task.isSuccessful()) {
                                                     callback.onSuccess();
+                                                } else {
+                                                    callback.onFailure();
                                                 }
                                             }
                                         });

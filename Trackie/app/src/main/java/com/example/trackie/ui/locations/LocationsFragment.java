@@ -58,8 +58,8 @@ public class LocationsFragment extends Fragment {
                 FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().
                         beginTransaction()
                         .setCustomAnimations(R.anim.fragment_fade_enter, R.anim.fragment_fade_exit);
-                fragmentTransaction.replace(view.getId(), new AddLocationFragment());
-                fragmentTransaction.addToBackStack(null).commit();
+                fragmentTransaction.add(view.getId(), new AddLocationFragment());
+                fragmentTransaction.addToBackStack("Locations").commit();
             }
         });
     }
