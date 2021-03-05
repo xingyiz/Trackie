@@ -84,7 +84,7 @@ public class MappingMainFragment extends Fragment{
 
     }
 
-    // Todo
+    // TODO: fix issue for when backgroudn image does not load by the time user clicks map mode
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
