@@ -1,4 +1,4 @@
-package com.example.trackie.ui.home;
+package com.example.trackie.ui.locations;
 
 import android.content.Context;
 import android.view.LayoutInflater;

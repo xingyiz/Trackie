@@ -1,38 +1,49 @@
 package com.example.trackie.ui.mapmode;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Toast;
 
+import com.davemorrissey.labs.subscaleview.ImageSource;
 import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
 import com.example.trackie.R;
+import com.example.trackie.database.MapData;
+import com.example.trackie.ui.PinImageMapView;
 import com.example.trackie.ui.TouchMapView;
+
+import java.util.Observable;
+import java.util.Observer;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link MappingMainFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MappingMainFragment extends Fragment {
+public class MappingMainFragment extends Fragment implements Observer {
 
-    // TODO: Rename parameter arguments, choose names that match
+
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private static final String MAP_DATA_KEY = "MapData";
+    private static MapData mapData;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    SharedPreferences sharedPreferences;
+    String pFile = "com.example.trackie.ui.preferences";
+    boolean darkModeEnabled;
 
     public MappingMainFragment() {
         // Required empty public constructor
@@ -50,8 +61,7 @@ public class MappingMainFragment extends Fragment {
     public static MappingMainFragment newInstance(String param1, String param2) {
         MappingMainFragment fragment = new MappingMainFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putParcelable(MAP_DATA_KEY, mapData);
         fragment.setArguments(args);
         return fragment;
     }
@@ -60,8 +70,7 @@ public class MappingMainFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            mapData = getArguments().getParcelable(MAP_DATA_KEY);
         }
     }
 
@@ -69,13 +78,47 @@ public class MappingMainFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_mapping_main, container, false);
+        View root = inflater.inflate(R.layout.fragment_mapping_main, container, false);
+
+
+        // TODO: Code for getting and loading in correct map + correct colour
+        SubsamplingScaleImageView map = root.findViewById(R.id.mapping_indoor_map_view);
+        // set shared preferences and theme
+        sharedPreferences = this.getActivity().getSharedPreferences(pFile, Context.MODE_PRIVATE);
+        darkModeEnabled = sharedPreferences.getBoolean("dark_mode_state", false);
+
+        if (darkModeEnabled) {
+            // get white image
+
+        } else {
+            // get dark image
+        }
+
+        return root;
+
     }
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        SubsamplingScaleImageView mapping_image = (SubsamplingScaleImageView) view.findViewById(R.id.mapping_indoor_map_view);
-        Bitmap mapBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.sample_floor_plan);
-        TouchMapView mapView = new TouchMapView(getActivity(), TouchMapView.MAP_MODE, mapping_image, mapBitmap.copy(mapBitmap.getConfig(), false));
+
+        PinImageMapView mappingImageView = (PinImageMapView) view.findViewById(R.id.mapping_indoor_map_view);
+        Bitmap mapBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.b2_l1);
+        mappingImageView.setImage(ImageSource.bitmap(mapBitmap));
+
+        Button confirmMappingClickButton = (Button) view.findViewById(R.id.confirm_mapping_click_button);
+        confirmMappingClickButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mappingImageView.setConfirmedPoint(true);
+            }
+        });
+
+    }
+
+    // Observer method to detect when current coordinates in the TouchMapView has changed
+    // Reads the RSSI values and updates the current data
+    @Override
+    public void update(Observable o, Object arg) {
+
     }
 }

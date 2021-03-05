@@ -35,7 +35,7 @@ public class RSSITestFragment extends Fragment {
     private WifiManager wifiManager;
     private RSSIAdapter adapter;
 
-    private static int ACCESS_WIFI_STATE_REQUEST = 1;
+    private static final int ACCESS_WIFI_STATE_REQUEST = 1;
 
     @Nullable
     @Override

@@ -1,31 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.mapmode.MappingMainFragment">
 
-    <com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView
+    <com.example.trackie.ui.PinImageMapView
         android:id="@+id/mapping_indoor_map_view"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:src="@drawable/sample_floor_plan"
+        android:src="@drawable/b2_l1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-    </com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView>
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:elevation="2dp"
-        android:id="@+id/confirm_location_button"
+        android:id="@+id/confirm_mapping_click_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="64dp"
         android:layout_marginEnd="64dp"
         android:layout_marginBottom="42dp"
+        android:elevation="2dp"
         android:foreground="?attr/selectableItemBackground"
         android:text="@string/confirm_mapping_location"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -34,31 +34,32 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:elevation="2dp"
         android:id="@+id/collected_data_textview"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="16dp"
+        android:elevation="2dp"
         android:fontFamily="@font/segoeui"
         android:text="@string/collected_data"
         android:textAlignment="center"
         android:textSize="@dimen/content_text_size"
-        app:layout_constraintBottom_toTopOf="@+id/confirm_location_button"
+        app:layout_constraintBottom_toTopOf="@+id/confirm_mapping_click_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:elevation="2dp"
         android:id="@+id/move_5_meter_alert_textview"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
+        android:elevation="2dp"
         android:text="@string/move_5_meters_guide"
         android:textAlignment="center"
+        android:textColor="?attr/colorControlHighlight"
         android:theme="@style/Theme.Trackie.AlertText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
