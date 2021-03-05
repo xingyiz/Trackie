@@ -47,7 +47,6 @@
         android:id="@+id/image_database"
         android:layout_marginTop="12dp"
         android:layout_below="@+id/remove_button"
-        android:src="@drawable/sample_floor_plan"
         android:layout_centerInParent="true" />
 
 </RelativeLayout>

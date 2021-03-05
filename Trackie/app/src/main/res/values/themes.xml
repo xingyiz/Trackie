@@ -58,8 +58,26 @@
         <item name="android:textSize">@dimen/button_text_size</item>
     </style>
 
-
     <style name="Theme.Trackie.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.Trackie.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="WindowAnimationStyle">
+        <item name="android:windowEnterAnimation">@android:anim/linear_interpolator</item>
+    </style>
+
+    <style name="Theme.Trackie.Splash" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:background">@drawable/side_nav_bar</item>
+        <item name="android:windowAnimationStyle">@style/WindowAnimationStyle</item>
+        <item name="android:windowActivityTransitions">true</item>
+        <item name="android:windowContentTransitions">true</item>
+        <item name="android:windowEnterTransition">@transition/fade</item>
+        <item name="android:windowExitTransition">@transition/fade</item>
+    </style>
+
+    <style name="Theme.Trackie.SubscaleView">
+        <item name="android:tint">@color/darkmaroon</item>
+    </style>
+
 </resources>

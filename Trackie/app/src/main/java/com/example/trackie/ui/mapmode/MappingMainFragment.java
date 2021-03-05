@@ -1,11 +1,14 @@
 package com.example.trackie.ui.mapmode;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 
 import android.os.Parcelable;
@@ -37,6 +40,10 @@ public class MappingMainFragment extends Fragment implements Observer {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String MAP_DATA_KEY = "MapData";
     private static MapData mapData;
+
+    SharedPreferences sharedPreferences;
+    String pFile = "com.example.trackie.ui.preferences";
+    boolean darkModeEnabled;
 
     public MappingMainFragment() {
         // Required empty public constructor
@@ -71,15 +78,40 @@ public class MappingMainFragment extends Fragment implements Observer {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_mapping_main, container, false);
+        View root = inflater.inflate(R.layout.fragment_mapping_main, container, false);
+
+
+        // TODO: Code for getting and loading in correct map + correct colour
+        SubsamplingScaleImageView map = root.findViewById(R.id.mapping_indoor_map_view);
+        // set shared preferences and theme
+        sharedPreferences = this.getActivity().getSharedPreferences(pFile, Context.MODE_PRIVATE);
+        darkModeEnabled = sharedPreferences.getBoolean("dark_mode_state", false);
+
+        if (darkModeEnabled) {
+            // get white image
+
+        } else {
+            // get dark image
+        }
+
+        return root;
+
     }
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        PinImageMapView mapping_image = (PinImageMapView) view.findViewById(R.id.mapping_indoor_map_view);
+        PinImageMapView mappingImageView = (PinImageMapView) view.findViewById(R.id.mapping_indoor_map_view);
         Bitmap mapBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.b2_l1);
-        mapping_image.setImage(ImageSource.bitmap(mapBitmap));
+        mappingImageView.setImage(ImageSource.bitmap(mapBitmap));
+
+        Button confirmMappingClickButton = (Button) view.findViewById(R.id.confirm_mapping_click_button);
+        confirmMappingClickButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mappingImageView.setConfirmedPoint(true);
+            }
+        });
 
     }
 

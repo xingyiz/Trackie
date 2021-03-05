@@ -2,15 +2,9 @@ package com.example.trackie.ui;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Matrix;
-import android.graphics.Point;
 import android.graphics.PointF;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.util.AttributeSet;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
@@ -19,12 +13,7 @@ import android.widget.Toast;
 import com.davemorrissey.labs.subscaleview.ImageSource;
 import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
 import com.example.trackie.R;
-import com.example.trackie.database.MapData;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.ArrayList;
 import java.util.Observable;
 
 // wrapper class for the map image, which is to be used in both map and test mode in the app
@@ -104,7 +93,7 @@ public class TouchMapView extends Observable {
 
     private void setMarker(PointF coords) {
         mapCanvas.save();
-        Drawable marker = context.getDrawable(R.drawable.ic_location_on_24px);
+        Drawable marker = context.getDrawable(R.drawable.confirmed_pin_marker_24px);
         marker.setBounds((int) (coords.x - 45.0),
                          (int) (coords.y - 45.0),
                          (int) (coords.x + 45.0),

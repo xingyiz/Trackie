@@ -57,10 +57,8 @@ public class MapData implements MapRep, Parcelable {
         this.device = device;
         this.timestamp = timestamp;
         this.floorplan = floorplan;
-        if (floorplan != null) {
-            // uploadFloorplan();
-        } else {
-            // retrieve floorplan from storage
+        if (floorplan == null) {
+            retrieveFloorplan();
         }
     }
 
@@ -79,7 +77,7 @@ public class MapData implements MapRep, Parcelable {
         floorplan = in.readString();
     }
 
-    private void uploadFloorplan() {
+    private void uploadFloorplan(OnCompleteCallback callback) {
         try {
             Uri filePath = Uri.parse(floorplan);
             StorageReference ref = storageReference.child(name);
@@ -90,12 +88,14 @@ public class MapData implements MapRep, Parcelable {
                         @Override
                         public void onSuccess(Uri uri) {
                             floorplan = uri.toString();
+                            callback.onSuccess();
                         }
                     });
                 }
             });
         } catch (Exception e) {
             // error handling
+            callback.onFailure();
         }
     }
 
@@ -172,7 +172,10 @@ public class MapData implements MapRep, Parcelable {
 
     public String getFloorplan() { return floorplan; }
 
-    public void setFloorplan(String floorplan) { this.floorplan = floorplan; }
+    public void setFloorplan(String floorplan, OnCompleteCallback callback) {
+        this.floorplan = floorplan;
+        uploadFloorplan(callback);
+    }
 
     @Override
     public Map<String, Object> retrieveRepresentation() {
