@@ -22,8 +22,6 @@ import java.util.ArrayList;
 
 public class LocationsFragment extends Fragment {
 
-    private MapData mapData;
-
     private LocationsViewModel locationsViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -60,7 +58,7 @@ public class LocationsFragment extends Fragment {
                 FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().
                         beginTransaction()
                         .setCustomAnimations(R.anim.fragment_fade_enter, R.anim.fragment_fade_exit);
-                fragmentTransaction.replace(view.getId(), new AddLocationFragment(new MapData()));
+                fragmentTransaction.replace(view.getId(), new AddLocationFragment());
                 fragmentTransaction.addToBackStack(null).commit();
             }
         });

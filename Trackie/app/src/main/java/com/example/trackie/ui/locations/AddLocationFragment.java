@@ -24,7 +24,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.trackie.R;
-import com.example.trackie.database.MapData;
+import com.example.trackie.database.FloorplanHelper;
 import com.example.trackie.database.OnCompleteCallback;
 
 import java.io.FileNotFoundException;
@@ -32,7 +32,6 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -47,7 +46,6 @@ public class AddLocationFragment extends Fragment {
 
     private Bitmap floorplanBitmap = null;
 
-    private MapData mapData;
     private Uri filePath;
 
     public static final int GET_FROM_GALLERY = 3;
@@ -55,15 +53,6 @@ public class AddLocationFragment extends Fragment {
 
     public AddLocationFragment() {
         // Required empty public constructor
-    }
-
-    public AddLocationFragment(MapData mapData) {
-        this.mapData = mapData;
-    }
-
-    // getter for MapData
-    public MapData getMapData() {
-        return mapData;
     }
 
     /**
@@ -127,16 +116,16 @@ public class AddLocationFragment extends Fragment {
                 String outputDateString = dateFormat.format(currentTime);
                 // Toast.makeText(getActivity(), "Time is: " + outputDateString, Toast.LENGTH_SHORT).show();
                 // set upload to database code here
-                mapData.setName(locationNameEditText.getText().toString());
-                mapData.setFloorplan(filePath.toString(), new OnCompleteCallback() {
+                FloorplanHelper.UploadFloorplan uploadFloorplan = new FloorplanHelper.UploadFloorplan(locationNameEditText.getText().toString(), filePath);
+                uploadFloorplan.execute(new OnCompleteCallback() {
                     @Override
                     public void onSuccess() {
-                        Toast.makeText(getContext(), "Upload success", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Upload Success", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void onFailure() {
-                        Toast.makeText(getContext(), "Upload failure", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Upload Failure", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
@@ -144,7 +133,6 @@ public class AddLocationFragment extends Fragment {
 
                     }
                 });
-
                 // TODO: Create a new entry in LocationsFragment haha
             }
         });

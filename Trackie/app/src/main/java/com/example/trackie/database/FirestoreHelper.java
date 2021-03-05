@@ -97,7 +97,7 @@ public class FirestoreHelper {
         private boolean checkMapData(MapData mapData) {
             return mapData.getName() != null && mapData.getData() != null
                     && mapData.getDevice() != null && mapData.getLocation() != null
-                    && mapData.getFloorplan() != null && mapData.getTimestamp() != null;
+                    && mapData.getTimestamp() != null;
         }
     }
 
