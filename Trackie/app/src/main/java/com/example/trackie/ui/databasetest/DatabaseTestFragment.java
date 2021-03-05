@@ -105,7 +105,7 @@ public class DatabaseTestFragment extends Fragment {
     }
 
     public void getData(boolean remove) {
-        FirestoreHelper.GetMapData getter = new FirestoreHelper.GetMapData("HELLO WORLD");
+        FirestoreHelper.GetMapData getter = new FirestoreHelper.GetMapData("B2L2");
         getter.execute(new OnCompleteCallback() {
             @Override
             public void onSuccess() {
@@ -156,7 +156,7 @@ public class DatabaseTestFragment extends Fragment {
     }
 
     public void setData() {
-        MapData mapData = new MapData("HELLO WORLD", data, location, z, device, timestamp);
+        MapData mapData = new MapData("B2L2", data, location, z, device, timestamp);
         FirestoreHelper.SetMapData setter = new FirestoreHelper.SetMapData(mapData);
         setter.execute(new OnCompleteCallback() {
             @Override
