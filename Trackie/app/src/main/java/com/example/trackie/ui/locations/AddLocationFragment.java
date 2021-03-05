@@ -89,6 +89,7 @@ public class AddLocationFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_add_location, container, false);
     }
 
+    // TODO: cannot add name that already exist in database
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);

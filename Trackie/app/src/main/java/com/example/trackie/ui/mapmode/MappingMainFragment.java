@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,12 +15,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.CustomTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.davemorrissey.labs.subscaleview.ImageSource;
 import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
 import com.example.trackie.R;
+import com.example.trackie.database.FloorplanHelper;
 import com.example.trackie.database.MapData;
+import com.example.trackie.database.OnCompleteCallback;
 import com.example.trackie.ui.PinImageMapView;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -94,8 +103,40 @@ public class MappingMainFragment extends Fragment{
         super.onViewCreated(view, savedInstanceState);
 
         mappingImageView = (PinImageMapView) view.findViewById(R.id.mapping_indoor_map_view);
-        Bitmap mapBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.b2_l1);
-        mappingImageView.setImage(ImageSource.bitmap(mapBitmap));
+        String floorplanName = "";
+        if (getActivity() instanceof MapModeActivity) {
+            floorplanName = ((MapModeActivity)getActivity()).getCurrentFloorplanName();
+        }
+        FloorplanHelper.RetrieveFloorplan retrieveFloorplan = new FloorplanHelper.RetrieveFloorplan(floorplanName);
+        retrieveFloorplan.execute(new OnCompleteCallback() {
+            @Override
+            public void onSuccess() {
+                StorageReference ref = FirebaseStorage.getInstance().getReferenceFromUrl(retrieveFloorplan.getFloorplanURL());
+                Glide.with(requireContext()).asBitmap()
+                        .load(ref)
+                        .into(new CustomTarget<Bitmap>() {
+                            @Override
+                            public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+                                mappingImageView.setImage(ImageSource.bitmap(resource));
+                            }
+
+                            @Override
+                            public void onLoadCleared(@Nullable Drawable placeholder) {
+
+                            }
+                        });
+            }
+
+            @Override
+            public void onFailure() {
+                Toast.makeText(getContext(), "Can't Retrieve Floorplan", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onError() {
+
+            }
+        });
 
         Button confirmMappingClickButton = (Button) view.findViewById(R.id.confirm_mapping_click_button);
         confirmMappingClickButton.setOnClickListener(new View.OnClickListener() {

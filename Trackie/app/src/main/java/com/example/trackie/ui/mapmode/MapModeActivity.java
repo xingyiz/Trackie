@@ -5,10 +5,13 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ActivityOptions;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.transition.Fade;
 import android.transition.Slide;
@@ -18,11 +21,17 @@ import android.view.Window;
 
 import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
 import com.example.trackie.R;
+import com.example.trackie.Utils;
+import com.example.trackie.database.FloorplanData;
+import com.example.trackie.database.FloorplanHelper;
+import com.example.trackie.database.OnCompleteCallback;
 import com.example.trackie.ui.MainActivity;
+import com.example.trackie.ui.locations.LocationsAdapter;
 import com.example.trackie.ui.testmode.TestModeActivity;
 
 public class MapModeActivity extends AppCompatActivity {
 
+    String floorplanName;
 
 
     @Override
@@ -31,20 +40,26 @@ public class MapModeActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_map_mode);
 
+        SharedPreferences preferences = getSharedPreferences(Utils.P_FILE, MODE_PRIVATE);
+        floorplanName = preferences.getString(Utils.CURRENT_LOCATION_KEY, "nil");
+
         // set up action bar
         Toolbar toolbar = findViewById(R.id.top_toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Current Location");
-
+        getSupportActionBar().setTitle("Current Location: " + floorplanName);
         NavController navController = Navigation.findNavController(this, R.id.map_mode_host_fragment);
-
-
     }
+
+
 
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
+    }
+
+    public String getCurrentFloorplanName() {
+        return floorplanName;
     }
 }
