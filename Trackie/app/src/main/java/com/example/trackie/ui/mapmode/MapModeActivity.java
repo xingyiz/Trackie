@@ -32,7 +32,7 @@ import com.example.trackie.ui.testmode.TestModeActivity;
 public class MapModeActivity extends AppCompatActivity {
 
     String floorplanName;
-
+    boolean darkModeEnabled;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +42,7 @@ public class MapModeActivity extends AppCompatActivity {
 
         SharedPreferences preferences = getSharedPreferences(Utils.P_FILE, MODE_PRIVATE);
         floorplanName = preferences.getString(Utils.CURRENT_LOCATION_KEY, "nil");
+        darkModeEnabled = preferences.getBoolean("dark_mode_state", false);
 
         // set up action bar
         Toolbar toolbar = findViewById(R.id.top_toolbar);
@@ -61,5 +62,9 @@ public class MapModeActivity extends AppCompatActivity {
 
     public String getCurrentFloorplanName() {
         return floorplanName;
+    }
+
+    public boolean isDarkModeEnabled() {
+        return darkModeEnabled;
     }
 }

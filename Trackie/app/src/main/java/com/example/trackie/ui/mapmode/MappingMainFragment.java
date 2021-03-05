@@ -80,24 +80,11 @@ public class MappingMainFragment extends Fragment{
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View root = inflater.inflate(R.layout.fragment_mapping_main, container, false);
-
-
-        // TODO: Code for getting and loading in correct map + correct colour
-        SubsamplingScaleImageView map = root.findViewById(R.id.mapping_indoor_map_view);
-        // set shared preferences and theme
-        sharedPreferences = this.getActivity().getSharedPreferences(pFile, Context.MODE_PRIVATE);
-        darkModeEnabled = sharedPreferences.getBoolean("dark_mode_state", false);
-
-        if (darkModeEnabled) {
-            // get white image
-
-        } else {
-            // get dark image
-        }
-
         return root;
 
     }
+
+    // Todo
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -107,6 +94,8 @@ public class MappingMainFragment extends Fragment{
         if (getActivity() instanceof MapModeActivity) {
             floorplanName = ((MapModeActivity)getActivity()).getCurrentFloorplanName();
         }
+
+        // TODO: change image loaded according to whether its dark mode or light mode
         FloorplanHelper.RetrieveFloorplan retrieveFloorplan = new FloorplanHelper.RetrieveFloorplan(floorplanName);
         retrieveFloorplan.execute(new OnCompleteCallback() {
             @Override
