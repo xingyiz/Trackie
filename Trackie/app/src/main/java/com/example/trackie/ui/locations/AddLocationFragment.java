@@ -27,6 +27,7 @@ import android.widget.Toast;
 import com.example.trackie.R;
 import com.example.trackie.database.FloorplanHelper;
 import com.example.trackie.database.OnCompleteCallback;
+import com.google.android.material.checkbox.MaterialCheckBox;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -44,6 +45,7 @@ public class AddLocationFragment extends Fragment {
     private Button uploadFloorplanButton;
     private ImageView uploadFloorplanImageView;
     private Button confirmFloorplanButton;
+    private MaterialCheckBox checkBox;
 
     private Bitmap floorplanBitmap = null;
 
@@ -95,6 +97,7 @@ public class AddLocationFragment extends Fragment {
         uploadFloorplanButton = (Button) view.findViewById(R.id.upload_floorplan_button);
         uploadFloorplanImageView = (ImageView) view.findViewById(R.id.upload_floorplan_imageview);
         confirmFloorplanButton = (Button) view.findViewById(R.id.confirm_floorplan_button);
+        checkBox = view.findViewById(R.id.upload_floorplan_checkbox);
 
         uploadFloorplanImageView.setVisibility(View.INVISIBLE);
         uploadFloorplanButton.setOnClickListener(new View.OnClickListener() {
@@ -117,8 +120,9 @@ public class AddLocationFragment extends Fragment {
                 // String outputDateString = dateFormat.format(currentTime);
                 // Toast.makeText(getActivity(), "Time is: " + outputDateString, Toast.LENGTH_SHORT).show();
                 // set upload to database code here
+                int darkmode = checkBox.isChecked() ? 1 : 0;
                 FloorplanHelper.UploadFloorplan uploadFloorplan = new FloorplanHelper.UploadFloorplan(
-                        locationNameEditText.getText().toString(), filePath, 0);
+                        locationNameEditText.getText().toString(), filePath, darkmode);
                 uploadFloorplan.execute(new OnCompleteCallback() {
                     @Override
                     public void onSuccess() {

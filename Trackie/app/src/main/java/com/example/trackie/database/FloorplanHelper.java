@@ -9,12 +9,49 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.SetOptions;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class FloorplanHelper {
+
+    public static class GetFloorplanList implements FirestoreExecute {
+        private final FirebaseFirestore db = FirebaseFirestore.getInstance();
+        private List<FloorplanData> floorplanDataList = new ArrayList<>();
+
+        @Override
+        public void execute(OnCompleteCallback callback) {
+            try {
+                db.collection("Floorplans").get()
+                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                if (task.isSuccessful()) {
+                                    for (QueryDocumentSnapshot doc : task.getResult()) {
+                                        FloorplanData floorplanData = doc.toObject(FloorplanData.class);
+                                        floorplanDataList.add(floorplanData);
+                                    }
+                                    callback.onSuccess();
+                                } else {
+                                    callback.onError();
+                                }
+                            }
+                        });
+            } catch (Exception e) {
+                callback.onError();
+            }
+        }
+
+        public List<FloorplanData> getFloorplanDataList() {
+            return floorplanDataList;
+        }
+    }
 
     public static class RetrieveFloorplan implements FirestoreExecute {
         private String name;
@@ -28,7 +65,7 @@ public class FloorplanHelper {
         @Override
         public void execute(OnCompleteCallback callback) {
             try {
-                db.collection(name + "_floorplan").document(name)
+                db.collection("Floorplans").document(name)
                         .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -79,7 +116,7 @@ public class FloorplanHelper {
                             @Override
                             public void onSuccess(Uri uri) {
                                 floorplan = uri;
-                                db.collection(name + "_floorplan").document(name)
+                                db.collection("Floorplans").document(name)
                                         .set(new FloorplanData(name, floorplan.toString(), darkmode), SetOptions.merge())
                                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
