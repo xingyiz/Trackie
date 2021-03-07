@@ -11,6 +11,8 @@
 
     <string name="map_mode">Map Mode</string>
     <string name="confirm_mapping_location">Confirm Location</string>
+    <string name="delete">Delete</string>
+    <string name="view_data">View Data</string>
     <string name="end_mapping">End Mapping</string>
     <string name="collected_data">Collected Data:</string>
     <string name="move_5_meters_guide">Move about 5 metres away</string>

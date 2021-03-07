@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/pin_options_layout_container"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingBottom="10dp"
+    android:background="@drawable/pin_options_bubble">
+
+    <FrameLayout
+        android:id="@+id/pin_view_data_option_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="?android:selectableItemBackground"
+        android:clickable="true">
+        <TextView
+            android:layout_width="80dp"
+            android:layout_height="30dp"
+            android:text="@string/view_data"
+            android:textSize="@dimen/small_text_size"
+            android:fontFamily="@font/segoeui"
+            android:gravity="center"/>
+    </FrameLayout>
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@android:color/darker_gray"/>
+
+    <FrameLayout
+        android:id="@+id/pin_delete_option_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="?android:selectableItemBackground"
+        android:clickable="true">
+        <TextView
+            android:layout_width="80dp"
+            android:layout_height="30dp"
+            android:text="@string/delete"
+            android:textSize="@dimen/small_text_size"
+            android:fontFamily="@font/segoeui"
+            android:gravity="center"/>
+    </FrameLayout>
+</LinearLayout>
