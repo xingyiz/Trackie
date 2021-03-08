@@ -136,10 +136,9 @@ public class RSSITestFragment extends Fragment {
         Toast.makeText(getContext(), "Scan Complete", Toast.LENGTH_SHORT).show();
         results = wifiManager.getScanResults();
         requireActivity().unregisterReceiver(wifiReceiver);
-        Toast.makeText(getContext(), "Scan Results: " + results.toString(), Toast.LENGTH_LONG).show();
 
-        listView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
+        Toast.makeText(getContext(), "Scan Results: " + results.toString(), Toast.LENGTH_LONG).show();
     }
 
     @Override
