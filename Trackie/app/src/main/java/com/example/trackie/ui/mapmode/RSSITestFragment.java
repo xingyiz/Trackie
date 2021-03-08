@@ -47,7 +47,7 @@ public class RSSITestFragment extends Fragment {
             if (success) {
                 scanSuccess();
             } else {
-                scanFailure();
+                scanFailure("onReceive");
             }
             Toast.makeText(getContext(), "Scan Complete", Toast.LENGTH_SHORT).show();
             results = wifiManager.getScanResults();
@@ -91,12 +91,12 @@ public class RSSITestFragment extends Fragment {
         if (success) {
             Toast.makeText(getContext(), "Scanning for WiFi...", Toast.LENGTH_SHORT).show();
         } else {
-            scanFailure();
+            scanFailure("scanWifi");
         }
     }
 
-    private void scanFailure() {
-        Toast.makeText(getContext(), "SCAN FAILURE :(", Toast.LENGTH_SHORT).show();
+    private void scanFailure(String s) {
+        Toast.makeText(getContext(), "SCAN FAILURE :(" + s, Toast.LENGTH_SHORT).show();
     }
 
     private void scanSuccess() {
