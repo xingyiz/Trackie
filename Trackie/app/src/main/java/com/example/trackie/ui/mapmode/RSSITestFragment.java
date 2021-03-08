@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
@@ -36,19 +37,19 @@ import java.util.List;
 public class RSSITestFragment extends Fragment {
 
     private RecyclerView recyclerView;
-    private MaterialButton scanButton;
 
     private WifiManager wifiManager;
     private List<ScanResult> results = new ArrayList<>();
     private RSSIAdapter adapter;
     BroadcastReceiver wifiReceiver;
 
+    @RequiresApi(api = Build.VERSION_CODES.R)
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_rssitest, container, false);
 
-        scanButton = view.findViewById(R.id.rssi_button);
+        MaterialButton scanButton = view.findViewById(R.id.rssi_button);
         scanButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,7 +72,7 @@ public class RSSITestFragment extends Fragment {
             wifiReceiver = new BroadcastReceiver() {
                 @Override
                 public void onReceive(Context context, Intent intent) {
-                    Toast.makeText(getContext(), "onReceive called", Toast.LENGTH_SHORT).show();
+                    // Toast.makeText(getContext(), "onReceive called", Toast.LENGTH_SHORT).show();
                     boolean success = intent.getBooleanExtra(WifiManager.EXTRA_RESULTS_UPDATED, false);
 
                     if (success) {
@@ -85,6 +86,12 @@ public class RSSITestFragment extends Fragment {
             adapter = new RSSIAdapter(results, getContext());
             recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
             recyclerView.setAdapter(adapter);
+
+            if (!wifiManager.isScanThrottleEnabled()) {
+                // Toast.makeText(getContext(), "Throttle Disabled", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(getContext(), "Throttle Enabled", Toast.LENGTH_SHORT).show();
+            }
 
             IntentFilter intentFilter = new IntentFilter();
             intentFilter.addAction(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION);
@@ -116,7 +123,7 @@ public class RSSITestFragment extends Fragment {
                 }, 123);
                 return;
             } else {
-                Toast.makeText(getContext(), "ACCESS_COARSE_LOCATION permission granted", Toast.LENGTH_SHORT).show();
+                // Toast.makeText(getContext(), "ACCESS_COARSE_LOCATION permission granted", Toast.LENGTH_SHORT).show();
             }
         }
 
@@ -139,13 +146,12 @@ public class RSSITestFragment extends Fragment {
     private void scanSuccess() {
         Toast.makeText(getContext(), "Scan Complete", Toast.LENGTH_SHORT).show();
         results = wifiManager.getScanResults();
-        requireActivity().unregisterReceiver(wifiReceiver);
 
         adapter = new RSSIAdapter(results, getContext());
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);
 
-        Toast.makeText(getContext(), "Scan Results: " + results.toString(), Toast.LENGTH_LONG).show();
+        // Toast.makeText(getContext(), "Scan Results: " + results.toString(), Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -153,7 +159,7 @@ public class RSSITestFragment extends Fragment {
         switch (requestCode) {
             case 123: {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    Toast.makeText(getContext(), "Permission Granted", Toast.LENGTH_SHORT).show();
+                    // Toast.makeText(getContext(), "Permission Granted", Toast.LENGTH_SHORT).show();
                     startScan();
                 } else {
                     Toast.makeText(getContext(), "Permission Not Granted", Toast.LENGTH_SHORT).show();
