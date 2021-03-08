@@ -41,6 +41,8 @@ public class MappingMainFragment extends Fragment{
     private static final String MAP_DATA_KEY = "MapData";
     private static MapData mapData;
     private PinImageMapView mappingImageView;
+    private Button confirmMappingClickButton;
+    private Button endMappingButton;
 
     SharedPreferences sharedPreferences;
     String pFile = "com.example.trackie.ui.preferences";
@@ -127,12 +129,19 @@ public class MappingMainFragment extends Fragment{
             }
         });
 
-        Button confirmMappingClickButton = (Button) view.findViewById(R.id.confirm_mapping_click_button);
+        confirmMappingClickButton = (Button) view.findViewById(R.id.confirm_mapping_click_button);
         confirmMappingClickButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mappingImageView.setConfirmedPoint(true);
+                mappingImageView.comfirmPoint();
                 // map RSSI values here
+            }
+        });
+
+        endMappingButton = (Button) view.findViewById(R.id.finish_mapping_button);
+        endMappingButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
             }
         });
 

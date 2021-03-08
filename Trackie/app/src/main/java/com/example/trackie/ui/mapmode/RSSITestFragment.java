@@ -23,6 +23,8 @@ import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.trackie.R;
 import com.google.android.material.button.MaterialButton;
@@ -33,7 +35,7 @@ import java.util.List;
 
 public class RSSITestFragment extends Fragment {
 
-    private ListView listView;
+    private RecyclerView recyclerView;
     private MaterialButton scanButton;
 
     private WifiManager wifiManager;
@@ -54,7 +56,7 @@ public class RSSITestFragment extends Fragment {
             }
         });
 
-        listView = view.findViewById(R.id.rssi_listview);
+        recyclerView = view.findViewById(R.id.rssi_listview);
         wifiManager = (WifiManager) getActivity().getApplicationContext().getSystemService(Context.WIFI_SERVICE);
         /* DEPRECATED FOR ANDROID 10
         if (!wifiManager.isWifiEnabled()) {
@@ -81,13 +83,16 @@ public class RSSITestFragment extends Fragment {
             };
 
             adapter = new RSSIAdapter(results, getContext());
-            listView.setAdapter(adapter);
+            recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+            recyclerView.setAdapter(adapter);
 
             IntentFilter intentFilter = new IntentFilter();
             intentFilter.addAction(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION);
             requireActivity().registerReceiver(wifiReceiver, intentFilter);
 
             scanWifi();
+            adapter.notifyDataSetChanged();
+            recyclerView.setAdapter(adapter);
         }
 
         return view;

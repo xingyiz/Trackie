@@ -15,7 +15,7 @@
         android:background="?android:selectableItemBackground"
         android:clickable="true">
         <TextView
-            android:layout_width="80dp"
+            android:layout_width="75dp"
             android:layout_height="30dp"
             android:text="@string/view_data"
             android:textSize="@dimen/small_text_size"
@@ -35,7 +35,7 @@
         android:background="?android:selectableItemBackground"
         android:clickable="true">
         <TextView
-            android:layout_width="80dp"
+            android:layout_width="75dp"
             android:layout_height="30dp"
             android:text="@string/delete"
             android:textSize="@dimen/small_text_size"

@@ -22,6 +22,7 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
@@ -42,8 +43,9 @@ public class PinImageMapView extends SubsamplingScaleImageView {
     private List<PointF> mapPoints;
     private Bitmap pinBitmap;
     private Bitmap unconfirmedPinBitmap;
-    private boolean isConfirmedPoint;
+    private PointF unconfirmedPoint;
     private PointF selectedPoint;
+
     public PinImageMapView(Context context) {
         this(context, null);
         initialise();
@@ -66,7 +68,7 @@ public class PinImageMapView extends SubsamplingScaleImageView {
         Drawable unconfirmedPinDrawable = getContext().getDrawable(R.drawable.unconfirmed_pin_marker_24px);
         unconfirmedPinBitmap = setUpPinBitmap(unconfirmedPinDrawable);
 
-        isConfirmedPoint = false;
+        unconfirmedPoint = null;
     }
 
     private Bitmap setUpPinBitmap(Drawable drawable) {
@@ -78,14 +80,9 @@ public class PinImageMapView extends SubsamplingScaleImageView {
     }
 
     public void addPoint(PointF point) {
-        if (!isConfirmedPoint && !mapPoints.isEmpty()) mapPoints.remove(mapPoints.size() - 1);
+        if (unconfirmedPoint != null && !mapPoints.isEmpty()) mapPoints.remove(unconfirmedPoint);
         mapPoints.add(point);
-        isConfirmedPoint = false;
-        invalidate();
-    }
-
-    public void removePoint(PointF point) {
-        mapPoints.remove(point);
+        unconfirmedPoint = point;
         invalidate();
     }
 
@@ -97,16 +94,14 @@ public class PinImageMapView extends SubsamplingScaleImageView {
     @Override
     protected synchronized void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        if (!isReady()) {
-            return;
-        }
+        if (!isReady()) return;
         paint.setAntiAlias(true);
         for (PointF point : mapPoints) {
             PointF vPoint = sourceToViewCoord(point);
 
             float vX = vPoint.x - (pinBitmap.getWidth()/2);
             float vY = vPoint.y- pinBitmap.getHeight();
-            if (!isConfirmedPoint && mapPoints.indexOf(point) == mapPoints.size() - 1) {
+            if (unconfirmedPoint != null && point == unconfirmedPoint) {
                 canvas.drawBitmap(unconfirmedPinBitmap, vX, vY, paint);
                 continue;
             }
@@ -118,6 +113,7 @@ public class PinImageMapView extends SubsamplingScaleImageView {
         GestureDetector gestureDetector = new GestureDetector(getContext(), new GestureDetector.SimpleOnGestureListener() {
             @Override
             public boolean onSingleTapConfirmed(MotionEvent e) {
+
                 boolean isPointTapped = false;
                 PointF tappedCoordinate = new PointF(e.getX(), e.getY());
                 if (isReady() && mapPoints != null) {
@@ -139,17 +135,36 @@ public class PinImageMapView extends SubsamplingScaleImageView {
                     }
                 }
                 if (!isPointTapped) {
-                    addPoint(viewToSourceCoord(tappedCoordinate));
+                    PointF sTappedCoordinate = viewToSourceCoord(tappedCoordinate);
+                    addPoint(sTappedCoordinate);
                 }
                 return true;
             }
         });
-        setOnTouchListener((v, event) -> gestureDetector.onTouchEvent(event));
+
+//        RotationGestureDetector rotationGestureDetector = new RotationGestureDetector(new RotationGestureDetector.OnRotationGestureListener() {
+//            @Override
+//            public void OnRotation(RotationGestureDetector rotationDetector) {
+//                PinImageMapView.this.setZoomEnabled(false);
+//                float angle = rotationDetector.getAngle();
+//                Toast.makeText(getContext(), "Angle: " + angle, Toast.LENGTH_SHORT).show();
+//            }
+//        });
+
+        setOnTouchListener((v, event) -> {
+            gestureDetector.onTouchEvent(event);
+//            rotationGestureDetector.onTouchEvent(event);
+            return false;
+        });
     }
 
-    public void setConfirmedPoint(boolean confirmedPoint) {
-        isConfirmedPoint = confirmedPoint;
+    public void comfirmPoint() {
+        unconfirmedPoint = null;
         invalidate();
+    }
+
+    public PointF getUnconfirmedPoint() {
+        return unconfirmedPoint;
     }
 
     private void createPinPopUpOptions(int pointX, int pointY) {
@@ -159,7 +174,6 @@ public class PinImageMapView extends SubsamplingScaleImageView {
                 WindowManager.LayoutParams.WRAP_CONTENT, true);
         popUp.setTouchable(true);
         popUp.setOutsideTouchable(true);
-        popUp.setBackgroundDrawable(getContext().getDrawable(R.drawable.pin_options_bubble));
 
         mOptionsView.measure(MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED),
                 MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED));

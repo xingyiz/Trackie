@@ -6,61 +6,63 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.trackie.R;
 import com.google.android.material.textview.MaterialTextView;
 
 import java.util.List;
 
-public class RSSIAdapter extends ArrayAdapter<ScanResult> {
+public class RSSIAdapter extends RecyclerView.Adapter {
     private List<ScanResult> scanResultList;
     Context context;
 
-    private static class ViewHolder {
-        MaterialTextView bssid;
-        MaterialTextView ssid;
-        MaterialTextView rssi;
-        MaterialTextView timestamp;
-    }
-
     public RSSIAdapter(List<ScanResult> scanResultList, Context context) {
-        super(context, R.layout.rssi_listview, scanResultList);
         this.scanResultList = scanResultList;
         this.context = context;
     }
 
     @NonNull
     @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        ScanResult scanResult = getItem(position);
-        ViewHolder viewHolder;
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        LayoutInflater layoutInflater = LayoutInflater.from(context);
+        View view = layoutInflater.inflate(R.layout.rssi_listview, parent, false);
+        ViewHolder viewHolder = new ViewHolder(view);
 
-        final View result;
+        return viewHolder;
+    }
 
-        if (convertView == null) {
-            viewHolder = new ViewHolder();
-            LayoutInflater inflater = LayoutInflater.from(getContext());
-            convertView = inflater.inflate(R.layout.rssi_listview, parent, false);
-            viewHolder.bssid = convertView.findViewById(R.id.BSSID);
-            viewHolder.ssid = convertView.findViewById(R.id.SSID);
-            viewHolder.rssi = convertView.findViewById(R.id.RSSI);
-            viewHolder.timestamp = convertView.findViewById(R.id.TIME);
+    @Override
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+        final ViewHolder viewHolder = (ViewHolder) holder;
+        ScanResult scanResult = scanResultList.get(position);
+        System.out.println("ScanResult: " + scanResult);
+        viewHolder.BSSID.setText(scanResult.BSSID);
+        viewHolder.SSID.setText(scanResult.SSID);
+        viewHolder.RSSI.setText(scanResult.level);
+        viewHolder.TIME.setText(String.valueOf(scanResult.timestamp));
+    }
 
-            result = convertView;
-            convertView.setTag(viewHolder);
-        } else {
-            viewHolder = (ViewHolder) convertView.getTag();
-            result = convertView;
+    @Override
+    public int getItemCount() {
+        return scanResultList.size();
+    }
+
+
+
+    private class ViewHolder extends RecyclerView.ViewHolder {
+        private TextView BSSID, SSID, RSSI, TIME;
+
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+            BSSID = itemView.findViewById(R.id.BSSID);
+            SSID = itemView.findViewById(R.id.SSID);
+            RSSI = itemView.findViewById(R.id.RSSI);
+            TIME = itemView.findViewById(R.id.TIME);
         }
-
-        viewHolder.bssid.setText(scanResult.BSSID);
-        viewHolder.ssid.setText(scanResult.SSID);
-        viewHolder.rssi.setText(scanResult.level);
-        viewHolder.timestamp.setText(String.valueOf(scanResult.timestamp));
-
-        return convertView;
     }
 }
