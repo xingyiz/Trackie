@@ -92,7 +92,6 @@ public class RSSITestFragment extends Fragment {
 
             scanWifi();
             adapter.notifyDataSetChanged();
-            recyclerView.setAdapter(adapter);
         }
 
         return view;
@@ -142,7 +141,10 @@ public class RSSITestFragment extends Fragment {
         results = wifiManager.getScanResults();
         requireActivity().unregisterReceiver(wifiReceiver);
 
-        adapter.notifyDataSetChanged();
+        adapter = new RSSIAdapter(results, getContext());
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerView.setAdapter(adapter);
+
         Toast.makeText(getContext(), "Scan Results: " + results.toString(), Toast.LENGTH_LONG).show();
     }
 

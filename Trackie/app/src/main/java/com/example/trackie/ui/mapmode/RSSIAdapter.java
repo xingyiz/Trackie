@@ -40,10 +40,9 @@ public class RSSIAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         final ViewHolder viewHolder = (ViewHolder) holder;
         ScanResult scanResult = scanResultList.get(position);
-        System.out.println("ScanResult: " + scanResult);
         viewHolder.BSSID.setText(scanResult.BSSID);
         viewHolder.SSID.setText(scanResult.SSID);
-        viewHolder.RSSI.setText(scanResult.level);
+        viewHolder.RSSI.setText(String.valueOf(scanResult.level));
         viewHolder.TIME.setText(String.valueOf(scanResult.timestamp));
     }
 
