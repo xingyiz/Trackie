@@ -10,7 +10,7 @@
         android:id="@+id/BSSID"
         android:text="BSSID"
         android:textSize="16sp"
-        android:layout_margin="20dp" />
+        android:layout_marginStart="20dp" />
 
     <com.google.android.material.textview.MaterialTextView
         android:layout_width="wrap_content"
@@ -18,7 +18,7 @@
         android:id="@+id/SSID"
         android:text="SSID"
         android:textSize="16sp"
-        android:layout_margin="20dp" />
+        android:layout_marginStart="20dp" />
 
     <com.google.android.material.textview.MaterialTextView
         android:layout_width="wrap_content"
@@ -26,7 +26,7 @@
         android:id="@+id/RSSI"
         android:text="RSSI"
         android:textSize="16sp"
-        android:layout_margin="20dp" />
+        android:layout_marginStart="20dp" />
 
     <com.google.android.material.textview.MaterialTextView
         android:layout_width="wrap_content"
@@ -34,5 +34,5 @@
         android:id="@+id/TIME"
         android:text="Time"
         android:textSize="16sp"
-        android:layout_margin="20dp" />
+        android:layout_marginStart="20dp" />
 </LinearLayout>

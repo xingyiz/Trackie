@@ -9,5 +9,18 @@
     <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/map_listview"/>
+        android:layout_weight="16"
+        android:id="@+id/rssi_listview"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Start Wi-Fi Scanning"
+        android:textSize="20sp"
+        android:id="@+id/rssi_button"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"/>
 </LinearLayout>

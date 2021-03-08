@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -23,54 +24,88 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.example.trackie.R;
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textview.MaterialTextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class RSSITestFragment extends Fragment {
 
     private ListView listView;
+    private MaterialButton scanButton;
 
-    private BroadcastReceiver wifiReceiver;
     private WifiManager wifiManager;
+    private List<ScanResult> results = new ArrayList<>();
     private RSSIAdapter adapter;
 
-    private static final int ACCESS_WIFI_STATE_REQUEST = 1;
+    BroadcastReceiver wifiReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            boolean success = intent.getBooleanExtra(WifiManager.EXTRA_RESULTS_UPDATED, false);
+
+            if (success) {
+                scanSuccess();
+            } else {
+                scanFailure();
+            }
+            Toast.makeText(getContext(), "Scan Complete", Toast.LENGTH_SHORT).show();
+            results = wifiManager.getScanResults();
+            requireActivity().unregisterReceiver(this);
+
+            listView.setAdapter(adapter);
+            adapter.notifyDataSetChanged();
+        }
+    };
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_rssitest, container, false);
 
-        if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_WIFI_STATE) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_WIFI_STATE}, ACCESS_WIFI_STATE_REQUEST);
-        }
+        scanButton = view.findViewById(R.id.rssi_button);
+        scanButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                scanWifi();
+            }
+        });
 
-        wifiManager = (WifiManager) getActivity().getSystemService(Context.WIFI_SERVICE);
+        listView = view.findViewById(R.id.rssi_listview);
+        wifiManager = (WifiManager) getActivity().getApplicationContext().getSystemService(Context.WIFI_SERVICE);
         if (!wifiManager.isWifiEnabled()) {
-            Toast.makeText(getContext(), "WiFi is currently disabled. \nWe will enable it.", Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(), "WiFi is disabled... we will enable it", Toast.LENGTH_LONG).show();
             wifiManager.setWifiEnabled(true);
         }
-        listView = view.findViewById(R.id.map_listview);
 
-        wifiReceiver = new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                if (intent.getAction().equals(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION)) {
-                    List<ScanResult> scanResultList = wifiManager.getScanResults();
-                    adapter = new RSSIAdapter(scanResultList, getContext());
-                    listView.setAdapter(adapter);
-                    requireActivity().unregisterReceiver(wifiReceiver);
-                }
-            }
-        };
+        adapter = new RSSIAdapter(results, getContext());
+        listView.setAdapter(adapter);
 
         requireActivity().registerReceiver(wifiReceiver, new IntentFilter(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION));
-        wifiManager.startScan();
 
         return view;
     }
 
+    private void scanWifi() {
+        boolean success = wifiManager.startScan();
+        if (success) {
+            Toast.makeText(getContext(), "Scanning for WiFi...", Toast.LENGTH_SHORT).show();
+        } else {
+            scanFailure();
+        }
+    }
+
+    private void scanFailure() {
+        Toast.makeText(getContext(), "SCAN FAILURE :(", Toast.LENGTH_SHORT).show();
+    }
+
+    private void scanSuccess() {
+        results = wifiManager.getScanResults();
+        adapter.notifyDataSetChanged();
+    }
+}
+
+/*
     @Override
     public void onResume() {
         super.onResume();
@@ -94,3 +129,4 @@ public class RSSITestFragment extends Fragment {
         }
     }
 }
+*/
