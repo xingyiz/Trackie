@@ -1,6 +1,7 @@
 package com.example.trackie.ui.mapmode;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -38,25 +39,7 @@ public class RSSITestFragment extends Fragment {
     private WifiManager wifiManager;
     private List<ScanResult> results = new ArrayList<>();
     private RSSIAdapter adapter;
-
-    BroadcastReceiver wifiReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            boolean success = intent.getBooleanExtra(WifiManager.EXTRA_RESULTS_UPDATED, false);
-
-            if (success) {
-                scanSuccess();
-            } else {
-                scanFailure("onReceive");
-            }
-            Toast.makeText(getContext(), "Scan Complete", Toast.LENGTH_SHORT).show();
-            results = wifiManager.getScanResults();
-            requireActivity().unregisterReceiver(this);
-
-            listView.setAdapter(adapter);
-            adapter.notifyDataSetChanged();
-        }
-    };
+    BroadcastReceiver wifiReceiver;
 
     @Nullable
     @Override
@@ -73,20 +56,70 @@ public class RSSITestFragment extends Fragment {
 
         listView = view.findViewById(R.id.rssi_listview);
         wifiManager = (WifiManager) getActivity().getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+        /* DEPRECATED FOR ANDROID 10
         if (!wifiManager.isWifiEnabled()) {
             Toast.makeText(getContext(), "WiFi is disabled... we will enable it", Toast.LENGTH_LONG).show();
             wifiManager.setWifiEnabled(true);
+        }*/
+
+        if (!wifiManager.isWifiEnabled()) {
+            Toast.makeText(getContext(), "Please enable Wi-Fi", Toast.LENGTH_LONG).show();
+        } else {
+
+            wifiReceiver = new BroadcastReceiver() {
+                @Override
+                public void onReceive(Context context, Intent intent) {
+                    Toast.makeText(getContext(), "onReceive called", Toast.LENGTH_SHORT).show();
+                    boolean success = intent.getBooleanExtra(WifiManager.EXTRA_RESULTS_UPDATED, false);
+
+                    if (success) {
+                        scanSuccess();
+                    } else {
+                        scanFailure("onReceive");
+                    }
+                }
+            };
+
+            adapter = new RSSIAdapter(results, getContext());
+            listView.setAdapter(adapter);
+
+            IntentFilter intentFilter = new IntentFilter();
+            intentFilter.addAction(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION);
+            requireActivity().registerReceiver(wifiReceiver, intentFilter);
+
+            scanWifi();
         }
-
-        adapter = new RSSIAdapter(results, getContext());
-        listView.setAdapter(adapter);
-
-        requireActivity().registerReceiver(wifiReceiver, new IntentFilter(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION));
 
         return view;
     }
 
     private void scanWifi() {
+
+        // With Android Level >= 23, have to ask user for permission
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            int permission1 = ContextCompat.checkSelfPermission(requireActivity(),
+                    Manifest.permission.ACCESS_COARSE_LOCATION);
+
+            if (permission1 != PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(getContext(), "ACCESS_COARSE_LOCATION permission not granted", Toast.LENGTH_SHORT).show();
+
+                // Request permission
+                ActivityCompat.requestPermissions(requireActivity(), new String[]{
+                        Manifest.permission.ACCESS_COARSE_LOCATION,
+                        Manifest.permission.ACCESS_FINE_LOCATION,
+                        Manifest.permission.ACCESS_NETWORK_STATE,
+                        Manifest.permission.ACCESS_WIFI_STATE
+                }, 123);
+                return;
+            } else {
+                Toast.makeText(getContext(), "ACCESS_COARSE_LOCATION permission granted", Toast.LENGTH_SHORT).show();
+            }
+        }
+
+        startScan();
+    }
+
+    private void startScan() {
         boolean success = wifiManager.startScan();
         if (success) {
             Toast.makeText(getContext(), "Scanning for WiFi...", Toast.LENGTH_SHORT).show();
@@ -100,8 +133,33 @@ public class RSSITestFragment extends Fragment {
     }
 
     private void scanSuccess() {
+        Toast.makeText(getContext(), "Scan Complete", Toast.LENGTH_SHORT).show();
         results = wifiManager.getScanResults();
+        requireActivity().unregisterReceiver(wifiReceiver);
+        Toast.makeText(getContext(), "Scan Results: " + results.toString(), Toast.LENGTH_LONG).show();
+
+        listView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case 123: {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Toast.makeText(getContext(), "Permission Granted", Toast.LENGTH_SHORT).show();
+                    startScan();
+                } else {
+                    Toast.makeText(getContext(), "Permission Not Granted", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            }
+
+            default: {
+                Toast.makeText(getContext(), "Permission Error", Toast.LENGTH_SHORT).show();
+            }
+
+        }
     }
 }
 
