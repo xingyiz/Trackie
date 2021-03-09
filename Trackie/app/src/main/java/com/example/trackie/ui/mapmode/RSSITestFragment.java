@@ -6,6 +6,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiManager;
@@ -36,6 +37,9 @@ import java.util.List;
 
 public class RSSITestFragment extends Fragment {
 
+    SharedPreferences sharedPreferences;
+    String pFile = "com.example.trackie.ui.preferences";
+
     private RecyclerView recyclerView;
 
     private WifiManager wifiManager;
@@ -49,6 +53,9 @@ public class RSSITestFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_rssitest, container, false);
+
+        sharedPreferences = this.getActivity().getSharedPreferences(pFile, Context.MODE_PRIVATE);
+        oneMeterRSSI = sharedPreferences.getInt("measured_rssi", -50);
 
         MaterialButton scanButton = view.findViewById(R.id.rssi_button);
         scanButton.setOnClickListener(new View.OnClickListener() {

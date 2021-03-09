@@ -13,4 +13,5 @@ public class RSSIUtils {
         double distance = Math.pow(10, power);
         return distance;
     }
+
 }

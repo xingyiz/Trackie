@@ -50,7 +50,6 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void onTransitionCompleted(MotionLayout motionLayout, int i) {
                 startActivity(intent);
-                showSystemUI();
             }
 
             @Override
