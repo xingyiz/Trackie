@@ -4,11 +4,9 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-<<<<<<< HEAD
-import android.media.Image;
-=======
+
 import android.graphics.drawable.Drawable;
->>>>>>> main
+
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -21,12 +19,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
-<<<<<<< HEAD
-=======
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.CustomTarget;
 import com.bumptech.glide.request.transition.Transition;
->>>>>>> main
+
 import com.davemorrissey.labs.subscaleview.ImageSource;
 import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
 import com.example.trackie.R;
@@ -89,14 +85,11 @@ public class MappingMainFragment extends Fragment{
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View root = inflater.inflate(R.layout.fragment_mapping_main, container, false);
-<<<<<<< HEAD
 
         // set shared preferences and theme
         sharedPreferences = this.getActivity().getSharedPreferences(pFile, Context.MODE_PRIVATE);
         darkModeEnabled = sharedPreferences.getBoolean("dark_mode_state", false);
 
-=======
->>>>>>> main
         return root;
 
     }
@@ -105,7 +98,7 @@ public class MappingMainFragment extends Fragment{
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-<<<<<<< HEAD
+
         SubsamplingScaleImageView mapping_image = (SubsamplingScaleImageView) view.findViewById(R.id.mapping_indoor_map_view);
         Bitmap mapBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.b2_l1_light);
 
@@ -115,7 +108,6 @@ public class MappingMainFragment extends Fragment{
 
         TouchMapView mapView = new TouchMapView(getActivity(), TouchMapView.MAP_MODE, mapping_image, mapBitmap.copy(mapBitmap.getConfig(), false));
 
-=======
 
         mappingImageView = (PinImageMapView) view.findViewById(R.id.mapping_indoor_map_view);
         String floorplanName = "";
@@ -170,7 +162,6 @@ public class MappingMainFragment extends Fragment{
             public void onClick(View v) {
             }
         });
->>>>>>> main
 
     }
 
