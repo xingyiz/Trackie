@@ -51,6 +51,7 @@ public class RSSITestFragment extends Fragment {
             Toast.makeText(getContext(), "WiFi is currently disabled. \nWe will enable it.", Toast.LENGTH_LONG).show();
             wifiManager.setWifiEnabled(true);
         }
+
         listView = view.findViewById(R.id.map_listview);
 
         wifiReceiver = new BroadcastReceiver() {
