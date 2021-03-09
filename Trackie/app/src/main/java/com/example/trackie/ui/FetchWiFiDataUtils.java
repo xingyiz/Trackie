@@ -24,13 +24,17 @@ public class FetchWiFiDataUtils {
     private WifiManager wifiManager;
     private List<ScanResult> results;
     private BroadcastReceiver wifiReceiver;
+    private final int timesToScan;
+    private int timesScanned;
 
     public static int WIFI_SCAN_PERMISSIONS_CODE = 123;
 
-    public FetchWiFiDataUtils(Activity activity, boolean isPermissionsGranted, FetchListener listener) {
+    public FetchWiFiDataUtils(Activity activity, boolean isPermissionsGranted, FetchListener listener, int timesToScan) {
         this.activity = activity;
         this.context = activity.getApplicationContext();
+        this.timesToScan = timesToScan;
 
+        timesScanned = 0;
         wifiManager = (WifiManager) context.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
         initializeBroadcastReceiver(listener);
         results = new ArrayList<>();
@@ -73,8 +77,17 @@ public class FetchWiFiDataUtils {
                     if (success) {
                         results = wifiManager.getScanResults();
                         listener.onScanResultsReceived(results);
+                        timesScanned++;
+                        System.out.println("Times scanned: " + timesScanned);
+                        if (timesScanned == timesToScan) {
+                            timesScanned = 0;
+                            listener.finishScanning();
+                        } else {
+                            scanWiFiData();
+                        }
                     } else {
                         Toast.makeText(context, "SCAN FAILURE :(", Toast.LENGTH_SHORT).show();
+                        listener.onError(new Throwable("Could not get RSSI values :("));
                     }
                 }
             };
@@ -87,12 +100,23 @@ public class FetchWiFiDataUtils {
 
     public boolean scanWiFiData() {
         boolean success = wifiManager.startScan();
-        if (success) Toast.makeText(context, "Scanning for WiFi...", Toast.LENGTH_SHORT).show();
+        if (success) {
+            Toast.makeText(context, "Scanning for WiFi...", Toast.LENGTH_SHORT).show();
+        }
+        return success;
+    }
+
+    public boolean scanMultipleWiFiData(int times) {
+        boolean success = false;
+        for (int i=0; i<times; i++) {
+            success = scanWiFiData();
+        }
         return success;
     }
 
     public interface FetchListener {
         void onScanResultsReceived(List<ScanResult> scanResults);
         void onError(Throwable error);
+        void finishScanning();
     }
 }

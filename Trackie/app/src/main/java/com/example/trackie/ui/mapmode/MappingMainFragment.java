@@ -154,8 +154,9 @@ public class MappingMainFragment extends Fragment{
             });
         }
 
-        MapWiFiDataListener listener = new MapWiFiDataListener();
-        dataUtils = new FetchWiFiDataUtils(getActivity(), isPermissionsGranted, listener);
+        final int maxedScannedTimes = 5;
+        MapWiFiDataListener listener = new MapWiFiDataListener(maxedScannedTimes);
+        dataUtils = new FetchWiFiDataUtils(getActivity(), isPermissionsGranted, listener, 5);
         isPermissionsGranted = dataUtils.getPermissionGranted();
 
 
@@ -167,7 +168,6 @@ public class MappingMainFragment extends Fragment{
                 if (location == null) return;
                 listener.setLocation(location);
                 boolean success = dataUtils.scanWiFiData();
-                if (success) mappingImageView.comfirmPoint();
             }
         });
 
@@ -194,32 +194,50 @@ public class MappingMainFragment extends Fragment{
                         }
                     });
                 }
-
             }
         });
 
     }
 
     private MapData convertScanResultsToMapData(List<ScanResult> scanResults,
-                                                PointF location) {
-        SharedPreferences preferences = getContext().getSharedPreferences(Utils.P_FILE, Context.MODE_PRIVATE);
-        String name = preferences.getString(Utils.CURRENT_LOCATION_KEY, "nil");
-        String device = Build.MODEL;
-        Timestamp timestamp = new Timestamp(new Date());
-        String id = timestamp.toString() + "-" + name;
+                                                PointF location, MapData currentMapData) {
+        if (currentMapData == null) {
+            SharedPreferences preferences = getContext().getSharedPreferences(Utils.P_FILE, Context.MODE_PRIVATE);
+            String name = preferences.getString(Utils.CURRENT_LOCATION_KEY, "nil");
+            String device = Build.MODEL;
+            Timestamp timestamp = new Timestamp(new Date());
+            String id = timestamp.toString() + "-" + name;
 
-        Map<String, List<Integer>> mappedData = new HashMap<>();
+            Map<String, List<Integer>> mappedData = new HashMap<>();
 
-        for (ScanResult result : scanResults) {
-            String bssid = result.BSSID;
-            int rssi = result.level;
-            List<Integer> rssiValues = new ArrayList<>();
-            rssiValues.add(rssi);
-            mappedData.put(bssid, rssiValues);
+            for (ScanResult result : scanResults) {
+                String bssid = result.BSSID;
+                int rssi = result.level;
+                List<Integer> rssiValues = new ArrayList<>();
+                rssiValues.add(rssi);
+                mappedData.put(bssid, rssiValues);
+            }
+
+            MapData mapData = new MapData(name, mappedData, location, 1, device, timestamp);
+            return mapData;
+        } else {
+            Map<String, List<Integer>> currentData = currentMapData.getData();
+            for (ScanResult result : scanResults) {
+                String bssid = result.BSSID;
+                int rssi = result.level;
+                if (currentData.containsKey(bssid)) {
+                    List<Integer> currentRSSIvalues = currentData.get(bssid);
+                    currentRSSIvalues.add(rssi);
+                    currentData.put(bssid, currentRSSIvalues);
+                } else {
+                    List<Integer> rssiValues = new ArrayList<>();
+                    rssiValues.add(rssi);
+                    currentData.put(bssid, rssiValues);
+                }
+            }
+            currentMapData.setData(currentData);
+            return currentMapData;
         }
-
-        MapData mapData = new MapData(name, mappedData, location, 1, device, timestamp);
-        return mapData;
     }
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -243,6 +261,11 @@ public class MappingMainFragment extends Fragment{
     // listener subclass which saves mapdata in a list every time user confirms a mapaing point
     private class MapWiFiDataListener implements FetchWiFiDataUtils.FetchListener {
         PointF location;
+        MapData currentMapData;
+
+        public MapWiFiDataListener(int maxScanTimes) {
+            this.currentMapData = null;
+        }
 
         public void setLocation(PointF location) {
             this.location = location;
@@ -250,13 +273,19 @@ public class MappingMainFragment extends Fragment{
 
         @Override
         public void onScanResultsReceived(List<ScanResult> scanResults) {
-            MapData mapData = convertScanResultsToMapData(scanResults, location);
-            mapDataList.add(mapData);
+            MapData mapData = convertScanResultsToMapData(scanResults, location, currentMapData);
+            currentMapData = mapData;
             Toast.makeText(getContext(), scanResults.toString(), Toast.LENGTH_SHORT).show();
         }
 
         @Override
         public void onError(Throwable error) {
+        }
+
+        @Override
+        public void finishScanning() {
+            mapDataList.add(currentMapData);
+            mappingImageView.comfirmPoint();
         }
     }
 
