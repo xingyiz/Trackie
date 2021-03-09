@@ -20,10 +20,12 @@ import java.util.List;
 public class RSSIAdapter extends RecyclerView.Adapter {
     private List<ScanResult> scanResultList;
     Context context;
+    int oneMeterRSSI;
 
-    public RSSIAdapter(List<ScanResult> scanResultList, Context context) {
+    public RSSIAdapter(List<ScanResult> scanResultList, Context context, int standard) {
         this.scanResultList = scanResultList;
         this.context = context;
+        this.oneMeterRSSI = standard;
     }
 
     @NonNull
@@ -40,10 +42,13 @@ public class RSSIAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         final ViewHolder viewHolder = (ViewHolder) holder;
         ScanResult scanResult = scanResultList.get(position);
-        viewHolder.BSSID.setText(scanResult.BSSID);
-        viewHolder.SSID.setText(scanResult.SSID);
-        viewHolder.RSSI.setText(String.valueOf(scanResult.level));
-        viewHolder.TIME.setText(String.valueOf(scanResult.timestamp));
+        viewHolder.BSSID.setText("BSSID: " + scanResult.BSSID);
+        viewHolder.SSID.setText("SSID: " + scanResult.SSID);
+        viewHolder.RSSI.setText("RSSI: " + String.valueOf(scanResult.level));
+        viewHolder.DISTANCE.setText("Estimated Distance: " + String.valueOf(RSSIUtils.calculateDistance(scanResult.level, oneMeterRSSI, 4)));
+        viewHolder.MEASURED_RSSI.setText("One Meter RSSI: " + String.valueOf(oneMeterRSSI));
+        viewHolder.FREQUENCY.setText("Frequency: " + String.valueOf(scanResult.frequency) + "MHz");
+        viewHolder.TIME.setText("Time: " + String.valueOf(scanResult.timestamp));
     }
 
     @Override
@@ -54,13 +59,16 @@ public class RSSIAdapter extends RecyclerView.Adapter {
 
 
     private class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView BSSID, SSID, RSSI, TIME;
+        private TextView BSSID, SSID, RSSI,DISTANCE, MEASURED_RSSI, FREQUENCY, TIME;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             BSSID = itemView.findViewById(R.id.BSSID);
             SSID = itemView.findViewById(R.id.SSID);
             RSSI = itemView.findViewById(R.id.RSSI);
+            DISTANCE = itemView.findViewById(R.id.DISTANCE);
+            MEASURED_RSSI = itemView.findViewById(R.id.measuredRSSI);
+            FREQUENCY = itemView.findViewById(R.id.Frequency);
             TIME = itemView.findViewById(R.id.TIME);
         }
     }

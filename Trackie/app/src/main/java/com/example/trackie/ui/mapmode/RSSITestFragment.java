@@ -6,6 +6,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiManager;
@@ -36,18 +37,25 @@ import java.util.List;
 
 public class RSSITestFragment extends Fragment {
 
+    SharedPreferences sharedPreferences;
+    String pFile = "com.example.trackie.ui.preferences";
+
     private RecyclerView recyclerView;
 
     private WifiManager wifiManager;
     private List<ScanResult> results = new ArrayList<>();
     private RSSIAdapter adapter;
     BroadcastReceiver wifiReceiver;
+    int oneMeterRSSI = -30;
 
     @RequiresApi(api = Build.VERSION_CODES.R)
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_rssitest, container, false);
+
+        sharedPreferences = this.getActivity().getSharedPreferences(pFile, Context.MODE_PRIVATE);
+        oneMeterRSSI = sharedPreferences.getInt("measured_rssi", -50);
 
         MaterialButton scanButton = view.findViewById(R.id.rssi_button);
         scanButton.setOnClickListener(new View.OnClickListener() {
@@ -83,7 +91,7 @@ public class RSSITestFragment extends Fragment {
                 }
             };
 
-            adapter = new RSSIAdapter(results, getContext());
+            adapter = new RSSIAdapter(results, getContext(), oneMeterRSSI);
             recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
             recyclerView.setAdapter(adapter);
 
@@ -137,11 +145,12 @@ public class RSSITestFragment extends Fragment {
         Toast.makeText(getContext(), "SCAN FAILURE :(" + s, Toast.LENGTH_SHORT).show();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.R)
     private void scanSuccess() {
         Toast.makeText(getContext(), "Scan Complete", Toast.LENGTH_SHORT).show();
         results = wifiManager.getScanResults();
 
-        adapter = new RSSIAdapter(results, getContext());
+        adapter = new RSSIAdapter(results, getContext(), oneMeterRSSI);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);
 
