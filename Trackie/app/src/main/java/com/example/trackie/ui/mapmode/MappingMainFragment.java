@@ -1,14 +1,21 @@
 package com.example.trackie.ui.mapmode;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.PointF;
 import android.graphics.drawable.Drawable;
+import android.net.wifi.ScanResult;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -23,12 +30,23 @@ import com.bumptech.glide.request.transition.Transition;
 import com.davemorrissey.labs.subscaleview.ImageSource;
 import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
 import com.example.trackie.R;
+import com.example.trackie.Utils;
+import com.example.trackie.database.FirestoreHelper;
 import com.example.trackie.database.FloorplanHelper;
 import com.example.trackie.database.MapData;
 import com.example.trackie.database.OnCompleteCallback;
+import com.example.trackie.ui.FetchWiFiDataUtils;
 import com.example.trackie.ui.PinImageMapView;
+import com.google.firebase.Timestamp;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -39,10 +57,15 @@ public class MappingMainFragment extends Fragment{
 
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String MAP_DATA_KEY = "MapData";
-    private static MapData mapData;
+    private static List<MapData> mapDataList;
     private PinImageMapView mappingImageView;
     private Button confirmMappingClickButton;
     private Button endMappingButton;
+    private final static int WIFI_SCAN_PERMISSIONS = 123;
+    private boolean isPermissionsGranted;
+
+    private FetchWiFiDataUtils dataUtils;
+    private FetchWiFiDataUtils.FetchListener dataListener;
 
     SharedPreferences sharedPreferences;
     String pFile = "com.example.trackie.ui.preferences";
@@ -64,7 +87,6 @@ public class MappingMainFragment extends Fragment{
     public static MappingMainFragment newInstance(String param1, String param2) {
         MappingMainFragment fragment = new MappingMainFragment();
         Bundle args = new Bundle();
-        args.putParcelable(MAP_DATA_KEY, mapData);
         fragment.setArguments(args);
         return fragment;
     }
@@ -73,7 +95,7 @@ public class MappingMainFragment extends Fragment{
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mapData = getArguments().getParcelable(MAP_DATA_KEY);
+            mapDataList = getArguments().getParcelable(MAP_DATA_KEY);
         }
     }
 
@@ -97,44 +119,55 @@ public class MappingMainFragment extends Fragment{
             floorplanName = ((MapModeActivity)getActivity()).getCurrentFloorplanName();
         }
 
+        if (mapDataList == null) mapDataList = new ArrayList<>();
         // TODO: change image loaded according to whether its dark mode or light mode
-        FloorplanHelper.RetrieveFloorplan retrieveFloorplan = new FloorplanHelper.RetrieveFloorplan(floorplanName);
-        retrieveFloorplan.execute(new OnCompleteCallback() {
-            @Override
-            public void onSuccess() {
-                StorageReference ref = FirebaseStorage.getInstance().getReferenceFromUrl(retrieveFloorplan.getFloorplanURL());
-                Glide.with(requireContext()).asBitmap()
-                        .load(ref)
-                        .into(new CustomTarget<Bitmap>() {
-                            @Override
-                            public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
-                                mappingImageView.setImage(ImageSource.bitmap(resource));
-                            }
+        if (!floorplanName.equals("")) {
+            FloorplanHelper.RetrieveFloorplan retrieveFloorplan = new FloorplanHelper.RetrieveFloorplan(floorplanName);
+            retrieveFloorplan.execute(new OnCompleteCallback() {
+                @Override
+                public void onSuccess() {
+                    StorageReference ref = FirebaseStorage.getInstance().getReferenceFromUrl(retrieveFloorplan.getFloorplanURL());
+                    Glide.with(requireContext()).asBitmap()
+                            .load(ref)
+                            .into(new CustomTarget<Bitmap>() {
+                                @Override
+                                public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+                                    mappingImageView.setImage(ImageSource.bitmap(resource));
+                                }
 
-                            @Override
-                            public void onLoadCleared(@Nullable Drawable placeholder) {
+                                @Override
+                                public void onLoadCleared(@Nullable Drawable placeholder) {
 
-                            }
-                        });
-            }
+                                }
+                            });
+                }
 
-            @Override
-            public void onFailure() {
-                Toast.makeText(getContext(), "Can't Retrieve Floorplan", Toast.LENGTH_SHORT).show();
-            }
+                @Override
+                public void onFailure() {
+                    Toast.makeText(getContext(), "Can't Retrieve Floorplan", Toast.LENGTH_SHORT).show();
+                }
 
-            @Override
-            public void onError() {
+                @Override
+                public void onError() {
 
-            }
-        });
+                }
+            });
+        }
+
+        MapWiFiDataListener listener = new MapWiFiDataListener();
+        dataUtils = new FetchWiFiDataUtils(getActivity(), isPermissionsGranted, listener);
+        isPermissionsGranted = dataUtils.getPermissionGranted();
+
 
         confirmMappingClickButton = (Button) view.findViewById(R.id.confirm_mapping_click_button);
         confirmMappingClickButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mappingImageView.comfirmPoint();
-                // map RSSI values here
+                PointF location = mappingImageView.getUnconfirmedPoint();
+                if (location == null) return;
+                listener.setLocation(location);
+                boolean success = dataUtils.scanWiFiData();
+                if (success) mappingImageView.comfirmPoint();
             }
         });
 
@@ -142,9 +175,89 @@ public class MappingMainFragment extends Fragment{
         endMappingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                for (MapData data : mapDataList) {
+                    FirestoreHelper.SetMapData dataSetter = new FirestoreHelper.SetMapData(data);
+                    dataSetter.execute(new OnCompleteCallback() {
+                        @Override
+                        public void onSuccess() {
+                            Toast.makeText(getContext(), "Data upload success!", Toast.LENGTH_SHORT).show();
+                        }
+
+                        @Override
+                        public void onFailure() {
+                            Toast.makeText(getContext(), "Data upload failed :/", Toast.LENGTH_SHORT).show();
+                        }
+
+                        @Override
+                        public void onError() {
+
+                        }
+                    });
+                }
+
             }
         });
 
+    }
+
+    private MapData convertScanResultsToMapData(List<ScanResult> scanResults,
+                                                PointF location) {
+        SharedPreferences preferences = getContext().getSharedPreferences(Utils.P_FILE, Context.MODE_PRIVATE);
+        String name = preferences.getString(Utils.CURRENT_LOCATION_KEY, "nil");
+        String device = Build.MODEL;
+        Timestamp timestamp = new Timestamp(new Date());
+        String id = timestamp.toString() + "-" + name;
+
+        Map<String, List<Integer>> mappedData = new HashMap<>();
+
+        for (ScanResult result : scanResults) {
+            String bssid = result.BSSID;
+            int rssi = result.level;
+            List<Integer> rssiValues = new ArrayList<>();
+            rssiValues.add(rssi);
+            mappedData.put(bssid, rssiValues);
+        }
+
+        MapData mapData = new MapData(name, mappedData, location, 1, device, timestamp);
+        return mapData;
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case WIFI_SCAN_PERMISSIONS: {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // Toast.makeText(getContext(), "Permission Granted", Toast.LENGTH_SHORT).show();
+                    isPermissionsGranted = true;
+                } else {
+                    Toast.makeText(getContext(), "Permission Not Granted", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            }
+
+            default: {
+                Toast.makeText(getContext(), "Permission Error", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    // listener subclass which saves mapdata in a list every time user confirms a mapaing point
+    private class MapWiFiDataListener implements FetchWiFiDataUtils.FetchListener {
+        PointF location;
+
+        public void setLocation(PointF location) {
+            this.location = location;
+        }
+
+        @Override
+        public void onScanResultsReceived(List<ScanResult> scanResults) {
+            MapData mapData = convertScanResultsToMapData(scanResults, location);
+            mapDataList.add(mapData);
+            Toast.makeText(getContext(), scanResults.toString(), Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void onError(Throwable error) {
+        }
     }
 
 }
