@@ -13,6 +13,8 @@ import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.provider.MediaStore;
 import android.view.LayoutInflater;
@@ -24,6 +26,9 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.trackie.R;
+import com.example.trackie.database.FloorplanHelper;
+import com.example.trackie.database.OnCompleteCallback;
+import com.google.android.material.checkbox.MaterialCheckBox;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -41,8 +46,11 @@ public class AddLocationFragment extends Fragment {
     private Button uploadFloorplanButton;
     private ImageView uploadFloorplanImageView;
     private Button confirmFloorplanButton;
+    private MaterialCheckBox checkBox;
 
     private Bitmap floorplanBitmap = null;
+
+    private Uri filePath;
 
     public static final int GET_FROM_GALLERY = 3;
     private static final int READ_EXTERNAL_STORAGE_REQUEST = 2;
@@ -82,6 +90,7 @@ public class AddLocationFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_add_location, container, false);
     }
 
+    // TODO: cannot add name that already exist in database
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -90,6 +99,7 @@ public class AddLocationFragment extends Fragment {
         uploadFloorplanButton = (Button) view.findViewById(R.id.upload_floorplan_button);
         uploadFloorplanImageView = (ImageView) view.findViewById(R.id.upload_floorplan_imageview);
         confirmFloorplanButton = (Button) view.findViewById(R.id.confirm_floorplan_button);
+        checkBox = view.findViewById(R.id.upload_floorplan_checkbox);
 
         uploadFloorplanImageView.setVisibility(View.INVISIBLE);
         uploadFloorplanButton.setOnClickListener(new View.OnClickListener() {
@@ -97,32 +107,56 @@ public class AddLocationFragment extends Fragment {
             public void onClick(View v) {
                 if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
                     ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, READ_EXTERNAL_STORAGE_REQUEST);
+                } else {
+                    startActivityForResult(new Intent(Intent.ACTION_PICK,
+                            MediaStore.Images.Media.INTERNAL_CONTENT_URI), GET_FROM_GALLERY);
                 }
-                startActivityForResult(new Intent(Intent.ACTION_PICK,
-                        MediaStore.Images.Media.INTERNAL_CONTENT_URI), GET_FROM_GALLERY);
             }
         });
 
         confirmFloorplanButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Date currentTime = Calendar.getInstance().getTime();
-                SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy hh:mm");
-                String outputDateString = dateFormat.format(currentTime);
-                Toast.makeText(getActivity(), "Time is: " + outputDateString, Toast.LENGTH_SHORT).show();
+                // Date currentTime = Calendar.getInstance().getTime();
+                // SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy hh:mm");
+                // String outputDateString = dateFormat.format(currentTime);
+                // Toast.makeText(getActivity(), "Time is: " + outputDateString, Toast.LENGTH_SHORT).show();
                 // set upload to database code here
+                int darkmode = checkBox.isChecked() ? 1 : 0;
+                FloorplanHelper.UploadFloorplan uploadFloorplan = new FloorplanHelper.UploadFloorplan(
+                        locationNameEditText.getText().toString(), filePath, darkmode);
+                uploadFloorplan.execute(new OnCompleteCallback() {
+                    @Override
+                    public void onSuccess() {
+                        Toast.makeText(getContext(), "Upload Success", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onFailure() {
+                        Toast.makeText(getContext(), "Upload Failure", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onError() {
+
+                    }
+                });
+
+                getActivity().onBackPressed();
+
             }
         });
     }
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == GET_FROM_GALLERY && resultCode == Activity.RESULT_OK) {
-            Uri floorplanImage = data.getData();
+            filePath = data.getData();
             try {
-                floorplanBitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), floorplanImage);
+                floorplanBitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), filePath);
                 uploadFloorplanImageView.setImageBitmap(floorplanBitmap);
                 uploadFloorplanImageView.setVisibility(View.VISIBLE);
             } catch (FileNotFoundException e) {
@@ -138,7 +172,8 @@ public class AddLocationFragment extends Fragment {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == READ_EXTERNAL_STORAGE_REQUEST) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(getActivity(), "Access Storage Permission Granted", Toast.LENGTH_SHORT).show();
+                startActivityForResult(new Intent(Intent.ACTION_PICK,
+                        MediaStore.Images.Media.INTERNAL_CONTENT_URI), GET_FROM_GALLERY);
             } else {
                 Toast.makeText(getActivity(), "Access Storage Permission Denied", Toast.LENGTH_SHORT).show();
             }

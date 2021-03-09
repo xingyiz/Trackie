@@ -31,10 +31,6 @@ public class MapData implements MapRep, Parcelable {
     private double z;                               // z location of user, doesn't really change if on the same floor
     private String device;
     private Timestamp timestamp;
-    private String floorplan;
-
-    FirebaseStorage storage = FirebaseStorage.getInstance();
-    StorageReference storageReference = storage.getReference();
 
     public MapData() {}
 
@@ -46,22 +42,15 @@ public class MapData implements MapRep, Parcelable {
      * @param z
      * @param device
      * @param timestamp
-     * @param floorplan     Uri String, set to null if already exists
      */
     public MapData(String name, Map<String, List<Integer>> data, PointF location, double z,
-                   String device, Timestamp timestamp, String floorplan) {
+                   String device, Timestamp timestamp) {
         this.name = name;
         this.data = data;
         this.location = location;
         this.z = z;
         this.device = device;
         this.timestamp = timestamp;
-        this.floorplan = floorplan;
-        if (floorplan != null) {
-            // uploadFloorplan();
-        } else {
-            // retrieve floorplan from storage
-        }
     }
 
     // test function pls delete
@@ -76,41 +65,6 @@ public class MapData implements MapRep, Parcelable {
         z = in.readDouble();
         device = in.readString();
         timestamp = in.readParcelable(Timestamp.class.getClassLoader());
-        floorplan = in.readString();
-    }
-
-    private void uploadFloorplan() {
-        try {
-            Uri filePath = Uri.parse(floorplan);
-            StorageReference ref = storageReference.child(name);
-            ref.putFile(filePath).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                        @Override
-                        public void onSuccess(Uri uri) {
-                            floorplan = uri.toString();
-                        }
-                    });
-                }
-            });
-        } catch (Exception e) {
-            // error handling
-        }
-    }
-
-    private void retrieveFloorplan() {
-        try {
-            StorageReference ref = storageReference.child(name);
-            ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                @Override
-                public void onSuccess(Uri uri) {
-                    floorplan = uri.toString();
-                }
-            });
-        } catch (Exception e) {
-            // error handling
-        }
     }
 
     // Getters and Setters
@@ -170,10 +124,6 @@ public class MapData implements MapRep, Parcelable {
         this.timestamp = timestamp;
     }
 
-    public String getFloorplan() { return floorplan; }
-
-    public void setFloorplan(String floorplan) { this.floorplan = floorplan; }
-
     @Override
     public Map<String, Object> retrieveRepresentation() {
         Map<String, Object> map = new HashMap<>();
@@ -192,8 +142,7 @@ public class MapData implements MapRep, Parcelable {
                 + ", location = " + location.toString()
                 + ", z = " + z
                 + ", device = " + device
-                + ", timestamp = " + timestamp.toString()
-                + ", floorplan = " + floorplan + " ]";
+                + ", timestamp = " + timestamp.toString() + " ]";
     }
 
     public static final Creator<MapData> CREATOR = new Creator<MapData>() {
@@ -222,6 +171,5 @@ public class MapData implements MapRep, Parcelable {
         dest.writeDouble(z);
         dest.writeString(device);
         dest.writeParcelable(timestamp, flags);
-        dest.writeString(floorplan);
     }
 }

@@ -24,7 +24,7 @@
         android:layout_marginBottom="36dp"
         android:clickable="true"
         android:src="@drawable/ic_add_24px"
-        app:backgroundTint="@color/light_gray"
+        app:backgroundTint="@color/midtone"
         app:borderWidth="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />

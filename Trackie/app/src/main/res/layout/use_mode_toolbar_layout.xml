@@ -33,7 +33,7 @@
             android:fontFamily="@font/segoeui"
             android:text="Current Location"
             android:textAlignment="center"
-            android:textColor="@color/white"
+            android:textColor="?attr/colorOnPrimary"
             android:textSize="@dimen/alert_text_size"></TextView>
 
     </RelativeLayout>

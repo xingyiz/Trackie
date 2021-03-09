@@ -1,19 +1,15 @@
 package com.example.trackie.ui;
 
-import android.app.ActivityOptions;
-import android.content.Intent;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.transition.Fade;
-import android.transition.Transition;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.Window;
+import android.view.View;
 
 import com.example.trackie.R;
-import com.example.trackie.ui.databasetest.DatabaseTestFragment;
+import com.example.trackie.Utils;
 import com.google.android.material.navigation.NavigationView;
 
-import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -22,14 +18,29 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-public class MainActivity extends AppCompatActivity {
+import static android.view.View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
 
+public class MainActivity extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editPrefs;
+    boolean darkModeEnabled;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        // set shared preferences and theme
+        sharedPreferences = getSharedPreferences(Utils.P_FILE, Context.MODE_PRIVATE);
+        darkModeEnabled = sharedPreferences.getBoolean(Utils.DARK_MODE_STATE_KEY, false);
+
+        if (darkModeEnabled) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        }
+
+        showSystemUI();
         setContentView(R.layout.activity_main);
 
         // set up action bar
@@ -50,17 +61,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
-    @Override
     public boolean onSupportNavigateUp() {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
     }
 
+    // Shows the system bars by removing all the flags
+// except for the ones that make the content appear under the system bars.
+    private void showSystemUI() {
+
+        View decorView = getWindow().getDecorView();
+        decorView.setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_VISIBLE
+                        | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN );
+    }
 }

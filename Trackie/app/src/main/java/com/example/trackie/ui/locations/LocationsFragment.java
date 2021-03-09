@@ -15,14 +15,19 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.trackie.R;
+import com.example.trackie.database.FloorplanData;
+import com.example.trackie.database.FloorplanHelper;
 import com.example.trackie.database.MapData;
+import com.example.trackie.database.OnCompleteCallback;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class LocationsFragment extends Fragment {
-
     private LocationsViewModel locationsViewModel;
+    private List<FloorplanData> floorplanDataList;
+    RecyclerView locationsRecyclerView;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -42,14 +47,27 @@ public class LocationsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        RecyclerView locationsRecyclerView = (RecyclerView) view.findViewById(R.id.locations_recycler_view);
-        ArrayList<MapData> mapDatas = new ArrayList<>();
-        mapDatas.add(new MapData("Bedroom"));
-        mapDatas.add(new MapData("Living Room"));
-        mapDatas.add(new MapData("Study Room"));
-        RecyclerView.Adapter locationsAdapter = new LocationsAdapter(getActivity(), mapDatas);
-        locationsRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        locationsRecyclerView.setAdapter(locationsAdapter);
+        locationsRecyclerView = (RecyclerView) view.findViewById(R.id.locations_recycler_view);
+        FloorplanHelper.GetFloorplanList getFloorplanList = new FloorplanHelper.GetFloorplanList();
+        getFloorplanList.execute(new OnCompleteCallback() {
+            @Override
+            public void onSuccess() {
+                floorplanDataList = getFloorplanList.getFloorplanDataList();
+                RecyclerView.Adapter locationsAdapter = new LocationsAdapter(getActivity(), floorplanDataList);
+                locationsRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                locationsRecyclerView.setAdapter(locationsAdapter);
+            }
+
+            @Override
+            public void onFailure() {
+
+            }
+
+            @Override
+            public void onError() {
+
+            }
+        });
 
         FloatingActionButton addLocationButton = view.findViewById(R.id.upload_location_button);
         addLocationButton.setOnClickListener(new View.OnClickListener() {
@@ -59,7 +77,7 @@ public class LocationsFragment extends Fragment {
                         beginTransaction()
                         .setCustomAnimations(R.anim.fragment_fade_enter, R.anim.fragment_fade_exit);
                 fragmentTransaction.replace(view.getId(), new AddLocationFragment());
-                fragmentTransaction.addToBackStack(null).commit();
+                fragmentTransaction.addToBackStack("Locations").commit();
             }
         });
     }

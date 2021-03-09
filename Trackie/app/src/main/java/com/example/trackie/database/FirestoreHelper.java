@@ -10,6 +10,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FirebaseStorage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,26 +68,36 @@ public class FirestoreHelper {
 
         @Override
         public void execute(OnCompleteCallback callback) {
-            try {
-                id = db.collection(mapData.getName()).document().getId();
-                mapData.setId(id);
-                db.collection(mapData.getName())
-                        .document(id)
-                        .set(mapData)
-                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                if (task.isSuccessful()) {
-                                    callback.onSuccess();
-                                } else {
-                                    callback.onFailure();
+            if (checkMapData(mapData)) {
+                try {
+                    id = db.collection(mapData.getName()).document().getId();
+                    mapData.setId(id);
+                    db.collection(mapData.getName())
+                            .document(id)
+                            .set(mapData)
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+                                        callback.onSuccess();
+                                    } else {
+                                        callback.onFailure();
+                                    }
                                 }
-                            }
-                        });
-            } catch (Exception e) {
-                // error handling
-                callback.onError();
+                            });
+                } catch (Exception e) {
+                    // error handling
+                    callback.onError();
+                }
+            } else {
+                callback.onFailure();
             }
+        }
+
+        private boolean checkMapData(MapData mapData) {
+            return mapData.getName() != null && mapData.getData() != null
+                    && mapData.getDevice() != null && mapData.getLocation() != null
+                    && mapData.getTimestamp() != null;
         }
     }
 

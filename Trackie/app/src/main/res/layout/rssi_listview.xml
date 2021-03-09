@@ -1,38 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical">
 
     <com.google.android.material.textview.MaterialTextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/BSSID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
         android:text="BSSID"
-        android:textSize="16sp"
-        android:layout_margin="20dp" />
+        android:textSize="16sp" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/SSID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
         android:text="SSID"
-        android:textSize="16sp"
-        android:layout_margin="20dp" />
+        android:textSize="16sp" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/RSSI"
-        android:text="RSSI"
-        android:textSize="16sp"
-        android:layout_margin="20dp" />
-
-    <com.google.android.material.textview.MaterialTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:text="RSSI"
+        android:textSize="16sp" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/measuredRSSI"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:text="ONE METER RSSI"
+        android:textSize="16sp" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/DISTANCE"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:text="DISTANCE"
+        android:textSize="16sp" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/Frequency"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:text="FREQUENCY"
+        android:textSize="16sp" />
+
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/TIME"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
         android:text="Time"
-        android:textSize="16sp"
-        android:layout_margin="20dp" />
+        android:layout_marginBottom="5dp"
+        android:textSize="16sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginBottom="10dp"
+        android:background="@color/airBlue"/>
 </LinearLayout>

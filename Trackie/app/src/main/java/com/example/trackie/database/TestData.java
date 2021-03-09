@@ -10,7 +10,7 @@ import java.util.Map;
 
 public class TestData extends MapData {
     public TestData(String name, Map<String, List<Integer>> data, PointF location, double z,
-                    String device, Timestamp timestamp, String floorplan) {
-        super(name, data, location, z, device, timestamp, floorplan);
+                    String device, Timestamp timestamp) {
+        super(name, data, location, z, device, timestamp);
     }
 }

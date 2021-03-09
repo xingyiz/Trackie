@@ -8,14 +8,16 @@
     android:fitsSystemWindows="true"
     tools:openDrawer="start">
     <LinearLayout
+        android:id="@+id/fragment_window"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-    <include
-        layout="@layout/app_bar_main"
-        android:id="@+id/include_app_bar_home"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+
+        <include
+            layout="@layout/app_bar_main"
+            android:id="@+id/include_app_bar_home"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
         <include layout="@layout/content_main" />
     </LinearLayout>
@@ -25,7 +27,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
-        app:headerLayout="@layout/nav_header_main"
+        style="@style/Theme.Trackie.NavMenu"
         app:menu="@menu/activity_main_drawer" />
 
 </androidx.drawerlayout.widget.DrawerLayout>
