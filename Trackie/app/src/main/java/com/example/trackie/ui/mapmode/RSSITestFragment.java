@@ -42,6 +42,7 @@ public class RSSITestFragment extends Fragment {
     private List<ScanResult> results = new ArrayList<>();
     private RSSIAdapter adapter;
     BroadcastReceiver wifiReceiver;
+    int oneMeterRSSI = -30;
 
     @RequiresApi(api = Build.VERSION_CODES.R)
     @Nullable
@@ -83,7 +84,7 @@ public class RSSITestFragment extends Fragment {
                 }
             };
 
-            adapter = new RSSIAdapter(results, getContext());
+            adapter = new RSSIAdapter(results, getContext(), oneMeterRSSI);
             recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
             recyclerView.setAdapter(adapter);
 
@@ -143,11 +144,12 @@ public class RSSITestFragment extends Fragment {
         Toast.makeText(getContext(), "SCAN FAILURE :(" + s, Toast.LENGTH_SHORT).show();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.R)
     private void scanSuccess() {
         Toast.makeText(getContext(), "Scan Complete", Toast.LENGTH_SHORT).show();
         results = wifiManager.getScanResults();
 
-        adapter = new RSSIAdapter(results, getContext());
+        adapter = new RSSIAdapter(results, getContext(), oneMeterRSSI);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);
 
