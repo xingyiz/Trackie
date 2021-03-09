@@ -136,6 +136,7 @@ public class PinImageMapView extends SubsamplingScaleImageView {
                 }
                 if (!isPointTapped) {
                     PointF sTappedCoordinate = viewToSourceCoord(tappedCoordinate);
+                    if (sTappedCoordinate.x < 0 || sTappedCoordinate.y < 0 || sTappedCoordinate.y > PinImageMapView.this.getSHeight()) return false;
                     addPoint(sTappedCoordinate);
                 }
                 return true;

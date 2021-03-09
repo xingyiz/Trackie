@@ -1,11 +1,9 @@
 package com.example.trackie.ui.mapmode;
 
-import android.Manifest;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.PointF;
 import android.graphics.drawable.Drawable;
 import android.net.wifi.ScanResult;
@@ -14,8 +12,6 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -28,7 +24,6 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.CustomTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.davemorrissey.labs.subscaleview.ImageSource;
-import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
 import com.example.trackie.R;
 import com.example.trackie.Utils;
 import com.example.trackie.database.FirestoreHelper;
@@ -154,11 +149,11 @@ public class MappingMainFragment extends Fragment{
             });
         }
 
+        // Handle scanning of RSSI values
         final int maxedScannedTimes = 5;
         MapWiFiDataListener listener = new MapWiFiDataListener(maxedScannedTimes);
         dataUtils = new FetchWiFiDataUtils(getActivity(), isPermissionsGranted, listener, 5);
         isPermissionsGranted = dataUtils.getPermissionGranted();
-
 
         confirmMappingClickButton = (Button) view.findViewById(R.id.confirm_mapping_click_button);
         confirmMappingClickButton.setOnClickListener(new View.OnClickListener() {
