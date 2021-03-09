@@ -88,12 +88,6 @@ public class RSSITestFragment extends Fragment {
             recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
             recyclerView.setAdapter(adapter);
 
-            if (!wifiManager.isScanThrottleEnabled()) {
-                // Toast.makeText(getContext(), "Throttle Disabled", Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(getContext(), "Throttle Enabled", Toast.LENGTH_SHORT).show();
-            }
-
             IntentFilter intentFilter = new IntentFilter();
             intentFilter.addAction(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION);
             requireActivity().registerReceiver(wifiReceiver, intentFilter);
