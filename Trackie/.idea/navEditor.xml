@@ -47,8 +47,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="12" />
-                            <option name="y" value="12" />
+                            <option name="x" value="236" />
+                            <option name="y" value="8" />
                           </Point>
                         </option>
                       </LayoutPositions>
@@ -85,6 +85,18 @@
                           <Point>
                             <option name="x" value="14" />
                             <option name="y" value="593" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="nav_test_rssi">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="12" />
+                            <option name="y" value="12" />
                           </Point>
                         </option>
                       </LayoutPositions>

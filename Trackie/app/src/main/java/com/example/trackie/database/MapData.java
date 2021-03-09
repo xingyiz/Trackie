@@ -1,7 +1,10 @@
 package com.example.trackie.database;
 
 import android.graphics.Point;
+import android.graphics.PointF;
 import android.net.Uri;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -18,19 +21,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class MapData implements MapRep {
+public class MapData implements MapRep, Parcelable {
     private static final String TAG = "MapData";
 
     private String id;
-    private String name;
-    private Map<String, List<Integer>> data;   // String = BSSID of WAP, ArrayList<Integer> = RSSI values associated with WAP
-    private Point location;                         // (x, y) location of user
+    private String name;                            // Name of Location
+    private Map<String, List<Integer>> data;        // String = BSSID of WAP, ArrayList<Integer> = RSSI values associated with WAP
+    private PointF location;                        // (x, y) location of user
     private double z;                               // z location of user, doesn't really change if on the same floor
     private String device;
     private Timestamp timestamp;
-    private String floorplan;
-    FirebaseStorage storage = FirebaseStorage.getInstance();
-    StorageReference storageReference = storage.getReference();
 
     public MapData() {}
 
@@ -42,56 +42,29 @@ public class MapData implements MapRep {
      * @param z
      * @param device
      * @param timestamp
-     * @param floorplan     Uri String, set to null if already exists
      */
-    public MapData(String name, Map<String, List<Integer>> data, Point location, double z,
-                   String device, Timestamp timestamp, String floorplan) {
+    public MapData(String name, Map<String, List<Integer>> data, PointF location, double z,
+                   String device, Timestamp timestamp) {
         this.name = name;
         this.data = data;
         this.location = location;
         this.z = z;
         this.device = device;
         this.timestamp = timestamp;
-        this.floorplan = floorplan;
-        if (floorplan != null) {
-            // uploadFloorplan();
-        } else {
-            // retrieve floorplan from storage
-        }
     }
 
-    private void uploadFloorplan() {
-        try {
-            Uri filePath = Uri.parse(floorplan);
-            StorageReference ref = storageReference.child(name);
-            ref.putFile(filePath).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                        @Override
-                        public void onSuccess(Uri uri) {
-                            floorplan = uri.toString();
-                        }
-                    });
-                }
-            });
-        } catch (Exception e) {
-            // error handling
-        }
+    // test function pls delete
+    public MapData(String name) {
+        this.name = name;
     }
 
-    private void retrieveFloorplan() {
-        try {
-            StorageReference ref = storageReference.child(name);
-            ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                @Override
-                public void onSuccess(Uri uri) {
-                    floorplan = uri.toString();
-                }
-            });
-        } catch (Exception e) {
-            // error handling
-        }
+    protected MapData(Parcel in) {
+        id = in.readString();
+        name = in.readString();
+        location = in.readParcelable(PointF.class.getClassLoader());
+        z = in.readDouble();
+        device = in.readString();
+        timestamp = in.readParcelable(Timestamp.class.getClassLoader());
     }
 
     // Getters and Setters
@@ -119,11 +92,11 @@ public class MapData implements MapRep {
         this.data = data;
     }
 
-    public Point getLocation() {
+    public PointF getLocation() {
         return location;
     }
 
-    public void setLocation(Point location) {
+    public void setLocation(PointF location) {
         this.location = location;
     }
 
@@ -151,10 +124,6 @@ public class MapData implements MapRep {
         this.timestamp = timestamp;
     }
 
-    public String getFloorplan() { return floorplan; }
-
-    public void setFloorplan(String floorplan) { this.floorplan = floorplan; }
-
     @Override
     public Map<String, Object> retrieveRepresentation() {
         Map<String, Object> map = new HashMap<>();
@@ -173,7 +142,34 @@ public class MapData implements MapRep {
                 + ", location = " + location.toString()
                 + ", z = " + z
                 + ", device = " + device
-                + ", timestamp = " + timestamp.toString()
-                + ", floorplan = " + floorplan + " ]";
+                + ", timestamp = " + timestamp.toString() + " ]";
+    }
+
+    public static final Creator<MapData> CREATOR = new Creator<MapData>() {
+        @Override
+        public MapData createFromParcel(Parcel in) {
+            return new MapData(in);
+        }
+
+        @Override
+        public MapData[] newArray(int size) {
+            return new MapData[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+
+        dest.writeString(id);
+        dest.writeString(name);
+        dest.writeParcelable(location, flags);
+        dest.writeDouble(z);
+        dest.writeString(device);
+        dest.writeParcelable(timestamp, flags);
     }
 }

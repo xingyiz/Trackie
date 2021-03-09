@@ -29,4 +29,10 @@
         android:label="DatabaseTestFragment"
         tools:layout="@layout/fragment_databasetest"/>
 
+    <fragment
+        android:id="@+id/nav_test_rssi"
+        android:name="com.example.trackie.ui.mapmode.RSSITestFragment"
+        android:label="RSSITestFragment"
+        tools:layout="@layout/fragment_rssitest"/>
+
 </navigation>

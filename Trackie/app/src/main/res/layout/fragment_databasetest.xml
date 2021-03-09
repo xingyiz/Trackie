@@ -7,26 +7,46 @@
         android:id="@+id/get_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/bsegoeui"
         android:text="GET"
-        android:layout_centerInParent="true" />
+        android:layout_above="@id/set_button"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="12dp"/>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/set_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/get_button"
-        android:fontFamily="@font/bsegoeui"
         android:layout_marginTop="12dp"
+        android:layout_above="@id/remove_button"
         android:text="SET"
         android:layout_centerInParent="true" />
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/database_display"
+    <ScrollView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@id/get_button"
-        android:text="hello"
+        android:layout_above="@+id/get_button"
+        android:layout_centerInParent="true">
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/database_display"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="hello" />
+    </ScrollView>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/remove_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="REMOVE"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="12dp" />
+
+    <ImageView
+        android:layout_width="300dp"
+        android:layout_height="200dp"
+        android:id="@+id/image_database"
+        android:layout_marginTop="12dp"
+        android:layout_below="@+id/remove_button"
         android:layout_centerInParent="true" />
 
 </RelativeLayout>
