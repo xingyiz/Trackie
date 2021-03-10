@@ -21,6 +21,9 @@
     <string name="show_results">Show Results</string>
     <string name="return_home">Return Home</string>
 
+    <string name="pin_location">Pin Location</string>
+    <string name="bssids_count">BSSIDs Count</string>
+
 
     <string name="test_mode">Test Mode</string>
 

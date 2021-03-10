@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.graphics.PointF;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiManager;
 import android.os.Build;
@@ -72,16 +73,15 @@ public class FetchWiFiDataUtils {
             wifiReceiver = new BroadcastReceiver() {
                 @Override
                 public void onReceive(Context context, Intent intent) {
-                    // Toast.makeText(getContext(), "onReceive called", Toast.LENGTH_SHORT).show();
                     boolean success = intent.getBooleanExtra(WifiManager.EXTRA_RESULTS_UPDATED, false);
                     if (success) {
                         results = wifiManager.getScanResults();
                         listener.onScanResultsReceived(results);
                         timesScanned++;
-                        System.out.println("Times scanned: " + timesScanned);
+
                         if (timesScanned == timesToScan) {
                             timesScanned = 0;
-                            listener.finishScanning();
+                            listener.finishAllScanning();
                         } else {
                             scanWiFiData();
                         }
@@ -97,6 +97,8 @@ public class FetchWiFiDataUtils {
             context.registerReceiver(wifiReceiver, intentFilter);
         }
     }
+
+
 
     public boolean scanWiFiData() {
         boolean success = wifiManager.startScan();
@@ -115,8 +117,9 @@ public class FetchWiFiDataUtils {
     }
 
     public interface FetchListener {
+        void setLocation(PointF location);
         void onScanResultsReceived(List<ScanResult> scanResults);
         void onError(Throwable error);
-        void finishScanning();
+        void finishAllScanning();
     }
 }

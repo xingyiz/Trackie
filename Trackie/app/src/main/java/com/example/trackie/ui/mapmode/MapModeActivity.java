@@ -3,6 +3,7 @@ package com.example.trackie.ui.mapmode;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -33,6 +34,7 @@ public class MapModeActivity extends AppCompatActivity {
 // TODO: if preferences empty (no current location) tell user to go back and select location
     String floorplanName;
     boolean darkModeEnabled;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
