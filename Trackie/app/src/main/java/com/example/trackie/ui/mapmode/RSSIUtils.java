@@ -2,10 +2,10 @@ package com.example.trackie.ui.mapmode;
 
 public class RSSIUtils {
 
-   /* claculates line of sight distance using Propagation Path-Loss Model Estimate
-    @param    A: Reference signal recieved at  distance d0 (measured power)
+   /* calculates line of sight distance using Propagation Path-Loss Model Estimate
+    @param    A: Reference signal received at  distance d0 (measured power)
     @param    n: path attenuation factor
-    @param    RSSI: rssi recieved from ScanResult
+    @param    RSSI: rssi received from ScanResult
 
     */
     public static double calculateDistance(int RSSI, int A, int n) {
