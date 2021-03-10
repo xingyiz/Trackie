@@ -13,13 +13,11 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.PopupWindow;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -52,7 +50,7 @@ import java.util.Map;
  */
 
 // TODO: create viewmodel attached to manage mapdata
-public class MappingMainFragment extends Fragment implements PinImageMapView.PinDataViewer{
+public class MappingMainFragment extends Fragment implements PinImageMapView.PinDataViewer {
 
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String MAP_DATA_KEY = "MapData";
@@ -153,8 +151,7 @@ public class MappingMainFragment extends Fragment implements PinImageMapView.Pin
         }
 
         // Handle scanning of RSSI values
-        final int maxedScannedTimes = 5;
-        MapWiFiDataListener mapWiFiDataListener = new MapWiFiDataListener(maxedScannedTimes);
+        MapWiFiDataListener mapWiFiDataListener = new MapWiFiDataListener();
         dataUtils = new FetchWiFiDataUtils(getActivity(), isPermissionsGranted, mapWiFiDataListener, TIMES_TO_SCAN);
         isPermissionsGranted = dataUtils.getPermissionGranted();
 
@@ -165,8 +162,7 @@ public class MappingMainFragment extends Fragment implements PinImageMapView.Pin
                 PointF location = mappingImageView.getUnconfirmedPoint();
                 if (location == null) return;
                 mapWiFiDataListener.setLocation(location);
-                boolean success = dataUtils.scanWiFiData();
-                if (!success) Toast.makeText(getContext(), "Failed to scan WiFi data!", Toast.LENGTH_SHORT).show();
+                dataUtils.startScanWifiData();
             }
         });
 
@@ -266,7 +262,7 @@ public class MappingMainFragment extends Fragment implements PinImageMapView.Pin
         PointF location;
         MapData currentMapData;
 
-        public MapWiFiDataListener(int maxScanTimes) {
+        public MapWiFiDataListener() {
             this.currentMapData = null;
         }
 
@@ -291,7 +287,9 @@ public class MappingMainFragment extends Fragment implements PinImageMapView.Pin
         @Override
         public void finishAllScanning() {
             mapDataList.add(currentMapData);
+            System.out.println("Data: " + currentMapData.getData());
             mappingImageView.comfirmPoint();
+            currentMapData = null;
         }
     }
 

@@ -27,6 +27,7 @@ public class FetchWiFiDataUtils {
     private BroadcastReceiver wifiReceiver;
     private final int timesToScan;
     private int timesScanned;
+    private FetchListener dataListener;
 
     public static int WIFI_SCAN_PERMISSIONS_CODE = 123;
 
@@ -34,10 +35,11 @@ public class FetchWiFiDataUtils {
         this.activity = activity;
         this.context = activity.getApplicationContext();
         this.timesToScan = timesToScan;
+        this.dataListener = listener;
 
         timesScanned = 0;
         wifiManager = (WifiManager) context.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
-        initializeBroadcastReceiver(listener);
+        initializeBroadcastReceiver();
         results = new ArrayList<>();
     }
 
@@ -66,7 +68,7 @@ public class FetchWiFiDataUtils {
     }
 
     // Helper function to create WiFiManager, scan the RSSI values and return the result
-    public void initializeBroadcastReceiver(FetchListener listener) {
+    public void initializeBroadcastReceiver() {
         if (!wifiManager.isWifiEnabled()) {
             Toast.makeText(context, "Please enable Wi-Fi", Toast.LENGTH_LONG).show();
         } else {
@@ -76,18 +78,20 @@ public class FetchWiFiDataUtils {
                     boolean success = intent.getBooleanExtra(WifiManager.EXTRA_RESULTS_UPDATED, false);
                     if (success) {
                         results = wifiManager.getScanResults();
-                        listener.onScanResultsReceived(results);
+                        dataListener.onScanResultsReceived(results);
                         timesScanned++;
 
                         if (timesScanned == timesToScan) {
                             timesScanned = 0;
-                            listener.finishAllScanning();
+                            dataListener.finishAllScanning();
+                            context.unregisterReceiver(wifiReceiver);
+                            wifiReceiver = null;
                         } else {
-                            scanWiFiData();
+                            startScanWifiData();
                         }
                     } else {
                         Toast.makeText(context, "SCAN FAILURE :(", Toast.LENGTH_SHORT).show();
-                        listener.onError(new Throwable("Could not get RSSI values :("));
+                        dataListener.onError(new Throwable("Could not get RSSI values :("));
                     }
                 }
             };
@@ -98,9 +102,10 @@ public class FetchWiFiDataUtils {
         }
     }
 
-
-
-    public boolean scanWiFiData() {
+    public boolean startScanWifiData() {
+        if (wifiReceiver == null) {
+            initializeBroadcastReceiver();
+        }
         boolean success = wifiManager.startScan();
         if (success) {
             Toast.makeText(context, "Scanning for WiFi...", Toast.LENGTH_SHORT).show();
@@ -108,13 +113,6 @@ public class FetchWiFiDataUtils {
         return success;
     }
 
-    public boolean scanMultipleWiFiData(int times) {
-        boolean success = false;
-        for (int i=0; i<times; i++) {
-            success = scanWiFiData();
-        }
-        return success;
-    }
 
     public interface FetchListener {
         void setLocation(PointF location);

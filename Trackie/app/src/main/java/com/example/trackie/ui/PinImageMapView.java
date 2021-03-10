@@ -106,7 +106,6 @@ public class PinImageMapView extends SubsamplingScaleImageView {
         GestureDetector gestureDetector = new GestureDetector(getContext(), new GestureDetector.SimpleOnGestureListener() {
             @Override
             public boolean onSingleTapConfirmed(MotionEvent e) {
-
                 boolean isPointTapped = false;
                 PointF tappedCoordinate = new PointF(e.getX(), e.getY());
                 if (isReady() && mapPoints != null) {
