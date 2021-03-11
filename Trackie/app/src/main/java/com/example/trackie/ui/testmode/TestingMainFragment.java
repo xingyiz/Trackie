@@ -81,10 +81,16 @@ public class TestingMainFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+        // Inflate the layout for this fragmen
+        getLocationButton = container.findViewById(R.id.get_user_location_button);
+        return inflater.inflate(R.layout.fragment_testing_main, container, false);
+    }
 
-        // shit code ples change
-        testImageMapView = container.findViewById(R.id.testing_indoor_map_view);
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        testImageMapView = view.findViewById(R.id.testing_indoor_map_view);
         SharedPreferences preferences = getContext().getSharedPreferences(Utils.P_FILE, MODE_PRIVATE);
         String floorplanName = preferences.getString(Utils.CURRENT_LOCATION_KEY, "nil");
         if (!floorplanName.equals("")) {
@@ -103,6 +109,7 @@ public class TestingMainFragment extends Fragment {
 
                                 @Override
                                 public void onLoadCleared(@Nullable Drawable placeholder) {
+
                                 }
                             });
                 }
@@ -118,9 +125,5 @@ public class TestingMainFragment extends Fragment {
                 }
             });
         }
-        // shit code ples change
-
-        getLocationButton = container.findViewById(R.id.get_user_location_button);
-        return inflater.inflate(R.layout.fragment_testing_main, container, false);
     }
 }
