@@ -11,6 +11,8 @@
 
     <string name="map_mode">Map Mode</string>
     <string name="confirm_mapping_location">Confirm Location</string>
+    <string name="scanning_wifi_data">Scanning WiFi Data...</string>
+    <string name="times_scanned">Times Scanned</string>
     <string name="delete">Delete</string>
     <string name="view_data">View Data</string>
     <string name="end_mapping">End Mapping</string>

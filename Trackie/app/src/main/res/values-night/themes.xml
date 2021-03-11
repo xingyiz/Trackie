@@ -7,7 +7,7 @@
 
     <string name="menu_home">Home</string>
 
-    <style name="Theme.Trackie" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.AppCompat.Trackie" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <item name="android:windowBackground">@color/jet</item>
         <item name="android:windowFullscreen">false</item>
 
@@ -32,7 +32,7 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorSecondary</item>
         <!-- Customize your theme here. -->
-        <item name="buttonStyle">@style/Theme.Trackie.MainButton</item>
+        <item name="buttonStyle">@style/Theme.AppCompat.Trackie.MainButton</item>
     </style>
 
     <style name="Theme.Trackie.NavMenu" parent="Widget.MaterialComponents.NavigationView">
@@ -54,7 +54,7 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorSecondary</item>
     </style>
 
-    <style name="Theme.Trackie.SubscaleView">
+    <style name="Theme.AppCompat.Trackie.SubscaleView">
         <item name="android:tint">@color/white_gray</item>
     </style>
 

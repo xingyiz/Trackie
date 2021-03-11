@@ -15,7 +15,7 @@
         android:layout_marginTop="6dp"
         android:layout_marginBottom="6dp"
         android:text="Location"
-        android:theme="@style/Theme.Trackie.TitleText"
+        android:theme="@style/Theme.AppCompat.Trackie.TitleText"
         app:layout_constraintBottom_toTopOf="@+id/location_description_textview"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

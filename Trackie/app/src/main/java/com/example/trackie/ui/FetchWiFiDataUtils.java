@@ -2,7 +2,6 @@ package com.example.trackie.ui;
 
 import android.Manifest;
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -12,12 +11,24 @@ import android.graphics.PointF;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiManager;
 import android.os.Build;
+import android.os.Handler;
+import android.os.Looper;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.PopupWindow;
 import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+
+import com.example.trackie.R;
+import com.google.android.material.progressindicator.CircularProgressIndicator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +42,8 @@ public class FetchWiFiDataUtils {
     private final int timesToScan;
     private int timesScanned;
     private FetchListener dataListener;
+    private PopupWindow progressPopup;
+    private View progressPopupView;
 
     public static int WIFI_SCAN_PERMISSIONS_CODE = 123;
 
@@ -85,10 +98,16 @@ public class FetchWiFiDataUtils {
                         timesScanned++;
 
                         if (timesScanned == timesToScan) {
-                            timesScanned = 0;
                             dataListener.finishAllScanning();
                             context.unregisterReceiver(wifiReceiver);
                             wifiReceiver = null;
+
+                            final Handler handler = new Handler(Looper.myLooper());
+                            handler.postDelayed(() -> {
+                                progressPopup.dismiss();
+                                progressPopup = null;
+                            }, 250);
+                            timesScanned = 0;
                         } else {
                             startScanWifiData();
                         }
@@ -106,16 +125,35 @@ public class FetchWiFiDataUtils {
     }
 
 
-
     public boolean startScanWifiData() {
         if (wifiReceiver == null) {
             initializeBroadcastReceiver();
         }
         boolean success = wifiManager.startScan();
-        if (success) {
-            Toast.makeText(context, "Scanning for WiFi...", Toast.LENGTH_SHORT).show();
-        }
+        if (success) openProgressWindow();
         return success;
+    }
+
+    public void openProgressWindow() {
+        if (progressPopup != null && progressPopupView != null) {
+            TextView timesScannedTextview = progressPopupView.findViewById(R.id.scanning_times_scanned_textview);
+            timesScannedTextview.setText(context.getString(R.string.times_scanned) + ": " + timesScanned);
+            return;
+        }
+
+        LayoutInflater inflater = LayoutInflater.from(activity);
+        progressPopupView = inflater.inflate(R.layout.collect_wifi_data_progress_layout, null);
+        ProgressBar scanProgressBar = progressPopupView.findViewById(R.id.wifi_scanning_progress_indicator);
+        scanProgressBar.setMax(timesToScan);
+        scanProgressBar.setProgress(timesScanned);
+
+        TextView timesScannedTextview = progressPopupView.findViewById(R.id.scanning_times_scanned_textview);
+        timesScannedTextview.setText(context.getString(R.string.times_scanned) + ": " + timesScanned);
+        progressPopup = new PopupWindow(progressPopupView, WindowManager.LayoutParams.WRAP_CONTENT,
+                                                    WindowManager.LayoutParams.WRAP_CONTENT, true);
+        progressPopup.setTouchable(false);
+        progressPopup.setOutsideTouchable(false);
+        progressPopup.showAtLocation(progressPopupView, Gravity.CENTER, 0, 0);
     }
 
 
