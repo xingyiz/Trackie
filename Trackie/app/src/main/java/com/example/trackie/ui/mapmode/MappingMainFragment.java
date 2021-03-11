@@ -62,7 +62,7 @@ public class MappingMainFragment extends Fragment implements PinImageMapView.Pin
     private boolean isPermissionsGranted;
 
     // number of times the wifi scanner should be scanning
-    private static final int TIMES_TO_SCAN = 3;
+    private static final int TIMES_TO_SCAN = 5;
     private FetchWiFiDataUtils dataUtils;
 
     public MappingMainFragment() {
