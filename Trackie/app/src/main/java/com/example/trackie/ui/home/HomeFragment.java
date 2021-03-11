@@ -4,24 +4,38 @@ import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.location.Location;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import com.example.trackie.R;
 import com.example.trackie.Utils;
+import com.example.trackie.database.FloorplanData;
+import com.example.trackie.database.FloorplanHelper;
+import com.example.trackie.database.OnCompleteCallback;
+import com.example.trackie.ui.locations.LocationsFragment;
+import com.example.trackie.ui.locations.LocationsViewModel;
 import com.example.trackie.ui.mapmode.MapModeActivity;
 import com.example.trackie.ui.testmode.TestModeActivity;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class HomeFragment extends Fragment {
 
@@ -31,9 +45,14 @@ public class HomeFragment extends Fragment {
     Button setLocationButton;
     NavController controller;
 
+    private LocationsViewModel locationsViewModel;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
+        // load locations
+        locationsViewModel = new ViewModelProvider(requireActivity()).get(LocationsViewModel.class);
+
         return root;
     }
 
