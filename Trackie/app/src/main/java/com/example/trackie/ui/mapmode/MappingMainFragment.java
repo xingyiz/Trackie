@@ -279,7 +279,7 @@ public class MappingMainFragment extends Fragment implements PinImageMapView.Pin
         @Override
         public void onScanResultsReceived(List<ScanResult> scanResults) {
             currentMapData = convertScanResultsToMapData(scanResults, location, currentMapData);
-            Toast.makeText(getContext(), scanResults.toString(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), scanResults.get(0).toString(), Toast.LENGTH_SHORT).show();
         }
 
         @Override
