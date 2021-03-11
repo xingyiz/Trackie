@@ -171,7 +171,9 @@ public class MappingMainFragment extends Fragment implements PinImageMapView.Pin
             @Override
             public void onClick(View v) {
                 for (MapData data : mapDataList) {
-                    FirestoreHelper.SetMapData dataSetter = new FirestoreHelper.SetMapData(data);
+                    MapData preparedData = data.prepareForUpload(mappingImageView.getSWidth(),
+                                                                 mappingImageView.getSHeight());
+                    FirestoreHelper.SetMapData dataSetter = new FirestoreHelper.SetMapData(preparedData);
                     dataSetter.execute(new OnCompleteCallback() {
                         @Override
                         public void onSuccess() {
@@ -287,7 +289,6 @@ public class MappingMainFragment extends Fragment implements PinImageMapView.Pin
         @Override
         public void finishAllScanning() {
             mapDataList.add(currentMapData);
-            System.out.println("Data: " + currentMapData.getData());
             mappingImageView.comfirmPoint();
             currentMapData = null;
         }
@@ -299,7 +300,6 @@ public class MappingMainFragment extends Fragment implements PinImageMapView.Pin
         for (MapData mapData : mapDataList) {
             if (mapData.getLocation().equals(selectedPoint)) {
                 PinDataPopUp pinPopUp = new PinDataPopUp(getContext(), mapData, selectedPoint);
-                System.out.println("Pinpopup called");
                 pinPopUp.show();
                 break;
             }

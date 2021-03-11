@@ -2,6 +2,7 @@ package com.example.trackie.ui;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -11,6 +12,8 @@ import android.graphics.PointF;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiManager;
 import android.os.Build;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import androidx.core.app.ActivityCompat;
@@ -101,6 +104,8 @@ public class FetchWiFiDataUtils {
             context.registerReceiver(wifiReceiver, intentFilter);
         }
     }
+
+
 
     public boolean startScanWifiData() {
         if (wifiReceiver == null) {
