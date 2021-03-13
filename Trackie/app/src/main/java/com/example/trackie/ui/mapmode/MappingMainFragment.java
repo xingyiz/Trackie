@@ -32,6 +32,7 @@ import com.example.trackie.database.MapData;
 import com.example.trackie.database.OnCompleteCallback;
 import com.example.trackie.ui.FetchWiFiDataUtils;
 import com.example.trackie.ui.PinImageMapView;
+import com.example.trackie.ui.Prefs;
 import com.google.firebase.Timestamp;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -62,7 +63,6 @@ public class MappingMainFragment extends Fragment implements PinImageMapView.Pin
     private boolean isPermissionsGranted;
 
     // number of times the wifi scanner should be scanning
-    private static final int TIMES_TO_SCAN = 5;
     private FetchWiFiDataUtils dataUtils;
 
     public MappingMainFragment() {
@@ -152,7 +152,7 @@ public class MappingMainFragment extends Fragment implements PinImageMapView.Pin
 
         // Handle scanning of RSSI values
         MapWiFiDataListener mapWiFiDataListener = new MapWiFiDataListener();
-        dataUtils = new FetchWiFiDataUtils(getActivity(), isPermissionsGranted, mapWiFiDataListener, TIMES_TO_SCAN);
+        dataUtils = new FetchWiFiDataUtils(getActivity(), isPermissionsGranted, mapWiFiDataListener);
         isPermissionsGranted = dataUtils.getPermissionGranted();
 
         confirmMappingClickButton = (Button) view.findViewById(R.id.confirm_mapping_click_button);
@@ -199,8 +199,7 @@ public class MappingMainFragment extends Fragment implements PinImageMapView.Pin
         // Check if data is currently being mapped. If not, create a new mapdata
         // Otherwise update the existing mapdata (for >= 2nd iteration of scanning)
         if (currentMapData == null) {
-            SharedPreferences preferences = getContext().getSharedPreferences(Utils.P_FILE, Context.MODE_PRIVATE);
-            String name = preferences.getString(Utils.CURRENT_LOCATION_KEY, "nil");
+            String name = Prefs.getCurrentLocation(getContext());
             String device = Build.MODEL;
             Timestamp timestamp = new Timestamp(new Date());
             String id = timestamp.toString() + "-" + name;

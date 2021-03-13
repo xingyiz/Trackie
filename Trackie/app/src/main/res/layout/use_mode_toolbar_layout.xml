@@ -11,7 +11,7 @@
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"
-    app:popupTheme="@style/Theme.AppCompat.Trackie.PopupOverlay">
+    app:popupTheme="@style/Theme.Trackie.PopupOverlay">
 
     <RelativeLayout
         android:layout_width="match_parent"

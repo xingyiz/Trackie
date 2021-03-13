@@ -22,19 +22,12 @@ import static android.view.View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
 
 public class MainActivity extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;
-    SharedPreferences sharedPreferences;
-    SharedPreferences.Editor editPrefs;
-    boolean darkModeEnabled;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // set shared preferences and theme
-        sharedPreferences = getSharedPreferences(Utils.P_FILE, Context.MODE_PRIVATE);
-        darkModeEnabled = sharedPreferences.getBoolean(Utils.DARK_MODE_STATE_KEY, false);
-
-        if (darkModeEnabled) {
+        if (Prefs.getDarkModeState(getApplicationContext())) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         } else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);

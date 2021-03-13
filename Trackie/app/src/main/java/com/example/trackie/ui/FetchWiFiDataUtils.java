@@ -30,6 +30,8 @@ import androidx.core.content.ContextCompat;
 import com.example.trackie.R;
 import com.google.android.material.progressindicator.CircularProgressIndicator;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,10 +49,10 @@ public class FetchWiFiDataUtils {
 
     public static int WIFI_SCAN_PERMISSIONS_CODE = 123;
 
-    public FetchWiFiDataUtils(Activity activity, boolean isPermissionsGranted, FetchListener listener, int timesToScan) {
+    public FetchWiFiDataUtils(Activity activity, boolean isPermissionsGranted, FetchListener listener) {
         this.activity = activity;
         this.context = activity.getApplicationContext();
-        this.timesToScan = timesToScan;
+        this.timesToScan = Prefs.getNumberOfScans(context);
         this.dataListener = listener;
 
         timesScanned = 0;
@@ -129,7 +131,18 @@ public class FetchWiFiDataUtils {
         if (wifiReceiver == null) {
             initializeBroadcastReceiver();
         }
-        boolean success = wifiManager.startScan();
+        boolean success = false;
+        if (Prefs.getActiveScanningEnabled(context)) {
+            try {
+                Method startScanActiveMethod = WifiManager.class.getMethod("startScanActive");
+                startScanActiveMethod.invoke(wifiManager);
+            } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
+                e.printStackTrace();
+                Toast.makeText(activity, "Unable to get active scan method. Set to normal scan...", Toast.LENGTH_SHORT).show();
+                Prefs.setActiveScanningEnabled(context, false);
+                success = wifiManager.startScan();
+            }
+        } else success = wifiManager.startScan();
         if (success) openProgressWindow();
         return success;
     }

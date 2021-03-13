@@ -27,6 +27,7 @@ import com.example.trackie.database.FloorplanData;
 import com.example.trackie.database.FloorplanHelper;
 import com.example.trackie.database.OnCompleteCallback;
 import com.example.trackie.ui.MainActivity;
+import com.example.trackie.ui.Prefs;
 import com.example.trackie.ui.locations.LocationsAdapter;
 import com.example.trackie.ui.testmode.TestModeActivity;
 
@@ -42,9 +43,8 @@ public class MapModeActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_map_mode);
 
-        SharedPreferences preferences = getSharedPreferences(Utils.P_FILE, MODE_PRIVATE);
-        floorplanName = preferences.getString(Utils.CURRENT_LOCATION_KEY, "nil");
-        darkModeEnabled = preferences.getBoolean("dark_mode_state", false);
+        floorplanName = Prefs.getCurrentLocation(getApplicationContext());
+        darkModeEnabled = Prefs.getDarkModeState(getApplicationContext());
 
         // set up action bar
         Toolbar toolbar = findViewById(R.id.top_toolbar);
