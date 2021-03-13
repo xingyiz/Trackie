@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
                 R.id.nav_home, R.id.nav_locations, R.id.nav_settings, R.id.nav_database, R.id.nav_test_rssi)
                 .setDrawerLayout(drawer)
                 .build();
-        if (!darkModeEnabled) {
+        if (!Prefs.getDarkModeState(getApplicationContext())) {
             navigationView.inflateHeaderView(R.layout.nav_header_main);
         }
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);

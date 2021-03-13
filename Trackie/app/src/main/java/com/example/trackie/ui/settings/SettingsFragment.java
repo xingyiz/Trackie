@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -85,12 +86,12 @@ public class SettingsFragment extends Fragment {
                 String inputRSSI = inputRSSIEditText.getText().toString();
 
                 try {
-
                     if (inputRSSI.isEmpty() || Integer.parseInt(inputRSSI) > 0) {
                         Toast.makeText(getContext(), "Invalid Input. Please enter a valid RSSI value.", Toast.LENGTH_SHORT).show();
                     } else {
                         Prefs.setMeasuredRSSI(getContext(), Integer.parseInt(inputRSSI));
                         Toast.makeText(getContext(), "Sucess. Measured RSSI is now " + inputRSSI, Toast.LENGTH_SHORT).show();
+                        hideKeyboard(inputRSSIEditText);
                     }
                 } catch (Exception e) {
                     Toast.makeText(getContext(), "Invalid Input. Please enter a number.", Toast.LENGTH_SHORT).show();
@@ -100,6 +101,7 @@ public class SettingsFragment extends Fragment {
         });
 
         numberOfScansEditText = root.findViewById(R.id.number_of_scans_edittext);
+        numberOfScansEditText.setHint(String.valueOf(Prefs.getNumberOfScans(getContext())));
         numberOfScansButton = root.findViewById(R.id.number_of_scans_set_button);
         numberOfScansButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,6 +114,7 @@ public class SettingsFragment extends Fragment {
                     } else {
                         Prefs.setNumberOfScans(getContext(), Integer.parseInt(numberOfScans));
                         Toast.makeText(getContext(), "Success. Number of times to scan is now " + numberOfScans, Toast.LENGTH_SHORT).show();
+                        hideKeyboard(numberOfScansEditText);
                     }
                 } catch (Exception e) {
                     Toast.makeText(getContext(), "Invalid Input. Please enter a number.", Toast.LENGTH_SHORT).show();
@@ -122,4 +125,8 @@ public class SettingsFragment extends Fragment {
         return root;
     }
 
+    private void hideKeyboard(EditText editText) {
+        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(editText.getWindowToken(), InputMethodManager.RESULT_UNCHANGED_SHOWN);
+    }
 }
