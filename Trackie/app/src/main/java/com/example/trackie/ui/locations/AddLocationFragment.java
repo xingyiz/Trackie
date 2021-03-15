@@ -128,6 +128,8 @@ public class AddLocationFragment extends Fragment {
                 uploadFloorplan.execute(new OnCompleteCallback() {
                     @Override
                     public void onSuccess() {
+                        LocationsViewModel locationsViewModel = new LocationsViewModel();
+                        locationsViewModel.loadLocations();
                         Toast.makeText(getContext(), "Upload Success", Toast.LENGTH_SHORT).show();
                     }
 
