@@ -28,7 +28,7 @@
         <item name="buttonStyle">@style/Theme.Trackie.MainButton</item>
     </style>
 
-    <style name="Theme.Trackie.NavMenu" parent="Widget.MaterialComponents.NavigationView">
+    <style name="Theme.AppCompat.Trackie.NavMenu" parent="Widget.MaterialComponents.NavigationView">
         <item name="itemIconTint">?attr/colorOnBackground</item>
         <item name="itemTextColor">?attr/colorOnBackground</item>
         <item name="headerLayout">@layout/nav_header_main</item>
@@ -67,6 +67,11 @@
 
     <style name="WindowAnimationStyle">
         <item name="android:windowEnterAnimation">@android:anim/linear_interpolator</item>
+    </style>
+
+    <style name="WrapContentDialog" parent="Theme.Trackie">
+        <item name="windowMinWidthMajor">0%</item>
+        <item name="windowMinWidthMinor">0%</item>
     </style>
 
     <style name="Theme.Trackie.Splash" parent="Theme.MaterialComponents.DayNight.NoActionBar">

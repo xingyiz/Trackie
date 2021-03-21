@@ -32,6 +32,7 @@ import com.example.trackie.database.MapData;
 import com.example.trackie.database.OnCompleteCallback;
 import com.example.trackie.ui.FetchWiFiDataUtils;
 import com.example.trackie.ui.PinImageMapView;
+import com.example.trackie.ui.Prefs;
 import com.google.firebase.Timestamp;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -48,7 +49,9 @@ import java.util.Map;
  * Use the {@link MappingMainFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MappingMainFragment extends Fragment{
+
+// TODO: create viewmodel attached to manage mapdata
+public class MappingMainFragment extends Fragment implements PinImageMapView.PinDataViewer {
 
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String MAP_DATA_KEY = "MapData";
@@ -59,12 +62,8 @@ public class MappingMainFragment extends Fragment{
     private final static int WIFI_SCAN_PERMISSIONS = 123;
     private boolean isPermissionsGranted;
 
+    // number of times the wifi scanner should be scanning
     private FetchWiFiDataUtils dataUtils;
-    private FetchWiFiDataUtils.FetchListener dataListener;
-
-    SharedPreferences sharedPreferences;
-    String pFile = "com.example.trackie.ui.preferences";
-    boolean darkModeEnabled;
 
     public MappingMainFragment() {
         // Required empty public constructor
@@ -99,6 +98,7 @@ public class MappingMainFragment extends Fragment{
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View root = inflater.inflate(R.layout.fragment_mapping_main, container, false);
+
         return root;
 
     }
@@ -109,7 +109,9 @@ public class MappingMainFragment extends Fragment{
         super.onViewCreated(view, savedInstanceState);
 
         mappingImageView = (PinImageMapView) view.findViewById(R.id.mapping_indoor_map_view);
+        mappingImageView.setPinDataViewer(this);
         String floorplanName = "";
+        // get variables from parent activity
         if (getActivity() instanceof MapModeActivity) {
             floorplanName = ((MapModeActivity)getActivity()).getCurrentFloorplanName();
         }
@@ -132,7 +134,6 @@ public class MappingMainFragment extends Fragment{
 
                                 @Override
                                 public void onLoadCleared(@Nullable Drawable placeholder) {
-
                                 }
                             });
                 }
@@ -150,9 +151,8 @@ public class MappingMainFragment extends Fragment{
         }
 
         // Handle scanning of RSSI values
-        final int maxedScannedTimes = 5;
-        MapWiFiDataListener listener = new MapWiFiDataListener(maxedScannedTimes);
-        dataUtils = new FetchWiFiDataUtils(getActivity(), isPermissionsGranted, listener, 5);
+        MapWiFiDataListener mapWiFiDataListener = new MapWiFiDataListener();
+        dataUtils = new FetchWiFiDataUtils(getActivity(), isPermissionsGranted, mapWiFiDataListener);
         isPermissionsGranted = dataUtils.getPermissionGranted();
 
         confirmMappingClickButton = (Button) view.findViewById(R.id.confirm_mapping_click_button);
@@ -161,8 +161,8 @@ public class MappingMainFragment extends Fragment{
             public void onClick(View v) {
                 PointF location = mappingImageView.getUnconfirmedPoint();
                 if (location == null) return;
-                listener.setLocation(location);
-                boolean success = dataUtils.scanWiFiData();
+                mapWiFiDataListener.setLocation(location);
+                dataUtils.startScanWifiData();
             }
         });
 
@@ -171,7 +171,9 @@ public class MappingMainFragment extends Fragment{
             @Override
             public void onClick(View v) {
                 for (MapData data : mapDataList) {
-                    FirestoreHelper.SetMapData dataSetter = new FirestoreHelper.SetMapData(data);
+                    MapData preparedData = data.prepareForUpload(mappingImageView.getSWidth(),
+                                                                 mappingImageView.getSHeight());
+                    FirestoreHelper.SetMapData dataSetter = new FirestoreHelper.SetMapData(preparedData);
                     dataSetter.execute(new OnCompleteCallback() {
                         @Override
                         public void onSuccess() {
@@ -185,20 +187,19 @@ public class MappingMainFragment extends Fragment{
 
                         @Override
                         public void onError() {
-
                         }
                     });
                 }
             }
         });
-
     }
 
     private MapData convertScanResultsToMapData(List<ScanResult> scanResults,
                                                 PointF location, MapData currentMapData) {
+        // Check if data is currently being mapped. If not, create a new mapdata
+        // Otherwise update the existing mapdata (for >= 2nd iteration of scanning)
         if (currentMapData == null) {
-            SharedPreferences preferences = getContext().getSharedPreferences(Utils.P_FILE, Context.MODE_PRIVATE);
-            String name = preferences.getString(Utils.CURRENT_LOCATION_KEY, "nil");
+            String name = Prefs.getCurrentLocation(getContext());
             String device = Build.MODEL;
             Timestamp timestamp = new Timestamp(new Date());
             String id = timestamp.toString() + "-" + name;
@@ -216,6 +217,7 @@ public class MappingMainFragment extends Fragment{
             MapData mapData = new MapData(name, mappedData, location, 1, device, timestamp);
             return mapData;
         } else {
+            currentMapData = currentMapData.copy();
             Map<String, List<Integer>> currentData = currentMapData.getData();
             for (ScanResult result : scanResults) {
                 String bssid = result.BSSID;
@@ -231,9 +233,12 @@ public class MappingMainFragment extends Fragment{
                 }
             }
             currentMapData.setData(currentData);
+            currentMapData.setLocation(location);
+
             return currentMapData;
         }
     }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         switch (requestCode) {
@@ -253,12 +258,12 @@ public class MappingMainFragment extends Fragment{
         }
     }
 
-    // listener subclass which saves mapdata in a list every time user confirms a mapaing point
+    // listener subclass which saves mapdata in a list every time user confirms a mapping point
     private class MapWiFiDataListener implements FetchWiFiDataUtils.FetchListener {
         PointF location;
         MapData currentMapData;
 
-        public MapWiFiDataListener(int maxScanTimes) {
+        public MapWiFiDataListener() {
             this.currentMapData = null;
         }
 
@@ -266,11 +271,13 @@ public class MappingMainFragment extends Fragment{
             this.location = location;
         }
 
+        public PointF getLocation() {
+            return location;
+        }
+
         @Override
         public void onScanResultsReceived(List<ScanResult> scanResults) {
-            MapData mapData = convertScanResultsToMapData(scanResults, location, currentMapData);
-            currentMapData = mapData;
-            Toast.makeText(getContext(), scanResults.toString(), Toast.LENGTH_SHORT).show();
+            currentMapData = convertScanResultsToMapData(scanResults, location, currentMapData);
         }
 
         @Override
@@ -278,10 +285,22 @@ public class MappingMainFragment extends Fragment{
         }
 
         @Override
-        public void finishScanning() {
+        public void finishAllScanning() {
             mapDataList.add(currentMapData);
             mappingImageView.comfirmPoint();
+            currentMapData = null;
         }
     }
 
+    // method called when view pin data option is selected after clicking on the pin in PinImageMapView
+    @Override
+    public void onViewPinData(PointF selectedPoint) {
+        for (MapData mapData : mapDataList) {
+            if (mapData.getLocation().equals(selectedPoint)) {
+                PinDataPopUp pinPopUp = new PinDataPopUp(getContext(), mapData, selectedPoint);
+                pinPopUp.show();
+                break;
+            }
+        }
+    }
 }

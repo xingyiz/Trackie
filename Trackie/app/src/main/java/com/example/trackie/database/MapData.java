@@ -17,6 +17,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -171,5 +172,26 @@ public class MapData implements MapRep, Parcelable {
         dest.writeDouble(z);
         dest.writeString(device);
         dest.writeParcelable(timestamp, flags);
+    }
+
+    // creates a full copy of the existing mapdata class
+    public MapData copy() {
+        Map<String, List<Integer>> copyData = new HashMap<>();
+        for (String bssid : data.keySet()) {
+            List<Integer> newRSSIValues = new ArrayList<>();
+            for (int rssi : data.get(bssid)) {
+                newRSSIValues.add(rssi);
+            }
+            copyData.put(bssid, newRSSIValues);
+        }
+        return new MapData(name, copyData, location, z, device, timestamp);
+    }
+
+    // rescales the coordinates, among other preprocessing things that may be included in the future
+    public MapData prepareForUpload(int sourceWidth, int sourceHeight) {
+        MapData preparedMapData = this.copy();
+        preparedMapData.setLocation(new PointF(this.location.x / sourceWidth,
+                                               this.location.y / sourceHeight));
+        return preparedMapData;
     }
 }

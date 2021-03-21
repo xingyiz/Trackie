@@ -1,14 +1,33 @@
 package com.example.trackie.ui.testmode;
 
+import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.CustomTarget;
+import com.bumptech.glide.request.transition.Transition;
+import com.davemorrissey.labs.subscaleview.ImageSource;
 import com.example.trackie.R;
+import com.example.trackie.Utils;
+import com.example.trackie.database.FloorplanHelper;
+import com.example.trackie.database.OnCompleteCallback;
+import com.example.trackie.ui.TestImageMapView;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
+import static android.content.Context.MODE_PRIVATE;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -17,6 +36,8 @@ import com.example.trackie.R;
  */
 public class TestingMainFragment extends Fragment {
 
+    Button getLocationButton;
+    TestImageMapView testImageMapView;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -60,7 +81,49 @@ public class TestingMainFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+        // Inflate the layout for this fragmen
+        getLocationButton = container.findViewById(R.id.get_user_location_button);
         return inflater.inflate(R.layout.fragment_testing_main, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        testImageMapView = view.findViewById(R.id.testing_indoor_map_view);
+        SharedPreferences preferences = getContext().getSharedPreferences(Utils.P_FILE, MODE_PRIVATE);
+        String floorplanName = preferences.getString(Utils.CURRENT_LOCATION_KEY, "nil");
+        if (!floorplanName.equals("")) {
+            FloorplanHelper.RetrieveFloorplan retrieveFloorplan = new FloorplanHelper.RetrieveFloorplan(floorplanName);
+            retrieveFloorplan.execute(new OnCompleteCallback() {
+                @Override
+                public void onSuccess() {
+                    StorageReference ref = FirebaseStorage.getInstance().getReferenceFromUrl(retrieveFloorplan.getFloorplanURL());
+                    Glide.with(requireContext()).asBitmap()
+                            .load(ref)
+                            .into(new CustomTarget<Bitmap>() {
+                                @Override
+                                public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+                                    testImageMapView.setImage(ImageSource.bitmap(resource));
+                                }
+
+                                @Override
+                                public void onLoadCleared(@Nullable Drawable placeholder) {
+
+                                }
+                            });
+                }
+
+                @Override
+                public void onFailure() {
+                    Toast.makeText(getContext(), "Can't Retrieve Floorplan", Toast.LENGTH_SHORT).show();
+                }
+
+                @Override
+                public void onError() {
+
+                }
+            });
+        }
     }
 }
