@@ -40,6 +40,8 @@ import static android.content.Context.MODE_PRIVATE;
  * Use the {@link TestingMainFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
+
+// TODO: take care of landscape orientation changes
 public class TestingMainFragment extends Fragment {
 
     private TestImageMapView testImageMapView;

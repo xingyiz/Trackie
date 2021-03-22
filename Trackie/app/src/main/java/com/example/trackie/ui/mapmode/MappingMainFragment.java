@@ -50,7 +50,7 @@ import java.util.Map;
  * create an instance of this fragment.
  */
 
-// TODO: create viewmodel attached to manage mapdata
+// TODO: take care of landscape orientation changes
 public class MappingMainFragment extends Fragment implements PinImageMapView.PinDataViewer {
 
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
