@@ -62,7 +62,6 @@ public class MappingMainFragment extends Fragment implements PinImageMapView.Pin
     private final static int WIFI_SCAN_PERMISSIONS = 123;
     private boolean isPermissionsGranted;
 
-    // number of times the wifi scanner should be scanning
     private FetchWiFiDataUtils dataUtils;
 
     public MappingMainFragment() {
@@ -103,12 +102,13 @@ public class MappingMainFragment extends Fragment implements PinImageMapView.Pin
 
     }
 
-    // TODO: fix issue for when backgroudn image does not load by the time user clicks map mode
+    // TODO: fix issue for when background image does not load by the time user clicks map mode
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        mappingImageView = (PinImageMapView) view.findViewById(R.id.mapping_indoor_map_view);
+        // set up map view
+        mappingImageView = view.findViewById(R.id.mapping_indoor_map_view);
         mappingImageView.setPinDataViewer(this);
         String floorplanName = "";
         // get variables from parent activity
@@ -118,7 +118,7 @@ public class MappingMainFragment extends Fragment implements PinImageMapView.Pin
 
         if (mapDataList == null) mapDataList = new ArrayList<>();
         // TODO: change image loaded according to whether its dark mode or light mode
-        if (!floorplanName.equals("")) {
+        if (floorplanName != null) {
             FloorplanHelper.RetrieveFloorplan retrieveFloorplan = new FloorplanHelper.RetrieveFloorplan(floorplanName);
             retrieveFloorplan.execute(new OnCompleteCallback() {
                 @Override
@@ -145,24 +145,24 @@ public class MappingMainFragment extends Fragment implements PinImageMapView.Pin
 
                 @Override
                 public void onError() {
-
                 }
             });
         }
 
         // Handle scanning of RSSI values
         MapWiFiDataListener mapWiFiDataListener = new MapWiFiDataListener();
-        dataUtils = new FetchWiFiDataUtils(getActivity(), isPermissionsGranted, mapWiFiDataListener);
+        dataUtils = new FetchWiFiDataUtils(getActivity(), mapWiFiDataListener);
         isPermissionsGranted = dataUtils.getPermissionGranted();
-
         confirmMappingClickButton = (Button) view.findViewById(R.id.confirm_mapping_click_button);
         confirmMappingClickButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 PointF location = mappingImageView.getUnconfirmedPoint();
-                if (location == null) return;
                 mapWiFiDataListener.setLocation(location);
-                dataUtils.startScanWifiData();
+                if (location == null) return;
+                if (isPermissionsGranted) dataUtils.startScanWifiData();
+                else Toast.makeText(getContext(), "WiFi scanning permissions not granted!",
+                                    Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -192,6 +192,12 @@ public class MappingMainFragment extends Fragment implements PinImageMapView.Pin
                 }
             }
         });
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        dataUtils.stopScanning();
     }
 
     private MapData convertScanResultsToMapData(List<ScanResult> scanResults,
@@ -258,7 +264,7 @@ public class MappingMainFragment extends Fragment implements PinImageMapView.Pin
         }
     }
 
-    // listener subclass which saves mapdata in a list every time user confirms a mapping point
+    // listener subclass which saves mapdata in the list every time user confirms a mapping point
     private class MapWiFiDataListener implements FetchWiFiDataUtils.FetchListener {
         PointF location;
         MapData currentMapData;

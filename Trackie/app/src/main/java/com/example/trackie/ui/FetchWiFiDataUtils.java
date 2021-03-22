@@ -35,30 +35,43 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
+// Utility class which scans for WiFI data
 public class FetchWiFiDataUtils {
     private Activity activity;
     private Context context;
+
     private WifiManager wifiManager;
     private List<ScanResult> results;
     private BroadcastReceiver wifiReceiver;
-    private final int timesToScan;
+
+    private boolean showProgressWindow;
+    private int timesToScan;
     private int timesScanned;
+    private boolean stopScanning = false;
+
     private FetchListener dataListener;
     private PopupWindow progressPopup;
     private View progressPopupView;
 
+
     public static int WIFI_SCAN_PERMISSIONS_CODE = 123;
 
-    public FetchWiFiDataUtils(Activity activity, boolean isPermissionsGranted, FetchListener listener) {
+    public FetchWiFiDataUtils(Activity activity, FetchListener listener) {
         this.activity = activity;
         this.context = activity.getApplicationContext();
         this.timesToScan = Prefs.getNumberOfScans(context);
         this.dataListener = listener;
 
+        this.showProgressWindow = true;
         timesScanned = 0;
         wifiManager = (WifiManager) context.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
         initializeBroadcastReceiver();
         results = new ArrayList<>();
+    }
+
+    public FetchWiFiDataUtils(Activity activity, FetchListener dataListener, boolean showProgressWindow) {
+        this(activity, dataListener);
+        this.showProgressWindow = showProgressWindow;
     }
 
     // Activity will need to call onRequestPermissionsResult
@@ -86,7 +99,7 @@ public class FetchWiFiDataUtils {
     }
 
     // Helper function to create WiFiManager, scan the RSSI values and return the result
-    public void initializeBroadcastReceiver() {
+    private void initializeBroadcastReceiver() {
         if (!wifiManager.isWifiEnabled()) {
             Toast.makeText(context, "Please enable Wi-Fi", Toast.LENGTH_LONG).show();
         } else {
@@ -101,8 +114,6 @@ public class FetchWiFiDataUtils {
 
                         if (timesScanned == timesToScan) {
                             dataListener.finishAllScanning();
-                            context.unregisterReceiver(wifiReceiver);
-                            wifiReceiver = null;
 
                             final Handler handler = new Handler(Looper.myLooper());
                             handler.postDelayed(() -> {
@@ -111,7 +122,8 @@ public class FetchWiFiDataUtils {
                             }, 250);
                             timesScanned = 0;
                         } else {
-                            startScanWifiData();
+                            if (!stopScanning) startScanWifiData();
+                            else this.abortBroadcast();
                         }
                     } else {
                         Toast.makeText(context, "SCAN FAILURE :(", Toast.LENGTH_SHORT).show();
@@ -126,7 +138,7 @@ public class FetchWiFiDataUtils {
         }
     }
 
-
+    // scans wifi data
     public boolean startScanWifiData() {
         if (wifiReceiver == null) {
             initializeBroadcastReceiver();
@@ -143,8 +155,13 @@ public class FetchWiFiDataUtils {
                 success = wifiManager.startScan();
             }
         } else success = wifiManager.startScan();
-        if (success) openProgressWindow();
+        if (success && showProgressWindow) openProgressWindow();
         return success;
+    }
+
+    public void scanWiFiDataRepeatedly() {
+        this.timesToScan = 10000;
+        startScanWifiData();
     }
 
     public void openProgressWindow() {
@@ -169,9 +186,16 @@ public class FetchWiFiDataUtils {
         progressPopup.showAtLocation(progressPopupView, Gravity.CENTER, 0, 0);
     }
 
+    public void stopScanning() {
+        try {
+            context.unregisterReceiver(wifiReceiver);
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+        }
+        stopScanning = true;
+    }
 
     public interface FetchListener {
-        void setLocation(PointF location);
         void onScanResultsReceived(List<ScanResult> scanResults);
         void onError(Throwable error);
         void finishAllScanning();

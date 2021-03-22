@@ -43,7 +43,7 @@ public class TestImageMapView extends SubsamplingScaleImageView {
 
         if (!isReady()) return;
         paint.setAntiAlias(true);
-
+        if (currentUserLocation == null) return;
         PointF vPoint = sourceToViewCoord(currentUserLocation);
         float vX = vPoint.x - (pinBitmap.getWidth()/2);
         float vY = vPoint.y - pinBitmap.getHeight();
