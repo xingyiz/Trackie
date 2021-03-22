@@ -27,7 +27,7 @@ public class LocationsViewModel extends ViewModel {
         return locationsData.getValue();
     }
 
-    private void loadLocations() {
+    public void loadLocations() {
         FloorplanHelper.GetFloorplanList getFloorplanList = new FloorplanHelper.GetFloorplanList();
         getFloorplanList.execute(new OnCompleteCallback() {
             @Override
