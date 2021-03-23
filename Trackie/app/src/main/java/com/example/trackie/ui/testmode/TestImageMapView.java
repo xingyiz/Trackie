@@ -1,4 +1,4 @@
-package com.example.trackie.ui;
+package com.example.trackie.ui.testmode;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -26,6 +26,7 @@ public class TestImageMapView extends SubsamplingScaleImageView {
     private final Paint paint = new Paint();
     private PointF currentUserLocation;
     private Bitmap pinBitmap;
+    private final static int ANIMATION_FRAMERATE = 8;
 
     public TestImageMapView(Context context, AttributeSet attr) {
         super(context, attr);
@@ -56,7 +57,7 @@ public class TestImageMapView extends SubsamplingScaleImageView {
             return;
         }
 
-        PointThread pointThread = new PointThread(newLocation, 8);
+        PointThread pointThread = new PointThread(newLocation, ANIMATION_FRAMERATE);
         pointThread.start();
 
 

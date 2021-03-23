@@ -1,7 +1,5 @@
 package com.example.trackie.ui.mapmode;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.PointF;
@@ -25,13 +23,11 @@ import com.bumptech.glide.request.target.CustomTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.davemorrissey.labs.subscaleview.ImageSource;
 import com.example.trackie.R;
-import com.example.trackie.Utils;
 import com.example.trackie.database.FirestoreHelper;
 import com.example.trackie.database.FloorplanHelper;
 import com.example.trackie.database.MapData;
 import com.example.trackie.database.OnCompleteCallback;
 import com.example.trackie.ui.FetchWiFiDataUtils;
-import com.example.trackie.ui.PinImageMapView;
 import com.example.trackie.ui.Prefs;
 import com.google.firebase.Timestamp;
 import com.google.firebase.storage.FirebaseStorage;
@@ -51,7 +47,7 @@ import java.util.Map;
  */
 
 // TODO: take care of landscape orientation changes
-public class MappingMainFragment extends Fragment implements PinImageMapView.PinDataViewer {
+public class MappingMainFragment extends Fragment implements PinImageMapView.PinOptionsController {
 
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String MAP_DATA_KEY = "MapData";
@@ -109,7 +105,7 @@ public class MappingMainFragment extends Fragment implements PinImageMapView.Pin
 
         // set up map view
         mappingImageView = view.findViewById(R.id.mapping_indoor_map_view);
-        mappingImageView.setPinDataViewer(this);
+        mappingImageView.setPinOptionsController(this);
         String floorplanName = "";
         // get variables from parent activity
         if (getActivity() instanceof MapModeActivity) {
@@ -170,6 +166,9 @@ public class MappingMainFragment extends Fragment implements PinImageMapView.Pin
         endMappingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (mapDataList.isEmpty()) {
+                    Toast.makeText(getContext(), "No data to upload!", Toast.LENGTH_SHORT).show();
+                }
                 for (MapData data : mapDataList) {
                     MapData preparedData = data.prepareForUpload(mappingImageView.getSWidth(),
                                                                  mappingImageView.getSHeight());
@@ -178,6 +177,8 @@ public class MappingMainFragment extends Fragment implements PinImageMapView.Pin
                         @Override
                         public void onSuccess() {
                             Toast.makeText(getContext(), "Data upload success!", Toast.LENGTH_SHORT).show();
+                            mapDataList.clear();
+                            getActivity().finish();
                         }
 
                         @Override
@@ -305,6 +306,16 @@ public class MappingMainFragment extends Fragment implements PinImageMapView.Pin
             if (mapData.getLocation().equals(selectedPoint)) {
                 PinDataPopUp pinPopUp = new PinDataPopUp(getContext(), mapData, selectedPoint);
                 pinPopUp.show();
+                break;
+            }
+        }
+    }
+
+    @Override
+    public void onDeletePinData(PointF selectedPoint) {
+        for (MapData mapData : mapDataList) {
+            if (mapData.getLocation().equals(selectedPoint)) {
+                mapDataList.remove(mapData);
                 break;
             }
         }
