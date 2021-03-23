@@ -65,7 +65,6 @@ public class FetchWiFiDataUtils {
         this.showProgressWindow = true;
         timesScanned = 0;
         wifiManager = (WifiManager) context.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
-        initializeBroadcastReceiver();
         results = new ArrayList<>();
     }
 

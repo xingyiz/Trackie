@@ -101,16 +101,21 @@ public class TestImageMapView extends SubsamplingScaleImageView {
             float deltaX = endPoint.x - currentUserLocation.x;
             float deltaY = endPoint.y - currentUserLocation.y;
             float angle = (float) Math.atan2(deltaY, deltaX);
-            float speed = smoothness;
 
             while (!currentUserLocation.equals(endPoint)) {
-                float newX = (float) (currentUserLocation.x + speed * Math.cos(angle));
-                float newY = (float) (currentUserLocation.y + speed * Math.sin(angle));
+                float newX = (float) (currentUserLocation.x + smoothness * Math.cos(angle));
+                float newY = (float) (currentUserLocation.y + smoothness * Math.sin(angle));
 
                 if (Math.abs(newX - endPoint.x) < 20 && Math.abs(newY - endPoint.y) < 20)
                     currentUserLocation.set(endPoint);
                 else currentUserLocation.set(newX, newY);
                 postInvalidate();
+
+                animateCenter(currentUserLocation)
+                        .withDuration(250)
+                        .withEasing(SubsamplingScaleImageView.EASE_OUT_QUAD)
+                        .withInterruptible(false)
+                        .start();
 
                 try {
                     Thread.sleep(smoothness);
@@ -118,12 +123,6 @@ public class TestImageMapView extends SubsamplingScaleImageView {
                     e.printStackTrace();
                 }
             }
-
-            animateCenter(currentUserLocation)
-                    .withDuration(200)
-                    .withEasing(SubsamplingScaleImageView.EASE_OUT_QUAD)
-                    .withInterruptible(false)
-                    .start();
         }
     }
 }
