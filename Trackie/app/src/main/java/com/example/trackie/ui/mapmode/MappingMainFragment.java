@@ -178,7 +178,6 @@ public class MappingMainFragment extends Fragment implements PinImageMapView.Pin
                         public void onSuccess() {
                             Toast.makeText(getContext(), "Data upload success!", Toast.LENGTH_SHORT).show();
                             mapDataList.clear();
-                            getActivity().finish();
                         }
 
                         @Override
