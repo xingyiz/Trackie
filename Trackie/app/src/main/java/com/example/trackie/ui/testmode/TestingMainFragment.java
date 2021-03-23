@@ -44,7 +44,7 @@ public class TestingMainFragment extends Fragment {
 
     private TestImageMapView testImageMapView;
     private FetchWiFiDataUtils dataUtils;
-
+    private TestWiFiDataListener testWiFiDataListener;
 
     public TestingMainFragment() {
         // Required empty public constructor
@@ -122,15 +122,9 @@ public class TestingMainFragment extends Fragment {
         }
 
         // Handle scanning of RSSI values
-        TestWiFiDataListener testWiFiDataListener = new TestWiFiDataListener();
+        testWiFiDataListener = new TestWiFiDataListener();
         dataUtils = new FetchWiFiDataUtils(getActivity(), testWiFiDataListener, false);
-        dataUtils.scanWiFiDataRepeatedly();
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        dataUtils.stopScanning();
+        dataUtils.scanWiFiDataIndefinitely();
     }
 
     private class TestWiFiDataListener implements FetchWiFiDataUtils.FetchListener {

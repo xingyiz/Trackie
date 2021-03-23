@@ -117,13 +117,22 @@ public class FetchWiFiDataUtils {
 
                             final Handler handler = new Handler(Looper.myLooper());
                             handler.postDelayed(() -> {
+                                wifiReceiver.abortBroadcast();
+                                context.unregisterReceiver(wifiReceiver);
+                                wifiReceiver = null;
                                 progressPopup.dismiss();
                                 progressPopup = null;
-                            }, 250);
+                            }, 1000);
                             timesScanned = 0;
+                            // enable touch again after touch was disabled when scanning process screen shows
+                            activity.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
                         } else {
+                            System.out.println(stopScanning);
                             if (!stopScanning) startScanWifiData();
-                            else this.abortBroadcast();
+                            else {
+                                wifiReceiver.abortBroadcast();
+                                wifiReceiver = null;
+                            }
                         }
                     } else {
                         Toast.makeText(context, "SCAN FAILURE :(", Toast.LENGTH_SHORT).show();
@@ -140,8 +149,18 @@ public class FetchWiFiDataUtils {
 
     // scans wifi data
     public boolean startScanWifiData() {
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION);
+
+        // initialize wifireceiver if null
         if (wifiReceiver == null) {
             initializeBroadcastReceiver();
+        }
+
+        // check if call to stop scanning was made before
+        if (stopScanning) {
+            stopScanning = false;
+            context.registerReceiver(wifiReceiver, intentFilter);
         }
         boolean success = false;
         if (Prefs.getActiveScanningEnabled(context)) {
@@ -159,7 +178,7 @@ public class FetchWiFiDataUtils {
         return success;
     }
 
-    public void scanWiFiDataRepeatedly() {
+    public void scanWiFiDataIndefinitely() {
         this.timesToScan = 10000;
         startScanWifiData();
     }
@@ -180,8 +199,10 @@ public class FetchWiFiDataUtils {
         TextView timesScannedTextview = progressPopupView.findViewById(R.id.scanning_times_scanned_textview);
         timesScannedTextview.setText(context.getString(R.string.times_scanned) + ": " + timesScanned);
         progressPopup = new PopupWindow(progressPopupView, WindowManager.LayoutParams.WRAP_CONTENT,
-                                                    WindowManager.LayoutParams.WRAP_CONTENT, true);
-        progressPopup.setTouchable(false);
+                                                    WindowManager.LayoutParams.WRAP_CONTENT, false);
+        // disable touch in case user clicks back while scanning
+        activity.getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+                                      WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
         progressPopup.setOutsideTouchable(false);
         progressPopup.showAtLocation(progressPopupView, Gravity.CENTER, 0, 0);
     }
@@ -193,6 +214,7 @@ public class FetchWiFiDataUtils {
             e.printStackTrace();
         }
         stopScanning = true;
+        if (progressPopup != null && progressPopup.isShowing()) progressPopup.dismiss();
     }
 
     public interface FetchListener {

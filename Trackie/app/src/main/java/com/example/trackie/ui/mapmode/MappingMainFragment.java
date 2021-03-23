@@ -52,6 +52,7 @@ public class MappingMainFragment extends Fragment implements PinImageMapView.Pin
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String MAP_DATA_KEY = "MapData";
     private static List<MapData> mapDataList;
+    private MapWiFiDataListener mapWiFiDataListener;
     private PinImageMapView mappingImageView;
     private Button confirmMappingClickButton;
     private Button endMappingButton;
@@ -146,7 +147,7 @@ public class MappingMainFragment extends Fragment implements PinImageMapView.Pin
         }
 
         // Handle scanning of RSSI values
-        MapWiFiDataListener mapWiFiDataListener = new MapWiFiDataListener();
+        mapWiFiDataListener = new MapWiFiDataListener();
         dataUtils = new FetchWiFiDataUtils(getActivity(), mapWiFiDataListener);
         isPermissionsGranted = dataUtils.getPermissionGranted();
         confirmMappingClickButton = (Button) view.findViewById(R.id.confirm_mapping_click_button);
@@ -194,11 +195,6 @@ public class MappingMainFragment extends Fragment implements PinImageMapView.Pin
         });
     }
 
-    @Override
-    public void onStop() {
-        super.onStop();
-        dataUtils.stopScanning();
-    }
 
     private MapData convertScanResultsToMapData(List<ScanResult> scanResults,
                                                 PointF location, MapData currentMapData) {
