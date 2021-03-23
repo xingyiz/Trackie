@@ -17,6 +17,8 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -190,8 +192,11 @@ public class MapData implements MapRep, Parcelable {
     // rescales the coordinates, among other preprocessing things that may be included in the future
     public MapData prepareForUpload(int sourceWidth, int sourceHeight) {
         MapData preparedMapData = this.copy();
-        preparedMapData.setLocation(new PointF(this.location.x / sourceWidth,
-                                               this.location.y / sourceHeight));
+        DecimalFormat df = new DecimalFormat("#.####");
+        df.setRoundingMode(RoundingMode.CEILING);
+        Double norm_x = (double) this.location.x / sourceWidth;
+        Double norm_y = (double) this.location.y / sourceHeight;
+        preparedMapData.setLocation(new PointF(Float.parseFloat(df.format(norm_x)), Float.parseFloat(df.format(norm_y))));
         return preparedMapData;
     }
 }
