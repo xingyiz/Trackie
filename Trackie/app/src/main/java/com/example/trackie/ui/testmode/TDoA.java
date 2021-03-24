@@ -1,4 +1,4 @@
-package com.example.trackie.ui.mapmode;
+package com.example.trackie.ui.testmode;
 
 public class TDoA {
 
