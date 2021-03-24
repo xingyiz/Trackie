@@ -119,8 +119,12 @@ public class FetchWiFiDataUtils {
                                 wifiReceiver.abortBroadcast();
                                 context.unregisterReceiver(wifiReceiver);
                                 wifiReceiver = null;
-                                progressPopup.dismiss();
-                                progressPopup = null;
+
+                                if ( progressPopup != null){
+                                    progressPopup.dismiss();
+                                    progressPopup = null;
+                                }
+
                             }, 1000);
                             timesScanned = 0;
                             // enable touch again after touch was disabled when scanning process screen shows
