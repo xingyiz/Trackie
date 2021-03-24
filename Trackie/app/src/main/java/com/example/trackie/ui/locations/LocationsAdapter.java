@@ -48,7 +48,6 @@ public class LocationsAdapter extends RecyclerView.Adapter {
         final ViewHolder viewHolder = (ViewHolder) holder;
         FloorplanData floorplanData = locationsList.get(position);
         viewHolder.locationNameTextview.setText(floorplanData.getName());
-        System.out.println("Name: " + floorplanData.getName());
 
         viewHolder.container.setOnClickListener(new View.OnClickListener() {
             @Override

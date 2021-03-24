@@ -112,6 +112,7 @@ public class DatabaseTestFragment extends Fragment {
                 if (!remove) {
                     mapDataList = getter.getResult();
                     textView.setText(mapDataList.toString());
+                    Toast.makeText(getContext(), mapDataList.size() + " datapoints", Toast.LENGTH_LONG).show();
 
                     if (mapDataList.size() > 0) {
                         FloorplanHelper.RetrieveFloorplan retrieveFloorplan = new FloorplanHelper.RetrieveFloorplan(mapDataList.get(0).getName());
@@ -156,7 +157,7 @@ public class DatabaseTestFragment extends Fragment {
     }
 
     public void setData() {
-        MapData mapData = new MapData("B2L2", data, location, z, device, timestamp);
+        MapData mapData = new MapData("B2L1", data, location, z, device, timestamp);
         FirestoreHelper.SetMapData setter = new FirestoreHelper.SetMapData(mapData);
         setter.execute(new OnCompleteCallback() {
             @Override

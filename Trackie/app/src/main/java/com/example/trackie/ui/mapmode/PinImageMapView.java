@@ -1,4 +1,4 @@
-package com.example.trackie.ui;
+package com.example.trackie.ui.mapmode;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -37,7 +37,7 @@ public class PinImageMapView extends SubsamplingScaleImageView {
     private PointF unconfirmedPoint;
     private PointF selectedPoint;
 
-    private PinDataViewer pinDataViewer;
+    private PinOptionsController pinOptionsController;
 
     public PinImageMapView(Context context) {
         this(context, null);
@@ -128,7 +128,10 @@ public class PinImageMapView extends SubsamplingScaleImageView {
                 }
                 if (!isPointTapped) {
                     PointF sTappedCoordinate = viewToSourceCoord(tappedCoordinate);
-                    if (sTappedCoordinate.x < 0 || sTappedCoordinate.y < 0 || sTappedCoordinate.y > PinImageMapView.this.getSHeight()) return false;
+                    if (sTappedCoordinate.x < 0 || sTappedCoordinate.x > PinImageMapView.this.getSWidth() ||
+                        sTappedCoordinate.y < 0 || sTappedCoordinate.y > PinImageMapView.this.getSHeight()) {
+                        return false;
+                    }
                     addPoint(sTappedCoordinate);
                 }
                 return true;
@@ -174,13 +177,11 @@ public class PinImageMapView extends SubsamplingScaleImageView {
                 pointY + mOptionsView.getMeasuredHeight() - (pinBitmap.getHeight() / 2));
 
         FrameLayout pinDeleteSelector = (FrameLayout) mOptionsView.findViewById(R.id.pin_delete_option_view);
-        pinDeleteSelector.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (selectedPoint != null) {
-                    mapPoints.remove(selectedPoint);
-                    dismissSelectedPoint(popUp);
-                }
+        pinDeleteSelector.setOnClickListener(v -> {
+            if (selectedPoint != null) {
+                mapPoints.remove(selectedPoint);
+                pinOptionsController.onDeletePinData(selectedPoint);
+                dismissSelectedPoint(popUp);
             }
         });
 
@@ -188,14 +189,14 @@ public class PinImageMapView extends SubsamplingScaleImageView {
         pinViewDataSelector.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (pinDataViewer != null) pinDataViewer.onViewPinData(selectedPoint);
+                if (pinOptionsController != null) pinOptionsController.onViewPinData(selectedPoint);
                 dismissSelectedPoint(popUp);
             }
         });
     }
 
-    public void setPinDataViewer(PinDataViewer viewer) {
-        this.pinDataViewer = viewer;
+    public void setPinOptionsController(PinOptionsController viewer) {
+        this.pinOptionsController = viewer;
     }
 
     private void dismissSelectedPoint(PopupWindow popUp) {
@@ -207,7 +208,8 @@ public class PinImageMapView extends SubsamplingScaleImageView {
         }, 150);
     }
 
-    public interface PinDataViewer {
+    public interface PinOptionsController {
         void onViewPinData(PointF selectedPoint);
+        void onDeletePinData(PointF selectedPoint);
     }
 }
