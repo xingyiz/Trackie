@@ -44,6 +44,8 @@ import java.util.Date;
 public class AddLocationFragment extends Fragment {
     private EditText locationNameEditText;
     private Button uploadFloorplanButton;
+    private Button uploadDarkFloorplanButton;
+    private ImageView darkImageView;
     private ImageView uploadFloorplanImageView;
     private Button confirmFloorplanButton;
     private MaterialCheckBox checkBox;
@@ -100,8 +102,11 @@ public class AddLocationFragment extends Fragment {
         uploadFloorplanImageView = (ImageView) view.findViewById(R.id.upload_floorplan_imageview);
         confirmFloorplanButton = (Button) view.findViewById(R.id.confirm_floorplan_button);
         checkBox = view.findViewById(R.id.upload_floorplan_checkbox);
+        darkImageView = view.findViewById(R.id.upload_dark_floorplan_imageview);
+        uploadDarkFloorplanButton = view.findViewById(R.id.upload_dark_floorplan_button);
 
         uploadFloorplanImageView.setVisibility(View.INVISIBLE);
+        darkImageView.setVisibility(View.INVISIBLE);
         uploadFloorplanButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -111,6 +116,13 @@ public class AddLocationFragment extends Fragment {
                     startActivityForResult(new Intent(Intent.ACTION_PICK,
                             MediaStore.Images.Media.INTERNAL_CONTENT_URI), GET_FROM_GALLERY);
                 }
+            }
+        });
+
+        uploadDarkFloorplanButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
             }
         });
 
