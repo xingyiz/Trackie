@@ -15,19 +15,19 @@ import static androidx.test.espresso.Espresso.onView;
 @RunWith(AndroidJUnit4.class)
 public class MapModeScreenTest {
 
-    @Rule
-    public ActivityTestRule<MapModeActivity> mMapModeActivityTestRule =
-            new ActivityTestRule<MapModeActivity>(MapModeActivity.class);
-
-    @Before
-    public void yourSetUpFragment(){
-        mMapModeActivityTestRule.getActivity()
-                .getFragmentManager().beginTransaction();
-    }
-
-
-   // @Test
-   // public void ClickAddNoteButton_opensAddNoteUi() throws Exception{
-     //   onView().perform().check();
-  //  }
+//    @Rule
+//    public ActivityTestRule<MapModeActivity> mMapModeActivityTestRule =
+//            new ActivityTestRule<MapModeActivity>(MapModeActivity.class);
+//
+//    @Before
+//    public void yourSetUpFragment(){
+//        mMapModeActivityTestRule.getActivity()
+//                .getFragmentManager().beginTransaction();
+//    }
+//
+//
+//    @Test
+//    public void ClickAddNoteButton_opensAddNoteUi() throws Exception{
+//        onView().perform().check();
+//    }
 }
