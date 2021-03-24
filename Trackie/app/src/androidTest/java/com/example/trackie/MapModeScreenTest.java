@@ -26,8 +26,8 @@ public class MapModeScreenTest {
     }
 
 
-    @Test
-    public void ClickAddNoteButton_opensAddNoteUi() throws Exception{
-        onView().perform().check():
-    }
+   // @Test
+   // public void ClickAddNoteButton_opensAddNoteUi() throws Exception{
+     //   onView().perform().check();
+  //  }
 }
