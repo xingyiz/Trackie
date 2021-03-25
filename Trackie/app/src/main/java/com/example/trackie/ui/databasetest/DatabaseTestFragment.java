@@ -98,14 +98,15 @@ public class DatabaseTestFragment extends Fragment {
                 } else if (mapDataList.size() == 0){
                     Toast.makeText(getContext(), "Nothing to remove", Toast.LENGTH_SHORT).show();
                 } else {
-                    removeData();
+                    Toast.makeText(getContext(), "HI NO REMOVING ALLOWED", Toast.LENGTH_LONG).show();
+                    // removeData();
                 }
             }
         });
     }
 
     public void getData(boolean remove) {
-        FirestoreHelper.GetMapData getter = new FirestoreHelper.GetMapData("B2L2");
+        FirestoreHelper.GetMapData getter = new FirestoreHelper.GetMapData("B2L2 ACCURATE");
         getter.execute(new OnCompleteCallback() {
             @Override
             public void onSuccess() {
@@ -139,7 +140,7 @@ public class DatabaseTestFragment extends Fragment {
                     }
                 } else {
                     if (mapDataList != null) {
-                        removeData();
+                        //removeData();
                     }
                 }
             }
@@ -177,7 +178,7 @@ public class DatabaseTestFragment extends Fragment {
         });
     }
 
-    public void removeData() {
+    /*public void removeData() {
             FirestoreHelper.RemoveMapData remover = new FirestoreHelper.RemoveMapData(mapDataList.get(0));
             remover.execute(new OnCompleteCallback() {
                 @Override
@@ -195,5 +196,5 @@ public class DatabaseTestFragment extends Fragment {
 
                 }
             });
-        }
+        }*/
 }
