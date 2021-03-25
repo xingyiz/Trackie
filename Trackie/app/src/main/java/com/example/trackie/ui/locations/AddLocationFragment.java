@@ -15,6 +15,8 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.provider.MediaStore;
 import android.view.LayoutInflater;
@@ -44,8 +46,6 @@ import java.util.Date;
 public class AddLocationFragment extends Fragment {
     private EditText locationNameEditText;
     private Button uploadFloorplanButton;
-    private Button uploadDarkFloorplanButton;
-    private ImageView darkImageView;
     private ImageView uploadFloorplanImageView;
     private Button confirmFloorplanButton;
     private MaterialCheckBox checkBox;
@@ -53,6 +53,8 @@ public class AddLocationFragment extends Fragment {
     private Bitmap floorplanBitmap = null;
 
     private Uri filePath;
+
+    private LocationsViewModel locationsViewModel;
 
     public static final int GET_FROM_GALLERY = 3;
     private static final int READ_EXTERNAL_STORAGE_REQUEST = 2;
@@ -78,16 +80,10 @@ public class AddLocationFragment extends Fragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-        }
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        locationsViewModel = new ViewModelProvider(getActivity()).get(LocationsViewModel.class);
         container.removeAllViews();
         return inflater.inflate(R.layout.fragment_add_location, container, false);
     }
@@ -102,11 +98,8 @@ public class AddLocationFragment extends Fragment {
         uploadFloorplanImageView = (ImageView) view.findViewById(R.id.upload_floorplan_imageview);
         confirmFloorplanButton = (Button) view.findViewById(R.id.confirm_floorplan_button);
         checkBox = view.findViewById(R.id.upload_floorplan_checkbox);
-        darkImageView = view.findViewById(R.id.upload_dark_floorplan_imageview);
-        uploadDarkFloorplanButton = view.findViewById(R.id.upload_dark_floorplan_button);
 
         uploadFloorplanImageView.setVisibility(View.INVISIBLE);
-        darkImageView.setVisibility(View.INVISIBLE);
         uploadFloorplanButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -116,13 +109,6 @@ public class AddLocationFragment extends Fragment {
                     startActivityForResult(new Intent(Intent.ACTION_PICK,
                             MediaStore.Images.Media.INTERNAL_CONTENT_URI), GET_FROM_GALLERY);
                 }
-            }
-        });
-
-        uploadDarkFloorplanButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
             }
         });
 
@@ -140,7 +126,6 @@ public class AddLocationFragment extends Fragment {
                 uploadFloorplan.execute(new OnCompleteCallback() {
                     @Override
                     public void onSuccess() {
-                        LocationsViewModel locationsViewModel = new LocationsViewModel();
                         locationsViewModel.loadLocations();
                         Toast.makeText(getContext(), "Upload Success", Toast.LENGTH_SHORT).show();
                     }
