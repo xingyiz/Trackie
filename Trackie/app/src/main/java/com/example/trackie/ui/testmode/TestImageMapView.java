@@ -28,6 +28,7 @@ public class TestImageMapView extends SubsamplingScaleImageView {
     private Bitmap pinBitmap;
     private final static int ANIMATION_FRAMERATE = 8;
 
+
     public TestImageMapView(Context context, AttributeSet attr) {
         super(context, attr);
 
@@ -71,6 +72,7 @@ public class TestImageMapView extends SubsamplingScaleImageView {
         paint.setAntiAlias(true);
         if (currentUserLocation == null) return;
         PointF vPoint = sourceToViewCoord(currentUserLocation);
+
         float vX = vPoint.x - (pinBitmap.getWidth()/2);
         float vY = vPoint.y - pinBitmap.getHeight();
 
@@ -106,16 +108,11 @@ public class TestImageMapView extends SubsamplingScaleImageView {
                 float newX = (float) (currentUserLocation.x + smoothness * Math.cos(angle));
                 float newY = (float) (currentUserLocation.y + smoothness * Math.sin(angle));
 
-                if (Math.abs(newX - endPoint.x) < 20 && Math.abs(newY - endPoint.y) < 20)
+                if (Math.abs(newX - endPoint.x) < 20 && Math.abs(newY - endPoint.y) < 20) {
                     currentUserLocation.set(endPoint);
+                }
                 else currentUserLocation.set(newX, newY);
                 postInvalidate();
-
-                animateCenter(currentUserLocation)
-                        .withDuration(250)
-                        .withEasing(SubsamplingScaleImageView.EASE_OUT_QUAD)
-                        .withInterruptible(false)
-                        .start();
 
                 try {
                     Thread.sleep(smoothness);
@@ -123,6 +120,12 @@ public class TestImageMapView extends SubsamplingScaleImageView {
                     e.printStackTrace();
                 }
             }
+
+            animateCenter(currentUserLocation)
+                    .withDuration(100)
+                    .withEasing(SubsamplingScaleImageView.EASE_OUT_QUAD)
+                    .withInterruptible(false)
+                    .start();
         }
     }
 }
