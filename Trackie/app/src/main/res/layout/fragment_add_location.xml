@@ -1,80 +1,143 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.locations.AddLocationFragment"
-    android:id="@+id/add_location_fragment_location">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/upload_location_input_layout"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="32dp"
-        android:hint="Enter Location Name"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+<ScrollView android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/location_name_edittext"
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.locations.AddLocationFragment"
+        android:id="@+id/add_location_fragment_location">
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/upload_location_input_layout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="32dp"
+            android:hint="Enter Location Name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/location_name_edittext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:maxLines="1"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/upload_floorplan_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="text"
-            android:maxLines="1"/>
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_marginTop="12dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:foreground="?attr/selectableItemBackground"
+            android:paddingLeft="@dimen/nav_header_vertical_spacing"
+            android:paddingRight="@dimen/nav_header_vertical_spacing"
+            android:text="Upload light mode floorplan"
+            app:layout_constraintTop_toBottomOf="@+id/upload_floorplan_checkbox"
+            tools:layout_editor_absoluteX="32dp" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/upload_floorplan_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:foreground="?attr/selectableItemBackground"
-        android:paddingLeft="@dimen/nav_header_vertical_spacing"
-        android:paddingRight="@dimen/nav_header_vertical_spacing"
-        android:text="@string/upload_floorplan_here"
-        app:layout_constraintTop_toBottomOf="@+id/upload_floorplan_checkbox"
-        tools:layout_editor_absoluteX="32dp" />
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/upload_dark_floorplan_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                android:foreground="?attr/selectableItemBackground"
+                android:paddingLeft="@dimen/nav_header_vertical_spacing"
+                android:paddingRight="@dimen/nav_header_vertical_spacing"
+                android:text="Upload dark mode floorplan"
+                app:layout_constraintTop_toBottomOf="@+id/upload_floorplan_button"
+                tools:layout_editor_absoluteX="32dp" />
 
-    <com.google.android.material.checkbox.MaterialCheckBox
-        android:id="@+id/upload_floorplan_checkbox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Darkmode Compatible?"
-        app:layout_constraintEnd_toEndOf="@+id/upload_location_input_layout"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/upload_location_input_layout"
-        app:layout_constraintTop_toBottomOf="@+id/upload_location_input_layout" />
+        <com.google.android.material.checkbox.MaterialCheckBox
+            android:id="@+id/upload_floorplan_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Darkmode Compatible?"
+            app:layout_constraintEnd_toEndOf="@+id/upload_location_input_layout"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/upload_location_input_layout"
+            app:layout_constraintTop_toBottomOf="@+id/upload_location_input_layout" />
 
-    <ImageView
-        android:id="@+id/upload_floorplan_imageview"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="32dp"
-        android:src="@drawable/sample_floor_plan"
-        app:layout_constraintBottom_toTopOf="@id/confirm_floorplan_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/upload_floorplan_button" />
+        <TextView
+            android:id="@+id/light_floorplan_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:paddingLeft="@dimen/nav_header_vertical_spacing"
+            android:paddingRight="@dimen/nav_header_vertical_spacing"
+            app:layout_constraintTop_toBottomOf="@id/upload_dark_floorplan_button"
+            app:layout_constraintBottom_toTopOf="@id/upload_floorplan_imageview"
+            android:text="Light Mode Floorplan"/>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/confirm_floorplan_button"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
-        android:text="@string/confirm_floorplan"
-        android:foreground="?attr/selectableItemBackground"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/upload_floorplan_button"
-        app:layout_constraintStart_toStartOf="@+id/upload_floorplan_button" />
+        <ImageView
+            android:id="@+id/upload_floorplan_imageview"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="32dp"
+            android:src="@drawable/main_logo_ldpi"
+            app:layout_constraintBottom_toTopOf="@id/dark_floorplan_header"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/light_floorplan_header" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/dark_floorplan_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:paddingLeft="@dimen/nav_header_vertical_spacing"
+            android:paddingRight="@dimen/nav_header_vertical_spacing"
+            app:layout_constraintTop_toBottomOf="@id/upload_floorplan_imageview"
+            app:layout_constraintBottom_toTopOf="@id/upload_dark_floorplan_imageview"
+            android:text="Dark Mode Floorplan"/>
+
+        <ImageView
+            android:id="@+id/upload_dark_floorplan_imageview"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="32dp"
+            android:src="@drawable/main_logo_ldpi"
+            app:layout_constraintBottom_toTopOf="@id/confirm_floorplan_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/dark_floorplan_header" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/confirm_floorplan_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="32dp"
+            android:text="@string/confirm_floorplan"
+            android:foreground="?attr/selectableItemBackground"
+            app:layout_constraintTop_toBottomOf="@id/upload_dark_floorplan_imageview"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/upload_dark_floorplan_button"
+            app:layout_constraintStart_toStartOf="@+id/upload_dark_floorplan_button" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

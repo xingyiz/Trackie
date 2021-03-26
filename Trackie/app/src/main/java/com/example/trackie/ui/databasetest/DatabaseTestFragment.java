@@ -98,20 +98,22 @@ public class DatabaseTestFragment extends Fragment {
                 } else if (mapDataList.size() == 0){
                     Toast.makeText(getContext(), "Nothing to remove", Toast.LENGTH_SHORT).show();
                 } else {
-                    removeData();
+                    Toast.makeText(getContext(), "HI NO REMOVING ALLOWED", Toast.LENGTH_LONG).show();
+                    // removeData();
                 }
             }
         });
     }
 
     public void getData(boolean remove) {
-        FirestoreHelper.GetMapData getter = new FirestoreHelper.GetMapData("B2L2");
+        FirestoreHelper.GetMapData getter = new FirestoreHelper.GetMapData("B2L2 ACCURATE");
         getter.execute(new OnCompleteCallback() {
             @Override
             public void onSuccess() {
                 if (!remove) {
                     mapDataList = getter.getResult();
                     textView.setText(mapDataList.toString());
+                    Toast.makeText(getContext(), mapDataList.size() + " datapoints", Toast.LENGTH_LONG).show();
 
                     if (mapDataList.size() > 0) {
                         FloorplanHelper.RetrieveFloorplan retrieveFloorplan = new FloorplanHelper.RetrieveFloorplan(mapDataList.get(0).getName());
@@ -138,7 +140,7 @@ public class DatabaseTestFragment extends Fragment {
                     }
                 } else {
                     if (mapDataList != null) {
-                        removeData();
+                        //removeData();
                     }
                 }
             }
@@ -156,7 +158,7 @@ public class DatabaseTestFragment extends Fragment {
     }
 
     public void setData() {
-        MapData mapData = new MapData("B2L2", data, location, z, device, timestamp);
+        MapData mapData = new MapData("B2L1", data, location, z, device, timestamp);
         FirestoreHelper.SetMapData setter = new FirestoreHelper.SetMapData(mapData);
         setter.execute(new OnCompleteCallback() {
             @Override
@@ -176,7 +178,7 @@ public class DatabaseTestFragment extends Fragment {
         });
     }
 
-    public void removeData() {
+    /*public void removeData() {
             FirestoreHelper.RemoveMapData remover = new FirestoreHelper.RemoveMapData(mapDataList.get(0));
             remover.execute(new OnCompleteCallback() {
                 @Override
@@ -194,5 +196,5 @@ public class DatabaseTestFragment extends Fragment {
 
                 }
             });
-        }
+        }*/
 }

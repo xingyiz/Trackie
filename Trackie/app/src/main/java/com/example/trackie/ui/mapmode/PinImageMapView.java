@@ -1,6 +1,5 @@
-package com.example.trackie.ui;
+package com.example.trackie.ui.mapmode;
 
-import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -15,24 +14,16 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.PopupWindow;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
 import com.example.trackie.R;
 import com.example.trackie.Utils;
-import com.example.trackie.ui.mapmode.MapModeActivity;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.zip.Inflater;
 
 /*
     TODO: rotation of image using 2 finger gesture
@@ -46,6 +37,8 @@ public class PinImageMapView extends SubsamplingScaleImageView {
     private PointF unconfirmedPoint;
     private PointF selectedPoint;
 
+    private PinOptionsController pinOptionsController;
+
     public PinImageMapView(Context context) {
         this(context, null);
         initialise();
@@ -56,7 +49,7 @@ public class PinImageMapView extends SubsamplingScaleImageView {
         initialise();
     }
 
-    // helper function to set up some varaibles in the class
+    // helper function to set up some variables in the class
     private void initialise() {
         setMaxScale(155);
         mapPoints = new ArrayList<>();
@@ -113,7 +106,6 @@ public class PinImageMapView extends SubsamplingScaleImageView {
         GestureDetector gestureDetector = new GestureDetector(getContext(), new GestureDetector.SimpleOnGestureListener() {
             @Override
             public boolean onSingleTapConfirmed(MotionEvent e) {
-
                 boolean isPointTapped = false;
                 PointF tappedCoordinate = new PointF(e.getX(), e.getY());
                 if (isReady() && mapPoints != null) {
@@ -136,6 +128,10 @@ public class PinImageMapView extends SubsamplingScaleImageView {
                 }
                 if (!isPointTapped) {
                     PointF sTappedCoordinate = viewToSourceCoord(tappedCoordinate);
+                    if (sTappedCoordinate.x < 0 || sTappedCoordinate.x > PinImageMapView.this.getSWidth() ||
+                        sTappedCoordinate.y < 0 || sTappedCoordinate.y > PinImageMapView.this.getSHeight()) {
+                        return false;
+                    }
                     addPoint(sTappedCoordinate);
                 }
                 return true;
@@ -181,19 +177,39 @@ public class PinImageMapView extends SubsamplingScaleImageView {
                 pointY + mOptionsView.getMeasuredHeight() - (pinBitmap.getHeight() / 2));
 
         FrameLayout pinDeleteSelector = (FrameLayout) mOptionsView.findViewById(R.id.pin_delete_option_view);
-        pinDeleteSelector.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (selectedPoint != null) {
-                    Handler handler = new Handler(Looper.getMainLooper());
-                    handler.postDelayed(() -> {
-                        mapPoints.remove(selectedPoint);
-                        selectedPoint = null;
-                        popUp.dismiss();
-                        invalidate();
-                    }, 150);
-                }
+        pinDeleteSelector.setOnClickListener(v -> {
+            if (selectedPoint != null) {
+                mapPoints.remove(selectedPoint);
+                pinOptionsController.onDeletePinData(selectedPoint);
+                dismissSelectedPoint(popUp);
             }
         });
+
+        FrameLayout pinViewDataSelector = (FrameLayout) mOptionsView.findViewById(R.id.pin_view_data_option_view);
+        pinViewDataSelector.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (pinOptionsController != null) pinOptionsController.onViewPinData(selectedPoint);
+                dismissSelectedPoint(popUp);
+            }
+        });
+    }
+
+    public void setPinOptionsController(PinOptionsController viewer) {
+        this.pinOptionsController = viewer;
+    }
+
+    private void dismissSelectedPoint(PopupWindow popUp) {
+        Handler handler = new Handler(Looper.getMainLooper());
+        handler.postDelayed(() -> {
+            selectedPoint = null;
+            popUp.dismiss();
+            invalidate();
+        }, 150);
+    }
+
+    public interface PinOptionsController {
+        void onViewPinData(PointF selectedPoint);
+        void onDeletePinData(PointF selectedPoint);
     }
 }

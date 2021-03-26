@@ -9,6 +9,7 @@
 
     <style name="Theme.Trackie" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <item name="android:windowBackground">@color/jet</item>
+        <item name="android:windowFullscreen">false</item>
 
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/darkPink</item>

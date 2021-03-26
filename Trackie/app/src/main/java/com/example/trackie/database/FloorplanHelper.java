@@ -138,4 +138,34 @@ public class FloorplanHelper {
             }
         }
     }
+
+    public static class RemoveFloorplan implements FirestoreExecute {
+
+        private String floorplanName;
+        private final FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        public RemoveFloorplan(String name) {
+            this.floorplanName = name;
+        }
+
+        @Override
+        public void execute(OnCompleteCallback callback) {
+            try {
+                db.collection("Floorplans").document(floorplanName)
+                        .delete()
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()) {
+                                    callback.onSuccess();
+                                } else {
+                                    callback.onFailure();
+                                }
+                            }
+                        });
+            } catch (Exception e) {
+                callback.onError();
+            }
+        }
+    }
 }

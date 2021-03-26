@@ -18,30 +18,22 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import static android.view.View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
+
 public class MainActivity extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;
-    SharedPreferences sharedPreferences;
-    SharedPreferences.Editor editPrefs;
-    boolean darkModeEnabled;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-<<<<<<< HEAD
-        //showSystemUI();
-=======
 
-        // set shared preferences and theme
-        sharedPreferences = getSharedPreferences(Utils.P_FILE, Context.MODE_PRIVATE);
-        darkModeEnabled = sharedPreferences.getBoolean(Utils.DARK_MODE_STATE_KEY, false);
-
-        if (darkModeEnabled) {
+        if (Prefs.getDarkModeState(getApplicationContext())) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         } else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         }
 
->>>>>>> main
+        showSystemUI();
         setContentView(R.layout.activity_main);
 
         // set up action bar
@@ -56,6 +48,9 @@ public class MainActivity extends AppCompatActivity {
                 R.id.nav_home, R.id.nav_locations, R.id.nav_settings, R.id.nav_database, R.id.nav_test_rssi)
                 .setDrawerLayout(drawer)
                 .build();
+        if (!Prefs.getDarkModeState(getApplicationContext())) {
+            navigationView.inflateHeaderView(R.layout.nav_header_main);
+        }
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
@@ -67,18 +62,16 @@ public class MainActivity extends AppCompatActivity {
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
     }
-<<<<<<< HEAD
 
     // Shows the system bars by removing all the flags
 // except for the ones that make the content appear under the system bars.
     private void showSystemUI() {
+
         View decorView = getWindow().getDecorView();
         decorView.setSystemUiVisibility(
-                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                View.SYSTEM_UI_FLAG_VISIBLE
+                        | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                         | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN );
     }
-
-=======
->>>>>>> main
 }

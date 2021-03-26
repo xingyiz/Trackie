@@ -6,8 +6,9 @@
     android:layout_height="match_parent"
     tools:context=".ui.mapmode.MappingMainFragment">
 
-    <com.example.trackie.ui.PinImageMapView
+    <com.example.trackie.ui.mapmode.PinImageMapView
         android:id="@+id/mapping_indoor_map_view"
+        android:contentDescription="map image view"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"

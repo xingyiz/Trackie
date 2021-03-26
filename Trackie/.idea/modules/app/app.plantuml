@@ -1,0 +1,374 @@
+@startuml
+
+title __TRACKIE.APP's Class Diagram__\n
+
+  namespace com.bumptech.glide {
+    class com.bumptech.glide.GeneratedAppGlideModuleImpl {
+    }
+  }
+  
+
+  namespace com.bumptech.glide {
+    class com.bumptech.glide.GeneratedRequestManagerFactory {
+    }
+  }
+  
+
+  namespace com.example.trackie {
+    class com.example.trackie.BuildConfig {
+    }
+  }
+  
+
+  namespace com.example.trackie {
+    class com.example.trackie.Utils {
+    }
+  }
+  
+
+  namespace com.example.trackie {
+    namespace database {
+      class com.example.trackie.database.FetchFloorplan {
+      }
+    }
+  }
+  
+
+  namespace com.example.trackie {
+    namespace database {
+      class com.example.trackie.database.FirebaseImageLoader {
+      }
+    }
+  }
+  
+
+  namespace com.example.trackie {
+    namespace database {
+      interface com.example.trackie.database.FirestoreExecute {
+      }
+    }
+  }
+  
+
+  namespace com.example.trackie {
+    namespace database {
+      class com.example.trackie.database.FirestoreHelper {
+      }
+    }
+  }
+  
+
+  namespace com.example.trackie {
+    namespace database {
+      class com.example.trackie.database.GlideApp {
+      }
+    }
+  }
+  
+
+  namespace com.example.trackie {
+    namespace database {
+      class com.example.trackie.database.GlideOptions {
+      }
+    }
+  }
+  
+
+  namespace com.example.trackie {
+    namespace database {
+      class com.example.trackie.database.GlideRequest {
+      }
+    }
+  }
+  
+
+  namespace com.example.trackie {
+    namespace database {
+      class com.example.trackie.database.GlideRequests {
+      }
+    }
+  }
+  
+
+  namespace com.example.trackie {
+    namespace database {
+      class com.example.trackie.database.MapData {
+      }
+    }
+  }
+  
+
+  namespace com.example.trackie {
+    namespace database {
+      interface com.example.trackie.database.MapRep {
+      }
+    }
+  }
+  
+
+  namespace com.example.trackie {
+    namespace database {
+      interface com.example.trackie.database.OnCompleteCallback {
+      }
+    }
+  }
+  
+
+  namespace com.example.trackie {
+    namespace database {
+      class com.example.trackie.database.TestData {
+      }
+    }
+  }
+  
+
+  namespace com.example.trackie {
+    namespace ui {
+      class com.example.trackie.ui.MainActivity {
+      }
+    }
+  }
+  
+
+  namespace com.example.trackie {
+    namespace ui {
+      class com.example.trackie.ui.MapPoint {
+      }
+    }
+  }
+  
+
+  namespace com.example.trackie {
+    namespace ui {
+      class com.example.trackie.ui.PinImageMapView {
+      }
+    }
+  }
+  
+
+  namespace com.example.trackie {
+    namespace ui {
+      class com.example.trackie.ui.SplashActivity {
+      }
+    }
+  }
+  
+
+  namespace com.example.trackie {
+    namespace ui {
+      class com.example.trackie.ui.TouchMapView {
+      }
+    }
+  }
+  
+
+  namespace com.example.trackie {
+    namespace ui {
+      namespace databasetest {
+        class com.example.trackie.ui.databasetest.DatabaseTestFragment {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.example.trackie {
+    namespace ui {
+      namespace databasetest {
+        class com.example.trackie.ui.databasetest.DatabaseTestViewModel {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.example.trackie {
+    namespace ui {
+      namespace home {
+        class com.example.trackie.ui.home.HomeFragment {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.example.trackie {
+    namespace ui {
+      namespace locations {
+        class com.example.trackie.ui.locations.AddLocationFragment {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.example.trackie {
+    namespace ui {
+      namespace locations {
+        class com.example.trackie.ui.locations.LocationsAdapter {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.example.trackie {
+    namespace ui {
+      namespace locations {
+        class com.example.trackie.ui.locations.LocationsFragment {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.example.trackie {
+    namespace ui {
+      namespace locations {
+        class com.example.trackie.ui.locations.LocationsViewModel {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.example.trackie {
+    namespace ui {
+      namespace mapmode {
+        class com.example.trackie.ui.mapmode.MapModeActivity {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.example.trackie {
+    namespace ui {
+      namespace mapmode {
+        class com.example.trackie.ui.mapmode.MappingCompleteFragment {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.example.trackie {
+    namespace ui {
+      namespace mapmode {
+        class com.example.trackie.ui.mapmode.MappingMainFragment {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.example.trackie {
+    namespace ui {
+      namespace mapmode {
+        class com.example.trackie.ui.mapmode.RSSIAdapter {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.example.trackie {
+    namespace ui {
+      namespace mapmode {
+        class com.example.trackie.ui.mapmode.RSSITestFragment {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.example.trackie {
+    namespace ui {
+      namespace settings {
+        class com.example.trackie.ui.settings.SettingsFragment {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.example.trackie {
+    namespace ui {
+      namespace settings {
+        class com.example.trackie.ui.settings.SettingsViewModel {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.example.trackie {
+    namespace ui {
+      namespace testmode {
+        class com.example.trackie.ui.testmode.TestModeActivity {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.example.trackie {
+    namespace ui {
+      namespace testmode {
+        class com.example.trackie.ui.testmode.TestingMainFragment {
+        }
+      }
+    }
+  }
+  
+
+  com.bumptech.glide.GeneratedAppGlideModuleImpl -up-|> com.bumptech.glide.GeneratedAppGlideModule
+  com.bumptech.glide.GeneratedAppGlideModuleImpl o-- com.example.trackie.database.FetchFloorplan : appGlideModule
+  com.bumptech.glide.GeneratedRequestManagerFactory .up.|> com.bumptech.glide.manager.RequestManagerRetriever.RequestManagerFactory
+  com.example.trackie.database.FetchFloorplan -up-|> com.bumptech.glide.module.AppGlideModule
+  com.example.trackie.database.FirebaseImageLoader .up.|> com.bumptech.glide.load.model.ModelLoader
+  com.example.trackie.database.GlideOptions .up.|> java.lang.Cloneable
+  com.example.trackie.database.GlideOptions -up-|> com.bumptech.glide.request.RequestOptions
+  com.example.trackie.database.GlideRequest .up.|> java.lang.Cloneable
+  com.example.trackie.database.GlideRequest -up-|> com.bumptech.glide.RequestBuilder
+  com.example.trackie.database.GlideRequests -up-|> com.bumptech.glide.RequestManager
+  com.example.trackie.database.MapData .up.|> android.os.Parcelable
+  com.example.trackie.database.MapData .up.|> com.example.trackie.database.MapRep
+  com.example.trackie.database.TestData -up-|> com.example.trackie.database.MapData
+  com.example.trackie.ui.MainActivity -up-|> androidx.appcompat.app.AppCompatActivity
+  com.example.trackie.ui.PinImageMapView -up-|> com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView
+  com.example.trackie.ui.SplashActivity -up-|> androidx.appcompat.app.AppCompatActivity
+  com.example.trackie.ui.TouchMapView -up-|> java.util.Observable
+  com.example.trackie.ui.databasetest.DatabaseTestFragment -up-|> androidx.fragment.app.Fragment
+  com.example.trackie.ui.databasetest.DatabaseTestFragment o-- com.example.trackie.ui.databasetest.DatabaseTestViewModel : viewModel
+  com.example.trackie.ui.databasetest.DatabaseTestViewModel -up-|> androidx.lifecycle.ViewModel
+  com.example.trackie.ui.home.HomeFragment -up-|> androidx.fragment.app.Fragment
+  com.example.trackie.ui.locations.AddLocationFragment -up-|> androidx.fragment.app.Fragment
+  com.example.trackie.ui.locations.AddLocationFragment o-- com.example.trackie.database.MapData : mapData
+  com.example.trackie.ui.locations.LocationsAdapter -up-|> androidx.recyclerview.widget.RecyclerView.Adapter
+  com.example.trackie.ui.locations.LocationsFragment -up-|> androidx.fragment.app.Fragment
+  com.example.trackie.ui.locations.LocationsFragment o-- com.example.trackie.ui.locations.LocationsViewModel : locationsViewModel
+  com.example.trackie.ui.locations.LocationsFragment o-- com.example.trackie.database.MapData : mapData
+  com.example.trackie.ui.locations.LocationsViewModel -up-|> androidx.lifecycle.ViewModel
+  com.example.trackie.ui.mapmode.MapModeActivity -up-|> androidx.appcompat.app.AppCompatActivity
+  com.example.trackie.ui.mapmode.MappingCompleteFragment -up-|> androidx.fragment.app.Fragment
+  com.example.trackie.ui.mapmode.MappingMainFragment .up.|> java.util.Observer
+  com.example.trackie.ui.mapmode.MappingMainFragment -up-|> androidx.fragment.app.Fragment
+  com.example.trackie.ui.mapmode.RSSIAdapter -up-|> android.widget.ArrayAdapter
+  com.example.trackie.ui.mapmode.RSSITestFragment -up-|> androidx.fragment.app.Fragment
+  com.example.trackie.ui.mapmode.RSSITestFragment o-- com.example.trackie.ui.mapmode.RSSIAdapter : adapter
+  com.example.trackie.ui.settings.SettingsFragment -up-|> androidx.fragment.app.Fragment
+  com.example.trackie.ui.settings.SettingsFragment o-- com.example.trackie.ui.settings.SettingsViewModel : settingsViewModel
+  com.example.trackie.ui.settings.SettingsViewModel -up-|> androidx.lifecycle.ViewModel
+  com.example.trackie.ui.testmode.TestModeActivity -up-|> androidx.appcompat.app.AppCompatActivity
+  com.example.trackie.ui.testmode.TestingMainFragment -up-|> androidx.fragment.app.Fragment
+
+
+right footer
+
+
+PlantUML diagram generated by SketchIt! (https://bitbucket.org/pmesmeur/sketch.it)
+For more information about this tool, please contact philippe.mesmeur@gmail.com
+endfooter
+
+@enduml
