@@ -144,6 +144,7 @@ public class LocationsAdapter extends RecyclerView.Adapter {
 
     @Override
     public int getItemCount() {
+        if (locationsList == null) return -1;
         return locationsList.size();
     }
 }
