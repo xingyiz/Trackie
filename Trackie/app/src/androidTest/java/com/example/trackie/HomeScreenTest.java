@@ -2,6 +2,9 @@ package com.example.trackie;
 
 import android.view.Gravity;
 
+import androidx.test.InstrumentationRegistry;
+import androidx.test.espresso.contrib.RecyclerViewActions;
+import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.rule.ActivityTestRule;
 
@@ -16,11 +19,14 @@ import org.junit.runner.RunWith;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.matcher.RootMatchers.isDialog;
+import static androidx.test.espresso.matcher.ViewMatchers.hasDescendant;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.contrib.DrawerActions.*;
 import static androidx.test.espresso.contrib.DrawerMatchers.*;
+import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
 
 @RunWith(AndroidJUnit4.class)
@@ -76,6 +82,11 @@ public class HomeScreenTest {
                 .perform(click());
         onView(withId(R.id.locations_recycler_view))
                 .check(matches(isDisplayed()));
+        onView(ViewMatchers.withId(R.id.locations_recycler_view))
+                .perform(RecyclerViewActions.actionOnItem(
+                        hasDescendant(withText("CCL1")), click()
+                        )
+                );
     }
 
     @Test
@@ -128,7 +139,14 @@ public class HomeScreenTest {
         onView(withId(R.id.locations_recycler_view))
                 .check(matches(isDisplayed()));
 
-    }
+        onView(ViewMatchers.withId(R.id.locations_recycler_view))
+                .check(matches(isDisplayed()));
 
+        onView(ViewMatchers.withId(R.id.locations_recycler_view))
+                .perform(RecyclerViewActions.actionOnItem(
+                        hasDescendant(withText("B2L1")), click()
+                        )
+                );
+    }
 
 }
