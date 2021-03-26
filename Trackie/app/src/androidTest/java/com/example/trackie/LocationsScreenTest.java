@@ -56,6 +56,8 @@ public class LocationsScreenTest {
 
             onView(withId(R.id.locations_recycler_view))
                     .perform(RecyclerViewActions.actionOnItemAtPosition(i, click()));
+            // button 2 is cancel
+            // button 1 is set
             onView(withId(android.R.id.button2)).perform(click());
 
         }
