@@ -130,7 +130,6 @@ public class FetchWiFiDataUtils {
                             // enable touch again after touch was disabled when scanning process screen shows
                             activity.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
                         } else {
-                            System.out.println(stopScanning);
                             if (!stopScanning) startScanWifiData();
                             else {
                                 wifiReceiver.abortBroadcast();
