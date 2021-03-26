@@ -31,4 +31,6 @@
 
     <string name="upload_floorplan_here">Upload floorplan</string>
     <string name="confirm_floorplan">Confirm Floorplan</string>
+    <string name="data_upload_success">Data upload success!</string>
+    <string name="no_data">No data to upload!</string>
 </resources>
