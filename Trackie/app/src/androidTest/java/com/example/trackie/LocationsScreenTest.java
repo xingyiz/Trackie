@@ -33,6 +33,8 @@ public class LocationsScreenTest {
 
     Context context;
 
+    // need MainActivity class here since LocationsAdapter uses NavController,
+    // which is only instantiated in MainActivity
     @Rule
     public ActivityTestRule<MainActivity> mHomeActivityTestRule =
             new ActivityTestRule<>(MainActivity.class);
