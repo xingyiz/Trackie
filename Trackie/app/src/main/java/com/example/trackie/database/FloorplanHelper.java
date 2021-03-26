@@ -1,6 +1,7 @@
 package com.example.trackie.database;
 
 import android.net.Uri;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -72,6 +73,10 @@ public class FloorplanHelper {
                         if (task.isSuccessful()) {
                             DocumentSnapshot documentSnapshot = task.getResult();
                             FloorplanData floorplanData = documentSnapshot.toObject(FloorplanData.class);
+                            if (floorplanData == null) {
+                                callback.onFailure();
+                                return;
+                            }
                             name = floorplanData.getName();
                             floorplanURL = floorplanData.getFloorplan();
                             callback.onSuccess();

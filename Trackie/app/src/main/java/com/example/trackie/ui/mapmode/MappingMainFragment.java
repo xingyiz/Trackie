@@ -11,6 +11,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -59,6 +61,8 @@ public class MappingMainFragment extends Fragment implements PinImageMapView.Pin
     private final static int WIFI_SCAN_PERMISSIONS = 123;
     private boolean isPermissionsGranted;
 
+    private MappingMainViewModel viewModel;
+
     private FetchWiFiDataUtils dataUtils;
 
     public MappingMainFragment() {
@@ -94,9 +98,9 @@ public class MappingMainFragment extends Fragment implements PinImageMapView.Pin
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View root = inflater.inflate(R.layout.fragment_mapping_main, container, false);
+        viewModel = new ViewModelProvider(this).get(MappingMainViewModel.class);
 
         return root;
-
     }
 
     // TODO: fix issue for when background image does not load by the time user clicks map mode
@@ -107,6 +111,19 @@ public class MappingMainFragment extends Fragment implements PinImageMapView.Pin
         // set up map view
         mappingImageView = view.findViewById(R.id.mapping_indoor_map_view);
         mappingImageView.setPinOptionsController(this);
+
+        viewModel.getMapDataList().observe(getViewLifecycleOwner(), new Observer<List<MapData>>() {
+            @Override
+            public void onChanged(List<MapData> mapDataList) {
+                List<PointF> mappedPoints = new ArrayList<>();
+                for (MapData mapData : mapDataList) {
+                    mappedPoints.add(mapData.getLocation());
+                }
+                
+                mappingImageView.setMappedPoints(mappedPoints);
+            }
+        });
+
         String floorplanName = "";
         // get variables from parent activity
         if (getActivity() instanceof MapModeActivity) {
@@ -289,6 +306,7 @@ public class MappingMainFragment extends Fragment implements PinImageMapView.Pin
         @Override
         public void finishAllScanning() {
             mapDataList.add(currentMapData);
+            viewModel.addMapData(currentMapData);
             mappingImageView.comfirmPoint();
             currentMapData = null;
         }
@@ -306,13 +324,17 @@ public class MappingMainFragment extends Fragment implements PinImageMapView.Pin
         }
     }
 
+
+    // listener method called when delete pin option is selected in PinImageMapView
     @Override
     public void onDeletePinData(PointF selectedPoint) {
         for (MapData mapData : mapDataList) {
             if (mapData.getLocation().equals(selectedPoint)) {
                 mapDataList.remove(mapData);
+                viewModel.removeMapData(mapData);
                 break;
             }
         }
+
     }
 }

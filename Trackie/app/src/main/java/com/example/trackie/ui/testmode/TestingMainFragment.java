@@ -113,10 +113,12 @@ public class TestingMainFragment extends Fragment {
                 @Override
                 public void onFailure() {
                     Toast.makeText(getContext(), "Can't Retrieve Floorplan", Toast.LENGTH_SHORT).show();
+                    testImageMapView = null;
                 }
 
                 @Override
                 public void onError() {
+                    Toast.makeText(getContext(), "Error Retrieving Floorplan", Toast.LENGTH_SHORT).show();
                 }
             });
         }
@@ -131,6 +133,7 @@ public class TestingMainFragment extends Fragment {
 
         @Override
         public void onScanResultsReceived(List<ScanResult> scanResults) {
+            if (testImageMapView == null) return;
             // TODO: function which uses the data to get the location estimated by the algorithm
             Random random = new Random();
 

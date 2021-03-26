@@ -1,5 +1,6 @@
 package com.example.trackie.ui.mapmode;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
@@ -12,13 +13,19 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.ActivityOptions;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
+import android.os.Build;
 import android.os.Bundle;
 import android.transition.Fade;
 import android.transition.Slide;
 import android.transition.Transition;
 import android.view.Gravity;
+import android.view.View;
 import android.view.Window;
+import android.view.WindowInsets;
+import android.view.WindowInsetsController;
+import android.view.WindowManager;
 
 import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
 import com.example.trackie.R;
@@ -51,6 +58,23 @@ public class MapModeActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Current Location: " + floorplanName);
+
+        // if orientation is landscape, hide status and title bar
+        int orientation = getResources().getConfiguration().orientation;
+        if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            getSupportActionBar().hide();
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                final WindowInsetsController insetsController = getWindow().getInsetsController();
+                if (insetsController != null) {
+                    insetsController.hide(WindowInsets.Type.statusBars());
+                }
+            } else {
+                getWindow().setFlags(
+                        WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                        WindowManager.LayoutParams.FLAG_FULLSCREEN);
+            }
+        }
+
         NavController navController = Navigation.findNavController(this, R.id.map_mode_host_fragment);
     }
 
@@ -69,4 +93,5 @@ public class MapModeActivity extends AppCompatActivity {
     public boolean isDarkModeEnabled() {
         return darkModeEnabled;
     }
+
 }

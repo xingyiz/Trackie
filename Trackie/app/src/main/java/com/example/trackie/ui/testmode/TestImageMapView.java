@@ -110,6 +110,7 @@ public class TestImageMapView extends SubsamplingScaleImageView {
 
                 if (Math.abs(newX - endPoint.x) < 20 && Math.abs(newY - endPoint.y) < 20) {
                     currentUserLocation.set(endPoint);
+                    break;
                 }
                 else currentUserLocation.set(newX, newY);
                 postInvalidate();
