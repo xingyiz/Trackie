@@ -16,6 +16,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import static android.os.SystemClock.sleep;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
@@ -82,11 +83,6 @@ public class HomeScreenTest {
                 .perform(click());
         onView(withId(R.id.locations_recycler_view))
                 .check(matches(isDisplayed()));
-        onView(ViewMatchers.withId(R.id.locations_recycler_view))
-                .perform(RecyclerViewActions.actionOnItem(
-                        hasDescendant(withText("CCL1")), click()
-                        )
-                );
     }
 
     @Test
@@ -134,19 +130,11 @@ public class HomeScreenTest {
 
     @Test
     public void ClickSetLocationsButton() throws Exception{
+        sleep(100);
         onView(withId(R.id.set_location_button))
                 .perform(click());
         onView(withId(R.id.locations_recycler_view))
                 .check(matches(isDisplayed()));
-
-        onView(ViewMatchers.withId(R.id.locations_recycler_view))
-                .check(matches(isDisplayed()));
-
-        onView(ViewMatchers.withId(R.id.locations_recycler_view))
-                .perform(RecyclerViewActions.actionOnItem(
-                        hasDescendant(withText("B2L1")), click()
-                        )
-                );
     }
 
 }

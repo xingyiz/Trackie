@@ -3,10 +3,12 @@ package com.example.trackie;
 import android.content.Context;
 
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.test.espresso.contrib.RecyclerViewActions;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.rule.ActivityTestRule;
 
 import com.android21buttons.fragmenttestrule.FragmentTestRule;
+import com.example.trackie.ui.MainActivity;
 import com.example.trackie.ui.Prefs;
 import com.example.trackie.ui.locations.LocationsFragment;
 
@@ -32,12 +34,19 @@ public class LocationsScreenTest {
     Context context;
 
     @Rule
-    public FragmentTestRule<?, LocationsFragment> fragmentLocationsRule =
-            FragmentTestRule.create(LocationsFragment.class);
+    public ActivityTestRule<MainActivity> mHomeActivityTestRule =
+            new ActivityTestRule<>(MainActivity.class);
+
+//    @Rule
+//    public FragmentTestRule<?, LocationsFragment> fragmentLocationsRule =
+//            FragmentTestRule.create(LocationsFragment.class);
 
     @Before
     public void Setup() {
-        context = fragmentLocationsRule.getActivity().getApplicationContext();
+        context = mHomeActivityTestRule.getActivity().getApplicationContext();
+        TestingUtils.openDrawer();
+        onView(withId(R.id.nav_locations))
+                .perform(click());
     }
 
     @Test
@@ -46,7 +55,8 @@ public class LocationsScreenTest {
             // get name of button to click
 
             onView(withId(R.id.locations_recycler_view))
-                    .perform(actionOnItemAtPosition(i, click()));
+                    .perform(RecyclerViewActions.actionOnItemAtPosition(i, click()));
+            onView(withId(android.R.id.button2)).perform(click());
 
         }
     }
