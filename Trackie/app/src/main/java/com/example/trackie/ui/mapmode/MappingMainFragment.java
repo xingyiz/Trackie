@@ -170,6 +170,7 @@ public class MappingMainFragment extends Fragment implements PinImageMapView.Pin
                 if (mapDataList.isEmpty()) {
                     Toast.makeText(getContext(), "No data to upload!", Toast.LENGTH_SHORT).show();
                 }
+                Toast.makeText(getContext(), "Starting upload...", Toast.LENGTH_LONG).show();
                 for (MapData data : mapDataList) {
                     MapData preparedData = data.prepareForUpload(mappingImageView.getSWidth(),
                                                                  mappingImageView.getSHeight());
@@ -177,7 +178,6 @@ public class MappingMainFragment extends Fragment implements PinImageMapView.Pin
                     dataSetter.execute(new OnCompleteCallback() {
                         @Override
                         public void onSuccess() {
-                            Toast.makeText(getContext(), "Data upload success!", Toast.LENGTH_SHORT).show();
                             mapDataList.clear();
                         }
 
@@ -191,6 +191,8 @@ public class MappingMainFragment extends Fragment implements PinImageMapView.Pin
                         }
                     });
                 }
+
+                Toast.makeText(getContext(), "Upload Complete! :)", Toast.LENGTH_LONG).show();
             }
         });
     }
