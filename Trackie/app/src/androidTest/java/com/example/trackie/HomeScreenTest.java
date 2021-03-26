@@ -3,25 +3,30 @@ package com.example.trackie;
 import android.view.Gravity;
 
 import androidx.test.InstrumentationRegistry;
+import androidx.test.espresso.contrib.RecyclerViewActions;
+import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.rule.ActivityTestRule;
 
 import com.example.trackie.ui.MainActivity;
+import com.example.trackie.ui.Prefs;
 
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import static androidx.test.espresso.Espresso.closeSoftKeyboard;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.matcher.RootMatchers.isDialog;
+import static androidx.test.espresso.matcher.ViewMatchers.hasDescendant;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.contrib.DrawerActions.*;
 import static androidx.test.espresso.contrib.DrawerMatchers.*;
+import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
 
 @RunWith(AndroidJUnit4.class)
@@ -34,6 +39,7 @@ public class HomeScreenTest {
 
     @Before
     public void yourSetUpFragment(){
+        Prefs.setCurrentLocation(mHomeActivityTestRule.getActivity().getApplicationContext(), "B2L2");
         mHomeActivityTestRule.getActivity()
                 .getFragmentManager().beginTransaction();
     }
@@ -59,7 +65,7 @@ public class HomeScreenTest {
     @Test
     public void ClickNavHomeButton() throws Exception{
 
-        openDrawer();
+        TestingUtils.openDrawer();
 
         onView(withId(R.id.nav_home))
                 .perform(click());
@@ -71,16 +77,21 @@ public class HomeScreenTest {
 
     @Test
     public void ClickNavLocationsButton() throws Exception{
-       openDrawer();
+       TestingUtils.openDrawer();
         onView(withId(R.id.nav_locations))
                 .perform(click());
-        onView(withId(R.id.locations_fragment_container))
+        onView(withId(R.id.locations_recycler_view))
                 .check(matches(isDisplayed()));
+        onView(ViewMatchers.withId(R.id.locations_recycler_view))
+                .perform(RecyclerViewActions.actionOnItem(
+                        hasDescendant(withText("CCL1")), click()
+                        )
+                );
     }
 
     @Test
     public void ClickNavSettingButton() throws Exception{
-        openDrawer();
+        TestingUtils.openDrawer();
         onView(withId(R.id.nav_settings))
                 .perform(click());
         onView(withId(R.id.setting_fragment_container))
@@ -89,7 +100,7 @@ public class HomeScreenTest {
 
     @Test
     public void ClickNavDatabaseButton() throws Exception{
-        openDrawer();
+        TestingUtils.openDrawer();
         onView(withId(R.id.nav_database))
                 .perform(click());
         onView(withId(R.id.database_display))
@@ -98,7 +109,7 @@ public class HomeScreenTest {
 
     @Test
     public void ClickNavTestRssiButton() throws Exception{
-        openDrawer();
+        TestingUtils.openDrawer();
         onView(withId(R.id.nav_test_rssi))
                 .perform(click());
         onView(withId(R.id.rssi_listview))
@@ -125,16 +136,17 @@ public class HomeScreenTest {
     public void ClickSetLocationsButton() throws Exception{
         onView(withId(R.id.set_location_button))
                 .perform(click());
+        onView(withId(R.id.locations_recycler_view))
+                .check(matches(isDisplayed()));
 
+        onView(ViewMatchers.withId(R.id.locations_recycler_view))
+                .check(matches(isDisplayed()));
+
+        onView(ViewMatchers.withId(R.id.locations_recycler_view))
+                .perform(RecyclerViewActions.actionOnItem(
+                        hasDescendant(withText("B2L1")), click()
+                        )
+                );
     }
 
-    public void openDrawer() {
-        onView(withId(R.id.drawer_layout))
-                .perform(open()); // Open Drawer
-    }
-
-    public void closeDrawer() {
-        onView(withId(R.id.drawer_layout))
-                .perform(close()); // Close Drawer
-    }
 }

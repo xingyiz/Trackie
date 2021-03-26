@@ -1,8 +1,12 @@
 package com.example.trackie;
 
 import androidx.test.ext.junit.runners.AndroidJUnit4;
+import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.rule.ActivityTestRule;
+import androidx.test.uiautomator.*;
 
+import com.davemorrissey.labs.subscaleview.ImageSource;
+import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
 import com.example.trackie.ui.mapmode.MapModeActivity;
 
 import org.junit.Before;
@@ -10,15 +14,9 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import static androidx.test.core.app.ApplicationProvider.getApplicationContext;
 import static androidx.test.espresso.Espresso.onView;
-import static androidx.test.espresso.action.ViewActions.click;
-import static androidx.test.espresso.assertion.ViewAssertions.matches;
-import static androidx.test.espresso.matcher.RootMatchers.withDecorView;
-import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static androidx.test.espresso.matcher.ViewMatchers.withId;
-import static androidx.test.espresso.matcher.ViewMatchers.withText;
-import static org.hamcrest.core.IsNot.not;
+import static androidx.test.espresso.matcher.ViewMatchers.*;
+import static androidx.test.espresso.action.ViewActions.*;
 
 @RunWith(AndroidJUnit4.class)
 public class MapModeScreenTest {
@@ -27,42 +25,46 @@ public class MapModeScreenTest {
     public ActivityTestRule<MapModeActivity> mMapModeActivityTestRule =
             new ActivityTestRule<MapModeActivity>(MapModeActivity.class);
 
+
+
     @Before
     public void yourSetUpFragment(){
         mMapModeActivityTestRule.getActivity()
                 .getFragmentManager().beginTransaction();
+
     }
 
-
-//    @Test
-//    public void ClickAddNoteButton_opensAddNoteUi() throws Exception{
-//        onView(withId(R.id.top_toolbar))
-//                .perform(click());
-//        onView(withId(R.id.map_mode_host_fragment))
-//                .check(matches(isDisplayed()));
-//    }
-
     @Test
-    public void SetupScreen() throws Exception{
+    public void displayScreen() throws Exception{
+        SubsamplingScaleImageView imageView = mMapModeActivityTestRule.getActivity().findViewById(R.id.mapping_indoor_map_view);
+        imageView.setImage(ImageSource.resource(R.drawable.b2_l1));
         mMapModeActivityTestRule.getActivity()
                 .getFragmentManager().beginTransaction();
 
     }
 
+
     @Test
-    public void ClickConfirmLocationButton() throws Exception {
-        onView(withId(R.id.confirm_mapping_click_button))
+    public void DropPin() throws Exception{
+        onView(withId(R.id.mapping_indoor_map_view))
                 .perform(click());
-        onView(withId(R.id.add_location_fragment_location))
-                .check(matches(isDisplayed()));
+
     }
 
     @Test
-    public void ClickEndMappingButton() throws Exception {
-        onView(withId(R.id.finish_mapping_button))
-                .perform(click());
-        //onView(withId(R.id.mappingCompleteFragment))
-               // .check(matches(isDisplayed()));
-        onView(withText(R.string.no_data)).inRoot(withDecorView(not(mMapModeActivityTestRule.getActivity().getWindow().getDecorView()))).check(matches(isDisplayed()));
+    public void ScaleMapTest() throws Exception{
+        UiDevice myDevice = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation());
+        myDevice.findObject(new UiSelector().description("map image view")).pinchIn(50, 100); //to zoom in
+        myDevice.findObject(new UiSelector().description("map image view")).pinchOut(50, 100); //to zoom out
+    }
+
+    @Test
+    public void ConfirmLocationButtonTest() throws Exception{
+
+    }
+
+    @Test
+    public void EndMappingButtonTest() throws Exception{
+
     }
 }
