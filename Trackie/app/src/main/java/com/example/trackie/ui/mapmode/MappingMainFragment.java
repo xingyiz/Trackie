@@ -39,9 +39,6 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.gson.Gson;
 
-
-import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -108,7 +105,6 @@ public class MappingMainFragment extends Fragment implements PinImageMapView.Pin
         if (getArguments() != null) {
             mapDataList = getArguments().getParcelable(MAP_DATA_KEY);
         }
-
     }
 
     @Override
@@ -154,7 +150,7 @@ public class MappingMainFragment extends Fragment implements PinImageMapView.Pin
 
     // TODO: fix issue for when background image does not load by the time user clicks map mode
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated (@NonNull View view, @Nullable Bundle savedInstanceState){
         super.onViewCreated(view, savedInstanceState);
 
         // set up map view
@@ -168,7 +164,7 @@ public class MappingMainFragment extends Fragment implements PinImageMapView.Pin
                 for (MapData mapData : mapDataList) {
                     mappedPoints.add(mapData.getLocation());
                 }
-                
+
                 mappingImageView.setMappedPoints(mappedPoints);
             }
         });
@@ -224,7 +220,7 @@ public class MappingMainFragment extends Fragment implements PinImageMapView.Pin
                 if (location == null) return;
                 if (isPermissionsGranted) dataUtils.startScanWifiData();
                 else Toast.makeText(getContext(), "WiFi scanning permissions not granted!",
-                                    Toast.LENGTH_SHORT).show();
+                        Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -235,9 +231,10 @@ public class MappingMainFragment extends Fragment implements PinImageMapView.Pin
                 if (mapDataList.isEmpty()) {
                     Toast.makeText(getContext(), "No data to upload!", Toast.LENGTH_SHORT).show();
                 }
+                Toast.makeText(getContext(), "Starting upload...", Toast.LENGTH_LONG).show();
                 for (MapData data : mapDataList) {
                     MapData preparedData = data.prepareForUpload(mappingImageView.getSWidth(),
-                                                                 mappingImageView.getSHeight());
+                            mappingImageView.getSHeight());
                     FirestoreHelper.SetMapData dataSetter = new FirestoreHelper.SetMapData(preparedData);
                     dataSetter.execute(new OnCompleteCallback() {
                         @Override
@@ -257,6 +254,8 @@ public class MappingMainFragment extends Fragment implements PinImageMapView.Pin
                         }
                     });
                 }
+
+                Toast.makeText(getContext(), "Upload Complete! :)", Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -395,6 +394,5 @@ public class MappingMainFragment extends Fragment implements PinImageMapView.Pin
                 break;
             }
         }
-
     }
 }
