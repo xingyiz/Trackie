@@ -82,6 +82,7 @@ public class MapModeActivity extends AppCompatActivity {
 
     @Override
     public boolean onSupportNavigateUp() {
+
         onBackPressed();
         return true;
     }

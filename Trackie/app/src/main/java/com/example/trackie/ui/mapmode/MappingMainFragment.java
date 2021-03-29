@@ -1,5 +1,8 @@
 package com.example.trackie.ui.mapmode;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.PointF;
@@ -34,9 +37,13 @@ import com.example.trackie.ui.Prefs;
 import com.google.firebase.Timestamp;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.gson.Gson;
 
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -48,11 +55,11 @@ import java.util.Map;
  * create an instance of this fragment.
  */
 
-// TODO: take care of landscape orientation changes
 public class MappingMainFragment extends Fragment implements PinImageMapView.PinOptionsController {
 
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String MAP_DATA_KEY = "MapData";
+    private static String floorplanLocation;
     private static List<MapData> mapDataList;
     private MapWiFiDataListener mapWiFiDataListener;
     private PinImageMapView mappingImageView;
@@ -86,11 +93,22 @@ public class MappingMainFragment extends Fragment implements PinImageMapView.Pin
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+
+        // get location name from parent activity
+        if (getActivity() instanceof MapModeActivity) {
+            floorplanLocation = ((MapModeActivity)getActivity()).getCurrentFloorplanName();
+        }
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mapDataList = getArguments().getParcelable(MAP_DATA_KEY);
         }
+
     }
 
     @Override
@@ -101,6 +119,37 @@ public class MappingMainFragment extends Fragment implements PinImageMapView.Pin
         viewModel = new ViewModelProvider(this).get(MappingMainViewModel.class);
 
         return root;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        String json_mapdata = Prefs.getSavedMapping(getContext());
+        System.out.println("JSON_MAPDATA: " + json_mapdata);
+        MapData[] tempMapDataArray = new Gson().fromJson(json_mapdata, MapData[].class);
+        if (tempMapDataArray.length == 0) return;
+
+        List<MapData> tempMapDataList = Arrays.asList(tempMapDataArray);
+        // check if saved mapping exists in device
+        if (tempMapDataList.get(0).getName().equals(floorplanLocation)) {
+            AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
+            alertDialog.setMessage("Restore last saved mapping?");
+            alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Yes", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    viewModel.setMapDataList(tempMapDataList);
+                }
+            });
+            alertDialog.setButton(Dialog.BUTTON_NEGATIVE, "No, Start Fresh", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+            alertDialog.show();
+        } else {
+            Prefs.setSavedMapping(getContext(), "");
+        }
     }
 
     // TODO: fix issue for when background image does not load by the time user clicks map mode
@@ -124,16 +173,15 @@ public class MappingMainFragment extends Fragment implements PinImageMapView.Pin
             }
         });
 
-        String floorplanName = "";
         // get variables from parent activity
         if (getActivity() instanceof MapModeActivity) {
-            floorplanName = ((MapModeActivity)getActivity()).getCurrentFloorplanName();
+            floorplanLocation = ((MapModeActivity)getActivity()).getCurrentFloorplanName();
         }
 
         if (mapDataList == null) mapDataList = new ArrayList<>();
         // TODO: change image loaded according to whether its dark mode or light mode
-        if (floorplanName != null) {
-            FloorplanHelper.RetrieveFloorplan retrieveFloorplan = new FloorplanHelper.RetrieveFloorplan(floorplanName);
+        if (floorplanLocation != null) {
+            FloorplanHelper.RetrieveFloorplan retrieveFloorplan = new FloorplanHelper.RetrieveFloorplan(floorplanLocation);
             retrieveFloorplan.execute(new OnCompleteCallback() {
                 @Override
                 public void onSuccess() {
@@ -195,6 +243,7 @@ public class MappingMainFragment extends Fragment implements PinImageMapView.Pin
                         @Override
                         public void onSuccess() {
                             Toast.makeText(getContext(), "Data upload success!", Toast.LENGTH_SHORT).show();
+                            saveMapDataAsJSON();
                             mapDataList.clear();
                         }
 
@@ -212,6 +261,10 @@ public class MappingMainFragment extends Fragment implements PinImageMapView.Pin
         });
     }
 
+    private void saveMapDataAsJSON() {
+        String json_mapdata = new Gson().toJson(mapDataList);
+        Prefs.setSavedMapping(getContext(), json_mapdata);
+    }
 
     private MapData convertScanResultsToMapData(List<ScanResult> scanResults,
                                                 PointF location, MapData currentMapData) {
@@ -324,6 +377,13 @@ public class MappingMainFragment extends Fragment implements PinImageMapView.Pin
         }
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        // convert list of map data to json string and saved it to preferences
+        String json_mapdata = new Gson().toJson(mapDataList);
+        Prefs.setSavedMapping(getContext(), json_mapdata);
+    }
 
     // listener method called when delete pin option is selected in PinImageMapView
     @Override

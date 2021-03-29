@@ -13,6 +13,7 @@ public class Prefs {
     public static String MEASURED_RSSI_KEY = "measured_rssi";
     public static String ACTIVE_SCANNING_KEY = "active_scanning_enabled";
     public static String NUMBER_OF_SCANS_KEY = "number_of_scans";
+    public static String SAVED_MAPPING_KEY = "saved_mapping_key";
 
     public static SharedPreferences intializeSharedPref(Context context) {
         preferences = context.getSharedPreferences(P_FILE, Context.MODE_PRIVATE);
@@ -72,6 +73,23 @@ public class Prefs {
     public static void setNumberOfScans(Context context, int numberOfScans) {
         if (preferences == null) intializeSharedPref(context);
         editor.putInt(NUMBER_OF_SCANS_KEY, numberOfScans);
+        editor.apply();
+    }
+
+    public static String getSavedMapping(Context context) {
+        if (preferences == null) intializeSharedPref(context);
+        return preferences.getString(SAVED_MAPPING_KEY, "");
+    }
+
+    public static void setSavedMapping(Context context, String json) {
+        if (preferences == null) intializeSharedPref(context);
+        editor.putString(SAVED_MAPPING_KEY, json);
+        editor.apply();
+    }
+
+    public static void clearSavedMapping(Context context) {
+        if (preferences == null) intializeSharedPref(context);
+        editor.putString(SAVED_MAPPING_KEY, "");
         editor.apply();
     }
 
