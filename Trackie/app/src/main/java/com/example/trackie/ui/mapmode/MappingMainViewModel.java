@@ -11,18 +11,22 @@ import java.util.List;
 
 public class MappingMainViewModel extends ViewModel {
     private MutableLiveData<List<MapData>> mMapDataList;
+    private MutableLiveData<Boolean> mOpenedMapOnce;
 
     public MappingMainViewModel() {
         mMapDataList = new MutableLiveData<>();
         mMapDataList.setValue(new ArrayList<>());
+
+        mOpenedMapOnce = new MutableLiveData<>();
+        mOpenedMapOnce.setValue(false);
     }
 
     public LiveData<List<MapData>> getMapDataList() {
         return mMapDataList;
     }
 
-    public void setMapDataList(List<MapData> mapDataList) {
-        mMapDataList.setValue(mapDataList);
+    public void setMapDataList(List<MapData> savedMapDataList) {
+        mMapDataList.setValue(savedMapDataList);
     }
 
     public void addMapData(MapData mapData) {
@@ -31,5 +35,13 @@ public class MappingMainViewModel extends ViewModel {
 
     public void removeMapData(MapData mapData) {
         getMapDataList().getValue().remove(mapData);
+    }
+
+    public LiveData<Boolean> isOpenedMapOnce() {
+        return mOpenedMapOnce;
+    }
+
+    public void setOpenedMapOnce(boolean openedMapOnce) {
+        mOpenedMapOnce.setValue(openedMapOnce);
     }
 }

@@ -32,11 +32,16 @@ import com.example.trackie.R;
 import com.example.trackie.Utils;
 import com.example.trackie.database.FloorplanData;
 import com.example.trackie.database.FloorplanHelper;
+import com.example.trackie.database.MapData;
 import com.example.trackie.database.OnCompleteCallback;
 import com.example.trackie.ui.MainActivity;
 import com.example.trackie.ui.Prefs;
 import com.example.trackie.ui.locations.LocationsAdapter;
 import com.example.trackie.ui.testmode.TestModeActivity;
+import com.google.gson.Gson;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class MapModeActivity extends AppCompatActivity {
 // TODO: if preferences empty (no current location) tell user to go back and select location
@@ -50,8 +55,10 @@ public class MapModeActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_map_mode);
 
+        System.out.println("OnCreate is called");
         floorplanName = Prefs.getCurrentLocation(getApplicationContext());
         darkModeEnabled = Prefs.getDarkModeState(getApplicationContext());
+
 
         // set up action bar
         Toolbar toolbar = findViewById(R.id.top_toolbar);
@@ -78,8 +85,6 @@ public class MapModeActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.map_mode_host_fragment);
     }
 
-
-
     @Override
     public boolean onSupportNavigateUp() {
 
@@ -94,5 +99,4 @@ public class MapModeActivity extends AppCompatActivity {
     public boolean isDarkModeEnabled() {
         return darkModeEnabled;
     }
-
 }

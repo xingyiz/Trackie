@@ -100,53 +100,40 @@ public class MappingMainFragment extends Fragment implements PinImageMapView.Pin
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mapDataList = getArguments().getParcelable(MAP_DATA_KEY);
-        }
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View root = inflater.inflate(R.layout.fragment_mapping_main, container, false);
+
+        // get viewmodel
         viewModel = new ViewModelProvider(this).get(MappingMainViewModel.class);
+
+        final boolean alreadyOpenedMap = viewModel.isOpenedMapOnce().getValue(); // check if map is being opened for the first time
+
+        String json_mapdata = Prefs.getSavedMapping(getContext());
+        MapData[] tempMapDataArray = new Gson().fromJson(json_mapdata, MapData[].class);
+        if (tempMapDataArray == null || tempMapDataArray.length == 0) return root;
+
+        List<MapData> tempMapDataList = new ArrayList<>(Arrays.asList(tempMapDataArray));
+        if (tempMapDataList.get(0).getName().equals(floorplanLocation) && !alreadyOpenedMap) {
+
+            AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
+            alertDialog.setMessage("Restore last saved mapping?");
+            alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Yes",
+                    (dialog, which) -> viewModel.setMapDataList(tempMapDataList));
+            alertDialog.setButton(Dialog.BUTTON_NEGATIVE, "No, Start Fresh",
+                    (dialog, which) -> {
+                        Prefs.setSavedMapping(getContext(), "");
+                        dialog.dismiss();
+                    });
+
+            alertDialog.show();
+        }
+        viewModel.setOpenedMapOnce(true);
 
         return root;
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        String json_mapdata = Prefs.getSavedMapping(getContext());
-        System.out.println("JSON_MAPDATA: " + json_mapdata);
-        MapData[] tempMapDataArray = new Gson().fromJson(json_mapdata, MapData[].class);
-        if (tempMapDataArray.length == 0) return;
-
-        List<MapData> tempMapDataList = Arrays.asList(tempMapDataArray);
-        // check if saved mapping exists in device
-        if (tempMapDataList.get(0).getName().equals(floorplanLocation)) {
-            AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
-            alertDialog.setMessage("Restore last saved mapping?");
-            alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Yes", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    viewModel.setMapDataList(tempMapDataList);
-                }
-            });
-            alertDialog.setButton(Dialog.BUTTON_NEGATIVE, "No, Start Fresh", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.dismiss();
-                }
-            });
-            alertDialog.show();
-        } else {
-            Prefs.setSavedMapping(getContext(), "");
-        }
-    }
 
     // TODO: fix issue for when background image does not load by the time user clicks map mode
     @Override
@@ -159,9 +146,10 @@ public class MappingMainFragment extends Fragment implements PinImageMapView.Pin
 
         viewModel.getMapDataList().observe(getViewLifecycleOwner(), new Observer<List<MapData>>() {
             @Override
-            public void onChanged(List<MapData> mapDataList) {
+            public void onChanged(List<MapData> mMapDataList) {
+                mapDataList = mMapDataList;
                 List<PointF> mappedPoints = new ArrayList<>();
-                for (MapData mapData : mapDataList) {
+                for (MapData mapData : mMapDataList) {
                     mappedPoints.add(mapData.getLocation());
                 }
 
@@ -224,6 +212,7 @@ public class MappingMainFragment extends Fragment implements PinImageMapView.Pin
             }
         });
 
+        // upload data to firestore backend when 'End Mapping' button is clicked
         endMappingButton = (Button) view.findViewById(R.id.finish_mapping_button);
         endMappingButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -357,7 +346,7 @@ public class MappingMainFragment extends Fragment implements PinImageMapView.Pin
 
         @Override
         public void finishAllScanning() {
-            mapDataList.add(currentMapData);
+            System.out.println("MapDataList: " + mapDataList);
             viewModel.addMapData(currentMapData);
             mappingImageView.comfirmPoint();
             currentMapData = null;
