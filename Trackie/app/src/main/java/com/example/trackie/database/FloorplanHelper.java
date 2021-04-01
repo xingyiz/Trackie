@@ -31,7 +31,7 @@ public class FloorplanHelper {
 
     public static class GetFloorplanList implements FirestoreExecute {
         private final FirebaseFirestore db = FirebaseFirestore.getInstance();
-        private List<FloorplanData> floorplanDataList = new ArrayList<>();
+        private List<String> floorplanDataList = new ArrayList<>();
 
         @Override
         public void execute(OnCompleteCallback callback) {
@@ -43,7 +43,9 @@ public class FloorplanHelper {
                                 if (task.isSuccessful()) {
                                     for (QueryDocumentSnapshot doc : task.getResult()) {
                                         FloorplanData floorplanData = doc.toObject(FloorplanData.class);
-                                        floorplanDataList.add(floorplanData);
+                                        if (!floorplanDataList.contains(floorplanData.getName())) {
+                                            floorplanDataList.add(floorplanData.getName());
+                                        }
                                     }
                                     callback.onSuccess();
                                 } else {
@@ -56,7 +58,7 @@ public class FloorplanHelper {
             }
         }
 
-        public List<FloorplanData> getFloorplanDataList() {
+        public List<String> getFloorplanDataList() {
             return floorplanDataList;
         }
     }

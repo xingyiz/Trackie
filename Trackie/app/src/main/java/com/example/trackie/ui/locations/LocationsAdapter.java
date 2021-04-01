@@ -32,11 +32,11 @@ public class LocationsAdapter extends RecyclerView.Adapter {
     private Context context;
     private Activity activity;
     private static NavController navController;
-    private List<FloorplanData> locationsList;
+    private List<String> locationsList;
 
     private LocationsViewModel locationsViewModel;
 
-    public LocationsAdapter(Context context, Activity activity, List<FloorplanData> locationsList) {
+    public LocationsAdapter(Context context, Activity activity, List<String> locationsList) {
         this.context = context;
         this.activity = activity;
         navController = Navigation.findNavController(activity, R.id.nav_host_fragment);
@@ -57,19 +57,19 @@ public class LocationsAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         final ViewHolder viewHolder = (ViewHolder) holder;
-        FloorplanData floorplanData = locationsList.get(position);
-        viewHolder.locationNameTextview.setText(floorplanData.getName());
+        String floorplan = locationsList.get(position);
+        viewHolder.locationNameTextview.setText(floorplan);
 
         viewHolder.container.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-                builder.setMessage("Set Location: " + floorplanData.getName() + " ?")
+                builder.setMessage("Set Location: " + floorplan + " ?")
                         .setPositiveButton("Set", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                Prefs.setCurrentLocation(context, floorplanData.getName());
-                                Toast.makeText(context, "Location set: " + floorplanData.getName(), Toast.LENGTH_SHORT).show();
+                                Prefs.setCurrentLocation(context, floorplan);
+                                Toast.makeText(context, "Location set: " + floorplan, Toast.LENGTH_SHORT).show();
                                 navController.navigate(R.id.nav_home);
                             }
                         })
@@ -92,24 +92,24 @@ public class LocationsAdapter extends RecyclerView.Adapter {
                         .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                FloorplanHelper.RemoveFloorplan removeFloorplan = new FloorplanHelper.RemoveFloorplan(floorplanData.getName());
+                                FloorplanHelper.RemoveFloorplan removeFloorplan = new FloorplanHelper.RemoveFloorplan(floorplan);
                                 removeFloorplan.execute(new OnCompleteCallback() {
                                     @Override
                                     public void onSuccess() {
                                         locationsViewModel.loadLocations();
-                                        Toast.makeText(context, "Remove Success: " + floorplanData.getName() + " !", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(context, "Remove Success: " + floorplan + " !", Toast.LENGTH_LONG).show();
                                         locationsList.remove(position);
                                         LocationsAdapter.this.notifyItemRemoved(position);
                                     }
 
                                     @Override
                                     public void onFailure() {
-                                        Toast.makeText(context, "Remove Failure: " + floorplanData.getName() + " !", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(context, "Remove Failure: " + floorplan + " !", Toast.LENGTH_LONG).show();
                                     }
 
                                     @Override
                                     public void onError() {
-                                        Toast.makeText(context, "Remove Error: " + floorplanData.getName() + " !", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(context, "Remove Error: " + floorplan + " !", Toast.LENGTH_LONG).show();
                                     }
                                 });
                             }
