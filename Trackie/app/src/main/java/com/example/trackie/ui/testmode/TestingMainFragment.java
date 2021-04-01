@@ -90,7 +90,7 @@ public class TestingMainFragment extends Fragment {
         SharedPreferences preferences = getContext().getSharedPreferences(Utils.P_FILE, MODE_PRIVATE);
         String floorplanName = preferences.getString(Utils.CURRENT_LOCATION_KEY, "nil");
         if (!floorplanName.equals(null)) {
-            FloorplanHelper.RetrieveFloorplan retrieveFloorplan = new FloorplanHelper.RetrieveFloorplan(floorplanName);
+            FloorplanHelper.RetrieveFloorplan retrieveFloorplan = new FloorplanHelper.RetrieveFloorplan(floorplanName, getContext());
             retrieveFloorplan.execute(new OnCompleteCallback() {
                 @Override
                 public void onSuccess() {

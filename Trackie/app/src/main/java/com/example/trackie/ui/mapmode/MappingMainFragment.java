@@ -163,9 +163,8 @@ public class MappingMainFragment extends Fragment implements PinImageMapView.Pin
         }
 
         if (mapDataList == null) mapDataList = new ArrayList<>();
-        // TODO: change image loaded according to whether its dark mode or light mode
         if (floorplanLocation != null) {
-            FloorplanHelper.RetrieveFloorplan retrieveFloorplan = new FloorplanHelper.RetrieveFloorplan(floorplanLocation);
+            FloorplanHelper.RetrieveFloorplan retrieveFloorplan = new FloorplanHelper.RetrieveFloorplan(floorplanLocation, getContext());
             retrieveFloorplan.execute(new OnCompleteCallback() {
                 @Override
                 public void onSuccess() {
@@ -219,32 +218,33 @@ public class MappingMainFragment extends Fragment implements PinImageMapView.Pin
             public void onClick(View v) {
                 if (mapDataList.isEmpty()) {
                     Toast.makeText(getContext(), "No data to upload!", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getContext(), "Starting upload...", Toast.LENGTH_LONG).show();
+                    for (MapData data : mapDataList) {
+                        MapData preparedData = data.prepareForUpload(mappingImageView.getSWidth(),
+                                mappingImageView.getSHeight());
+                        FirestoreHelper.SetMapData dataSetter = new FirestoreHelper.SetMapData(preparedData);
+                        dataSetter.execute(new OnCompleteCallback() {
+                            @Override
+                            public void onSuccess() {
+                                // Toast.makeText(getContext(), "Data upload success!", Toast.LENGTH_SHORT).show();
+                                saveMapDataAsJSON();
+                            }
+
+                            @Override
+                            public void onFailure() {
+                                Toast.makeText(getContext(), "Data upload failed :/", Toast.LENGTH_SHORT).show();
+                            }
+
+                            @Override
+                            public void onError() {
+                            }
+                        });
+                    }
+
+                    Toast.makeText(getContext(), "Upload Complete! :)", Toast.LENGTH_LONG).show();
+                    mapDataList.clear();
                 }
-                Toast.makeText(getContext(), "Starting upload...", Toast.LENGTH_LONG).show();
-                for (MapData data : mapDataList) {
-                    MapData preparedData = data.prepareForUpload(mappingImageView.getSWidth(),
-                            mappingImageView.getSHeight());
-                    FirestoreHelper.SetMapData dataSetter = new FirestoreHelper.SetMapData(preparedData);
-                    dataSetter.execute(new OnCompleteCallback() {
-                        @Override
-                        public void onSuccess() {
-                            Toast.makeText(getContext(), "Data upload success!", Toast.LENGTH_SHORT).show();
-                            saveMapDataAsJSON();
-                            mapDataList.clear();
-                        }
-
-                        @Override
-                        public void onFailure() {
-                            Toast.makeText(getContext(), "Data upload failed :/", Toast.LENGTH_SHORT).show();
-                        }
-
-                        @Override
-                        public void onError() {
-                        }
-                    });
-                }
-
-                Toast.makeText(getContext(), "Upload Complete! :)", Toast.LENGTH_LONG).show();
             }
         });
     }

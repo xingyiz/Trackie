@@ -116,7 +116,7 @@ public class DatabaseTestFragment extends Fragment {
                     Toast.makeText(getContext(), mapDataList.size() + " datapoints", Toast.LENGTH_LONG).show();
 
                     if (mapDataList.size() > 0) {
-                        FloorplanHelper.RetrieveFloorplan retrieveFloorplan = new FloorplanHelper.RetrieveFloorplan(mapDataList.get(0).getName());
+                        FloorplanHelper.RetrieveFloorplan retrieveFloorplan = new FloorplanHelper.RetrieveFloorplan(mapDataList.get(0).getName(), getContext());
                         retrieveFloorplan.execute(new OnCompleteCallback() {
                             @Override
                             public void onSuccess() {
@@ -128,7 +128,7 @@ public class DatabaseTestFragment extends Fragment {
 
                             @Override
                             public void onFailure() {
-                                Toast.makeText(getContext(), "Can't Retrieve Floorplan", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getContext(), "No Such Floorplan. Please upload one or choose another!", Toast.LENGTH_SHORT).show();
                             }
 
                             @Override

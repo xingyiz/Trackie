@@ -1,18 +1,25 @@
 package com.example.trackie.database;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.Uri;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatDelegate;
 
+import com.example.trackie.ui.Prefs;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.SetOptions;
+import com.google.firebase.firestore.WriteBatch;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -58,15 +65,18 @@ public class FloorplanHelper {
         private String name;
         private String floorplanURL;
         private final FirebaseFirestore db = FirebaseFirestore.getInstance();
+        private int darkmode;
 
-        public RetrieveFloorplan(String name) {
+        public RetrieveFloorplan(String name, Context context) {
             this.name = name;
+            this.darkmode = Prefs.getDarkModeState(context) ? 1 : 0;
         }
 
         @Override
         public void execute(OnCompleteCallback callback) {
             try {
-                db.collection("Floorplans").document(name)
+                String floorplanName = name + darkmode;
+                db.collection("Floorplans").document(floorplanName)
                         .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -113,7 +123,8 @@ public class FloorplanHelper {
         @Override
         public void execute(OnCompleteCallback callback) {
             try {
-                StorageReference ref = storage.getReference(name);
+                String floorplanName = name + darkmode;
+                StorageReference ref = storage.getReference(floorplanName);
                 ref.putFile(floorplan).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -121,7 +132,7 @@ public class FloorplanHelper {
                             @Override
                             public void onSuccess(Uri uri) {
                                 floorplan = uri;
-                                db.collection("Floorplans").document(name)
+                                db.collection("Floorplans").document(floorplanName)
                                         .set(new FloorplanData(name, floorplan.toString(), darkmode), SetOptions.merge())
                                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
@@ -155,10 +166,17 @@ public class FloorplanHelper {
 
         @Override
         public void execute(OnCompleteCallback callback) {
+            WriteBatch writeBatch = db.batch();
             try {
-                db.collection("Floorplans").document(floorplanName)
-                        .delete()
-                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                DocumentReference dark = db.collection("Floorplans").document(floorplanName + "1");
+                DocumentReference light = db.collection("Floorplans").document(floorplanName + "0");
+                if (dark != null) {
+                    writeBatch.delete(dark);
+                }
+                if (light != null) {
+                    writeBatch.delete(light);
+                }
+                writeBatch.commit().addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()) {
