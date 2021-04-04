@@ -64,8 +64,6 @@ public class AddLocationScreenTest {
     }
 
     @Test
-
-
     public void LightFloorplanUploadTest() throws Exception{
         onView(withId(R.id.upload_floorplan_button))
                 .perform(click());

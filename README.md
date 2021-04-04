@@ -17,3 +17,7 @@ adb shell settings put global window_animation_scale 0
 adb shell settings put global transition_animation_scale 0
 adb shell settings put global animator_duration_scale 0
 ```
+
+#Links and Resources
+
+https://github.com/BraisGabin/FragmentTestRule/blob/master/sample/src/androidTest/java/com/android21buttons/fragmenttestrule/sample/FragmentWithActivityDependencyTest.java

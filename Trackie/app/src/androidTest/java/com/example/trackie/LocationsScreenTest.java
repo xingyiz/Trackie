@@ -53,7 +53,6 @@ public class LocationsScreenTest {
     public void setLocation() throws Exception{
         for (int i = 0; i < 5; i++) {
             // get name of button to click
-
             onView(withId(R.id.locations_recycler_view))
                     .perform(RecyclerViewActions.actionOnItemAtPosition(i, click()));
             onView(withId(android.R.id.button2)).perform(click());
