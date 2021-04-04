@@ -77,45 +77,25 @@
     <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib-common:1.3.50" level="project" />
     <orderEntry type="library" name="Gradle: org.jetbrains:annotations:13.0" level="project" />
     <orderEntry type="library" name="Gradle: com.google.firebase:firebase-annotations:16.0.0" level="project" />
-    <orderEntry type="library" name="Gradle: com.google.firebase:firebase-admin:6.5.0" level="project" />
-    <orderEntry type="library" name="Gradle: com.google.cloud:google-cloud-firestore:0.61.0-beta" level="project" />
-    <orderEntry type="library" name="Gradle: com.google.cloud:google-cloud-core-grpc:1.43.0" level="project" />
-    <orderEntry type="library" name="Gradle: com.google.api:gax-grpc:1.30.0" level="project" />
-    <orderEntry type="library" name="Gradle: io.grpc:grpc-protobuf:1.13.1" level="project" />
     <orderEntry type="library" name="Gradle: io.grpc:grpc-protobuf-lite:1.28.0" level="project" />
     <orderEntry type="library" name="Gradle: com.google.protobuf:protobuf-javalite:3.14.0" level="project" />
     <orderEntry type="library" name="Gradle: io.grpc:grpc-okhttp:1.28.0" level="project" />
     <orderEntry type="library" name="Gradle: com.squareup.okhttp:okhttp:2.7.5" level="project" />
     <orderEntry type="library" name="Gradle: com.squareup.okio:okio:1.13.0" level="project" />
-    <orderEntry type="library" name="Gradle: io.grpc:grpc-auth:1.13.1" level="project" />
-    <orderEntry type="library" name="Gradle: io.opencensus:opencensus-contrib-grpc-util:0.15.0" level="project" />
     <orderEntry type="library" name="Gradle: io.grpc:grpc-core:1.28.0" level="project" />
     <orderEntry type="library" name="Gradle: io.grpc:grpc-stub:1.28.0" level="project" />
     <orderEntry type="library" name="Gradle: io.grpc:grpc-api:1.28.0" level="project" />
-    <orderEntry type="library" name="Gradle: com.google.apis:google-api-services-drive:v3-rev197-1.25.0" level="project" />
-    <orderEntry type="library" name="Gradle: com.google.apis:google-api-services-discovery:v1-rev50-1.19.1" level="project" />
-    <orderEntry type="library" name="Gradle: com.google.api-client:google-api-client-gson:1.25.0" level="project" />
-    <orderEntry type="library" name="Gradle: com.google.cloud:google-cloud-storage:1.43.0" level="project" />
-    <orderEntry type="library" name="Gradle: com.google.cloud:google-cloud-core-http:1.43.0" level="project" />
-    <orderEntry type="library" name="Gradle: com.google.api-client:google-api-client:1.31.3" level="project" />
-    <orderEntry type="library" name="Gradle: com.google.oauth-client:google-oauth-client:1.31.4" level="project" />
-    <orderEntry type="library" name="Gradle: com.google.http-client:google-http-client-gson:1.39.0" level="project" />
-    <orderEntry type="library" name="Gradle: com.google.http-client:google-http-client-apache-v2:1.39.0" level="project" />
-    <orderEntry type="library" name="Gradle: com.google.cloud:google-cloud-core:1.43.0" level="project" />
-    <orderEntry type="library" name="Gradle: com.google.api:gax-httpjson:0.47.0" level="project" />
-    <orderEntry type="library" name="Gradle: com.google.api:gax:1.30.0" level="project" />
-    <orderEntry type="library" name="Gradle: com.google.auth:google-auth-library-oauth2-http:0.11.0" level="project" />
-    <orderEntry type="library" name="Gradle: com.google.http-client:google-http-client-jackson2:1.24.1" level="project" />
-    <orderEntry type="library" name="Gradle: com.google.http-client:google-http-client-appengine:1.24.1" level="project" />
-    <orderEntry type="library" name="Gradle: com.google.http-client:google-http-client-jackson:1.24.1" level="project" />
-    <orderEntry type="library" name="Gradle: com.google.http-client:google-http-client:1.39.0" level="project" />
+    <orderEntry type="library" name="Gradle: com.google.auth:google-auth-library-oauth2-http:0.25.2" level="project" />
+    <orderEntry type="library" name="Gradle: com.google.http-client:google-http-client-gson:1.39.1" level="project" />
+    <orderEntry type="library" name="Gradle: com.google.apis:google-api-services-discovery:v1-rev20190129-1.31.0" level="project" />
+    <orderEntry type="library" name="Gradle: com.google.api-client:google-api-client:1.31.1" level="project" />
+    <orderEntry type="library" name="Gradle: com.google.oauth-client:google-oauth-client:1.31.2" level="project" />
+    <orderEntry type="library" name="Gradle: com.google.http-client:google-http-client-jackson2:1.38.0" level="project" />
+    <orderEntry type="library" name="Gradle: com.google.http-client:google-http-client-apache-v2:1.38.0" level="project" />
+    <orderEntry type="library" name="Gradle: com.google.http-client:google-http-client:1.39.1" level="project" />
     <orderEntry type="library" name="Gradle: io.opencensus:opencensus-contrib-http-util:0.28.0" level="project" />
     <orderEntry type="library" name="Gradle: io.opencensus:opencensus-api:0.28.0" level="project" />
     <orderEntry type="library" name="Gradle: io.grpc:grpc-context:1.28.0" level="project" />
-    <orderEntry type="library" name="Gradle: com.google.api.grpc:proto-google-cloud-firestore-v1beta1:0.26.0" level="project" />
-    <orderEntry type="library" name="Gradle: com.google.api.grpc:proto-google-iam-v1:0.12.0" level="project" />
-    <orderEntry type="library" name="Gradle: com.google.api:api-common:1.7.0" level="project" />
-    <orderEntry type="library" name="Gradle: com.google.protobuf:protobuf-java-util:3.6.0" level="project" />
     <orderEntry type="library" name="Gradle: com.google.guava:guava:30.1-android" level="project" />
     <orderEntry type="library" name="Gradle: com.google.errorprone:error_prone_annotations:2.3.4" level="project" />
     <orderEntry type="library" name="Gradle: io.perfmark:perfmark-api:0.19.0" level="project" />
@@ -133,25 +113,9 @@
     <orderEntry type="library" name="Gradle: org.apache.httpcomponents:httpcore:4.4.14" level="project" />
     <orderEntry type="library" name="Gradle: commons-logging:commons-logging:1.2" level="project" />
     <orderEntry type="library" name="Gradle: commons-codec:commons-codec:1.11" level="project" />
-    <orderEntry type="library" name="Gradle: com.google.auth:google-auth-library-credentials:0.11.0" level="project" />
-    <orderEntry type="library" name="Gradle: com.fasterxml.jackson.core:jackson-core:2.9.2" level="project" />
-    <orderEntry type="library" name="Gradle: joda-time:joda-time:2.9.2" level="project" />
-    <orderEntry type="library" name="Gradle: org.threeten:threetenbp:1.3.3" level="project" />
-    <orderEntry type="library" name="Gradle: com.google.api.grpc:proto-google-common-protos:1.12.0" level="project" />
-    <orderEntry type="library" name="Gradle: com.google.protobuf:protobuf-java:3.6.0" level="project" />
-    <orderEntry type="library" name="Gradle: org.codehaus.jackson:jackson-core-asl:1.9.11" level="project" />
-    <orderEntry type="library" name="Gradle: com.google.apis:google-api-services-storage:v1-rev135-1.24.1" level="project" />
-    <orderEntry type="library" name="Gradle: io.grpc:grpc-netty-shaded:1.13.1" level="project" />
-    <orderEntry type="library" name="Gradle: com.google.auto.value:auto-value:1.4" level="project" />
-    <orderEntry type="library" name="Gradle: org.json:json:20160810" level="project" />
-    <orderEntry type="library" name="Gradle: org.slf4j:slf4j-api:1.7.25" level="project" />
-    <orderEntry type="library" name="Gradle: io.netty:netty-codec-http:4.1.22.Final" level="project" />
-    <orderEntry type="library" name="Gradle: io.netty:netty-handler:4.1.22.Final" level="project" />
-    <orderEntry type="library" name="Gradle: io.netty:netty-codec:4.1.22.Final" level="project" />
-    <orderEntry type="library" name="Gradle: io.netty:netty-transport:4.1.22.Final" level="project" />
-    <orderEntry type="library" name="Gradle: io.netty:netty-buffer:4.1.22.Final" level="project" />
-    <orderEntry type="library" name="Gradle: io.netty:netty-resolver:4.1.22.Final" level="project" />
-    <orderEntry type="library" name="Gradle: io.netty:netty-common:4.1.22.Final" level="project" />
+    <orderEntry type="library" name="Gradle: com.fasterxml.jackson.core:jackson-core:2.11.3" level="project" />
+    <orderEntry type="library" name="Gradle: com.google.auto.value:auto-value-annotations:1.7.4" level="project" />
+    <orderEntry type="library" name="Gradle: com.google.auth:google-auth-library-credentials:0.25.2" level="project" />
     <orderEntry type="library" name="Gradle: com.21buttons:fragment-test-rule-extras:2.0.1@aar" level="project" />
     <orderEntry type="library" name="Gradle: androidx.navigation:navigation-ui:2.2.2@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.google.android.material:material:1.4.0-alpha01@aar" level="project" />
