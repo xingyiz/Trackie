@@ -15,6 +15,8 @@ public class Prefs {
     public static String NUMBER_OF_SCANS_KEY = "number_of_scans";
     public static String SAVED_MAPPING_KEY = "saved_mapping_key";
 
+    public static String TOGGLE_TEST_B2L2_KEY = "toggle_b2l2_key";
+
     public static SharedPreferences intializeSharedPref(Context context) {
         preferences = context.getSharedPreferences(P_FILE, Context.MODE_PRIVATE);
         editor = preferences.edit();
@@ -90,6 +92,17 @@ public class Prefs {
     public static void clearSavedMapping(Context context) {
         if (preferences == null) intializeSharedPref(context);
         editor.putString(SAVED_MAPPING_KEY, "");
+        editor.apply();
+    }
+
+    public static boolean getTEST_B2L2(Context context) {
+        if (preferences == null) intializeSharedPref(context);
+        return preferences.getBoolean(TOGGLE_TEST_B2L2_KEY, false);
+    }
+
+    public static void setTEST_B2L2(Context context, boolean isTESTB2L2) {
+        if (preferences == null) intializeSharedPref(context);
+        editor.putBoolean(TOGGLE_TEST_B2L2_KEY, isTESTB2L2);
         editor.apply();
     }
 

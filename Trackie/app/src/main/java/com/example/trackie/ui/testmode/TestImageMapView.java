@@ -6,21 +6,11 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PointF;
 import android.graphics.drawable.Drawable;
-import android.os.Handler;
-import android.os.HandlerThread;
-import android.os.Looper;
-import android.os.SystemClock;
 import android.util.AttributeSet;
-import android.view.View;
-import android.widget.ImageView;
-
-import androidx.constraintlayout.core.widgets.Rectangle;
 
 import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
 import com.example.trackie.R;
 import com.example.trackie.Utils;
-
-import java.util.concurrent.TimeUnit;
 
 public class TestImageMapView extends SubsamplingScaleImageView {
     private final Paint paint = new Paint();
