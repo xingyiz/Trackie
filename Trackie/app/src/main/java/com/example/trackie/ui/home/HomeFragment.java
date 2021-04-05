@@ -29,10 +29,12 @@ import com.example.trackie.Utils;
 import com.example.trackie.database.FloorplanData;
 import com.example.trackie.database.FloorplanHelper;
 import com.example.trackie.database.OnCompleteCallback;
+import com.example.trackie.ui.Prefs;
 import com.example.trackie.ui.locations.LocationsFragment;
 import com.example.trackie.ui.locations.LocationsViewModel;
 import com.example.trackie.ui.mapmode.MapModeActivity;
 import com.example.trackie.ui.testmode.TestModeActivity;
+import com.example.trackie.ui.testmode.TestingViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,13 +47,14 @@ public class HomeFragment extends Fragment {
     Button setLocationButton;
     NavController controller;
 
-    private LocationsViewModel locationsViewModel;
-
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         // load locations
-        locationsViewModel = new ViewModelProvider(requireActivity()).get(LocationsViewModel.class);
+        LocationsViewModel locationsViewModel = new ViewModelProvider(requireActivity()).get(LocationsViewModel.class);
+        // load bssids
+//        TestingViewModel testingViewModel = new ViewModelProvider(requireActivity()).get(TestingViewModel.class);
+//        testingViewModel.loadGoodBSSIDs(Prefs.getCurrentLocation(getContext()), getContext());
 
         return root;
     }
