@@ -134,6 +134,8 @@ public class TestingMainFragment extends Fragment {
         @Override
         public void onScanResultsReceived(List<ScanResult> scanResults) {
             if (testImageMapView == null) return;
+            System.out.println("Scan results: ");
+            System.out.println(scanResults);
             // TODO: function which uses the data to get the location estimated by the algorithm
             Random random = new Random();
 
