@@ -86,7 +86,7 @@ public class TestingMainFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-//        TestingViewModel testingViewModel = new ViewModelProvider(requireActivity()).get(TestingViewModel.class);
+        TestingViewModel testingViewModel = new ViewModelProvider(requireActivity()).get(TestingViewModel.class);
 //        modelPrediction = new ModelPrediction(testingViewModel.getGoodBSSIDs(), testingViewModel.getSize());
 
         // long way first :(
@@ -95,6 +95,7 @@ public class TestingMainFragment extends Fragment {
             @Override
             public void onSuccess() {
                 goodBSSIDs = storageDownloader.getGoodBSSIDs();
+                modelPrediction = new ModelPrediction(goodBSSIDs, size);
                 size = storageDownloader.getSize();
                 Toast.makeText(getContext(), "GOOD_BSSIDS file retrieved :)", Toast.LENGTH_SHORT).show();
             }
@@ -110,15 +111,12 @@ public class TestingMainFragment extends Fragment {
             }
         });
 
-        modelPrediction = new ModelPrediction(goodBSSIDs, size);
-
         return inflater.inflate(R.layout.fragment_testing_main, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         // Set up map view
         testImageMapView = view.findViewById(R.id.testing_indoor_map_view);
         SharedPreferences preferences = getContext().getSharedPreferences(Utils.P_FILE, MODE_PRIVATE);
@@ -174,6 +172,12 @@ public class TestingMainFragment extends Fragment {
             PointF testPoint = new PointF(random.nextFloat() * testImageMapView.getSWidth(),
                                           random.nextFloat() * testImageMapView.getSHeight());
             testImageMapView.updateCurrentUserLocation(testPoint);
+            try {
+                modelPrediction.getPrediction(scanResults);
+            } catch (Exception e) {
+                e.printStackTrace();
+                Toast.makeText(getContext(), "Location has no saved BSSID values", Toast.LENGTH_SHORT).show();
+            }
         }
 
 
