@@ -22,6 +22,9 @@ import com.example.trackie.database.FloorplanHelper;
 import com.example.trackie.database.OnCompleteCallback;
 import com.example.trackie.database.FirestoreHelper;
 import com.example.trackie.database.MapData;
+import com.example.trackie.database.StorageDownloader;
+import com.example.trackie.ui.Prefs;
+import com.example.trackie.ui.testmode.TestingViewModel;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textview.MaterialTextView;
 import com.google.firebase.Timestamp;
@@ -61,6 +64,7 @@ public class DatabaseTestFragment extends Fragment {
 
             }
         });
+
         getButton = view.findViewById(R.id.get_button);
         setButton = view.findViewById(R.id.set_button);
         removeButton = view.findViewById(R.id.remove_button);
@@ -79,7 +83,8 @@ public class DatabaseTestFragment extends Fragment {
         getButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getData(false);
+//                 getData(false);
+                getBSSIDs();
             }
         });
 
@@ -140,6 +145,7 @@ public class DatabaseTestFragment extends Fragment {
                     }
                 } else {
                     if (mapDataList != null) {
+                        Toast.makeText(getContext(), "HI NO REMOVING ALLOWED", Toast.LENGTH_LONG).show();
                         //removeData();
                     }
                 }
@@ -197,4 +203,24 @@ public class DatabaseTestFragment extends Fragment {
                 }
             });
         }*/
+
+    public void getBSSIDs() {
+        StorageDownloader storageDownloader = new StorageDownloader(Prefs.getCurrentLocation(getContext()), getContext());
+        storageDownloader.execute(new OnCompleteCallback() {
+            @Override
+            public void onSuccess() {
+                textView.setText(storageDownloader.getGoodBSSIDs().toString());
+            }
+
+            @Override
+            public void onFailure() {
+                Toast.makeText(getContext(), "Getting GOOD_BSSIDS file failed", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onError() {
+                Toast.makeText(getContext(), "Getting GOOD_BSSIDS file errored", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 }

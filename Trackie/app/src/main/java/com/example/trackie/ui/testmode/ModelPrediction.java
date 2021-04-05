@@ -32,21 +32,34 @@ import java.util.Map;
 
 public class ModelPrediction {
 
-    public ArrayList<String> topBSSIDs;
+    public List<String> topBSSIDs;
+    public int size;
 
     // TODO: preprocess data coming in from WiFiScanner such that only RSSI from good BSSIDs are used
     private int[][] preprocessInputData(List<ScanResult> scanResults) {
-        int len = topBSSIDs.size();
-        int[][] inputdata = new int[len][1];
+        int[][] inputData = new int[size * 2][1];
+
+        // get index from topBSSIDs, place RSSI in correct place
         for (ScanResult scanResult : scanResults) {
             if (topBSSIDs.contains(scanResult.BSSID)) {
+                int index = topBSSIDs.indexOf(scanResult.BSSID);
+                inputData[index][1] = 1;
+                inputData[index + size][1] = scanResult.level;
             }
         }
-        return inputdata;
+
+        // for BSSIDs that are not found in scanResults, put -1 as RSSI
+        for (int i = 0; i < size; i++) {
+            if (inputData[i][1] == 0) {
+                inputData[i + size][1] = -1;
+            }
+        }
+        return inputData;
     }
 
-    public ModelPrediction(ArrayList<String> topBSSIDs) {
+    public ModelPrediction(List<String> topBSSIDs, int size) {
         this.topBSSIDs = topBSSIDs;
+        this.size = size;
     }
 
     public String getPrediction(List<ScanResult> scanResults) throws Exception {
