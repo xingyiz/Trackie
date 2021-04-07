@@ -41,7 +41,6 @@ public class ModelPrediction {
     public List<String> topBSSIDs;
     public int size;
 
-
     private final String CREDENTIALS_KEY = "{\n" +
             "  \"type\": \"service_account\",\n" +
             "  \"project_id\": \"trackie-2e28a\",\n" +
@@ -63,15 +62,15 @@ public class ModelPrediction {
         for (ScanResult scanResult : scanResults) {
             if (topBSSIDs.contains(scanResult.BSSID)) {
                 int index = topBSSIDs.indexOf(scanResult.BSSID);
-                inputData[index][1] = 1;
-                inputData[index + size][1] = scanResult.level;
+                inputData[index][0] = 1;
+                inputData[index + size][0] = scanResult.level / -100;
             }
         }
 
         // for BSSIDs that are not found in scanResults, put -1 as RSSI
         for (int i = 0; i < size; i++) {
-            if (inputData[i][1] == 0) {
-                inputData[i + size][1] = -1;
+            if (inputData[i][0] == 0) {
+                inputData[i + size][0] = -1;
             }
         }
         return inputData;
@@ -82,13 +81,13 @@ public class ModelPrediction {
         this.size = size;
     }
 
-    public void getPrediction(List<ScanResult> scanResults, OnReceivePredictionResultsCallback callback) {
+    public void getPrediction(List<ScanResult> scanResults) {
         int [][] inputData = preprocessInputData(scanResults);
         String inputJSON = createInputInstanceJSONFrom2DArray(inputData);
 
         System.out.println("Scan results: " + scanResults);
 
-        SendPredictionThread thread = new SendPredictionThread(callback, inputJSON);
+        SendPredictionThread thread = new SendPredictionThread(inputJSON);
         thread.start();
     }
 
@@ -103,7 +102,7 @@ public class ModelPrediction {
         private String inputJSON;
         private OnReceivePredictionResultsCallback callback;
 
-        public SendPredictionThread(OnReceivePredictionResultsCallback callback, String inputJSON) {
+        public SendPredictionThread(String inputJSON) {
             this.inputJSON = inputJSON;
             this.callback = callback;
         }
@@ -178,8 +177,7 @@ public class ModelPrediction {
                 System.out.println("IOException: fail to execute request");
                 e.printStackTrace();
             }
-            System.out.println("Response: " + response);
-            callback.onReceiveResults(response);
+            System.out.println(response);
         }
     }
 
