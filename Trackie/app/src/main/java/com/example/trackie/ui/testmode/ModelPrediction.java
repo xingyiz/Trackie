@@ -41,6 +41,7 @@ public class ModelPrediction {
     public List<String> topBSSIDs;
     public int size;
 
+
     private final String CREDENTIALS_KEY = "{\n" +
             "  \"type\": \"service_account\",\n" +
             "  \"project_id\": \"trackie-2e28a\",\n" +
@@ -81,15 +82,14 @@ public class ModelPrediction {
         this.size = size;
     }
 
-    public String getPrediction(List<ScanResult> scanResults) {
+    public void getPrediction(List<ScanResult> scanResults, OnReceivePredictionResultsCallback callback) {
         int [][] inputData = preprocessInputData(scanResults);
         String inputJSON = createInputInstanceJSONFrom2DArray(inputData);
 
         System.out.println("Scan results: " + scanResults);
 
-        SendPredictionThread thread = new SendPredictionThread(inputJSON);
+        SendPredictionThread thread = new SendPredictionThread(callback, inputJSON);
         thread.start();
-        return "";
     }
 
     private String createInputInstanceJSONFrom2DArray(int[][] inputArray) {
@@ -101,9 +101,11 @@ public class ModelPrediction {
 
     private class SendPredictionThread extends Thread {
         private String inputJSON;
+        private OnReceivePredictionResultsCallback callback;
 
-        public SendPredictionThread(String inputJSON) {
+        public SendPredictionThread(OnReceivePredictionResultsCallback callback, String inputJSON) {
             this.inputJSON = inputJSON;
+            this.callback = callback;
         }
 
         @Override
@@ -125,8 +127,8 @@ public class ModelPrediction {
             String projectId = "trackie-2e28a";
             // You should have already deployed a model and a version.
             // For reference, see https://cloud.google.com/ml-engine/docs/deploying-models.
-            String modelId = "trackie_model";
-            String versionId = "trackie_v1";
+            String modelId = "B2L2NEW_test";
+            String versionId = "B2L2NEW";
             param.set(
                     "name", String.format("projects/%s/models/%s/versions/%s", projectId, modelId, versionId));
 
@@ -176,8 +178,13 @@ public class ModelPrediction {
                 System.out.println("IOException: fail to execute request");
                 e.printStackTrace();
             }
-            System.out.println(response);
+            System.out.println("Response: " + response);
+            callback.onReceiveResults(response);
         }
+    }
+
+    public interface OnReceivePredictionResultsCallback {
+        void onReceiveResults(String result);
     }
 
 }

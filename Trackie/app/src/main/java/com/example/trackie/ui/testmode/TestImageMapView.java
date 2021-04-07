@@ -16,7 +16,7 @@ public class TestImageMapView extends SubsamplingScaleImageView {
     private final Paint paint = new Paint();
     private PointF currentUserLocation;
     private Bitmap pinBitmap;
-    private final static int ANIMATION_FRAMERATE = 8;
+    private final static int ANIMATION_FRAMERATE = 50;
 
 
     public TestImageMapView(Context context, AttributeSet attr) {
@@ -47,8 +47,7 @@ public class TestImageMapView extends SubsamplingScaleImageView {
             invalidate();
             return;
         }
-
-        PointThread pointThread = new PointThread(newLocation, ANIMATION_FRAMERATE);
+        PointThread pointThread = new PointThread(newLocation, this.getWidth() / ANIMATION_FRAMERATE);
         pointThread.start();
 
 

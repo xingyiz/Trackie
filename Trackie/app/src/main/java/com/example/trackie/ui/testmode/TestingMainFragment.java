@@ -173,7 +173,12 @@ public class TestingMainFragment extends Fragment {
                                           random.nextFloat() * testImageMapView.getSHeight());
             testImageMapView.updateCurrentUserLocation(testPoint);
             try {
-                modelPrediction.getPrediction(scanResults);
+                modelPrediction.getPrediction(scanResults, new ModelPrediction.OnReceivePredictionResultsCallback() {
+                    @Override
+                    public void onReceiveResults(String result) {
+                        System.out.println(result);
+                    }
+                });
             } catch (Exception e) {
                 e.printStackTrace();
                 Toast.makeText(getContext(), "Location has no saved BSSID values", Toast.LENGTH_SHORT).show();
