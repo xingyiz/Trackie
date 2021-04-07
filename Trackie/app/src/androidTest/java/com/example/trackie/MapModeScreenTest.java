@@ -8,8 +8,6 @@ import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.rule.ActivityTestRule;
 import androidx.test.uiautomator.*;
 
-import com.davemorrissey.labs.subscaleview.ImageSource;
-import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
 import com.example.trackie.ui.MainActivity;
 import com.example.trackie.ui.Prefs;
 import com.example.trackie.ui.mapmode.MapModeActivity;
@@ -101,7 +99,5 @@ public class MapModeScreenTest {
         onView(withText("Starting upload..."))
                 .inRoot(withDecorView(not(is(mHomeActivityTestRule.getActivity().getWindow().getDecorView()))))
                 .check(matches(isDisplayed()));
-
-
     }
 }
