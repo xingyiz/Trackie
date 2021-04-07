@@ -2,40 +2,47 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="match_parent">
-<LinearLayout
-    android:id="@+id/collect_wifi_data_progress_layout_container"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:background="@drawable/popup_window_background"
-    android:orientation="vertical">
 
-    <TextView
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/scanning_times_scanned_textview"
-        android:layout_margin="8dp"
-        android:text="@string/scanning_wifi_data"
-        android:textSize="@dimen/small_text_size"
-        android:layout_gravity="center_horizontal"/>
+        android:background="@drawable/popup_window_background">
 
-    <TextView
-        android:id="@+id/scanning_times_scanned_textview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/wifi_scanning_progress_indicator"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="Times scanned: "
-        android:textSize="@dimen/small_text_size"
-        android:layout_gravity="center_horizontal"/>
+        <LinearLayout
+            android:id="@+id/collect_wifi_data_progress_layout_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/window_popup_bg_stroke"
+            android:layout_margin="8dp"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/scanning_times_scanned_textview"
+                android:layout_margin="8dp"
+                android:text="@string/scanning_wifi_data"
+                android:textSize="@dimen/small_text_size"
+                android:layout_gravity="center_horizontal"/>
 
-    <ProgressBar
-        android:id="@+id/wifi_scanning_progress_indicator"
-        android:layout_width="55dp"
-        android:layout_height="55dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="8dp" />
+            <TextView
+                android:id="@+id/scanning_times_scanned_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/wifi_scanning_progress_indicator"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="Times scanned: "
+                android:textSize="@dimen/small_text_size"
+                android:layout_gravity="center_horizontal"/>
 
-</LinearLayout>
+            <ProgressBar
+                android:id="@+id/wifi_scanning_progress_indicator"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="8dp" />
+
+        </LinearLayout>
+    </LinearLayout>
 </LinearLayout>
