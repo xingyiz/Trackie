@@ -161,6 +161,7 @@ public class TestingMainFragment extends Fragment {
         dataUtils.scanWiFiDataIndefinitely();
     }
 
+
     private class TestWiFiDataListener implements FetchWiFiDataUtils.FetchListener {
 
         @Override

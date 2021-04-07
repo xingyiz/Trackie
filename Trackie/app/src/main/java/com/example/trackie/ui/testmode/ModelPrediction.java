@@ -1,5 +1,6 @@
 package com.example.trackie.ui.testmode;
 
+import android.graphics.PointF;
 import android.net.wifi.ScanResult;
 
 import com.google.api.client.http.javanet.NetHttpTransport;
@@ -55,8 +56,8 @@ public class ModelPrediction {
             "}";
 
     // TODO: preprocess data coming in from WiFiScanner such that only RSSI from good BSSIDs are used
-    private int[][] preprocessInputData(List<ScanResult> scanResults) {
-        int[][] inputData = new int[size * 2][1];
+    private double[][] preprocessInputData(List<ScanResult> scanResults) {
+        double[][] inputData = new double[size * 2][1];
 
         // get index from topBSSIDs, place RSSI in correct place
         for (ScanResult scanResult : scanResults) {
@@ -81,18 +82,18 @@ public class ModelPrediction {
         this.size = size;
     }
 
-    public void getPrediction(List<ScanResult> scanResults) {
-        int [][] inputData = preprocessInputData(scanResults);
+    public void getPrediction(List<ScanResult> scanResults, OnReceivePredictionResultsCallback callback) {
+        double[][] inputData = preprocessInputData(scanResults);
         String inputJSON = createInputInstanceJSONFrom2DArray(inputData);
 
         System.out.println("Scan results: " + scanResults);
 
-        SendPredictionThread thread = new SendPredictionThread(inputJSON);
+        SendPredictionThread thread = new SendPredictionThread(inputJSON, callback);
         thread.start();
     }
 
-    private String createInputInstanceJSONFrom2DArray(int[][] inputArray) {
-        Map<String, int[][]> map = new HashMap<>();
+    private String createInputInstanceJSONFrom2DArray(double[][] inputArray) {
+        Map<String, double[][]> map = new HashMap<>();
         map.put("instances", inputArray);
         JSONObject json = new JSONObject(map);
         return json.toString();
@@ -102,7 +103,7 @@ public class ModelPrediction {
         private String inputJSON;
         private OnReceivePredictionResultsCallback callback;
 
-        public SendPredictionThread(String inputJSON) {
+        public SendPredictionThread(String inputJSON, OnReceivePredictionResultsCallback callback) {
             this.inputJSON = inputJSON;
             this.callback = callback;
         }
@@ -126,8 +127,8 @@ public class ModelPrediction {
             String projectId = "trackie-2e28a";
             // You should have already deployed a model and a version.
             // For reference, see https://cloud.google.com/ml-engine/docs/deploying-models.
-            String modelId = "B2L2NEW_test";
-            String versionId = "B2L2NEW";
+            String modelId = "B2L2NEW_RF";
+            String versionId = "B2L2NEW_RF";
             param.set(
                     "name", String.format("projects/%s/models/%s/versions/%s", projectId, modelId, versionId));
 
@@ -178,11 +179,26 @@ public class ModelPrediction {
                 e.printStackTrace();
             }
             System.out.println(response);
+            callback.onReceiveResults(response);
         }
     }
 
     public interface OnReceivePredictionResultsCallback {
         void onReceiveResults(String result);
+    }
+
+    public PointF parsePredictionJSONForResult(String jsonResult) {
+        // TODO: PARSE THIS SHIT
+        // {
+        //  "predictions": [
+        //    [
+        //      0.3058874895796178,
+        //      0.42681561596691603
+        //    ]
+        //  ]
+        //}
+        return new PointF(0, 0);
+
     }
 
 }
