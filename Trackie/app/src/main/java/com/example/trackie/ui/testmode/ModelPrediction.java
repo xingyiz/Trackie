@@ -73,8 +73,8 @@ public class ModelPrediction {
 
         // for BSSIDs that are not found in scanResults, put -1 as RSSI
         for (int i = 0; i < size; i++) {
-            if (inputData[i][1] == 0) {
-                inputData[i + size][1] = -1;
+            if (inputData[i][0] == 0) {
+                inputData[i + size][0] = -1;
             }
         }
         return inputData;
