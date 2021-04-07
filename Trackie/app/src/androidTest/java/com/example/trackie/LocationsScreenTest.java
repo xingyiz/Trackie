@@ -1,4 +1,4 @@
-package com.example.trackie;
+ package com.example.trackie;
 
 import android.content.Context;
 
@@ -22,8 +22,6 @@ import org.junit.runners.JUnit4;
 
 
 import static androidx.test.espresso.Espresso.*;
-import static androidx.test.espresso.contrib.RecyclerViewActions.actionOnItem;
-import static androidx.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition;
 import static androidx.test.espresso.matcher.ViewMatchers.*;
 import static androidx.test.espresso.action.ViewActions.*;
 import static androidx.test.espresso.assertion.ViewAssertions.*;
