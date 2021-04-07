@@ -10,6 +10,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,10 +25,13 @@ import com.example.trackie.R;
 import com.example.trackie.Utils;
 import com.example.trackie.database.FloorplanHelper;
 import com.example.trackie.database.OnCompleteCallback;
+import com.example.trackie.database.StorageDownloader;
 import com.example.trackie.ui.FetchWiFiDataUtils;
+import com.example.trackie.ui.Prefs;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -45,6 +49,10 @@ public class TestingMainFragment extends Fragment {
     private TestImageMapView testImageMapView;
     private FetchWiFiDataUtils dataUtils;
     private TestWiFiDataListener testWiFiDataListener;
+
+    private ModelPrediction modelPrediction;
+    private ArrayList<String> goodBSSIDs;
+    private int size;
 
     public TestingMainFragment() {
         // Required empty public constructor
@@ -78,13 +86,37 @@ public class TestingMainFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        TestingViewModel testingViewModel = new ViewModelProvider(requireActivity()).get(TestingViewModel.class);
+//        modelPrediction = new ModelPrediction(testingViewModel.getGoodBSSIDs(), testingViewModel.getSize());
+
+        // long way first :(
+        StorageDownloader storageDownloader = new StorageDownloader(Prefs.getCurrentLocation(getContext()), getContext());
+        storageDownloader.execute(new OnCompleteCallback() {
+            @Override
+            public void onSuccess() {
+                goodBSSIDs = storageDownloader.getGoodBSSIDs();
+                modelPrediction = new ModelPrediction(goodBSSIDs, size);
+                size = storageDownloader.getSize();
+                Toast.makeText(getContext(), "GOOD_BSSIDS file retrieved :)", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure() {
+                Toast.makeText(getContext(), "Getting GOOD_BSSIDS file failed", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onError() {
+                Toast.makeText(getContext(), "Getting GOOD_BSSIDS file errored", Toast.LENGTH_SHORT).show();
+            }
+        });
+
         return inflater.inflate(R.layout.fragment_testing_main, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         // Set up map view
         testImageMapView = view.findViewById(R.id.testing_indoor_map_view);
         SharedPreferences preferences = getContext().getSharedPreferences(Utils.P_FILE, MODE_PRIVATE);
@@ -140,7 +172,14 @@ public class TestingMainFragment extends Fragment {
             PointF testPoint = new PointF(random.nextFloat() * testImageMapView.getSWidth(),
                                           random.nextFloat() * testImageMapView.getSHeight());
             testImageMapView.updateCurrentUserLocation(testPoint);
+            try {
+                modelPrediction.getPrediction(scanResults);
+            } catch (Exception e) {
+                e.printStackTrace();
+                Toast.makeText(getContext(), "Location has no saved BSSID values", Toast.LENGTH_SHORT).show();
+            }
         }
+
 
         @Override
         public void onError(Throwable error) {

@@ -7,6 +7,7 @@ import android.view.View;
 
 import com.example.trackie.R;
 import com.example.trackie.Utils;
+import com.example.trackie.ui.testmode.ModelPrediction;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.appcompat.app.AppCompatDelegate;
@@ -32,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
         } else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         }
+
 
         showSystemUI();
         setContentView(R.layout.activity_main);
