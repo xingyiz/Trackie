@@ -1,7 +1,10 @@
 package com.example.trackie.ui.testmode;
 
 import android.net.wifi.ScanResult;
+import android.widget.Toast;
 
+import com.google.api.client.googleapis.auth.oauth2.GoogleCredential;
+import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.http.ByteArrayContent;
 import com.google.api.client.http.FileContent;
@@ -14,6 +17,7 @@ import com.google.api.client.http.UriTemplate;
 import com.google.api.client.http.json.JsonHttpContent;
 import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.gson.GsonFactory;
+import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.services.discovery.Discovery;
 import com.google.api.services.discovery.model.JsonSchema;
 import com.google.api.services.discovery.model.RestDescription;
@@ -62,8 +66,8 @@ public class ModelPrediction {
         for (ScanResult scanResult : scanResults) {
             if (topBSSIDs.contains(scanResult.BSSID)) {
                 int index = topBSSIDs.indexOf(scanResult.BSSID);
-                inputData[index][1] = 1;
-                inputData[index + size][1] = scanResult.level;
+                inputData[index][0] = 1;
+                inputData[index + size][0] = scanResult.level / -100;
             }
         }
 
@@ -89,6 +93,11 @@ public class ModelPrediction {
 
         SendPredictionThread thread = new SendPredictionThread(inputJSON);
         thread.start();
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         return "";
     }
 
@@ -125,8 +134,8 @@ public class ModelPrediction {
             String projectId = "trackie-2e28a";
             // You should have already deployed a model and a version.
             // For reference, see https://cloud.google.com/ml-engine/docs/deploying-models.
-            String modelId = "trackie_model";
-            String versionId = "trackie_v1";
+            String modelId = "B2L2NEW_test";
+            String versionId = "B2L2NEW";
             param.set(
                     "name", String.format("projects/%s/models/%s/versions/%s", projectId, modelId, versionId));
 
@@ -179,5 +188,4 @@ public class ModelPrediction {
             System.out.println(response);
         }
     }
-
 }
