@@ -66,15 +66,15 @@ public class ModelPrediction {
         for (ScanResult scanResult : scanResults) {
             if (topBSSIDs.contains(scanResult.BSSID)) {
                 int index = topBSSIDs.indexOf(scanResult.BSSID);
-                inputData[index][0] = 1;
-                inputData[index + size][0] = scanResult.level / -100;
+                inputData[0][index] = 1;
+                inputData[0][index + size] = scanResult.level / -100;
             }
         }
 
         // for BSSIDs that are not found in scanResults, put -1 as RSSI
         for (int i = 0; i < size; i++) {
-            if (inputData[i][0] == 0) {
-                inputData[i + size][0] = -1;
+            if (inputData[0][i] == 0) {
+                inputData[0][i + size] = -1;
             }
         }
         return inputData;
