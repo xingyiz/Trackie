@@ -2,6 +2,7 @@ package com.example.trackie.ui.testmode;
 
 import android.graphics.PointF;
 import android.net.wifi.ScanResult;
+import android.widget.Toast;
 
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.http.ByteArrayContent;
@@ -15,6 +16,7 @@ import com.google.api.client.http.UriTemplate;
 import com.google.api.client.http.json.JsonHttpContent;
 import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.gson.GsonFactory;
+import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.services.discovery.Discovery;
 import com.google.api.services.discovery.model.JsonSchema;
 import com.google.api.services.discovery.model.RestDescription;
@@ -56,22 +58,22 @@ public class ModelPrediction {
             "}";
 
     // TODO: preprocess data coming in from WiFiScanner such that only RSSI from good BSSIDs are used
-    private double[][] preprocessInputData(List<ScanResult> scanResults) {
-        double[][] inputData = new double[size * 2][1];
+    private int[][] preprocessInputData(List<ScanResult> scanResults) {
+        int[][] inputData = new int[1][size * 2];
 
         // get index from topBSSIDs, place RSSI in correct place
         for (ScanResult scanResult : scanResults) {
             if (topBSSIDs.contains(scanResult.BSSID)) {
                 int index = topBSSIDs.indexOf(scanResult.BSSID);
-                inputData[index][0] = 1;
-                inputData[index + size][0] = scanResult.level / -100;
+                inputData[0][index] = 1;
+                inputData[0][index + size] = scanResult.level / -100;
             }
         }
 
         // for BSSIDs that are not found in scanResults, put -1 as RSSI
         for (int i = 0; i < size; i++) {
-            if (inputData[i][0] == 0) {
-                inputData[i + size][0] = -1;
+            if (inputData[0][i] == 0) {
+                inputData[0][i + size] = -1;
             }
         }
         return inputData;
@@ -82,18 +84,24 @@ public class ModelPrediction {
         this.size = size;
     }
 
-    public void getPrediction(List<ScanResult> scanResults, OnReceivePredictionResultsCallback callback) {
-        double[][] inputData = preprocessInputData(scanResults);
+    public String getPrediction(List<ScanResult> scanResults) {
+        int [][] inputData = preprocessInputData(scanResults);
         String inputJSON = createInputInstanceJSONFrom2DArray(inputData);
 
         System.out.println("Scan results: " + scanResults);
 
-        SendPredictionThread thread = new SendPredictionThread(inputJSON, callback);
+        SendPredictionThread thread = new SendPredictionThread(inputJSON);
         thread.start();
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return "";
     }
 
-    private String createInputInstanceJSONFrom2DArray(double[][] inputArray) {
-        Map<String, double[][]> map = new HashMap<>();
+    private String createInputInstanceJSONFrom2DArray(int[][] inputArray) {
+        Map<String, int[][]> map = new HashMap<>();
         map.put("instances", inputArray);
         JSONObject json = new JSONObject(map);
         return json.toString();
@@ -103,7 +111,7 @@ public class ModelPrediction {
         private String inputJSON;
         private OnReceivePredictionResultsCallback callback;
 
-        public SendPredictionThread(String inputJSON, OnReceivePredictionResultsCallback callback) {
+        public SendPredictionThread(String inputJSON) {
             this.inputJSON = inputJSON;
             this.callback = callback;
         }

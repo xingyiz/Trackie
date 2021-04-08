@@ -24,6 +24,8 @@
         <item name="colorAccent">@color/androidGreen</item>
         <item name="colorControlHighlight">@color/yellowGreenCrayola</item>
 
+        <item name="backgroundColor">@color/jet</item>
+
         <!-- Enable transitions -->
         <item name="android:windowActivityTransitions">true</item>
         <item name="android:windowContentTransitions">true</item>

@@ -1,7 +1,6 @@
 package com.example.trackie;
 
 import android.view.View;
-import android.widget.TextView;
 
 import androidx.test.espresso.UiController;
 import androidx.test.espresso.ViewAction;
@@ -9,9 +8,6 @@ import androidx.test.espresso.action.CoordinatesProvider;
 import androidx.test.espresso.action.GeneralClickAction;
 import androidx.test.espresso.action.Press;
 import androidx.test.espresso.action.Tap;
-
-import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
-import com.example.trackie.R;
 
 import org.hamcrest.Matcher;
 
