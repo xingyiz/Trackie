@@ -31,6 +31,9 @@ import com.example.trackie.ui.Prefs;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -117,6 +120,7 @@ public class TestingMainFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         // Set up map view
         testImageMapView = view.findViewById(R.id.testing_indoor_map_view);
         SharedPreferences preferences = getContext().getSharedPreferences(Utils.P_FILE, MODE_PRIVATE);
@@ -167,17 +171,21 @@ public class TestingMainFragment extends Fragment {
         @Override
         public void onScanResultsReceived(List<ScanResult> scanResults) {
             if (testImageMapView == null) return;
-            // TODO: function which uses the data to get the location estimated by the algorithm
-            Random random = new Random();
 
-            PointF testPoint = new PointF(random.nextFloat() * testImageMapView.getSWidth(),
-                                          random.nextFloat() * testImageMapView.getSHeight());
-            testImageMapView.updateCurrentUserLocation(testPoint);
             try {
                 modelPrediction.getPrediction(scanResults, new ModelPrediction.OnReceivePredictionResultsCallback() {
                     @Override
-                    public void onReceiveResults(String result) {
-                        System.out.println(result);
+                    public void onReceiveResults(double[] result) {
+                        PointF predictedPoint = new PointF((float) result[0] * testImageMapView.getSWidth(),
+                                                           (float) result[1] * testImageMapView.getSHeight());
+                        testImageMapView.updateCurrentUserLocation(predictedPoint);
+                    }
+
+                    @Override
+                    public void onError() {
+                        Toast.makeText(getContext()
+                                ,"Failed to parse JSON prediction string. Check code under ModelPrediction.parsePredictionJSONForResult()"
+                                , Toast.LENGTH_SHORT);
                     }
                 });
             } catch (Exception e) {

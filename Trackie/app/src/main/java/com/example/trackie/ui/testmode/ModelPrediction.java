@@ -13,27 +13,21 @@ import com.google.api.client.http.HttpRequest;
 import com.google.api.client.http.HttpRequestFactory;
 import com.google.api.client.http.HttpTransport;
 import com.google.api.client.http.UriTemplate;
-import com.google.api.client.http.json.JsonHttpContent;
-import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.gson.GsonFactory;
-import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.services.discovery.Discovery;
 import com.google.api.services.discovery.model.JsonSchema;
 import com.google.api.services.discovery.model.RestDescription;
 import com.google.api.services.discovery.model.RestMethod;
 import com.google.auth.http.HttpCredentialsAdapter;
-import com.google.auth.oauth2.AccessToken;
 import com.google.auth.oauth2.GoogleCredentials;
-import com.google.gson.Gson;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayInputStream;
-import java.io.File;
 import java.io.IOException;
-import java.io.SequenceInputStream;
 import java.nio.charset.StandardCharsets;
-import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -84,20 +78,14 @@ public class ModelPrediction {
         this.size = size;
     }
 
-    public String getPrediction(List<ScanResult> scanResults) {
+    public void getPrediction(List<ScanResult> scanResults, OnReceivePredictionResultsCallback callback) {
         int [][] inputData = preprocessInputData(scanResults);
         String inputJSON = createInputInstanceJSONFrom2DArray(inputData);
 
         System.out.println("Scan results: " + scanResults);
 
-        SendPredictionThread thread = new SendPredictionThread(inputJSON);
+        SendPredictionThread thread = new SendPredictionThread(inputJSON, callback);
         thread.start();
-        try {
-            thread.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        return "";
     }
 
     private String createInputInstanceJSONFrom2DArray(int[][] inputArray) {
@@ -111,7 +99,7 @@ public class ModelPrediction {
         private String inputJSON;
         private OnReceivePredictionResultsCallback callback;
 
-        public SendPredictionThread(String inputJSON) {
+        public SendPredictionThread(String inputJSON, OnReceivePredictionResultsCallback callback) {
             this.inputJSON = inputJSON;
             this.callback = callback;
         }
@@ -146,8 +134,7 @@ public class ModelPrediction {
 
             String contentType = "application/json";
             HttpContent content = ByteArrayContent.fromString(contentType, inputJSON);
-//        File requestBodyFile = new File("input.txt");
-//        HttpContent content = new FileContent(contentType, requestBodyFile);
+
             try {
                 System.out.println("Content length: " + content.getLength());
                 System.out.println("Input JSON string: " + inputJSON);
@@ -187,26 +174,27 @@ public class ModelPrediction {
                 e.printStackTrace();
             }
             System.out.println(response);
-            callback.onReceiveResults(response);
+
+            try {
+                callback.onReceiveResults(parsePredictionJSONForResult(response));
+            } catch (JSONException e) {
+                e.printStackTrace();
+                callback.onError();
+            }
         }
     }
 
     public interface OnReceivePredictionResultsCallback {
-        void onReceiveResults(String result);
+        void onReceiveResults(double[] result);
+        void onError();
     }
 
-    public PointF parsePredictionJSONForResult(String jsonResult) {
-        // TODO: PARSE THIS SHIT
-        // {
-        //  "predictions": [
-        //    [
-        //      0.3058874895796178,
-        //      0.42681561596691603
-        //    ]
-        //  ]
-        //}
-        return new PointF(0, 0);
-
+    public double[] parsePredictionJSONForResult(String jsonResult) throws JSONException {
+        JSONObject json = new JSONObject(jsonResult);
+        JSONArray jsonArray = json.getJSONArray("predictions");
+        double[] result = new double[]{jsonArray.getJSONArray(0).getDouble(0),
+                                       jsonArray.getJSONArray(0).getDouble(1)};
+        return result;
     }
 
 }

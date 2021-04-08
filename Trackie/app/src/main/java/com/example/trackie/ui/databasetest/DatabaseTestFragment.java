@@ -65,6 +65,7 @@ public class DatabaseTestFragment extends Fragment {
             }
         });
 
+
         getButton = view.findViewById(R.id.get_button);
         setButton = view.findViewById(R.id.set_button);
         removeButton = view.findViewById(R.id.remove_button);
