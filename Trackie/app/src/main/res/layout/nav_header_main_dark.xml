@@ -33,6 +33,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingTop="2dp"
+        android:id="@+id/nav_header_currentPrivs"
         android:text="@string/nav_header_subtitle"
         android:fontFamily="@font/raleway_regular"
         android:textSize="14sp"

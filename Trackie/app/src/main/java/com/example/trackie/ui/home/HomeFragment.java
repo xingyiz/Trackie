@@ -16,7 +16,9 @@ import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -29,12 +31,14 @@ import com.example.trackie.Utils;
 import com.example.trackie.database.FloorplanData;
 import com.example.trackie.database.FloorplanHelper;
 import com.example.trackie.database.OnCompleteCallback;
+import com.example.trackie.ui.AdminDialogFragment;
 import com.example.trackie.ui.Prefs;
 import com.example.trackie.ui.locations.LocationsFragment;
 import com.example.trackie.ui.locations.LocationsViewModel;
 import com.example.trackie.ui.mapmode.MapModeActivity;
 import com.example.trackie.ui.testmode.TestModeActivity;
 import com.example.trackie.ui.testmode.TestingViewModel;
+import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -75,8 +79,15 @@ public class HomeFragment extends Fragment {
         mapModeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent mapIntent = new Intent(getActivity(), MapModeActivity.class);
-                startActivity(mapIntent, ActivityOptions.makeSceneTransitionAnimation(getActivity()).toBundle());
+                if (Prefs.getAdminMode(getContext())) {
+                    Intent mapIntent = new Intent(getActivity(), MapModeActivity.class);
+                    startActivity(mapIntent, ActivityOptions.makeSceneTransitionAnimation(getActivity()).toBundle());
+                } else {
+                    AdminDialogFragment admin = new AdminDialogFragment();
+                    FragmentTransaction ft = getParentFragmentManager().beginTransaction();
+                    ft.addToBackStack(null);
+                    admin.show(ft, "admin");
+                }
             }
         });
 

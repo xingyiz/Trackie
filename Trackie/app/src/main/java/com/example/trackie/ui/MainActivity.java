@@ -3,13 +3,16 @@ package com.example.trackie.ui;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.view.View;
+import android.widget.TextView;
 
 import com.example.trackie.R;
 import com.example.trackie.Utils;
 import com.example.trackie.ui.testmode.ModelPrediction;
 import com.google.android.material.navigation.NavigationView;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -23,6 +26,7 @@ import static android.view.View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
 
 public class MainActivity extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;
+    private TextView currentPrivs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,9 +57,15 @@ public class MainActivity extends AppCompatActivity {
         if (!Prefs.getDarkModeState(getApplicationContext())) {
             navigationView.inflateHeaderView(R.layout.nav_header_main);
         }
+
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
+        View headerView = navigationView.getHeaderView(0);
+        currentPrivs = headerView.findViewById(R.id.nav_header_currentPrivs);
+        String current = Prefs.getAdminMode(getApplicationContext()) ? "Admin" : "User";
+        currentPrivs.setText("Current Privileges: " + current);
     }
 
     @Override

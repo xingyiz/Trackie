@@ -14,6 +14,7 @@ public class Prefs {
     public static String ACTIVE_SCANNING_KEY = "active_scanning_enabled";
     public static String NUMBER_OF_SCANS_KEY = "number_of_scans";
     public static String SAVED_MAPPING_KEY = "saved_mapping_key";
+    public static String ADMIN_MODE = "admin_mode";
 
     public static String TOGGLE_TEST_B2L2_KEY = "toggle_b2l2_key";
 
@@ -53,6 +54,17 @@ public class Prefs {
     public static void setCurrentLocation(Context context, String currentLocation) {
         if (preferences == null) intializeSharedPref(context);
         editor.putString(CURRENT_LOCATION_KEY, currentLocation);
+        editor.apply();
+    }
+
+    public static boolean getAdminMode(Context context) {
+        if (preferences == null) intializeSharedPref(context);
+        return preferences.getBoolean(ADMIN_MODE, false);
+    }
+
+    public static void setAdminMode(Context context, boolean adminMode) {
+        if (preferences == null) intializeSharedPref(context);
+        editor.putBoolean(ADMIN_MODE, adminMode);
         editor.apply();
     }
 
