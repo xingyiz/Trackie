@@ -27,7 +27,7 @@ import java.util.List;
 
 public class LocationsFragment extends Fragment {
     private LocationsViewModel locationsViewModel;
-    private List<String> floorplanDataList = new ArrayList<>();
+    private List<FloorplanData> floorplanDataList = new ArrayList<>();
     RecyclerView locationsRecyclerView;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -37,7 +37,7 @@ public class LocationsFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_locations, container, false);
 
         locationsRecyclerView = (RecyclerView) root.findViewById(R.id.locations_recycler_view);
-        floorplanDataList = (List<String>) locationsViewModel.getLocationsData();
+        floorplanDataList = (List<FloorplanData>) locationsViewModel.getLocationsData();
         RecyclerView.Adapter locationsAdapter = new LocationsAdapter(getContext(), getActivity(), floorplanDataList);
         locationsRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         locationsRecyclerView.setAdapter(locationsAdapter);

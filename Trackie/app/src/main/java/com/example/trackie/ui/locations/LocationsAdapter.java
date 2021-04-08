@@ -32,17 +32,20 @@ import com.example.trackie.database.FloorplanHelper;
 import com.example.trackie.database.OnCompleteCallback;
 import com.example.trackie.ui.Prefs;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class LocationsAdapter extends RecyclerView.Adapter {
     private Context context;
     private Activity activity;
     private static NavController navController;
-    private List<String> locationsList;
+    private List<FloorplanData> locationsList;
 
     private LocationsViewModel locationsViewModel;
 
-    public LocationsAdapter(Context context, Activity activity, List<String> locationsList) {
+    public LocationsAdapter(Context context, Activity activity, List<FloorplanData> locationsList) {
         this.context = context;
         this.activity = activity;
         navController = Navigation.findNavController(activity, R.id.nav_host_fragment);
@@ -63,8 +66,17 @@ public class LocationsAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         final ViewHolder viewHolder = (ViewHolder) holder;
-        String floorplan = locationsList.get(position);
+        String floorplan = locationsList.get(position).getName();
         viewHolder.locationNameTextview.setText(floorplan);
+
+        try {
+            SimpleDateFormat sfd = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss",
+                    Locale.getDefault());
+            String text = sfd.format(locationsList.get(position).getTimestamp().toDate());
+            viewHolder.locationDescriptionTextview.setText("Created : " + text);
+        } catch (NullPointerException e) {
+            Toast.makeText(context, "Floorplan has no date.", Toast.LENGTH_SHORT).show();
+        }
 
         viewHolder.container.setOnClickListener(new View.OnClickListener() {
             @Override

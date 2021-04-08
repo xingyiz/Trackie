@@ -18,12 +18,12 @@ import java.util.List;
 
 public class LocationsViewModel extends ViewModel {
 
-    public MutableLiveData<ArrayList<String>> locationsData = new MutableLiveData<>();
+    public MutableLiveData<ArrayList<FloorplanData>> locationsData = new MutableLiveData<>();
 
     public LocationsViewModel() {
         loadLocations();
     }
-    public ArrayList<String> getLocationsData() {
+    public ArrayList<FloorplanData> getLocationsData() {
         return locationsData.getValue();
     }
 
@@ -32,7 +32,7 @@ public class LocationsViewModel extends ViewModel {
         getFloorplanList.execute(new OnCompleteCallback() {
             @Override
             public void onSuccess() {
-                ArrayList<String> floorplanDataList = (ArrayList<String>) getFloorplanList.getFloorplanDataList();
+                ArrayList<FloorplanData> floorplanDataList = (ArrayList<FloorplanData>) getFloorplanList.getFloorplanDataList();
 //                Toast.makeText(getContext(), "Floorplan List Retrieved", Toast.LENGTH_SHORT).show();
                 locationsData.setValue(floorplanDataList);
             }

@@ -31,6 +31,7 @@ import com.example.trackie.R;
 import com.example.trackie.database.FloorplanHelper;
 import com.example.trackie.database.OnCompleteCallback;
 import com.google.android.material.checkbox.MaterialCheckBox;
+import com.google.firebase.Timestamp;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -122,7 +123,7 @@ public class AddLocationFragment extends Fragment {
                 // set upload to database code here
                 int darkmode = checkBox.isChecked() ? 1 : 0;
                 FloorplanHelper.UploadFloorplan uploadFloorplan = new FloorplanHelper.UploadFloorplan(
-                        locationNameEditText.getText().toString(), filePath, darkmode);
+                        locationNameEditText.getText().toString(), filePath, darkmode, new Timestamp(new Date()));
                 uploadFloorplan.execute(new OnCompleteCallback() {
                     @Override
                     public void onSuccess() {

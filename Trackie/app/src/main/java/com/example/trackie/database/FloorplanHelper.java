@@ -13,6 +13,7 @@ import com.example.trackie.ui.Prefs;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -31,7 +32,7 @@ public class FloorplanHelper {
 
     public static class GetFloorplanList implements FirestoreExecute {
         private final FirebaseFirestore db = FirebaseFirestore.getInstance();
-        private List<String> floorplanDataList = new ArrayList<>();
+        private List<FloorplanData> floorplanDataList = new ArrayList<>();
 
         @Override
         public void execute(OnCompleteCallback callback) {
@@ -44,7 +45,7 @@ public class FloorplanHelper {
                                     for (QueryDocumentSnapshot doc : task.getResult()) {
                                         FloorplanData floorplanData = doc.toObject(FloorplanData.class);
                                         if (!floorplanDataList.contains(floorplanData.getName())) {
-                                            floorplanDataList.add(floorplanData.getName());
+                                            floorplanDataList.add(floorplanData);
                                         }
                                     }
                                     callback.onSuccess();
@@ -58,7 +59,7 @@ public class FloorplanHelper {
             }
         }
 
-        public List<String> getFloorplanDataList() {
+        public List<FloorplanData> getFloorplanDataList() {
             return floorplanDataList;
         }
     }
@@ -66,6 +67,7 @@ public class FloorplanHelper {
     public static class RetrieveFloorplan implements FirestoreExecute {
         private String name;
         private String floorplanURL;
+        private Timestamp timestamp;
         private final FirebaseFirestore db = FirebaseFirestore.getInstance();
         private int darkmode;
 
@@ -91,6 +93,7 @@ public class FloorplanHelper {
                             }
                             name = floorplanData.getName();
                             floorplanURL = floorplanData.getFloorplan();
+                            timestamp = floorplanData.getTimestamp();
                             callback.onSuccess();
                         } else {
                             callback.onFailure();
@@ -105,6 +108,10 @@ public class FloorplanHelper {
         public String getFloorplanURL() {
             return floorplanURL;
         }
+
+        public Timestamp getTimestamp() {
+            return timestamp;
+        }
     }
 
     public static class UploadFloorplan implements FirestoreExecute {
@@ -112,14 +119,16 @@ public class FloorplanHelper {
         private String name;
         private Uri floorplan;
         private int darkmode;
+        private Timestamp timestamp;
 
         private final FirebaseStorage storage = FirebaseStorage.getInstance();
         private final FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-        public UploadFloorplan(String name, Uri floorplan, int darkmode) {
+        public UploadFloorplan(String name, Uri floorplan, int darkmode, Timestamp timestamp) {
             this.name = name;
             this.floorplan = floorplan;
             this.darkmode = darkmode;
+            this.timestamp = timestamp;
         }
 
         @Override
@@ -135,7 +144,7 @@ public class FloorplanHelper {
                             public void onSuccess(Uri uri) {
                                 floorplan = uri;
                                 db.collection("Floorplans").document(floorplanName)
-                                        .set(new FloorplanData(name, floorplan.toString(), darkmode), SetOptions.merge())
+                                        .set(new FloorplanData(name, floorplan.toString(), darkmode, timestamp), SetOptions.merge())
                                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {

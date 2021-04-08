@@ -5,6 +5,8 @@ import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
 
+import com.google.firebase.Timestamp;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,15 +14,17 @@ public class FloorplanData implements MapRep, Parcelable {
     private String name;
     private String floorplan;
     private int darkmode;
+    private Timestamp timestamp;
 
     public FloorplanData() {
 
     }
 
-    public FloorplanData(String name, String floorplan, int darkmode) {
+    public FloorplanData(String name, String floorplan, int darkmode, Timestamp timestamp) {
         this.name = name;
         this.floorplan = floorplan;
         this.darkmode = darkmode;
+        this.timestamp = timestamp;
     }
 
     protected FloorplanData(Parcel in) {
@@ -51,6 +55,10 @@ public class FloorplanData implements MapRep, Parcelable {
 
     public int getDarkmode() {
         return darkmode;
+    }
+
+    public Timestamp getTimestamp() {
+        return timestamp;
     }
 
     @Override

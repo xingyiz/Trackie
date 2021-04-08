@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -57,7 +58,7 @@ public class RSSITestFragment extends Fragment {
         sharedPreferences = this.getActivity().getSharedPreferences(pFile, Context.MODE_PRIVATE);
         oneMeterRSSI = sharedPreferences.getInt("measured_rssi", -50);
 
-        MaterialButton scanButton = view.findViewById(R.id.rssi_button);
+        Button scanButton = view.findViewById(R.id.rssi_button);
         scanButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
