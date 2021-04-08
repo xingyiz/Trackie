@@ -20,6 +20,7 @@
 
         <item name="backgroundColor">@color/white_gray</item>
 
+
         <!-- Enable transitions -->
         <item name="android:windowActivityTransitions">true</item>
         <item name="android:windowContentTransitions">true</item>
@@ -47,20 +48,21 @@
 
     <style name="Theme.Trackie.AlertText" parent="Widget.AppCompat.TextView">
         <item name="android:textSize">@dimen/alert_text_size</item>
-        <item name="android:fontFamily">@font/bsegoeui</item>
+        <item name="android:fontFamily">@font/opensans_semibold</item>
         <item name="android:textColor">?attr/colorPrimary</item>
         <item name="backgroundColor">?attr/colorSecondary</item>
     </style>
 
     <style name="Theme.Trackie.TitleText" parent="Widget.AppCompat.TextView">
         <item name="android:textSize">@dimen/button_text_size</item>
-        <item name="android:fontFamily">@font/bsegoeui</item>
+        <item name="android:fontFamily">@font/opensans_semibold</item>
         <item name="android:textColor">?attr/colorPrimaryVariant</item>
     </style>
 
     <style name="Theme.Trackie.MainButton" parent="Widget.AppCompat.Button">
         <item name="android:background">@drawable/button_colour</item>
         <item name="android:textColor">@drawable/button_text_colour</item>
+        <item name="font">@font/opensans_reg</item>
         <item name="android:textSize">@dimen/button_text_size</item>
     </style>
 

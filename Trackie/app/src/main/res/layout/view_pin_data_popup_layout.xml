@@ -16,7 +16,7 @@
         android:layout_height="match_parent"
         android:src="@drawable/popup_bg2"
         android:background="@drawable/popup_bg2"
-        android:alpha="0.5"
+        android:alpha="0.8"
         />
 
     <TextView
@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/alert_text_size"
         android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:fontFamily="@font/bsegoeui"
+        android:fontFamily="@font/opensans_bold"
         android:text="Pin Location : (x, y)"
         android:textSize="@dimen/button_text_size"
         android:textColor="?attr/colorSecondary"
@@ -40,7 +40,8 @@
         android:layout_marginEnd="@dimen/alert_text_size"
         android:text="BSSIDs mapped: 0"
         android:textSize="10sp"
-        android:fontFamily="@font/segoeui"
+        android:fontFamily="@font/opensans_reg"
+        android:textColor="?attr/colorSecondaryVariant"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -50,7 +51,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="6dp"
         android:layout_marginEnd="@dimen/alert_text_size"
-        android:fontFamily="@font/segoeui"
+        android:fontFamily="@font/opensans_reg"
+        android:textColor="?attr/colorSecondaryVariant"
         android:text="Time mapped: --/--/--"
         android:textSize="10sp"
         app:layout_constraintEnd_toEndOf="parent"
