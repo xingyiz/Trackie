@@ -9,7 +9,9 @@
         <item name="colorPrimary">@color/airBlue</item>
         <item name="colorPrimaryVariant">@color/blueGray</item>
         <item name="colorOnPrimary">@color/beauBlue</item>
-        <item name="colorOnBackground">@color/airBlue</item>
+        <item name="colorOnBackground">@color/charcoal</item>
+        <item name="colorOnPrimarySurface">@color/midtone</item>
+
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/charcoal</item>
         <item name="colorSecondaryVariant">@color/coolBlack</item>
@@ -55,7 +57,7 @@
 
     <style name="Theme.Trackie.TitleText" parent="Widget.AppCompat.TextView">
         <item name="android:textSize">@dimen/button_text_size</item>
-        <item name="android:fontFamily">@font/opensans_semibold</item>
+        <item name="android:fontFamily">@font/opensans_bold</item>
         <item name="android:textColor">?attr/colorPrimaryVariant</item>
     </style>
 

@@ -15,6 +15,7 @@
         android:layout_marginTop="6dp"
         android:layout_marginBottom="6dp"
         android:text="Location"
+        android:textColor="?attr/colorOnBackground"
         android:theme="@style/Theme.Trackie.TitleText"
         app:layout_constraintBottom_toTopOf="@+id/location_description_textview"
         app:layout_constraintStart_toStartOf="parent"
@@ -27,6 +28,8 @@
         android:layout_marginStart="10dp"
         android:layout_marginBottom="6dp"
         android:text="Created 00/00/00 • 00:00"
+        android:textColor="?attr/colorOnPrimarySurface"
+        android:fontFamily="@font/raleway_regular"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/location_name_textview" />
@@ -36,6 +39,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="6dp"
+        app:tint="?attr/colorOnBackground"
         app:layout_constraintBottom_toBottomOf="@+id/location_name_textview"
         app:layout_constraintStart_toEndOf="@+id/location_name_textview"
         app:layout_constraintTop_toTopOf="@+id/location_name_textview"
@@ -47,6 +51,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="12dp"
+        app:tint="?attr/colorOnBackground"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_more_vert_24px" />

@@ -6,12 +6,15 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.PopupMenu;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelStoreOwner;
@@ -126,18 +129,52 @@ public class LocationsAdapter extends RecyclerView.Adapter {
                 return true;
             }
         });
+
+        viewHolder.overflowButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                //creating a popup menu
+                PopupMenu popup = new PopupMenu(context, viewHolder.overflowButton);
+                //inflating menu from xml resource
+                popup.inflate(R.menu.locations_overflow_menu);
+                //adding click listener
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        switch (item.getItemId()) {
+                            case R.id.locmenu_edit:
+                                //handle menu1 click
+                                return true;
+                            case R.id.locmenu_delete:
+                                //handle menu2 click
+                                return true;
+
+                            default:
+                                return false;
+                        }
+                    }
+                });
+                //displaying the popup
+                popup.show();
+
+            }
+        });
     }
 
     private class ViewHolder extends RecyclerView.ViewHolder {
+        public View buttonViewOption;
         ConstraintLayout container;
         TextView locationNameTextview;
         TextView locationDescriptionTextview;
+        ImageView overflowButton;
+
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             locationNameTextview = itemView.findViewById(R.id.location_name_textview);
             locationDescriptionTextview = itemView.findViewById(R.id.location_description_textview);
-
+            overflowButton = itemView.findViewById(R.id.location_options_button);
             container = itemView.findViewById(R.id.location_recycler_layout_container);
         }
     }

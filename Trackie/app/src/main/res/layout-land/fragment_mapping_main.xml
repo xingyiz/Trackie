@@ -28,6 +28,7 @@
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
         android:text="@string/confirm_mapping_location"
+        android:fontFamily="@font/opensans_semibold"
         app:layout_constraintBottom_toBottomOf="@+id/mapping_indoor_map_view"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -44,6 +45,6 @@
         android:text="@string/end_mapping"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/mapping_indoor_map_view"
-        android:fontFamily="@font/bsegoeui" />
+        android:fontFamily="@font/opensans_semibold" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
