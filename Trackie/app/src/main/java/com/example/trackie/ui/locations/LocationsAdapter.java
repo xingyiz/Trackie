@@ -5,10 +5,12 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,6 +18,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelStoreOwner;
 import androidx.navigation.NavController;
@@ -84,6 +87,16 @@ public class LocationsAdapter extends RecyclerView.Adapter {
                         });
                 AlertDialog dialog = builder.create();
                 dialog.show();
+
+                TextView dialogText = (TextView) dialog.findViewById(android.R.id.message);
+                Button button1 = (Button) dialog.getWindow().findViewById(android.R.id.button1);
+                Button button2 = (Button) dialog.getWindow().findViewById(android.R.id.button2);
+
+                Typeface face = ResourcesCompat.getFont(context, R.font.opensans_reg);
+                Typeface bface = ResourcesCompat.getFont(context, R.font.opensans_semibold);
+                dialogText.setTypeface(face);
+                button1.setTypeface(bface);
+                button2.setTypeface(bface);
             }
         });
 
@@ -144,12 +157,11 @@ public class LocationsAdapter extends RecyclerView.Adapter {
                     public boolean onMenuItemClick(MenuItem item) {
                         switch (item.getItemId()) {
                             case R.id.locmenu_edit:
-                                //handle menu1 click
+
                                 return true;
                             case R.id.locmenu_delete:
-                                //handle menu2 click
-                                return true;
 
+                                return true;
                             default:
                                 return false;
                         }

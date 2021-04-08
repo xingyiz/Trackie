@@ -34,7 +34,7 @@
         android:layout_height="wrap_content"
         android:paddingTop="2dp"
         android:text="@string/nav_header_subtitle"
-        android:fontFamily="@font/opensans_reg"
+        android:fontFamily="@font/raleway_regular"
         android:textSize="14sp"
         android:textColor="@color/white"/>
 
