@@ -38,18 +38,7 @@ public class ModelPrediction {
     public List<String> topBSSIDs;
     public int size;
 
-    private final String CREDENTIALS_KEY = "{\n" +
-            "  \"type\": \"service_account\",\n" +
-            "  \"project_id\": \"trackie-2e28a\",\n" +
-            "  \"private_key_id\": \"bb4a06f5a2de4f942f6cdb4c0d8320a94af5a625\",\n" +
-            "  \"private_key\": \"-----BEGIN PRIVATE KEY-----\\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQC4mnIXZO4LeWLF\\nOU9692Gv7GzAth6B/RpcRjvEzHms/jXRP596uCzzepBRIDnwzXrIsxFqhuDh9Bcg\\nHHbQU5IYDfhBHkrgFqaLWYwIaHC+U1nv0NOLmgmve4GOv8Q6Oi2VqPlDdJyfNvmO\\nXNAEJjWDBRSfCvUxuHc04bK2B1ezkQs9KESjSTS4V0dvTmcGA0if1MXkhYJMqD3v\\nh3X0k3EV6sqrVQnH+MDP0l1Nf61CtOE7Gd5oksUWgdvF+IhLTCpVfu87t85GvaS0\\nN7tDhuZ4Npm7kfgu+dKqYJAglwtsQk/eZKwS0MA7ZgsVxorU0MMo3UZwC72cZjrn\\nVP+XFNMNAgMBAAECggEACyEMhcqI61orETbOStyFICUBvXB9UFrg7vUw/0FQiJRe\\nzDmotK5Lz3XxI2Ls+053+4eIIkL1ZcngZwgwRYj0Qsz8zXg1DWNwMPB6F7usKF1A\\nC8wsJLtpoBGzEtcOzm/Zda9VL7LlClg3HVUNGWLwUPDKeHghphi33xFIQ98Xc3TN\\n2XgOXdl4vi8EBnv7zPtsIo61nlHwc0IrechhZBhKRgoC0uiD3A+rrz1vpaMtauib\\nq9pysy727LyvAWw7lKZmPVJn55OpxjKnt3N0RzKNhuXpJPV/O1t2ea5HKI1euLTh\\nNtGqk2jFv2ZXCuLbkWUGfGwm/iARaLdctrq19JBS4QKBgQDkPfZasDtGx6URE3BH\\nKDtBkyH9qUEKBF9FnJcYi5/2DfZRsI6/Re3HskUWg28QWG2cuzvYNOQy7kmlwSpv\\npMCKu8u/nwb4CiqpTOGUy32gOBjIEUs5UKcCxwRuvZX2i0jTRYRRhll5ne/cFB72\\nifKd5E+/jPvwd/xSNc23AR8NCQKBgQDPDdgvahdJQcTLarRxkszxu9iLpcCQkTPd\\nTt3CAPpTKV6+P9Kd7MnfNCg0pG5dq8AzK27uk3gB8hPQSSWh5CpgDkltjlWmO8TQ\\nX64HMjMVj6eh660sDik5r91ngSny222aKaIgS1NetQp3wVIm1unQ8S/O62qK7+F9\\nhMsUBTFa5QKBgArwYU9FZQHmbaXc3aO7bOOerqFerExTm1FVyPQXNQpw7t5JbP4D\\n1vqcM615jSgmZNJ/MsYQ+uLqAsOb93G0XroHeCNt9sKKkjLdCW69Nf8o0R89nPJZ\\nSDfc2/yGv5o6YLoneckCfGVUyXstx7IfOG6S07OliSmkRoaWJ47e0eMpAoGBAKTt\\nZzWlcTUGMWbC8UbCY4NuWLgr6K5/KuvuxU+ijcMuYexzVCY9ljO4DQqZq9vrUiaw\\nQyXAy8fo9wVjLpm88FAhMTYWOX03gLdmb24F+5ECI8oju4YrJYVw45Bt32c2iCBT\\nZ3QH7Dm1RchMck7Dw+2OIMHW3cAcAeaEn2qsFDtNAoGBANez86woF2QiNvzqcqy9\\n/qIzfSjFNVNNcyK2LpzJmdCjbkr91MbdIV2wlKU9eVeG1YuGF7B22iWOYss797/I\\nnDlXpEau583EJhwZrHPxmj3z19Dw4yoUJPpteYwMNTrqvlf1aE04dkT8wpW38VJl\\nzgmw+hXi2m7WawWXdHgs2Ytd\\n-----END PRIVATE KEY-----\\n\",\n" +
-            "  \"client_email\": \"ai-engineer@trackie-2e28a.iam.gserviceaccount.com\",\n" +
-            "  \"client_id\": \"104991642182561362583\",\n" +
-            "  \"auth_uri\": \"https://accounts.google.com/o/oauth2/auth\",\n" +
-            "  \"token_uri\": \"https://oauth2.googleapis.com/token\",\n" +
-            "  \"auth_provider_x509_cert_url\": \"https://www.googleapis.com/oauth2/v1/certs\",\n" +
-            "  \"client_x509_cert_url\": \"https://www.googleapis.com/robot/v1/metadata/x509/ai-engineer%40trackie-2e28a.iam.gserviceaccount.com\"\n" +
-            "}";
+    private String CREDENTIALS_KEY = " ";
 
     // TODO: preprocess data coming in from WiFiScanner such that only RSSI from good BSSIDs are used
     private int[][] preprocessInputData(List<ScanResult> scanResults) {
@@ -118,11 +107,11 @@ public class ModelPrediction {
             RestMethod method = api.getResources().get("projects").getMethods().get("predict");
 
             JsonSchema param = new JsonSchema();
-            String projectId = "trackie-2e28a";
+            String projectId = "trackiev2";
             // You should have already deployed a model and a version.
             // For reference, see https://cloud.google.com/ml-engine/docs/deploying-models.
-            String modelId = "B2L2NEW_RF";
-            String versionId = "B2L2NEW_RF";
+            String modelId = "B2L2_RF";
+            String versionId = "B2L2_RF";
             param.set(
                     "name", String.format("projects/%s/models/%s/versions/%s", projectId, modelId, versionId));
 

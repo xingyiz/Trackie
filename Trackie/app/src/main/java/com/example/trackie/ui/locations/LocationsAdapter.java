@@ -33,6 +33,7 @@ import com.example.trackie.database.OnCompleteCallback;
 import com.example.trackie.ui.Prefs;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -42,6 +43,7 @@ public class LocationsAdapter extends RecyclerView.Adapter {
     private Activity activity;
     private static NavController navController;
     private List<FloorplanData> locationsList;
+    private List<String> locationsString = new ArrayList<>();
 
     private LocationsViewModel locationsViewModel;
 
@@ -49,6 +51,11 @@ public class LocationsAdapter extends RecyclerView.Adapter {
         this.context = context;
         this.activity = activity;
         navController = Navigation.findNavController(activity, R.id.nav_host_fragment);
+        for (FloorplanData data : locationsList) {
+            if (!locationsString.contains(data.getName())) {
+                locationsString.add(data.getName());
+            }
+        }
         this.locationsList = locationsList;
     }
 
@@ -66,7 +73,7 @@ public class LocationsAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         final ViewHolder viewHolder = (ViewHolder) holder;
-        String floorplan = locationsList.get(position).getName();
+        String floorplan = locationsString.get(position);
         viewHolder.locationNameTextview.setText(floorplan);
 
         try {
@@ -205,7 +212,7 @@ public class LocationsAdapter extends RecyclerView.Adapter {
 
     @Override
     public int getItemCount() {
-        if (locationsList == null) return -1;
-        return locationsList.size();
+        if (locationsString == null) return -1;
+        return locationsString.size();
     }
 }
