@@ -15,6 +15,8 @@ import androidx.lifecycle.ViewModelProvider;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -23,17 +25,20 @@ import com.bumptech.glide.request.transition.Transition;
 import com.davemorrissey.labs.subscaleview.ImageSource;
 import com.example.trackie.R;
 import com.example.trackie.Utils;
+import com.example.trackie.database.FirestoreExecute;
 import com.example.trackie.database.FloorplanHelper;
 import com.example.trackie.database.OnCompleteCallback;
 import com.example.trackie.database.StorageDownloader;
 import com.example.trackie.ui.FetchWiFiDataUtils;
 import com.example.trackie.ui.Prefs;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -50,6 +55,9 @@ import static android.content.Context.MODE_PRIVATE;
 public class TestingMainFragment extends Fragment {
 
     private TestImageMapView testImageMapView;
+    private ImageButton alertTestingDiscrepencyButton;
+    private Button endTestingButton;
+
     private FetchWiFiDataUtils dataUtils;
     private TestWiFiDataListener testWiFiDataListener;
 
@@ -163,6 +171,14 @@ public class TestingMainFragment extends Fragment {
         testWiFiDataListener = new TestWiFiDataListener();
         dataUtils = new FetchWiFiDataUtils(getActivity(), testWiFiDataListener, false);
         dataUtils.scanWiFiDataIndefinitely();
+
+        alertTestingDiscrepencyButton = view.findViewById(R.id.testing_discrepency_button);
+        endTestingButton = view.findViewById(R.id.end_testing_button);
+        endTestingButton.setOnClickListener(v -> {
+
+        });
+
+
     }
 
 
@@ -183,9 +199,7 @@ public class TestingMainFragment extends Fragment {
 
                     @Override
                     public void onError() {
-                        Toast.makeText(getContext()
-                                ,"Failed to parse JSON prediction string. Check code under ModelPrediction.parsePredictionJSONForResult()"
-                                , Toast.LENGTH_SHORT);
+                        System.out.println("Failed to parse JSON prediction string. Check code under ModelPrediction.parsePredictionJSONForResult()");
                     }
                 });
             } catch (Exception e) {
