@@ -25,6 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text"
+            android:fontFamily="@font/raleway_regular"
             android:maxLines="1"/>
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -36,6 +37,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
         android:foreground="?attr/selectableItemBackground"
+        android:fontFamily="@font/raleway_bold"
         android:paddingLeft="@dimen/nav_header_vertical_spacing"
         android:paddingRight="@dimen/nav_header_vertical_spacing"
         android:text="@string/upload_floorplan_here"
@@ -47,6 +49,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Darkmode Compatible?"
+        android:fontFamily="@font/raleway_regular"
         app:layout_constraintEnd_toEndOf="@+id/upload_location_input_layout"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/upload_location_input_layout"
@@ -72,6 +75,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="32dp"
         android:text="@string/confirm_floorplan"
+        android:fontFamily="@font/raleway_bold"
         android:foreground="?attr/selectableItemBackground"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/upload_floorplan_button"

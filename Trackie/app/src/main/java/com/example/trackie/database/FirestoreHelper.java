@@ -129,9 +129,4 @@ public class FirestoreHelper {
             }
         }
     }
-
-    public static class UpdateMapData {
-        private FirebaseFirestore db = FirebaseFirestore.getInstance();
-        // TODO
-    }
 }

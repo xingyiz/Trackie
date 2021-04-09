@@ -1,24 +1,49 @@
 package com.example.trackie.database;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import androidx.annotation.NonNull;
+
+import com.google.firebase.Timestamp;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class FloorplanData implements MapRep {
+public class FloorplanData implements MapRep, Parcelable {
     private String name;
     private String floorplan;
     private int darkmode;
+    private Timestamp timestamp;
 
     public FloorplanData() {
 
     }
 
-    public FloorplanData(String name, String floorplan, int darkmode) {
+    public FloorplanData(String name, String floorplan, int darkmode, Timestamp timestamp) {
         this.name = name;
         this.floorplan = floorplan;
         this.darkmode = darkmode;
+        this.timestamp = timestamp;
     }
+
+    protected FloorplanData(Parcel in) {
+        name = in.readString();
+        floorplan = in.readString();
+        darkmode = in.readInt();
+    }
+
+    public static final Creator<FloorplanData> CREATOR = new Creator<FloorplanData>() {
+        @Override
+        public FloorplanData createFromParcel(Parcel in) {
+            return new FloorplanData(in);
+        }
+
+        @Override
+        public FloorplanData[] newArray(int size) {
+            return new FloorplanData[size];
+        }
+    };
 
     public String getName() {
         return name;
@@ -30,6 +55,10 @@ public class FloorplanData implements MapRep {
 
     public int getDarkmode() {
         return darkmode;
+    }
+
+    public Timestamp getTimestamp() {
+        return timestamp;
     }
 
     @Override
@@ -47,5 +76,17 @@ public class FloorplanData implements MapRep {
         return "[FloorplanData: name = " + name
                 + ", floorplan = " + floorplan
                 + ", darkmode = " + darkmode + " ]";
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(name);
+        dest.writeString(floorplan);
+        dest.writeInt(darkmode);
     }
 }

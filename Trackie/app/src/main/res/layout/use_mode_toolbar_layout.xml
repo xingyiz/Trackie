@@ -24,17 +24,18 @@
             android:layout_height="40dp"
             android:layout_centerVertical="true"
             android:background="@drawable/ic_keyboard_return_24px"
-            android:backgroundTint="?attr/colorOnPrimary"></ImageButton>
+            android:backgroundTint="?attr/colorOnPrimary"
+            android:contentDescription="current_location_arrow" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/back_to_home_button"
-            android:fontFamily="@font/segoeui"
-            android:text="Current Location"
+            android:layout_toEndOf="@id/back_to_home_button"
+            android:fontFamily="@font/opensans_reg"
+            android:text="current_location"
             android:textAlignment="center"
             android:textColor="?attr/colorOnPrimary"
-            android:textSize="@dimen/alert_text_size"></TextView>
+            android:textSize="@dimen/alert_text_size" />
 
     </RelativeLayout>
 </androidx.appcompat.widget.Toolbar>

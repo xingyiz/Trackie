@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -57,7 +58,7 @@ public class RSSITestFragment extends Fragment {
         sharedPreferences = this.getActivity().getSharedPreferences(pFile, Context.MODE_PRIVATE);
         oneMeterRSSI = sharedPreferences.getInt("measured_rssi", -50);
 
-        MaterialButton scanButton = view.findViewById(R.id.rssi_button);
+        Button scanButton = view.findViewById(R.id.rssi_button);
         scanButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -182,14 +183,12 @@ public class RSSITestFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, 87);
             }
         }
     }
-
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);

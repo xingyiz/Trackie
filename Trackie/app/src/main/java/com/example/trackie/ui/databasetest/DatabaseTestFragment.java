@@ -22,6 +22,9 @@ import com.example.trackie.database.FloorplanHelper;
 import com.example.trackie.database.OnCompleteCallback;
 import com.example.trackie.database.FirestoreHelper;
 import com.example.trackie.database.MapData;
+import com.example.trackie.database.StorageDownloader;
+import com.example.trackie.ui.Prefs;
+import com.example.trackie.ui.testmode.TestingViewModel;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textview.MaterialTextView;
 import com.google.firebase.Timestamp;
@@ -61,6 +64,8 @@ public class DatabaseTestFragment extends Fragment {
 
             }
         });
+
+
         getButton = view.findViewById(R.id.get_button);
         setButton = view.findViewById(R.id.set_button);
         removeButton = view.findViewById(R.id.remove_button);
@@ -79,7 +84,8 @@ public class DatabaseTestFragment extends Fragment {
         getButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getData(false);
+//                 getData(false);
+                getBSSIDs();
             }
         });
 
@@ -98,23 +104,25 @@ public class DatabaseTestFragment extends Fragment {
                 } else if (mapDataList.size() == 0){
                     Toast.makeText(getContext(), "Nothing to remove", Toast.LENGTH_SHORT).show();
                 } else {
-                    removeData();
+                    Toast.makeText(getContext(), "HI NO REMOVING ALLOWED", Toast.LENGTH_LONG).show();
+                    // removeData();
                 }
             }
         });
     }
 
     public void getData(boolean remove) {
-        FirestoreHelper.GetMapData getter = new FirestoreHelper.GetMapData("B2L2");
+        FirestoreHelper.GetMapData getter = new FirestoreHelper.GetMapData("B2L2 ACCURATE");
         getter.execute(new OnCompleteCallback() {
             @Override
             public void onSuccess() {
                 if (!remove) {
                     mapDataList = getter.getResult();
                     textView.setText(mapDataList.toString());
+                    Toast.makeText(getContext(), mapDataList.size() + " datapoints", Toast.LENGTH_LONG).show();
 
                     if (mapDataList.size() > 0) {
-                        FloorplanHelper.RetrieveFloorplan retrieveFloorplan = new FloorplanHelper.RetrieveFloorplan(mapDataList.get(0).getName());
+                        FloorplanHelper.RetrieveFloorplan retrieveFloorplan = new FloorplanHelper.RetrieveFloorplan(mapDataList.get(0).getName(), getContext());
                         retrieveFloorplan.execute(new OnCompleteCallback() {
                             @Override
                             public void onSuccess() {
@@ -126,7 +134,7 @@ public class DatabaseTestFragment extends Fragment {
 
                             @Override
                             public void onFailure() {
-                                Toast.makeText(getContext(), "Can't Retrieve Floorplan", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getContext(), "No Such Floorplan. Please upload one or choose another!", Toast.LENGTH_SHORT).show();
                             }
 
                             @Override
@@ -138,7 +146,8 @@ public class DatabaseTestFragment extends Fragment {
                     }
                 } else {
                     if (mapDataList != null) {
-                        removeData();
+                        Toast.makeText(getContext(), "HI NO REMOVING ALLOWED", Toast.LENGTH_LONG).show();
+                        //removeData();
                     }
                 }
             }
@@ -156,7 +165,7 @@ public class DatabaseTestFragment extends Fragment {
     }
 
     public void setData() {
-        MapData mapData = new MapData("B2L2", data, location, z, device, timestamp);
+        MapData mapData = new MapData("B2L1", data, location, z, device, timestamp);
         FirestoreHelper.SetMapData setter = new FirestoreHelper.SetMapData(mapData);
         setter.execute(new OnCompleteCallback() {
             @Override
@@ -176,7 +185,7 @@ public class DatabaseTestFragment extends Fragment {
         });
     }
 
-    public void removeData() {
+    /*public void removeData() {
             FirestoreHelper.RemoveMapData remover = new FirestoreHelper.RemoveMapData(mapDataList.get(0));
             remover.execute(new OnCompleteCallback() {
                 @Override
@@ -194,5 +203,25 @@ public class DatabaseTestFragment extends Fragment {
 
                 }
             });
-        }
+        }*/
+
+    public void getBSSIDs() {
+        StorageDownloader storageDownloader = new StorageDownloader(Prefs.getCurrentLocation(getContext()), getContext());
+        storageDownloader.execute(new OnCompleteCallback() {
+            @Override
+            public void onSuccess() {
+                textView.setText(storageDownloader.getGoodBSSIDs().toString());
+            }
+
+            @Override
+            public void onFailure() {
+                Toast.makeText(getContext(), "Getting GOOD_BSSIDS file failed", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onError() {
+                Toast.makeText(getContext(), "Getting GOOD_BSSIDS file errored", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 }

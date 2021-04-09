@@ -6,8 +6,9 @@
     android:layout_height="match_parent"
     tools:context=".ui.mapmode.MappingMainFragment">
 
-    <com.example.trackie.ui.PinImageMapView
+    <com.example.trackie.ui.mapmode.PinImageMapView
         android:id="@+id/mapping_indoor_map_view"
+        android:contentDescription="map image view"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -16,6 +17,32 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
+
+    <ImageView
+        android:src="@drawable/button_bg1"
+        android:alpha="0.7"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginEnd="56dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toTopOf="@id/finish_mapping_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:src="@drawable/button_bg1"
+        android:alpha="0.7"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginEnd="56dp"
+        android:layout_marginBottom="36dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"/>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/confirm_mapping_click_button"
@@ -27,10 +54,12 @@
         android:elevation="2dp"
         android:foreground="?attr/selectableItemBackground"
         android:text="@string/confirm_mapping_location"
+        android:fontFamily="@font/opensans_semibold"
         app:layout_constraintBottom_toTopOf="@id/finish_mapping_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent">
+    </androidx.appcompat.widget.AppCompatButton>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/finish_mapping_button"
@@ -41,10 +70,14 @@
         android:layout_marginBottom="36dp"
         android:elevation="2dp"
         android:foreground="?attr/selectableItemBackground"
+        android:fontFamily="@font/opensans_semibold"
         android:text="@string/end_mapping"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        >
+
+    </androidx.appcompat.widget.AppCompatButton>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

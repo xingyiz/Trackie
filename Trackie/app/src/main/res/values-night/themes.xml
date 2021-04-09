@@ -14,8 +14,10 @@
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/darkPink</item>
         <item name="colorPrimaryVariant">@color/barbiePink</item>
-        <item name="colorOnPrimary">@color/white</item>
-        <item name="colorOnBackground">@color/darkPink</item>
+        <item name="colorOnPrimary">@color/white_gray</item>
+        <item name="colorOnBackground">@color/white_gray</item>
+        <item name="colorOnPrimarySurface">@color/midtone</item>
+
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/darkmaroon</item>
         <item name="colorSecondaryVariant">@color/coolBlack</item>
@@ -23,6 +25,8 @@
 
         <item name="colorAccent">@color/androidGreen</item>
         <item name="colorControlHighlight">@color/yellowGreenCrayola</item>
+
+        <item name="backgroundColor">@color/jet</item>
 
         <!-- Enable transitions -->
         <item name="android:windowActivityTransitions">true</item>

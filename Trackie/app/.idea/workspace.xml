@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="e4f83078-d488-44fd-81c6-8225c5d3028c" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../../.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../.idea/Trackie.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.idea/libraries/Gradle__androidx_annotation_annotation_experimental_1_0_0_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.idea/libraries/Gradle__androidx_dynamicanimation_dynamicanimation_1_0_0_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.idea/libraries/Gradle__androidx_test_espresso_espresso_contrib_3_1_0_alpha3_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.idea/libraries/Gradle__androidx_test_rules_1_1_0_alpha3_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.idea/libraries/Gradle__androidx_test_uiautomator_uiautomator_2_2_0_alpha3_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.idea/libraries/Gradle__com_21buttons_fragment_test_rule_2_0_1_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.idea/libraries/Gradle__com_21buttons_fragment_test_rule_extras_2_0_1_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.idea/libraries/Gradle__com_fasterxml_jackson_core_jackson_core_2_11_3.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.idea/libraries/Gradle__com_google_android_apps_common_testing_accessibility_framework_accessibility_test_framework_2_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.idea/libraries/Gradle__com_google_api_client_google_api_client_1_31_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.idea/libraries/Gradle__com_google_apis_google_api_services_discovery_v1_rev20190129_1_31_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.idea/libraries/Gradle__com_google_auth_google_auth_library_credentials_0_25_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.idea/libraries/Gradle__com_google_auth_google_auth_library_oauth2_http_0_25_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.idea/libraries/Gradle__com_google_auto_value_auto_value_annotations_1_7_4.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.idea/libraries/Gradle__com_google_guava_guava_30_1_android.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.idea/libraries/Gradle__com_google_http_client_google_http_client_1_39_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.idea/libraries/Gradle__com_google_http_client_google_http_client_apache_v2_1_38_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.idea/libraries/Gradle__com_google_http_client_google_http_client_gson_1_39_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.idea/libraries/Gradle__com_google_http_client_google_http_client_jackson2_1_38_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.idea/libraries/Gradle__com_google_oauth_client_google_oauth_client_1_31_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.idea/libraries/Gradle__commons_codec_commons_codec_1_11.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.idea/libraries/Gradle__commons_logging_commons_logging_1_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.idea/libraries/Gradle__io_opencensus_opencensus_api_0_28_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.idea/libraries/Gradle__io_opencensus_opencensus_contrib_http_util_0_28_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.idea/libraries/Gradle__org_apache_httpcomponents_httpclient_4_5_13.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.idea/libraries/Gradle__org_apache_httpcomponents_httpcore_4_4_14.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.idea/modules/app/app.plantuml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/androidTest/java/com/example/trackie/AddLocationScreenTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/androidTest/java/com/example/trackie/CustomMatchers.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/androidTest/java/com/example/trackie/HomeScreenTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/androidTest/java/com/example/trackie/LocationsScreenTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/androidTest/java/com/example/trackie/MapModeScreenTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/androidTest/java/com/example/trackie/SettingsScreenTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/androidTest/java/com/example/trackie/TestingUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/androidTest/java/com/example/trackie/ui/mapmode/RSSIUtilsTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/trackie/database/StorageDownloader.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/trackie/ui/AdminDialogFragment.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/trackie/ui/Prefs.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/trackie/ui/mapmode/PinDataPopUp.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/trackie/ui/testmode/ModelPrediction.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/trackie/ui/testmode/TestImageMapView.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/trackie/ui/testmode/TestingViewModel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/res/drawable/button_bg1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/res/drawable/fab_button_bg.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/res/drawable/fab_clicked.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/res/drawable/fab_default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/res/drawable/logo/layout/pin_dialogfragment.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/res/drawable/pink_gradient_rounded.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/res/drawable/popup_bg2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/res/drawable/popup_window_background.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/res/drawable/window_popup_bg_stroke.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/res/font/opensans_bold.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/res/font/opensans_light.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/res/font/opensans_reg.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/res/font/opensans_semibold.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/res/font/raleway_bold.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/res/font/raleway_exbold.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/res/font/raleway_regular.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/res/font/raleway_semibold.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/res/layout-land/fragment_mapping_main.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/res/layout/collect_wifi_data_progress_layout.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/res/layout/pin_rssi_data_recycler_layout.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/res/layout/view_pin_data_popup_layout.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/res/menu/locations_overflow_menu.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/caches/build_file_checksums.ser" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Gradle__com_google_android_material_material_1_1_0_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/libraries/Gradle__com_google_android_material_material_1_4_0_alpha01_aar.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Gradle__com_google_guava_guava_28_1_android.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/modules/app/Trackie.app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/modules/app/Trackie.app.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/trackie/database/FirestoreHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/trackie/database/FirestoreHelper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/trackie/database/FloorplanData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/trackie/database/FloorplanData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/trackie/database/FloorplanHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/trackie/database/FloorplanHelper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/trackie/database/MapData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/trackie/database/MapData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/trackie/ui/FetchWiFiDataUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/trackie/ui/FetchWiFiDataUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/trackie/ui/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/trackie/ui/MainActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/trackie/ui/PinImageMapView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/trackie/ui/mapmode/PinImageMapView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/trackie/ui/TestImageMapView.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/trackie/ui/databasetest/DatabaseTestFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/trackie/ui/databasetest/DatabaseTestFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/trackie/ui/home/HomeFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/trackie/ui/home/HomeFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/trackie/ui/locations/AddLocationFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/trackie/ui/locations/AddLocationFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/trackie/ui/locations/LocationsAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/trackie/ui/locations/LocationsAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/trackie/ui/locations/LocationsFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/trackie/ui/locations/LocationsFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/trackie/ui/locations/LocationsViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/trackie/ui/locations/LocationsViewModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/trackie/ui/mapmode/MapModeActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/trackie/ui/mapmode/MapModeActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/trackie/ui/mapmode/MappingMainFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/trackie/ui/mapmode/MappingMainFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/trackie/ui/mapmode/MappingMainViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/trackie/ui/mapmode/MappingMainViewModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/trackie/ui/mapmode/RSSIAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/trackie/ui/mapmode/RSSIAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/trackie/ui/mapmode/RSSITestFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/trackie/ui/mapmode/RSSITestFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/trackie/ui/mapmode/RSSIUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/trackie/ui/mapmode/RSSIUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/trackie/ui/mapmode/TDoA.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/trackie/ui/testmode/TDoA.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/trackie/ui/settings/SettingsFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/trackie/ui/settings/SettingsFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/trackie/ui/testmode/TestModeActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/trackie/ui/testmode/TestModeActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/trackie/ui/testmode/TestingMainFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/trackie/ui/testmode/TestingMainFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/drawable/ic_add_24px.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/drawable/ic_add_24px.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/drawable/ic_my_location_24px.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/drawable/ic_my_location_24px.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/drawable/unconfirmed_pin_marker_24px.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/drawable/unconfirmed_pin_marker_24px.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/font/bsegoeui.TTF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/font/isegoeui.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/font/segoeui.TTF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/font/segoeuiz.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/fragment_add_location.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/fragment_add_location.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/fragment_databasetest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/fragment_databasetest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/fragment_home.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/fragment_home.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/fragment_locations.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/fragment_locations.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/fragment_mapping_complete.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/fragment_mapping_complete.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/fragment_mapping_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/fragment_mapping_main.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/fragment_rssitest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/fragment_rssitest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/fragment_settings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/fragment_settings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/fragment_testing_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/fragment_testing_main.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/locations_recycler_layout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/locations_recycler_layout.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/nav_header_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/nav_header_main.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/nav_header_main_dark.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/nav_header_main_dark.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/pin_options_layout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/pin_options_layout.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/rssi_listview.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/rssi_listview.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/use_mode_toolbar_layout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/use_mode_toolbar_layout.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/values-night/themes.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/values-night/themes.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/values/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/values/themes.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/values/themes.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand />
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="ProjectId" id="1qvSqXejkSbMDgyQvBftkh1xxA2" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="autoscrollToSource" value="true" />
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="e4f83078-d488-44fd-81c6-8225c5d3028c" name="Default Changelist" comment="" />
+      <created>1617958761841</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1617958761841</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="1187" y="425" key="FileChooserDialogImpl" timestamp="1617959578696">
+      <screen x="62" y="0" width="1858" height="1080" />
+    </state>
+    <state x="1187" y="425" key="FileChooserDialogImpl/62.0.1858.1080@62.0.1858.1080" timestamp="1617959578696" />
+  </component>
+</project>

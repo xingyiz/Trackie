@@ -15,6 +15,8 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.provider.MediaStore;
 import android.view.LayoutInflater;
@@ -29,6 +31,7 @@ import com.example.trackie.R;
 import com.example.trackie.database.FloorplanHelper;
 import com.example.trackie.database.OnCompleteCallback;
 import com.google.android.material.checkbox.MaterialCheckBox;
+import com.google.firebase.Timestamp;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -51,6 +54,8 @@ public class AddLocationFragment extends Fragment {
     private Bitmap floorplanBitmap = null;
 
     private Uri filePath;
+
+    private LocationsViewModel locationsViewModel;
 
     public static final int GET_FROM_GALLERY = 3;
     private static final int READ_EXTERNAL_STORAGE_REQUEST = 2;
@@ -76,16 +81,10 @@ public class AddLocationFragment extends Fragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-        }
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        locationsViewModel = new ViewModelProvider(getActivity()).get(LocationsViewModel.class);
         container.removeAllViews();
         return inflater.inflate(R.layout.fragment_add_location, container, false);
     }
@@ -124,10 +123,11 @@ public class AddLocationFragment extends Fragment {
                 // set upload to database code here
                 int darkmode = checkBox.isChecked() ? 1 : 0;
                 FloorplanHelper.UploadFloorplan uploadFloorplan = new FloorplanHelper.UploadFloorplan(
-                        locationNameEditText.getText().toString(), filePath, darkmode);
+                        locationNameEditText.getText().toString(), filePath, darkmode, new Timestamp(new Date()));
                 uploadFloorplan.execute(new OnCompleteCallback() {
                     @Override
                     public void onSuccess() {
+                        locationsViewModel.loadLocations();
                         Toast.makeText(getContext(), "Upload Success", Toast.LENGTH_SHORT).show();
                     }
 

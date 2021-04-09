@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -23,19 +24,19 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.trackie.R;
+import com.example.trackie.ui.Prefs;
 
 public class SettingsFragment extends Fragment {
-
-    SharedPreferences sharedPreferences;
-    SharedPreferences.Editor editPrefs;
-    String pFile = "com.example.trackie.ui.preferences";
-
     boolean buttonState;
 
     private SettingsViewModel settingsViewModel;
     SwitchCompat darkModeSwitch;
+
     EditText inputRSSIEditText;
     Button rssiButton;
+    SwitchCompat activeScanningSwitch;
+    EditText numberOfScansEditText;
+    Button numberOfScansButton;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -50,9 +51,7 @@ public class SettingsFragment extends Fragment {
             }
         });
 
-        sharedPreferences = this.getActivity().getSharedPreferences(pFile, Context.MODE_PRIVATE);
-        editPrefs = sharedPreferences.edit();
-        buttonState = sharedPreferences.getBoolean("dark_mode_state", false);
+        buttonState = Prefs.getDarkModeState(getContext());
 
         darkModeSwitch = root.findViewById(R.id.toggle_dark_mode);
         darkModeSwitch.setChecked(buttonState);
@@ -65,8 +64,16 @@ public class SettingsFragment extends Fragment {
                     // light mode if false
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
                 }
-                editPrefs.putBoolean("dark_mode_state", isChecked);
-                editPrefs.apply();
+                Prefs.setDarkModeState(getContext(), isChecked);
+            }
+        });
+
+        activeScanningSwitch = root.findViewById(R.id.toggle_active_scanning);
+        activeScanningSwitch.setChecked(Prefs.getActiveScanningEnabled(getContext()));
+        activeScanningSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                Prefs.setActiveScanningEnabled(getContext(), isChecked);
             }
         });
 
@@ -79,13 +86,12 @@ public class SettingsFragment extends Fragment {
                 String inputRSSI = inputRSSIEditText.getText().toString();
 
                 try {
-
                     if (inputRSSI.isEmpty() || Integer.parseInt(inputRSSI) > 0) {
                         Toast.makeText(getContext(), "Invalid Input. Please enter a valid RSSI value.", Toast.LENGTH_SHORT).show();
                     } else {
-                        editPrefs.putInt("measured_rssi", Integer.parseInt(inputRSSI));
-                        editPrefs.apply();
+                        Prefs.setMeasuredRSSI(getContext(), Integer.parseInt(inputRSSI));
                         Toast.makeText(getContext(), "Sucess. Measured RSSI is now " + inputRSSI, Toast.LENGTH_SHORT).show();
+                        hideKeyboard(inputRSSIEditText);
                     }
                 } catch (Exception e) {
                     Toast.makeText(getContext(), "Invalid Input. Please enter a number.", Toast.LENGTH_SHORT).show();
@@ -94,7 +100,43 @@ public class SettingsFragment extends Fragment {
             }
         });
 
+        numberOfScansEditText = root.findViewById(R.id.number_of_scans_edittext);
+        numberOfScansEditText.setHint(String.valueOf(Prefs.getNumberOfScans(getContext())));
+        numberOfScansButton = root.findViewById(R.id.number_of_scans_set_button);
+        numberOfScansButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String numberOfScans = numberOfScansEditText.getText().toString();
+
+                try {
+                    if (numberOfScans.isEmpty() || Integer.parseInt(numberOfScans) <= 0 || Integer.parseInt(numberOfScans) > 10) {
+                        Toast.makeText(getContext(), "Invalid Input. Please enter a valid number less than 10", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Prefs.setNumberOfScans(getContext(), Integer.parseInt(numberOfScans));
+                        Toast.makeText(getContext(), "Success. Number of times to scan is now " + numberOfScans, Toast.LENGTH_SHORT).show();
+                        hideKeyboard(numberOfScansEditText);
+                    }
+                } catch (Exception e) {
+                    Toast.makeText(getContext(), "Invalid Input. Please enter a number.", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        SwitchCompat TEST_B2L2_toggle = root.findViewById(R.id.toggle_TEST_B2L2MODE);
+        TEST_B2L2_toggle.setChecked(Prefs.getTEST_B2L2(getContext()));
+        TEST_B2L2_toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                Prefs.setTEST_B2L2(getContext(), isChecked);
+            }
+        });
+
+
         return root;
     }
 
+    private void hideKeyboard(EditText editText) {
+        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(editText.getWindowToken(), InputMethodManager.RESULT_UNCHANGED_SHOWN);
+    }
 }

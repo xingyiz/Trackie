@@ -45,7 +45,7 @@ public class RSSIAdapter extends RecyclerView.Adapter {
         viewHolder.BSSID.setText("BSSID: " + scanResult.BSSID);
         viewHolder.SSID.setText("SSID: " + scanResult.SSID);
         viewHolder.RSSI.setText("RSSI: " + String.valueOf(scanResult.level));
-        viewHolder.DISTANCE.setText("Estimated Distance: " + String.valueOf(RSSIUtils.calculateDistance(scanResult.level, oneMeterRSSI, 4)));
+        viewHolder.DISTANCE.setText("Estimated Distance: " + String.valueOf(RSSIUtils.rssiToDistance(scanResult.level, scanResult.frequency)));
         viewHolder.MEASURED_RSSI.setText("One Meter RSSI: " + String.valueOf(oneMeterRSSI));
         viewHolder.FREQUENCY.setText("Frequency: " + String.valueOf(scanResult.frequency) + "MHz");
         viewHolder.TIME.setText("Time: " + String.valueOf(scanResult.timestamp));

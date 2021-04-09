@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rssi_listview"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
@@ -9,6 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
+        android:fontFamily="@font/raleway_regular"
         android:text="BSSID"
         android:textSize="16sp" />
 
@@ -17,6 +20,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
+        android:fontFamily="@font/raleway_regular"
         android:text="SSID"
         android:textSize="16sp" />
 
@@ -25,6 +29,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
+        android:fontFamily="@font/raleway_regular"
         android:text="RSSI"
         android:textSize="16sp" />
 
@@ -33,6 +38,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
+        android:fontFamily="@font/raleway_regular"
         android:text="ONE METER RSSI"
         android:textSize="16sp" />
 
@@ -40,6 +46,7 @@
         android:id="@+id/DISTANCE"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/raleway_regular"
         android:layout_marginStart="20dp"
         android:text="DISTANCE"
         android:textSize="16sp" />
@@ -48,6 +55,7 @@
         android:id="@+id/Frequency"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/raleway_regular"
         android:layout_marginStart="20dp"
         android:text="FREQUENCY"
         android:textSize="16sp" />
@@ -57,7 +65,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:text="Time"
+        android:text="TIME"
+        app:fontFamily="@font/raleway_regular"
         android:layout_marginBottom="5dp"
         android:textSize="16sp" />
 

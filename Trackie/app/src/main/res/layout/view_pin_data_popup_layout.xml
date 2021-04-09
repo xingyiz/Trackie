@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="35dp"
+    android:layout_marginRight="35dp"
+    android:layout_marginTop="50dp"
+    android:layout_marginBottom="50dp"
+    >
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/popup_bg2"
+        android:background="@drawable/popup_bg2"
+        android:alpha="0.8"
+        />
+
+    <TextView
+        android:id="@+id/pin_point_label_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/alert_text_size"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:fontFamily="@font/opensans_bold"
+        android:text="Pin Location : (x, y)"
+        android:textSize="@dimen/button_text_size"
+        android:textColor="?attr/colorSecondary"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/mapped_bssids_count_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:layout_marginEnd="@dimen/alert_text_size"
+        android:text="BSSIDs mapped: 0"
+        android:textSize="10sp"
+        android:fontFamily="@font/opensans_reg"
+        android:textColor="?attr/colorSecondaryVariant"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/pin_mapped_timestamp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:layout_marginEnd="@dimen/alert_text_size"
+        android:fontFamily="@font/opensans_reg"
+        android:textColor="?attr/colorSecondaryVariant"
+        android:text="Time mapped: --/--/--"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/mapped_bssids_count_textview" />
+
+    <View
+        android:id="@+id/view_pin_data_popup_layout_divider1"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_marginHorizontal="@dimen/cardview_default_radius"
+        android:background="?attr/colorControlHighlight"
+        android:alpha="0.6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/pin_point_label_textview" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/pin_data_info_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginHorizontal="@dimen/alert_text_size"
+        app:layout_constraintBottom_toTopOf="@id/view_pin_data_popup_layout_divider2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/view_pin_data_popup_layout_divider1" />
+
+    <View
+        android:id="@+id/view_pin_data_popup_layout_divider2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginBottom="0dp"
+        android:background="?attr/colorControlHighlight"
+        android:alpha="0.6"
+        android:layout_marginHorizontal="@dimen/cardview_default_radius"
+        app:layout_constraintTop_toBottomOf="@id/pin_data_info_recyclerview"
+        app:layout_constraintBottom_toTopOf="@id/pull_up_exit_view_pin_data_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <View
+        android:id="@+id/pull_up_exit_view_pin_data_view"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        app:layout_constraintTop_toBottomOf="@id/view_pin_data_popup_layout_divider2"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
