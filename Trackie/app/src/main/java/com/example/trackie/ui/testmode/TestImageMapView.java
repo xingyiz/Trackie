@@ -35,6 +35,9 @@ public class TestImageMapView extends SubsamplingScaleImageView {
     }
 
     public void updateCurrentUserLocation(PointF newLocation) {
+        if (newLocation == null) {
+            System.out.println("Could not get prediction result. Maybe try looking at ModelPrediction if this persists.");
+        }
         System.out.println("Got new location: " + newLocation);
         if (currentUserLocation == null) {
             currentUserLocation = new PointF(newLocation.x, newLocation.y);

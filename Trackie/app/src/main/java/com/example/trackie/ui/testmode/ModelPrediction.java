@@ -82,8 +82,6 @@ public class ModelPrediction {
         int [][] inputData = preprocessInputData(scanResults);
         String inputJSON = createInputInstanceJSONFrom2DArray(inputData);
 
-        System.out.println("Scan results: " + scanResults);
-
         SendPredictionThread thread = new SendPredictionThread(inputJSON, callback);
         thread.start();
     }
@@ -130,7 +128,6 @@ public class ModelPrediction {
 
             GenericUrl url =
                     new GenericUrl(UriTemplate.expand(api.getBaseUrl() + method.getPath(), param, true));
-            System.out.println(url);
 
             String contentType = "application/json";
             HttpContent content = ByteArrayContent.fromString(contentType, inputJSON);
@@ -173,7 +170,7 @@ public class ModelPrediction {
                 System.out.println("IOException: fail to execute request");
                 e.printStackTrace();
             }
-            System.out.println(response);
+            System.out.println("Response: " + response);
 
             try {
                 callback.onReceiveResults(parsePredictionJSONForResult(response));
@@ -184,11 +181,6 @@ public class ModelPrediction {
         }
     }
 
-    public interface OnReceivePredictionResultsCallback {
-        void onReceiveResults(double[] result);
-        void onError();
-    }
-
     public double[] parsePredictionJSONForResult(String jsonResult) throws JSONException {
         JSONObject json = new JSONObject(jsonResult);
         JSONArray jsonArray = json.getJSONArray("predictions");
@@ -197,4 +189,8 @@ public class ModelPrediction {
         return result;
     }
 
+    protected interface OnReceivePredictionResultsCallback {
+        void onReceiveResults(double[] result);
+        void onError();
+    }
 }

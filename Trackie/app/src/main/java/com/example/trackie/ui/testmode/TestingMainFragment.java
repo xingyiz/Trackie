@@ -190,7 +190,11 @@ public class TestingMainFragment extends Fragment {
                 });
             } catch (Exception e) {
                 e.printStackTrace();
-                Toast.makeText(getContext(), "Location has no saved BSSID values", Toast.LENGTH_SHORT).show();
+                try {
+                    Toast.makeText(getContext(), "Location has no saved BSSID values", Toast.LENGTH_SHORT).show();
+                } catch (Exception exception) {
+                    System.out.println("Could not make \"Location has no saved BSSID values\" toast!");
+                }
             }
         }
 
