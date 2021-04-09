@@ -109,7 +109,7 @@ public class ModelPrediction {
             RestMethod method = api.getResources().get("projects").getMethods().get("predict");
 
             JsonSchema param = new JsonSchema();
-            String projectId = "trackie-2e28a";
+            String projectId = "trackiev2";
             // You should have already deployed a model and a version.
             // For reference, see https://cloud.google.com/ml-engine/docs/deploying-models.
             String modelId = "B2L2_RF";
