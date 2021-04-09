@@ -38,6 +38,8 @@ public class ModelPrediction {
     public List<String> topBSSIDs;
     public int size;
 
+    private String CREDENTIALS_KEY = " ";
+
     // TODO: preprocess data coming in from WiFiScanner such that only RSSI from good BSSIDs are used
     private int[][] preprocessInputData(List<ScanResult> scanResults) {
         int[][] inputData = new int[1][size * 2];
