@@ -1,15 +1,14 @@
 package com.example.trackie.ui;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
-import androidx.constraintlayout.motion.widget.MotionHelper;
-import androidx.constraintlayout.motion.widget.MotionLayout;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.constraintlayout.motion.widget.MotionLayout;
 
 import com.example.trackie.R;
 

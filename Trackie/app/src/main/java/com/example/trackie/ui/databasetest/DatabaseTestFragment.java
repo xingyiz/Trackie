@@ -1,6 +1,5 @@
 package com.example.trackie.ui.databasetest;
 
-import android.graphics.Point;
 import android.graphics.PointF;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,19 +11,17 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.bumptech.glide.Glide;
 import com.example.trackie.R;
-import com.example.trackie.database.FloorplanHelper;
-import com.example.trackie.database.OnCompleteCallback;
 import com.example.trackie.database.FirestoreHelper;
+import com.example.trackie.database.FloorplanHelper;
 import com.example.trackie.database.MapData;
+import com.example.trackie.database.OnCompleteCallback;
 import com.example.trackie.database.StorageDownloader;
 import com.example.trackie.ui.Prefs;
-import com.example.trackie.ui.testmode.TestingViewModel;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textview.MaterialTextView;
 import com.google.firebase.Timestamp;
@@ -35,7 +32,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 public class DatabaseTestFragment extends Fragment {
     private MaterialButton getButton;

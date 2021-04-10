@@ -1,7 +1,5 @@
 package com.example.trackie.ui.mapmode;
 
-import static java.lang.Math.pow;
-
 public class RSSIUtils {
 
    /* calculates line of sight distance using Propagation Path-Loss Model Estimate

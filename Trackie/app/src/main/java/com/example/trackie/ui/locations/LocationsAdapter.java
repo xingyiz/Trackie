@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -26,7 +25,6 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.trackie.R;
-import com.example.trackie.Utils;
 import com.example.trackie.database.FloorplanData;
 import com.example.trackie.database.FloorplanHelper;
 import com.example.trackie.database.OnCompleteCallback;
@@ -34,7 +32,6 @@ import com.example.trackie.ui.Prefs;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 

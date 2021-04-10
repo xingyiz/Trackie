@@ -1,13 +1,9 @@
 package com.example.trackie.database;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.net.Uri;
-import android.util.Log;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatDelegate;
 
 import com.example.trackie.ui.Prefs;
 import com.google.android.gms.tasks.OnCompleteListener;

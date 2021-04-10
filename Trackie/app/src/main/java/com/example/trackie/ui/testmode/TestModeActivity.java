@@ -1,28 +1,16 @@
 package com.example.trackie.ui.testmode;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
-import android.app.ActivityOptions;
-import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
-import android.transition.Explode;
-import android.transition.Fade;
-import android.transition.Slide;
-import android.transition.Transition;
-import android.view.Gravity;
-import android.view.MenuItem;
-import android.view.Window;
 import android.view.WindowInsets;
 import android.view.WindowInsetsController;
 import android.view.WindowManager;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 import com.example.trackie.R;
-import com.example.trackie.ui.MainActivity;
-import com.example.trackie.ui.mapmode.MapModeActivity;
 
 public class TestModeActivity extends AppCompatActivity {
 

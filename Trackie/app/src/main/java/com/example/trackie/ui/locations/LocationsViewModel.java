@@ -1,20 +1,13 @@
 package com.example.trackie.ui.locations;
 
-import android.os.Bundle;
-import android.widget.Toast;
-
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.example.trackie.database.FloorplanData;
 import com.example.trackie.database.FloorplanHelper;
-import com.example.trackie.database.MapData;
 import com.example.trackie.database.OnCompleteCallback;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class LocationsViewModel extends ViewModel {
 
