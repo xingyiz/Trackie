@@ -56,7 +56,7 @@ import static android.content.Context.MODE_PRIVATE;
 public class TestingMainFragment extends Fragment {
 
     private TestImageMapView testImageMapView;
-    private ImageButton alertTestingDiscrepencyButton;
+    private Button alertTestingDiscrepencyButton;
     private Button endTestingButton;
 
     private FetchWiFiDataUtils dataUtils;
@@ -188,19 +188,17 @@ public class TestingMainFragment extends Fragment {
             ft.addToBackStack(null);
             rating.show(ft, "rating");
         });
-
-
     }
-
 
     private class TestWiFiDataListener implements FetchWiFiDataUtils.FetchListener {
 
         @Override
         public void onScanResultsReceived(List<ScanResult> scanResults) {
             if (testImageMapView == null) return;
+            System.out.println("Received");
 
             try {
-                modelPrediction.getPrediction(scanResults, new ModelPrediction.OnReceivePredictionResultsCallback() {
+                modelPrediction.getPrediction(preprocessInputData(scanResults), new ModelPrediction.OnReceivePredictionResultsCallback() {
                     @Override
                     public void onReceiveResults(double[] result) {
                         PointF predictedPoint = new PointF((float) result[0] * testImageMapView.getSWidth(),
@@ -235,6 +233,35 @@ public class TestingMainFragment extends Fragment {
         }
     }
 
+    // preprocsesing step which converts scanResults to list of rssi values
+    private List<List<Double>> preprocessInputData(List<ScanResult> scanResults) {
+        List<Double> inputData = new ArrayList<>(size * 2);
+        for (int i = 0; i < size*2; i++) {
+            inputData.add(i, 0.0);
+        }
+
+        // get index from topBSSIDs, place RSSI in correct place
+        for (ScanResult scanResult : scanResults) {
+            if (goodBSSIDs.contains(scanResult.BSSID)) {
+                int index = goodBSSIDs.indexOf(scanResult.BSSID);
+                inputData.set(index, 1.0);
+                inputData.set(index + size, (double) scanResult.level / -100.0);
+            }
+        }
+
+        // for BSSIDs that are not found in scanResults, put -1 as RSSI
+        for (int i = 0; i < size; i++) {
+            if (inputData.get(i) == 0.0) {
+                inputData.set(i + size, -1.0);
+            }
+        }
+
+        List<List<Double>> data = new ArrayList<>();
+        data.add(inputData);
+        return data;
+    }
+
+    // stop scanning when testing fragment is exited
     @Override
     public void onPause() {
         super.onPause();

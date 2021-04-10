@@ -40,36 +40,9 @@ public class ModelPrediction {
     public List<String> topBSSIDs;
     public int size;
 
-    private String CREDENTIALS_KEY; //ENTER CREDENTIALS KEY HERE
+    private String CREDENTIALS_KEY; // ENTER CREDENTIALS KEY HERE
 
     // TODO: preprocess data coming in from WiFiScanner such that only RSSI from good BSSIDs are used
-    private List<List<Double>> preprocessInputData(List<ScanResult> scanResults) {
-        List<Double> inputData = new ArrayList<>(size * 2);
-
-        for (int i = 0; i < size*2; i++) {
-            inputData.add(i, 0.0);
-        }
-
-        // get index from topBSSIDs, place RSSI in correct place
-        for (ScanResult scanResult : scanResults) {
-            if (topBSSIDs.contains(scanResult.BSSID)) {
-                int index = topBSSIDs.indexOf(scanResult.BSSID);
-                inputData.set(index, 1.0);
-                inputData.set(index + size, (double) scanResult.level / -100.0);
-            }
-        }
-
-        // for BSSIDs that are not found in scanResults, put -1 as RSSI
-        for (int i = 0; i < size; i++) {
-            if (inputData.get(i) == 0.0) {
-                inputData.set(i + size, -1.0);
-            }
-        }
-
-        List<List<Double>> data = new ArrayList<>();
-        data.add(inputData);
-        return data;
-    }
 
     public ModelPrediction(List<String> topBSSIDs, int size, String credentials) {
         this.topBSSIDs = topBSSIDs;
@@ -77,90 +50,89 @@ public class ModelPrediction {
         this.CREDENTIALS_KEY = credentials;
     }
 
-    public void getPrediction(List<ScanResult> scanResults, OnReceivePredictionResultsCallback callback) {
-        List<List<Double>> inputData = preprocessInputData(scanResults);
-//        String inputJSON = createInputInstanceJSONFrom2DArray(inputData);
+    public void getPrediction(List<List<Double>> inputData, OnReceivePredictionResultsCallback callback) {
+        String inputJSON = createInputInstanceJSONFrom2DArray(inputData);
         // REMEMBER TO DELETE THE BOTTOM AND USE THE TOP
-        String inputJSON = "{\"instances\": [[1.0," +
-                "  1.0," +
-                "  1.0," +
-                "  1.0," +
-                "  1.0," +
-                "  1.0," +
-                "  1.0," +
-                "  1.0," +
-                "  1.0," +
-                "  1.0," +
-                "  1.0," +
-                "  1.0," +
-                "  1.0," +
-                "  1.0," +
-                "  1.0," +
-                "  1.0," +
-                "  1.0," +
-                "  1.0," +
-                "  1.0," +
-                "  1.0," +
-                "  1.0," +
-                "  1.0," +
-                "  1.0," +
-                "  1.0," +
-                "  1.0," +
-                "  1.0," +
-                "  1.0," +
-                "  1.0," +
-                "  1.0," +
-                "  1.0," +
-                "  1.0," +
-                "  1.0," +
-                "  1.0," +
-                "  1.0," +
-                "  1.0," +
-                "  1.0," +
-                "  1.0," +
-                "  1.0," +
-                "  1.0," +
-                "  1.0," +
-                "  0.6225," +
-                "  0.6733333333333333," +
-                "  0.68," +
-                "  0.675," +
-                "  0.76," +
-                "  0.716," +
-                "  0.744," +
-                "  0.6125," +
-                "  0.6125," +
-                "  0.6125," +
-                "  0.6125," +
-                "  0.682," +
-                "  0.702," +
-                "  0.704," +
-                "  0.715," +
-                "  0.704," +
-                "  0.856," +
-                "  0.855," +
-                "  0.858," +
-                "  0.856," +
-                "  0.806," +
-                "  0.7225," +
-                "  0.775," +
-                "  0.81," +
-                "  0.704," +
-                "  0.8525," +
-                "  0.76," +
-                "  0.8066666666666668," +
-                "  0.8533333333333333," +
-                "  0.856," +
-                "  0.865," +
-                "  0.8575," +
-                "  0.8625," +
-                "  0.704," +
-                "  0.725," +
-                "  0.82," +
-                "  0.8078," +
-                "  0.8175," +
-                "  0.8125," +
-                "  0.8525]]}";
+//        String inputJSON = "{\"instances\": [[1.0," +
+//                "  1.0," +
+//                "  1.0," +
+//                "  1.0," +
+//                "  1.0," +
+//                "  1.0," +
+//                "  1.0," +
+//                "  1.0," +
+//                "  1.0," +
+//                "  1.0," +
+//                "  1.0," +
+//                "  1.0," +
+//                "  1.0," +
+//                "  1.0," +
+//                "  1.0," +
+//                "  1.0," +
+//                "  1.0," +
+//                "  1.0," +
+//                "  1.0," +
+//                "  1.0," +
+//                "  1.0," +
+//                "  1.0," +
+//                "  1.0," +
+//                "  1.0," +
+//                "  1.0," +
+//                "  1.0," +
+//                "  1.0," +
+//                "  1.0," +
+//                "  1.0," +
+//                "  1.0," +
+//                "  1.0," +
+//                "  1.0," +
+//                "  1.0," +
+//                "  1.0," +
+//                "  1.0," +
+//                "  1.0," +
+//                "  1.0," +
+//                "  1.0," +
+//                "  1.0," +
+//                "  1.0," +
+//                "  0.6225," +
+//                "  0.6733333333333333," +
+//                "  0.68," +
+//                "  0.675," +
+//                "  0.76," +
+//                "  0.716," +
+//                "  0.744," +
+//                "  0.6125," +
+//                "  0.6125," +
+//                "  0.6125," +
+//                "  0.6125," +
+//                "  0.682," +
+//                "  0.702," +
+//                "  0.704," +
+//                "  0.715," +
+//                "  0.704," +
+//                "  0.856," +
+//                "  0.855," +
+//                "  0.858," +
+//                "  0.856," +
+//                "  0.806," +
+//                "  0.7225," +
+//                "  0.775," +
+//                "  0.81," +
+//                "  0.704," +
+//                "  0.8525," +
+//                "  0.76," +
+//                "  0.8066666666666668," +
+//                "  0.8533333333333333," +
+//                "  0.856," +
+//                "  0.865," +
+//                "  0.8575," +
+//                "  0.8625," +
+//                "  0.704," +
+//                "  0.725," +
+//                "  0.82," +
+//                "  0.8078," +
+//                "  0.8175," +
+//                "  0.8125," +
+//                "  0.8525]]}";
         SendPredictionThread thread = new SendPredictionThread(inputJSON, callback);
         thread.start();
     }
