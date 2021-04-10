@@ -246,6 +246,8 @@ public class ModelPrediction {
             } catch (JSONException e) {
                 e.printStackTrace();
                 callback.onError();
+            } catch (NullPointerException e) {
+                callback.onError();
             }
         }
     }
