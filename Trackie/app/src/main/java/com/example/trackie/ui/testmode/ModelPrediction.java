@@ -45,7 +45,7 @@ public class ModelPrediction {
         List<Double> inputData = new ArrayList<>(size * 2);
 
         for (int i = 0; i < size*2; i++) {
-            inputData.add(i, 1.0);
+            inputData.add(i, 0.0);
         }
 
         Toast.makeText(context, "Initialised: " + inputData, Toast.LENGTH_SHORT).show();
