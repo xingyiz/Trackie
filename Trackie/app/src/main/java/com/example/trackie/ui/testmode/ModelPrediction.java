@@ -43,25 +43,32 @@ public class ModelPrediction {
     private String CREDENTIALS_KEY; //ENTER CREDENTIALS KEY HERE
 
     // TODO: preprocess data coming in from WiFiScanner such that only RSSI from good BSSIDs are used
-    private double[][] preprocessInputData(List<ScanResult> scanResults) {
-        double[][] inputData = new double[1][size * 2];
+    private List<List<Double>> preprocessInputData(List<ScanResult> scanResults) {
+        List<Double> inputData = new ArrayList<>(size * 2);
+
+        for (int i = 0; i < size*2; i++) {
+            inputData.add(i, 0.0);
+        }
 
         // get index from topBSSIDs, place RSSI in correct place
         for (ScanResult scanResult : scanResults) {
             if (topBSSIDs.contains(scanResult.BSSID)) {
                 int index = topBSSIDs.indexOf(scanResult.BSSID);
-                inputData[0][index] = 1;
-                inputData[0][index + size] = (double) scanResult.level / -100;
+                inputData.set(index, 1.0);
+                inputData.set(index + size, (double) scanResult.level / -100.0);
             }
         }
 
         // for BSSIDs that are not found in scanResults, put -1 as RSSI
         for (int i = 0; i < size; i++) {
-            if (inputData[0][i] == 0) {
-                inputData[0][i + size] = -1;
+            if (inputData.get(i) == 0.0) {
+                inputData.set(i + size, -1.0);
             }
         }
-        return inputData;
+
+        List<List<Double>> data = new ArrayList<>();
+        data.add(inputData);
+        return data;
     }
 
     public ModelPrediction(List<String> topBSSIDs, int size, String credentials) {
@@ -71,7 +78,7 @@ public class ModelPrediction {
     }
 
     public void getPrediction(List<ScanResult> scanResults, OnReceivePredictionResultsCallback callback) {
-        double [][] inputData = preprocessInputData(scanResults);
+        List<List<Double>> inputData = preprocessInputData(scanResults);
 //        String inputJSON = createInputInstanceJSONFrom2DArray(inputData);
         // REMEMBER TO DELETE THE BOTTOM AND USE THE TOP
         String inputJSON = "{\"instances\": [[1.0," +
@@ -158,8 +165,8 @@ public class ModelPrediction {
         thread.start();
     }
 
-    private String createInputInstanceJSONFrom2DArray(double[][] inputArray) {
-        Map<String, double[][]> map = new HashMap<>();
+    private String createInputInstanceJSONFrom2DArray(List<List<Double>> inputArray) {
+        Map<String, List<List<Double>>> map = new HashMap<>();
         map.put("instances", inputArray);
         JSONObject json = new JSONObject(map);
         return json.toString();
@@ -255,12 +262,109 @@ public class ModelPrediction {
         }
     }
 
+    /*public double[] testParseInputJSon() {
+        try {
+            JSONObject json = new JSONObject("\"instances\" : [[1.0,\n" +
+                    "  1.0,\n" +
+                    "  1.0,\n" +
+                    "  1.0,\n" +
+                    "  1.0,\n" +
+                    "  1.0,\n" +
+                    "  1.0,\n" +
+                    "  1.0,\n" +
+                    "  1.0,\n" +
+                    "  1.0,\n" +
+                    "  1.0,\n" +
+                    "  1.0,\n" +
+                    "  1.0,\n" +
+                    "  1.0,\n" +
+                    "  1.0,\n" +
+                    "  1.0,\n" +
+                    "  1.0,\n" +
+                    "  1.0,\n" +
+                    "  1.0,\n" +
+                    "  1.0,\n" +
+                    "  1.0,\n" +
+                    "  1.0,\n" +
+                    "  1.0,\n" +
+                    "  1.0,\n" +
+                    "  1.0,\n" +
+                    "  1.0,\n" +
+                    "  1.0,\n" +
+                    "  1.0,\n" +
+                    "  1.0,\n" +
+                    "  1.0,\n" +
+                    "  1.0,\n" +
+                    "  1.0,\n" +
+                    "  1.0,\n" +
+                    "  1.0,\n" +
+                    "  1.0,\n" +
+                    "  1.0,\n" +
+                    "  1.0,\n" +
+                    "  1.0,\n" +
+                    "  1.0,\n" +
+                    "  0.6225,\n" +
+                    "  0.6733333333333333,\n" +
+                    "  0.68,\n" +
+                    "  0.675,\n" +
+                    "  0.76,\n" +
+                    "  0.716,\n" +
+                    "  0.7440000000000001,\n" +
+                    "  0.6125,\n" +
+                    "  0.6125,\n" +
+                    "  0.6125,\n" +
+                    "  0.6125,\n" +
+                    "  0.682,\n" +
+                    "  0.7020000000000001,\n" +
+                    "  0.7040000000000001,\n" +
+                    "  0.715,\n" +
+                    "  0.7040000000000001,\n" +
+                    "  0.856,\n" +
+                    "  0.855,\n" +
+                    "  0.858,\n" +
+                    "  0.856,\n" +
+                    "  0.8059999999999999,\n" +
+                    "  0.7225,\n" +
+                    "  0.775,\n" +
+                    "  0.81,\n" +
+                    "  0.7040000000000001,\n" +
+                    "  0.8525,\n" +
+                    "  0.76,\n" +
+                    "  0.8066666666666668,\n" +
+                    "  0.8533333333333333,\n" +
+                    "  0.856,\n" +
+                    "  0.865,\n" +
+                    "  0.8575,\n" +
+                    "  0.8625,\n" +
+                    "  0.7040000000000001,\n" +
+                    "  0.725,\n" +
+                    "  0.82,\n" +
+                    "  0.8079999999999999,\n" +
+                    "  0.8175,\n" +
+                    "  0.8125,\n" +
+                    "  0.8525]]}");
+            JSONArray jsonArray = json.getJSONArray("instances");
+            double[] result = new double[]{jsonArray.getJSONArray(0).getDouble(0),
+                    jsonArray.getJSONArray(0).getDouble(1)};
+            return result;
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }*/
+
     public double[] parsePredictionJSONForResult(String jsonResult) throws JSONException {
-        JSONObject json = new JSONObject(jsonResult);
-        JSONArray jsonArray = json.getJSONArray("predictions");
-        double[] result = new double[]{jsonArray.getJSONArray(0).getDouble(0),
-                                       jsonArray.getJSONArray(0).getDouble(1)};
-        return result;
+        try {
+            JSONObject json = new JSONObject(jsonResult);
+            JSONArray jsonArray = json.getJSONArray("predictions");
+            double[] result = new double[]{jsonArray.getJSONArray(0).getDouble(0),
+                    jsonArray.getJSONArray(0).getDouble(1)};
+            return result;
+        } catch (Exception e) {
+            JSONObject json = new JSONObject(jsonResult);
+            String error = json.getString("error");
+            return new double[]{0.0, 0.0};
+        }
     }
 
     protected interface OnReceivePredictionResultsCallback {

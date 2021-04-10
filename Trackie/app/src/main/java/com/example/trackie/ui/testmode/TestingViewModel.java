@@ -10,7 +10,6 @@ import com.example.trackie.database.OnCompleteCallback;
 import com.example.trackie.database.StorageDownloader;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class TestingViewModel extends ViewModel {
 

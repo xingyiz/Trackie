@@ -56,7 +56,7 @@ import static android.content.Context.MODE_PRIVATE;
 public class TestingMainFragment extends Fragment {
 
     private TestImageMapView testImageMapView;
-    private Button alertTestingDiscrepencyButton;
+    private ImageButton alertTestingDiscrepencyButton;
     private Button endTestingButton;
 
     private FetchWiFiDataUtils dataUtils;
@@ -91,6 +91,7 @@ public class TestingMainFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
+
         }
     }
 
@@ -187,6 +188,8 @@ public class TestingMainFragment extends Fragment {
             ft.addToBackStack(null);
             rating.show(ft, "rating");
         });
+
+
     }
 
 

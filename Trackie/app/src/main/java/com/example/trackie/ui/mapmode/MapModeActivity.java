@@ -1,47 +1,19 @@
 package com.example.trackie.ui.mapmode;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.ContextCompat;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.app.ActivityOptions;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.res.Configuration;
-import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
-import android.transition.Fade;
-import android.transition.Slide;
-import android.transition.Transition;
-import android.view.Gravity;
-import android.view.View;
-import android.view.Window;
 import android.view.WindowInsets;
 import android.view.WindowInsetsController;
 import android.view.WindowManager;
 
-import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
-import com.example.trackie.R;
-import com.example.trackie.Utils;
-import com.example.trackie.database.FloorplanData;
-import com.example.trackie.database.FloorplanHelper;
-import com.example.trackie.database.MapData;
-import com.example.trackie.database.OnCompleteCallback;
-import com.example.trackie.ui.MainActivity;
-import com.example.trackie.ui.Prefs;
-import com.example.trackie.ui.locations.LocationsAdapter;
-import com.example.trackie.ui.testmode.TestModeActivity;
-import com.google.gson.Gson;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
-import java.util.Arrays;
-import java.util.List;
+import com.example.trackie.R;
+import com.example.trackie.ui.Prefs;
 
 public class MapModeActivity extends AppCompatActivity {
 // TODO: if preferences empty (no current location) tell user to go back and select location
