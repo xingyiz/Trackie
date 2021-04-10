@@ -36,17 +36,9 @@ import java.util.List;
 import java.util.Map;
 
 public class ModelPrediction {
-
-    public List<String> topBSSIDs;
-    public int size;
-
     private String CREDENTIALS_KEY; // ENTER CREDENTIALS KEY HERE
 
-    // TODO: preprocess data coming in from WiFiScanner such that only RSSI from good BSSIDs are used
-
-    public ModelPrediction(List<String> topBSSIDs, int size, String credentials) {
-        this.topBSSIDs = topBSSIDs;
-        this.size = size;
+    public ModelPrediction(String credentials) {
         this.CREDENTIALS_KEY = credentials;
     }
 

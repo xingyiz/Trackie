@@ -6,6 +6,12 @@ import android.graphics.PointF;
 import android.graphics.drawable.Drawable;
 import android.net.wifi.ScanResult;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,36 +19,22 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.Toast;
-
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.CustomTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.davemorrissey.labs.subscaleview.ImageSource;
 import com.example.trackie.R;
 import com.example.trackie.Utils;
-import com.example.trackie.database.FirestoreExecute;
 import com.example.trackie.database.FloorplanHelper;
 import com.example.trackie.database.OnCompleteCallback;
 import com.example.trackie.database.StorageDownloader;
 import com.example.trackie.ui.FetchWiFiDataUtils;
 import com.example.trackie.ui.Prefs;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -108,7 +100,7 @@ public class TestingMainFragment extends Fragment {
             public void onSuccess() {
                 goodBSSIDs = storageDownloader.getGoodBSSIDs();
                 String credentials = getString(R.string.credentials_key);
-                modelPrediction = new ModelPrediction(goodBSSIDs, size, credentials);
+                modelPrediction = new ModelPrediction(credentials);
                 size = storageDownloader.getSize();
                 Toast.makeText(getContext(), "GOOD_BSSIDS file retrieved :)", Toast.LENGTH_SHORT).show();
             }
@@ -233,10 +225,10 @@ public class TestingMainFragment extends Fragment {
         }
     }
 
-    // preprocsesing step which converts scanResults to list of rssi values
+    // preprocessing step which converts scanResults to list of rssi values
     private List<List<Double>> preprocessInputData(List<ScanResult> scanResults) {
         List<Double> inputData = new ArrayList<>(size * 2);
-        for (int i = 0; i < size*2; i++) {
+        for (int i = 0; i < size * 2; i++) {
             inputData.add(i, 0.0);
         }
 
@@ -258,6 +250,9 @@ public class TestingMainFragment extends Fragment {
 
         List<List<Double>> data = new ArrayList<>();
         data.add(inputData);
+
+        Log.d("PREPROCESSING", data.toString());
+
         return data;
     }
 
