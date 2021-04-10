@@ -4,12 +4,14 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.PointF;
 import android.graphics.drawable.Drawable;
+import android.media.Rating;
 import android.net.wifi.ScanResult;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
@@ -175,7 +177,10 @@ public class TestingMainFragment extends Fragment {
         alertTestingDiscrepencyButton = view.findViewById(R.id.testing_discrepency_button);
         endTestingButton = view.findViewById(R.id.end_testing_button);
         endTestingButton.setOnClickListener(v -> {
-
+            RatingDialogFragment rating = new RatingDialogFragment();
+            FragmentTransaction ft = getParentFragmentManager().beginTransaction();
+            ft.addToBackStack(null);
+            rating.show(ft, "rating");
         });
 
 

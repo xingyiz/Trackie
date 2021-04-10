@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:minWidth="800dp"
+    android:minHeight="300dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Test Session Feedback: "
+        android:fontFamily="@font/opensans_bold"
+        android:layout_gravity="center"
+        android:layout_marginRight="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="32dp"
+        android:textSize="24sp" />
+
+    <RatingBar
+        android:id="@+id/ratingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:numStars="5"
+        android:rating="3"
+        android:stepSize="0.5"
+        android:progressTint="@color/barbiePink"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/ratingTextLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
+        android:layout_gravity="center">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/ratingText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter Comments (Optional) "
+            android:fontFamily="@font/opensans_reg"
+            android:inputType="text" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minWidth="128dp"
+        android:id="@+id/ratingSubmit"
+        android:text="Submit"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
+        android:layout_gravity="center"
+        android:fontFamily="@font/opensans_bold" />
+
+</LinearLayout>
