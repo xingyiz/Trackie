@@ -38,18 +38,7 @@ public class ModelPrediction {
     public List<String> topBSSIDs;
     public int size;
 
-    private String CREDENTIALS_KEY = "{\n" +
-            "  \"type\": \"service_account\",\n" +
-            "  \"project_id\": \"trackiev2\",\n" +
-            "  \"private_key_id\": \"4711d0f32270a09aff204ec472aa7eed6fb54ceb\",\n" +
-            "  \"private_key\": \"-----BEGIN PRIVATE KEY-----\\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDZGsbuthqcuAzy\\nskzT/2ANSDm3dC5gGkP9or8dXcQKlh+mzmiBvSWrI5HubXZ31wqMxLLg9qsDZM+W\\nnrbnID4rA5PuHJ4e2928IKHlosj+oFBxNO/M68BaJj8qkknRuBjV7Q+UZBwxiTkR\\ndf9d5jvXiYZhQP6w688BxFcq0OX0MI9SdZ7rvRaxod2IRsk9OSxOOygDH9j+yvL3\\nMg57C/thuYp97tgRwxuCmMQWbgeev34GCY4K8K3c7kBG0/VEziK4+SF5Y7F7Zxlh\\n7bAjQbAtlvRxGof4+nqaZdIZwkVXCvPwbUFXzAyX8QzwPAVyXb3bsaElNexCbnQN\\nFJFO8QlxAgMBAAECggEAM2FI7zmdtrVAKzfTQuDPRJVxQ191kjzlFmOrwzFrse2x\\nc/KpfPrcrVHvuXOic94qmwH6K491DYqQLl9FfhF9ZQSlv9Z5/WefZGR8rDIIS2p5\\nXzFeBytMDIm8rUCNw9pD1m0SINZIbdjB7sX0N67DPtFHQkD1hb1o8kwbLQDfSxi7\\nWs3ZaptL2CS2K76NnHGncjoAfAFOO9rD5LdM3LSNLHm+FhDPbvhlZd3vdamlaA4P\\n/2TpbDMrQz0sYTKeOQAlB0okHvH0XoAIy0zIhv7WdnCQpGb05kpVNIYChtQGG7H4\\nb2SeSWk7TthUva531ioAmVBVPGd2M3oaDpCLkAckoQKBgQDuBki66JkJOqa2z2/+\\nyoFsnQ46fuwk92FJ8+kIielBhIW5dXdH2QuOwC2QQvk+MdyVQuM705QZ1WiUpPoA\\nroPV0N3bwCdimaBXGU4r8k27s9Hpca/up170hYuhFQk3GaY+c+EgtMcwKUoz4DPd\\nbNWEIO5TCaIu5FqgVUy0uOqbJQKBgQDpgAx4Y5ZLzHhjwHPeGy9Q+a06y4JU1tZN\\nrhjmcwsgDI7Z+3IoZ9wFWBn5PPlXWCoMBuf7pKayXBbK/IyN5XHH8qaWnZI2xsRL\\ndIjfqxIrQLW1QJYvVUBbFkjklZDdpv6BPZxwsBlqPv1o0z0dJou2SosUD/IbqhBN\\nc4mAedrpXQKBgQC97zXKMCEuRCcUaaMs5dsxGIJqGy3EscJoiMHDlokTRvSOcTWl\\nl4SpfKDfJRJOlus2EBHTg5oCo1C4jI0STi/VRr5CxKqo+33/AqpmVwvAZFV0ustw\\n3Q3ggVBSUb7wwP7vhvh2aMspm0ki7B1264nVzZFfoahRUtceafKzo3tSIQKBgQDm\\naxXjN2L5Ka0jwqaUZv8qSThI7MqQLfEMduDbiGtSFRJiyV69wL++BlKbQTBMoRPd\\nCnOiP7jACV/0r4OEAwdk6G678oJ2y26phzYKgiZLyG+HjVSnINmBCVylNXLfSAue\\nPc5C5YQu9DndV5bXTVJRcP4Nri6cXhX4WCs4PQdpgQKBgBdqCR+Oi1o+Hu4IqNYF\\nBqqokEOxIJRqe+6MGlTzi+ee1UMmKMtnNSWc7w7XpJs2aCATQlpE1Z63f8w8kdzg\\n7CXs1UzxboySbJPN0Ln6TLL+E1GjcYiXG/v5gFf9sTNe9fa257islvxIxyaNBrWU\\noh982BVaiM8uCIqWBf8H8Gdv\\n-----END PRIVATE KEY-----\\n\",\n" +
-            "  \"client_email\": \"ml-manager@trackiev2.iam.gserviceaccount.com\",\n" +
-            "  \"client_id\": \"108924010093481671203\",\n" +
-            "  \"auth_uri\": \"https://accounts.google.com/o/oauth2/auth\",\n" +
-            "  \"token_uri\": \"https://oauth2.googleapis.com/token\",\n" +
-            "  \"auth_provider_x509_cert_url\": \"https://www.googleapis.com/oauth2/v1/certs\",\n" +
-            "  \"client_x509_cert_url\": \"https://www.googleapis.com/robot/v1/metadata/x509/ml-manager%40trackiev2.iam.gserviceaccount.com\"\n" +
-            "}"; //ENTER CREDENTIALS KEY HERE
+    private String CREDENTIALS_KEY = ""; //ENTER CREDENTIALS KEY HERE
 
     // TODO: preprocess data coming in from WiFiScanner such that only RSSI from good BSSIDs are used
     private double[][] preprocessInputData(List<ScanResult> scanResults) {
@@ -256,8 +245,6 @@ public class ModelPrediction {
                 callback.onReceiveResults(parsePredictionJSONForResult(response));
             } catch (JSONException e) {
                 e.printStackTrace();
-                callback.onError();
-            } catch (NullPointerException e) {
                 callback.onError();
             }
         }
