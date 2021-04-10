@@ -107,7 +107,7 @@ public class TestingMainFragment extends Fragment {
             public void onSuccess() {
                 goodBSSIDs = storageDownloader.getGoodBSSIDs();
                 String credentials = getString(R.string.credentials_key);
-                modelPrediction = new ModelPrediction(goodBSSIDs, size, credentials);
+                modelPrediction = new ModelPrediction(goodBSSIDs, size, credentials, getContext());
                 size = storageDownloader.getSize();
                 Toast.makeText(getContext(), "GOOD_BSSIDS file retrieved :)", Toast.LENGTH_SHORT).show();
             }
@@ -174,6 +174,7 @@ public class TestingMainFragment extends Fragment {
         dataUtils.scanWiFiDataIndefinitely();
 
         alertTestingDiscrepencyButton = view.findViewById(R.id.testing_discrepency_button);
+
         endTestingButton = view.findViewById(R.id.end_testing_button);
         endTestingButton.setOnClickListener(v -> {
             RatingDialogFragment rating = new RatingDialogFragment();
@@ -181,10 +182,25 @@ public class TestingMainFragment extends Fragment {
             ft.addToBackStack(null);
             rating.show(ft, "rating");
         });
-
-
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        dataUtils.stopScanning();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        dataUtils.stopScanning();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        dataUtils.stopScanning();
+    }
 
     private class TestWiFiDataListener implements FetchWiFiDataUtils.FetchListener {
 

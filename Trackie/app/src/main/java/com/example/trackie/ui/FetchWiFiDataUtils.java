@@ -185,7 +185,7 @@ public class FetchWiFiDataUtils {
     }
 
     public void scanWiFiDataIndefinitely() {
-        this.timesToScan = 10000;
+        this.timesToScan = Integer.MAX_VALUE;
         startScanWifiData();
     }
 

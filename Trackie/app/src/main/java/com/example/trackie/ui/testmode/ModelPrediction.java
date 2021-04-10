@@ -1,5 +1,6 @@
 package com.example.trackie.ui.testmode;
 
+import android.content.Context;
 import android.graphics.PointF;
 import android.net.wifi.ScanResult;
 import android.widget.Toast;
@@ -29,8 +30,10 @@ import org.json.JSONObject;
 import java.io.ByteArrayInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -40,41 +43,57 @@ public class ModelPrediction {
     public List<String> topBSSIDs;
     public int size;
 
+    private Context context;
     private String CREDENTIALS_KEY; //ENTER CREDENTIALS KEY HERE
 
     // TODO: preprocess data coming in from WiFiScanner such that only RSSI from good BSSIDs are used
-    private double[][] preprocessInputData(List<ScanResult> scanResults) {
-        double[][] inputData = new double[1][size * 2];
+    private List<List<Double>> preprocessInputData(List<ScanResult> scanResults) {
+        List<Double> inputData = new ArrayList<>(size * 2);
+
+        for (int i = 0; i < size*2; i++) {
+            inputData.add(i, 1.0);
+        }
+
+        Toast.makeText(context, "Initialised: " + inputData, Toast.LENGTH_SHORT).show();
 
         // get index from topBSSIDs, place RSSI in correct place
         for (ScanResult scanResult : scanResults) {
             if (topBSSIDs.contains(scanResult.BSSID)) {
                 int index = topBSSIDs.indexOf(scanResult.BSSID);
-                inputData[0][index] = 1;
-                inputData[0][index + size] = (double) scanResult.level / -100;
+                inputData.set(index, 1.0);
+                inputData.set(index + size, (double) scanResult.level / -100.0);
             }
         }
+
+        Toast.makeText(context, "topbssids: " + inputData, Toast.LENGTH_SHORT).show();
 
         // for BSSIDs that are not found in scanResults, put -1 as RSSI
         for (int i = 0; i < size; i++) {
-            if (inputData[0][i] == 0) {
-                inputData[0][i + size] = -1;
+            if (inputData.get(i) == 0.0) {
+                inputData.set(i + size, -1.0);
             }
         }
-        return inputData;
+
+        Toast.makeText(context, "not found: " + inputData, Toast.LENGTH_SHORT).show();
+
+        List<List<Double>> data = new ArrayList<>();
+        data.add(inputData);
+        return data;
     }
 
-    public ModelPrediction(List<String> topBSSIDs, int size, String credentials) {
+    public ModelPrediction(List<String> topBSSIDs, int size, String credentials, Context context) {
         this.topBSSIDs = topBSSIDs;
         this.size = size;
         this.CREDENTIALS_KEY = credentials;
+        this.context = context;
     }
 
     public void getPrediction(List<ScanResult> scanResults, OnReceivePredictionResultsCallback callback) {
-        double [][] inputData = preprocessInputData(scanResults);
+        List<List<Double>> inputData = preprocessInputData(scanResults);
+        Toast.makeText(context, "preprocessed: " + inputData.toString(), Toast.LENGTH_SHORT).show();
 //        String inputJSON = createInputInstanceJSONFrom2DArray(inputData);
         // REMEMBER TO DELETE THE BOTTOM AND USE THE TOP
-        String inputJSON = "{\"instances\": [[1.0," +
+        /*String inputJSON = "{\"instances\": [[1.0," +
                 "  1.0," +
                 "  1.0," +
                 "  1.0," +
@@ -153,13 +172,14 @@ public class ModelPrediction {
                 "  0.8078," +
                 "  0.8175," +
                 "  0.8125," +
-                "  0.8525]]}";
-        SendPredictionThread thread = new SendPredictionThread(inputJSON, callback);
+                "  0.8525]]}";*/
+        SendPredictionThread thread = new SendPredictionThread(createInputInstanceJSONFrom2DArray(inputData), callback);
+        Toast.makeText(context, createInputInstanceJSONFrom2DArray(inputData), Toast.LENGTH_SHORT).show();
         thread.start();
     }
 
-    private String createInputInstanceJSONFrom2DArray(double[][] inputArray) {
-        Map<String, double[][]> map = new HashMap<>();
+    private String createInputInstanceJSONFrom2DArray(List<List<Double>> inputArray) {
+        Map<String, List<List<Double>>> map = new HashMap<>();
         map.put("instances", inputArray);
         JSONObject json = new JSONObject(map);
         return json.toString();
@@ -255,7 +275,7 @@ public class ModelPrediction {
         }
     }
 
-    public double[] testParseInputJSon() {
+    /*public double[] testParseInputJSon() {
         try {
             JSONObject json = new JSONObject("\"instances\" : [[1.0,\n" +
                     "  1.0,\n" +
@@ -344,14 +364,21 @@ public class ModelPrediction {
             e.printStackTrace();
         }
         return null;
-    }
+    }*/
 
     public double[] parsePredictionJSONForResult(String jsonResult) throws JSONException {
-        JSONObject json = new JSONObject(jsonResult);
-        JSONArray jsonArray = json.getJSONArray("predictions");
-        double[] result = new double[]{jsonArray.getJSONArray(0).getDouble(0),
-                                       jsonArray.getJSONArray(0).getDouble(1)};
-        return result;
+        try {
+            JSONObject json = new JSONObject(jsonResult);
+            JSONArray jsonArray = json.getJSONArray("predictions");
+            double[] result = new double[]{jsonArray.getJSONArray(0).getDouble(0),
+                    jsonArray.getJSONArray(0).getDouble(1)};
+            return result;
+        } catch (Exception e) {
+            JSONObject json = new JSONObject(jsonResult);
+            String error = json.getString("error");
+            Toast.makeText(context, "Prediction failed due to " + error, Toast.LENGTH_LONG).show();
+            return new double[]{0.0, 0.0};
+        }
     }
 
     protected interface OnReceivePredictionResultsCallback {
