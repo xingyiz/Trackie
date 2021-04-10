@@ -4,6 +4,7 @@ import android.graphics.PointF;
 import android.net.wifi.ScanResult;
 import android.widget.Toast;
 
+import com.example.trackie.R;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.http.ByteArrayContent;
 import com.google.api.client.http.FileContent;
@@ -26,6 +27,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayInputStream;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -38,7 +40,7 @@ public class ModelPrediction {
     public List<String> topBSSIDs;
     public int size;
 
-    private String CREDENTIALS_KEY = ""; //ENTER CREDENTIALS KEY HERE
+    private String CREDENTIALS_KEY; //ENTER CREDENTIALS KEY HERE
 
     // TODO: preprocess data coming in from WiFiScanner such that only RSSI from good BSSIDs are used
     private double[][] preprocessInputData(List<ScanResult> scanResults) {
@@ -62,9 +64,10 @@ public class ModelPrediction {
         return inputData;
     }
 
-    public ModelPrediction(List<String> topBSSIDs, int size) {
+    public ModelPrediction(List<String> topBSSIDs, int size, String credentials) {
         this.topBSSIDs = topBSSIDs;
         this.size = size;
+        this.CREDENTIALS_KEY = credentials;
     }
 
     public void getPrediction(List<ScanResult> scanResults, OnReceivePredictionResultsCallback callback) {

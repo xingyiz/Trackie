@@ -99,7 +99,6 @@ public class TestingMainFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         TestingViewModel testingViewModel = new ViewModelProvider(requireActivity()).get(TestingViewModel.class);
-//        modelPrediction = new ModelPrediction(testingViewModel.getGoodBSSIDs(), testingViewModel.getSize());
 
         // long way first :(
         StorageDownloader storageDownloader = new StorageDownloader(Prefs.getCurrentLocation(getContext()), getContext());
@@ -107,7 +106,8 @@ public class TestingMainFragment extends Fragment {
             @Override
             public void onSuccess() {
                 goodBSSIDs = storageDownloader.getGoodBSSIDs();
-                modelPrediction = new ModelPrediction(goodBSSIDs, size);
+                String credentials = getString(R.string.credentials_key);
+                modelPrediction = new ModelPrediction(goodBSSIDs, size, credentials);
                 size = storageDownloader.getSize();
                 Toast.makeText(getContext(), "GOOD_BSSIDS file retrieved :)", Toast.LENGTH_SHORT).show();
             }
