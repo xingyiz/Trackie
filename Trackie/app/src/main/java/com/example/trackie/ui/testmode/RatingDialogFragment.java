@@ -28,7 +28,7 @@ public class RatingDialogFragment extends DialogFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.rating_dialog, container, false);
+        View v = inflater.inflate(R.layout.test_rating_dialog, container, false);
 
         ratingText = v.findViewById(R.id.ratingText);
         ratingSubmit = v.findViewById(R.id.ratingSubmit);

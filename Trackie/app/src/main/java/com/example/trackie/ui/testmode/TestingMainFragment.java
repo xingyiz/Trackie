@@ -56,7 +56,7 @@ import static android.content.Context.MODE_PRIVATE;
 public class TestingMainFragment extends Fragment {
 
     private TestImageMapView testImageMapView;
-    private ImageButton alertTestingDiscrepencyButton;
+    private Button alertTestingDiscrepencyButton;
     private Button endTestingButton;
 
     private FetchWiFiDataUtils dataUtils;
@@ -65,6 +65,7 @@ public class TestingMainFragment extends Fragment {
     private ModelPrediction modelPrediction;
     private ArrayList<String> goodBSSIDs;
     private int size;
+    private PointF currentPoint;
 
     public TestingMainFragment() {
         // Required empty public constructor
@@ -90,7 +91,6 @@ public class TestingMainFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-
         }
     }
 
@@ -174,6 +174,12 @@ public class TestingMainFragment extends Fragment {
         dataUtils.scanWiFiDataIndefinitely();
 
         alertTestingDiscrepencyButton = view.findViewById(R.id.testing_discrepency_button);
+        alertTestingDiscrepencyButton.setOnClickListener(v -> {
+            System.out.println("WHAT WHAT WHAT");
+            if (currentPoint != null) {
+                testImageMapView.indicatePositionError(currentPoint);
+            }
+        });
         endTestingButton = view.findViewById(R.id.end_testing_button);
         endTestingButton.setOnClickListener(v -> {
             RatingDialogFragment rating = new RatingDialogFragment();
@@ -181,8 +187,6 @@ public class TestingMainFragment extends Fragment {
             ft.addToBackStack(null);
             rating.show(ft, "rating");
         });
-
-
     }
 
 
@@ -199,6 +203,7 @@ public class TestingMainFragment extends Fragment {
                         PointF predictedPoint = new PointF((float) result[0] * testImageMapView.getSWidth(),
                                                            (float) result[1] * testImageMapView.getSHeight());
                         testImageMapView.updateCurrentUserLocation(predictedPoint);
+                        currentPoint = predictedPoint;
                     }
 
                     @Override
@@ -225,5 +230,11 @@ public class TestingMainFragment extends Fragment {
         public void finishAllScanning() {
 
         }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        dataUtils.stopScanning();
     }
 }

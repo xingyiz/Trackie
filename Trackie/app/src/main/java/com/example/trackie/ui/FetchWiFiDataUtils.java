@@ -119,7 +119,7 @@ public class FetchWiFiDataUtils {
                         dataListener.onScanResultsReceived(results);
                         timesScanned++;
 
-                        if (timesScanned == timesToScan) {
+                        if (timesScanned == timesToScan || stopScanning) {
 
                             // stop all scanning, perform steps to close handler thread and unregister receiver
                             dataListener.finishAllScanning();

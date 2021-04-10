@@ -12,22 +12,28 @@ import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
 import com.example.trackie.R;
 import com.example.trackie.Utils;
 
+import java.util.ArrayList;
+
 public class TestImageMapView extends SubsamplingScaleImageView {
     private final Paint paint = new Paint();
     private PointF currentUserLocation;
+    private ArrayList<PointF> errorPoints = new ArrayList<>();
     private Bitmap pinBitmap;
+    private Bitmap errorBitmap;
     private final static int ANIMATION_FRAMERATE = 50;
-
 
     public TestImageMapView(Context context, AttributeSet attr) {
         super(context, attr);
 
-        setUpPinBitmap();
+        pinBitmap = setUpPinBitmap(R.drawable.ic_my_location_24px);
+        errorBitmap = setUpPinBitmap(R.drawable.ic_error_indicator_24dp);
     }
 
     public TestImageMapView(Context context) {
         super(context);
-        setUpPinBitmap();
+
+        pinBitmap = setUpPinBitmap(R.drawable.ic_my_location_24px);
+        errorBitmap = setUpPinBitmap(R.drawable.ic_error_indicator_24dp);
     }
 
     public PointF getCurrentUserLocation() {
@@ -52,8 +58,6 @@ public class TestImageMapView extends SubsamplingScaleImageView {
         }
         PointThread pointThread = new PointThread(newLocation, this.getWidth() / ANIMATION_FRAMERATE);
         pointThread.start();
-
-
     }
 
     @Override
@@ -63,22 +67,42 @@ public class TestImageMapView extends SubsamplingScaleImageView {
         if (!isReady()) return;
         paint.setAntiAlias(true);
         if (currentUserLocation == null) return;
-        PointF vPoint = sourceToViewCoord(currentUserLocation);
 
-        float vX = vPoint.x - (pinBitmap.getWidth()/2);
-        float vY = vPoint.y - pinBitmap.getHeight();
+        // draw user's current location
+        drawPoint(currentUserLocation, canvas, pinBitmap);
 
-        canvas.drawBitmap(pinBitmap, vX, vY, paint);
+        // draw all indicated error points by user
+        for (PointF errorPoint: errorPoints) {
+            System.out.println("Error point");
+           drawPoint(errorPoint, canvas, errorBitmap);
+        }
+    }
+
+    private void drawPoint(PointF point, Canvas canvas, Bitmap bitmap) {
+        PointF vPoint = sourceToViewCoord(point);
+        float vX = vPoint.x - (bitmap.getWidth()/2);
+        float vY = vPoint.y - bitmap.getHeight();
+        canvas.drawBitmap(bitmap, vX, vY, paint);
+    }
+
+    private Bitmap setUpPinBitmap(int drawableResource) {
+        Drawable pinDrawable = getContext().getDrawable(drawableResource);
+        Bitmap tempBitmap = Utils.drawableToBitmap(pinDrawable);
+        float density = getResources().getDisplayMetrics().densityDpi;
+        float width = (density / 420f) * tempBitmap.getWidth();
+        float height = (density / 420f) * tempBitmap.getHeight();
+        return Bitmap.createScaledBitmap(tempBitmap, (int) width, (int) height, true);
 
     }
 
-    private void setUpPinBitmap() {
-        Drawable pinDrawable = getContext().getDrawable(R.drawable.ic_my_location_24px);
-        Bitmap tempBitmap = Utils.drawableToBitmap(pinDrawable);
-        float density = getResources().getDisplayMetrics().densityDpi;
-        float pinW = (density / 420f) * tempBitmap.getWidth();
-        float pinH = (density / 420f) * tempBitmap.getHeight();
-        pinBitmap =  Bitmap.createScaledBitmap(tempBitmap, (int) pinW, (int) pinH, true);
+    protected void indicatePositionError(PointF errorPoint) {
+        if (errorPoints.contains(errorPoint)) return;
+        errorPoints.add(errorPoint);
+        invalidate();
+    }
+
+    protected ArrayList<PointF> getErrorPoints() {
+        return errorPoints;
     }
 
     private class PointThread extends Thread {
