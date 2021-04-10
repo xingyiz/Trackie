@@ -234,10 +234,13 @@ public class TestingMainFragment extends Fragment {
 
         // get index from topBSSIDs, place RSSI in correct place
         for (ScanResult scanResult : scanResults) {
-            if (goodBSSIDs.contains(scanResult.BSSID)) {
-                int index = goodBSSIDs.indexOf(scanResult.BSSID);
-                inputData.set(index, 1.0);
-                inputData.set(index + size, (double) scanResult.level / -100.0);
+            for (int i = 0; i < size; i++) {
+                if (goodBSSIDs.get(i).equals(scanResult.BSSID)) {
+                    int index = goodBSSIDs.indexOf(scanResult.BSSID);
+//                    Toast.makeText(getContext(), goodBSSIDs.get(index), Toast.LENGTH_SHORT).show();
+                    inputData.set(index, 1.0);
+                    inputData.set(index + size, (double) scanResult.level / -100.0);
+                }
             }
         }
 
@@ -251,7 +254,7 @@ public class TestingMainFragment extends Fragment {
         List<List<Double>> data = new ArrayList<>();
         data.add(inputData);
 
-        Log.d("PREPROCESSING", data.toString());
+        Toast.makeText(getContext(), data.toString(), Toast.LENGTH_SHORT).show();
 
         return data;
     }

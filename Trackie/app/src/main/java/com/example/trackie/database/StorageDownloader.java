@@ -63,7 +63,7 @@ public class StorageDownloader implements FirestoreExecute {
                             inputReader.close();
 //                            Toast.makeText(context, "Contents: " + contents, Toast.LENGTH_LONG).show();
 
-                            goodBSSIDs = new ArrayList<>(Arrays.asList(contents.split(",")));
+                            goodBSSIDs = new ArrayList<>(Arrays.asList(contents.split(", ")));
                             goodBSSIDs.remove(goodBSSIDs.size() - 1);
                             size = goodBSSIDs.size();
 
