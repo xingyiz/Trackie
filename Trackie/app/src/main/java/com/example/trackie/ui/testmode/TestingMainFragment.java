@@ -254,7 +254,7 @@ public class TestingMainFragment extends Fragment {
         List<List<Double>> data = new ArrayList<>();
         data.add(inputData);
 
-        Toast.makeText(getContext(), data.toString(), Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getContext(), data.toString(), Toast.LENGTH_SHORT).show();
 
         return data;
     }
