@@ -116,7 +116,7 @@ public class HomeScreenTest {
     public void ClickMapModeButton() throws Exception{
         onView(withId(R.id.map_mode_button))
                 .perform(click());
-        onView(withId(R.id.map_mode_host_fragment))
+        onView(withId(R.id.admin_pin))
                 .check(matches(isDisplayed()));
     }
 

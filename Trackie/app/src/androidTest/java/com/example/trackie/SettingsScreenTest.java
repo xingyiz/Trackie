@@ -69,7 +69,8 @@ public class SettingsScreenTest {
     @Test
     public void TestMeasuredRSSI() throws Exception{
         // set to 55 and check prefs
-        String data = "55";
+        // change to -55 to pass
+        String data = "-55";
         onView(withId(R.id.RSSIEditText))
                 .perform(click())
                 .perform(typeTextIntoFocusedView(data));
