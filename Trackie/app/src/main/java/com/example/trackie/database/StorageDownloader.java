@@ -34,7 +34,7 @@ public class StorageDownloader implements FirestoreExecute {
     private static final int READ_BLOCK_SIZE = 100;
 
     public StorageDownloader(String name, Context context) {
-        this.name = name + "_GOODSSIDS.txt";
+        this.name = name + "_good_ssids.txt";
         storageReference = firebaseStorage.getReference(this.name);
         this.context = context;
     }

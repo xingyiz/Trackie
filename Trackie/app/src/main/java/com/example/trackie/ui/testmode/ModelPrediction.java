@@ -44,87 +44,6 @@ public class ModelPrediction {
 
     public void getPrediction(List<List<Double>> inputData, OnReceivePredictionResultsCallback callback) {
         String inputJSON = createInputInstanceJSONFrom2DArray(inputData);
-        // REMEMBER TO DELETE THE BOTTOM AND USE THE TOP
-//        String inputJSON = "{\"instances\": [[1.0," +
-//                "  1.0," +
-//                "  1.0," +
-//                "  1.0," +
-//                "  1.0," +
-//                "  1.0," +
-//                "  1.0," +
-//                "  1.0," +
-//                "  1.0," +
-//                "  1.0," +
-//                "  1.0," +
-//                "  1.0," +
-//                "  1.0," +
-//                "  1.0," +
-//                "  1.0," +
-//                "  1.0," +
-//                "  1.0," +
-//                "  1.0," +
-//                "  1.0," +
-//                "  1.0," +
-//                "  1.0," +
-//                "  1.0," +
-//                "  1.0," +
-//                "  1.0," +
-//                "  1.0," +
-//                "  1.0," +
-//                "  1.0," +
-//                "  1.0," +
-//                "  1.0," +
-//                "  1.0," +
-//                "  1.0," +
-//                "  1.0," +
-//                "  1.0," +
-//                "  1.0," +
-//                "  1.0," +
-//                "  1.0," +
-//                "  1.0," +
-//                "  1.0," +
-//                "  1.0," +
-//                "  1.0," +
-//                "  0.6225," +
-//                "  0.6733333333333333," +
-//                "  0.68," +
-//                "  0.675," +
-//                "  0.76," +
-//                "  0.716," +
-//                "  0.744," +
-//                "  0.6125," +
-//                "  0.6125," +
-//                "  0.6125," +
-//                "  0.6125," +
-//                "  0.682," +
-//                "  0.702," +
-//                "  0.704," +
-//                "  0.715," +
-//                "  0.704," +
-//                "  0.856," +
-//                "  0.855," +
-//                "  0.858," +
-//                "  0.856," +
-//                "  0.806," +
-//                "  0.7225," +
-//                "  0.775," +
-//                "  0.81," +
-//                "  0.704," +
-//                "  0.8525," +
-//                "  0.76," +
-//                "  0.8066666666666668," +
-//                "  0.8533333333333333," +
-//                "  0.856," +
-//                "  0.865," +
-//                "  0.8575," +
-//                "  0.8625," +
-//                "  0.704," +
-//                "  0.725," +
-//                "  0.82," +
-//                "  0.8078," +
-//                "  0.8175," +
-//                "  0.8125," +
-//                "  0.8525]]}";
         SendPredictionThread thread = new SendPredictionThread(inputJSON, callback);
         thread.start();
     }
@@ -164,8 +83,8 @@ public class ModelPrediction {
             String projectId = "trackiev2";
             // You should have already deployed a model and a version.
             // For reference, see https://cloud.google.com/ml-engine/docs/deploying-models.
-            String modelId = "B2L2_RF";
-            String versionId = "B2L2_RF";
+            String modelId = "B2L2_XT";
+            String versionId = "B2L2_XT";
             param.set(
                     "name", String.format("projects/%s/models/%s/versions/%s", projectId, modelId, versionId));
 
