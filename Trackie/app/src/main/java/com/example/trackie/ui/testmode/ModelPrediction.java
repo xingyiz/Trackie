@@ -77,7 +77,7 @@ public class ModelPrediction {
             // You should have already deployed a model and a version.
             // For reference, see https://cloud.google.com/ml-engine/docs/deploying-models.
             String modelId = "B2L2_XT";
-            String versionId = "B2L2_XT";
+            String versionId = "B2L2_XT3";
             param.set(
                     "name", String.format("projects/%s/models/%s/versions/%s", projectId, modelId, versionId));
 

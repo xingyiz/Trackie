@@ -57,8 +57,8 @@
         android:layout_gravity="center"
         android:layout_marginRight="32dp"
         android:layout_marginLeft="32dp"
-        android:layout_marginTop="16dp"
-        android:textSize="18sp" />
+        android:layout_marginTop="32dp"
+        android:textSize="24sp" />
 
     <RatingBar
         android:id="@+id/ratingBar"
@@ -70,6 +70,7 @@
         android:rating="3"
         android:stepSize="0.5"
         android:progressTint="@color/barbiePink"
+        android:layout_marginTop="8dp"
         android:layout_marginLeft="32dp"
         android:layout_marginRight="32dp" />
 
@@ -87,7 +88,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Enter Comments (Optional) "
-            android:fontFamily="@font/opensans_reg"
+            android:fontFamily="@font/raleway_regular"
             android:inputType="text" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -102,7 +103,7 @@
         android:layout_marginLeft="32dp"
         android:layout_marginRight="32dp"
         android:layout_gravity="center"
-        android:fontFamily="@font/opensans_bold"
+        android:fontFamily="@font/opensans_semibold"
         android:layout_marginBottom="16dp"/>
 
 </LinearLayout>

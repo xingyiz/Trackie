@@ -202,11 +202,11 @@ public class MappingMainFragment extends Fragment implements PinImageMapView.Pin
             public void onClick(View v) {
                 PointF location = mappingImageView.getUnconfirmedPoint();
                 mapWiFiDataListener.setLocation(location);
+                Toast.makeText(getContext(), "Scanning...",
+                        Toast.LENGTH_SHORT).show();
                 if (location == null) return;
                 if (isPermissionsGranted) {
                     dataUtils.startScanWifiData();
-                    Toast.makeText(getContext(), "Scanning...",
-                            Toast.LENGTH_SHORT).show();
                 }
                 else Toast.makeText(getContext(), "WiFi scanning permissions not granted!",
                         Toast.LENGTH_SHORT).show();

@@ -34,7 +34,7 @@ public class StorageDownloader implements FirestoreExecute {
     private static final int READ_BLOCK_SIZE = 100;
 
     public StorageDownloader(String name, Context context) {
-        this.name = name + "_good_ssids.txt";
+        this.name = name + "_good_ssids2.txt";
         storageReference = firebaseStorage.getReference(this.name);
         this.context = context;
     }
@@ -65,6 +65,7 @@ public class StorageDownloader implements FirestoreExecute {
 
                             goodBSSIDs = new ArrayList<>(Arrays.asList(contents.split(", ")));
                             goodBSSIDs.remove(goodBSSIDs.size() - 1);
+//                            goodBSSIDs = new ArrayList<>(goodBSSIDs.subList(0, 60));
                             size = goodBSSIDs.size();
 
 //                            Toast.makeText(context, "Good BSSIDs: " + goodBSSIDs.get(0), Toast.LENGTH_LONG).show();
