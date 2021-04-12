@@ -9,11 +9,11 @@
         android:layout_width="136dp"
         >
 
-        <ImageView
+        <View
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/pink_gradient_rounded"
-            android:alpha="0.4"
+            android:alpha="0.9"
             />
 
         <TextView
