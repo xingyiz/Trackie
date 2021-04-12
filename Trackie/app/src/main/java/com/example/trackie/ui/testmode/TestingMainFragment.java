@@ -35,6 +35,7 @@ import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -102,7 +103,7 @@ public class TestingMainFragment extends Fragment {
             public void onSuccess() {
                 goodBSSIDs = storageDownloader.getGoodBSSIDs();
                 retrievedBSSID = true;
-                String credentials = getString(R.string.credentials_key);
+                String credentials = requireContext().getResources().getString(R.string.credentials_key);
                 modelPrediction = new ModelPrediction(credentials);
                 size = storageDownloader.getSize();
                 Toast.makeText(getContext(), "GOOD_BSSIDS file retrieved :)", Toast.LENGTH_SHORT).show();
