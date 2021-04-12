@@ -59,6 +59,8 @@ public class TestingMainFragment extends Fragment {
     private int size;
     private PointF currentPoint;
 
+    private boolean retrievedBSSID = false;
+
     public TestingMainFragment() {
         // Required empty public constructor
     }
@@ -99,6 +101,7 @@ public class TestingMainFragment extends Fragment {
             @Override
             public void onSuccess() {
                 goodBSSIDs = storageDownloader.getGoodBSSIDs();
+                retrievedBSSID = true;
                 String credentials = getString(R.string.credentials_key);
                 modelPrediction = new ModelPrediction(credentials);
                 size = storageDownloader.getSize();
@@ -190,20 +193,22 @@ public class TestingMainFragment extends Fragment {
             System.out.println("Received");
 
             try {
-                modelPrediction.getPrediction(preprocessInputData(scanResults), new ModelPrediction.OnReceivePredictionResultsCallback() {
-                    @Override
-                    public void onReceiveResults(double[] result) {
-                        PointF predictedPoint = new PointF((float) result[0] * testImageMapView.getSWidth(),
-                                                           (float) result[1] * testImageMapView.getSHeight());
-                        testImageMapView.updateCurrentUserLocation(predictedPoint);
-                        currentPoint = predictedPoint;
-                    }
+                if (retrievedBSSID) {
+                    modelPrediction.getPrediction(preprocessInputData(scanResults), new ModelPrediction.OnReceivePredictionResultsCallback() {
+                        @Override
+                        public void onReceiveResults(double[] result) {
+                            PointF predictedPoint = new PointF((float) result[0] * testImageMapView.getSWidth(),
+                                    (float) result[1] * testImageMapView.getSHeight());
+                            testImageMapView.updateCurrentUserLocation(predictedPoint);
+                            currentPoint = predictedPoint;
+                        }
 
-                    @Override
-                    public void onError() {
-                        System.out.println("Failed to parse JSON prediction string. Check code under ModelPrediction.parsePredictionJSONForResult()");
-                    }
-                });
+                        @Override
+                        public void onError() {
+                            System.out.println("Failed to parse JSON prediction string. Check code under ModelPrediction.parsePredictionJSONForResult()");
+                        }
+                    });
+                }
             } catch (Exception e) {
                 e.printStackTrace();
                 try {
