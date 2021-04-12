@@ -13,7 +13,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/pink_gradient_rounded"
-            android:alpha="0.4"
+            android:backgroundTint="@color/midtone"
+            android:backgroundTintMode="add"
+            android:alpha="1"
+
             />
 
         <TextView
@@ -23,7 +26,7 @@
             android:text="@string/scanning_wifi_data"
             android:fontFamily="@font/opensans_semibold"
             android:textSize="@dimen/small_text_size"
-            android:textColor="?attr/colorSecondaryVariant"
+            android:textColor="?attr/colorSecondary"
             android:layout_marginTop="@dimen/activity_vertical_margin"
             android:layout_marginHorizontal="8dp"
             app:layout_constraintStart_toStartOf="parent"
@@ -36,7 +39,7 @@
             android:layout_height="wrap_content"
             android:text="Times scanned: "
             android:textSize="@dimen/small_text_size"
-            android:textColor="?attr/colorSecondary"
+            android:textColor="?attr/colorOnPrimarySurface"
             android:fontFamily="@font/raleway_regular"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -45,14 +48,16 @@
 
         <ProgressBar
             android:id="@+id/wifi_scanning_progress_indicator"
+            android:indeterminate="true"
+            android:indeterminateDrawable="@drawable/circle_mdpi"
+            android:indeterminateTint="@color/mauve"
+            android:indeterminateTintMode="multiply"
             android:layout_width="55dp"
             android:layout_height="55dp"
-            android:outlineAmbientShadowColor="@color/white"
             android:layout_marginBottom="@dimen/activity_vertical_margin"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"/>
-
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

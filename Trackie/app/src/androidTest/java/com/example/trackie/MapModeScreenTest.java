@@ -59,6 +59,15 @@ public class MapModeScreenTest {
     }
 
     @Test
+    public void Login() throws Exception{
+
+    }
+
+    @Test public void FailLogin() throws Exception{
+
+    }
+
+    @Test
     public void DropPin() throws Exception{
         onView(withId(R.id.mapping_indoor_map_view))
                 .perform(click());
