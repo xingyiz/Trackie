@@ -36,6 +36,7 @@ import com.google.firebase.storage.StorageReference;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -61,6 +62,7 @@ public class TestingMainFragment extends Fragment {
     private PointF currentPoint;
 
     private boolean retrievedBSSID = false;
+    private long startTime;
 
     public TestingMainFragment() {
         // Required empty public constructor
@@ -95,6 +97,8 @@ public class TestingMainFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         TestingViewModel testingViewModel = new ViewModelProvider(requireActivity()).get(TestingViewModel.class);
+
+        startTime = System.currentTimeMillis();
 
         // long way first :(
         StorageDownloader storageDownloader = new StorageDownloader(Prefs.getCurrentLocation(getContext()), getContext());
@@ -179,10 +183,14 @@ public class TestingMainFragment extends Fragment {
         });
         endTestingButton = view.findViewById(R.id.end_testing_button);
         endTestingButton.setOnClickListener(v -> {
-            RatingDialogFragment rating = new RatingDialogFragment();
+            long endTimeSeconds = (System.currentTimeMillis() - startTime) / 1000;
+            int endMinutes = (int) endTimeSeconds / 60;
+            int endSeconds = (int) endTimeSeconds % 60;
+            String timeTakenString = endMinutes + " m, " + endSeconds + " s";
+            RatingDialogFragment ratingFragment = new RatingDialogFragment(testImageMapView.getErrorPoints().size(), timeTakenString);
             FragmentTransaction ft = getParentFragmentManager().beginTransaction();
             ft.addToBackStack(null);
-            rating.show(ft, "rating");
+            ratingFragment.show(ft, "rating");
         });
     }
 
@@ -191,9 +199,9 @@ public class TestingMainFragment extends Fragment {
         @Override
         public void onScanResultsReceived(List<ScanResult> scanResults) {
             if (testImageMapView == null) return;
-            System.out.println("Received");
 
             try {
+                System.out.println("Retrieved BSSID:" + retrievedBSSID);
                 if (retrievedBSSID) {
                     modelPrediction.getPrediction(preprocessInputData(scanResults), new ModelPrediction.OnReceivePredictionResultsCallback() {
                         @Override

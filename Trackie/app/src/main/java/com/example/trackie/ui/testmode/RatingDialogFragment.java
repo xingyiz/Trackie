@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RatingBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -20,15 +21,34 @@ import com.example.trackie.database.OnCompleteCallback;
 import com.example.trackie.database.RatingData;
 
 public class RatingDialogFragment extends DialogFragment {
+    private TextView errorCountTextview;
+    private TextView testTimeTakenTextview;
     private EditText ratingText;
     private String ratingTextProcessed;
     private Button ratingSubmit;
     private RatingBar ratingBar;
 
+    private int errorCount;
+    private String testTimeTaken;
+
+    public RatingDialogFragment(int numberOfErrors, String testTimeTaken) {
+        super();
+        this.errorCount = numberOfErrors;
+        this.testTimeTaken = testTimeTaken;
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.test_rating_dialog, container, false);
+
+        String indicated_time_taken = getString(R.string.time_taken);
+        testTimeTakenTextview = v.findViewById(R.id.testing_time_taken_textview);
+        testTimeTakenTextview.setText(indicated_time_taken + testTimeTaken);
+
+        String _indicated_errors_text = getString(R.string._indicated_error_points);
+        errorCountTextview = v.findViewById(R.id.indicated_error_points_count_textview);
+        errorCountTextview.setText(errorCount + _indicated_errors_text);
 
         ratingText = v.findViewById(R.id.ratingText);
         ratingSubmit = v.findViewById(R.id.ratingSubmit);

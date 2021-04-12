@@ -26,6 +26,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="16dp">
         <TextView
+            android:id="@+id/testing_time_taken_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/time_taken"
@@ -41,9 +42,10 @@
         </View>
 
         <TextView
+            android:id="@+id/indicated_error_points_count_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="3 indicated error points"
+            android:text="indicated error points"
             android:textSize="16sp"
             android:layout_weight="1"/>
 
