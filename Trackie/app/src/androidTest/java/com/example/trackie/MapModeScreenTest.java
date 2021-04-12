@@ -41,8 +41,9 @@ public class MapModeScreenTest {
 
     @Before
     public void yourSetUpFragment(){
-
-        Prefs.setCurrentLocation(mHomeActivityTestRule.getActivity().getApplicationContext(), "B2L2");
+        context = mHomeActivityTestRule.getActivity().getApplicationContext();
+        Prefs.setCurrentLocation(context, "B2L2");
+        Prefs.setAdminMode(context, true);
         mHomeActivityTestRule.getActivity()
                 .getFragmentManager().beginTransaction();
         onView(withId(R.id.map_mode_button))
@@ -55,15 +56,6 @@ public class MapModeScreenTest {
 */
    /*   PinImageMapView imageView = mMapModeActivityTestRule.getActivity().findViewById(R.id.mapping_indoor_map_view);
         imageView.setImage(ImageSource.resource(R.drawable.b2_l1));*/
-
-    }
-
-    @Test
-    public void Login() throws Exception{
-
-    }
-
-    @Test public void FailLogin() throws Exception{
 
     }
 
