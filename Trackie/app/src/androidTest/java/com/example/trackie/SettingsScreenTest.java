@@ -78,9 +78,6 @@ public class SettingsScreenTest {
         onView(withId(R.id.RSSISetButton))
                 .perform(click())
                 .check(matches(new CustomMatchers.StringPrefsMatcher(CustomMatchers.MEASURED_RSSI, data, context)));
-
-       //onView(withId(R.id.setting_fragment_container)).check(matches(new CustomMatchers.StringPrefsMatcher(CustomMatchers.MEASURED_RSSI, data, context )));
-
     }
 
     @Test
