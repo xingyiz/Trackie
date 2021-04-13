@@ -63,46 +63,4 @@ public class AddLocationScreenTest {
         }
     }
 
-    @Test
-
-
-    public void LightFloorplanUploadTest() throws Exception{
-        onView(withId(R.id.upload_floorplan_button))
-                .perform(click());
-
-        //Select Image
-
-        //Check if image is displayed
-    }
-
-    @Test
-    public void DarkFloorplanUploadTest() throws Exception{
-        onView(withId(R.id.upload_dark_floorplan_button))
-                .perform(click());
-
-        //Select Image
-
-        //Check if image is displayed
-
-    }
-
-    @Test
-    public void addLocation() throws Exception{
-
-    }
-
-    @Test
-    public void addLocationNoName() throws Exception{
-
-    }
-
-    @Test
-    public void AddLocationNoDarkImage() throws Exception {
-
-    }
-
-    @Test
-    public void AddLocationNoLightImage() throws Exception {
-
-    }
 }

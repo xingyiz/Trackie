@@ -1,20 +1,19 @@
 package com.example.trackie.database;
 
+import android.content.Context;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.example.trackie.ui.Prefs;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.storage.FirebaseStorage;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class FirestoreHelper {
     private static final String TAG = "FirestoreHelper";
@@ -130,8 +129,36 @@ public class FirestoreHelper {
         }
     }
 
-    public static class UpdateMapData {
+    public static class UploadRating implements FirestoreExecute {
+        private Context context;
+        private RatingData ratingData;
         private FirebaseFirestore db = FirebaseFirestore.getInstance();
-        // TODO
+        private String location;
+
+        public UploadRating(Context context, RatingData ratingData) {
+            this.context = context;
+            this.ratingData = ratingData;
+            location = Prefs.getCurrentLocation(context);
+        }
+
+        @Override
+        public void execute(OnCompleteCallback callback) {
+            try {
+                db.collection("Ratings").document(location)
+                        .set(ratingData)
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()) {
+                                    callback.onSuccess();
+                                } else {
+                                    callback.onFailure();
+                                }
+                            }
+                        });
+            } catch (Exception e) {
+                callback.onError();
+            }
+        }
     }
 }

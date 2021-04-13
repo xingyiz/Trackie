@@ -19,14 +19,15 @@
             android:layout_height="30dp"
             android:text="@string/view_data"
             android:textSize="@dimen/small_text_size"
-            android:fontFamily="@font/segoeui"
+            android:fontFamily="@font/raleway_semibold"
+            android:textColor="?attr/backgroundColor"
             android:gravity="center"/>
     </FrameLayout>
 
     <View
         android:layout_width="1dp"
         android:layout_height="match_parent"
-        android:background="@android:color/darker_gray"/>
+        android:background="@color/white"/>
 
     <FrameLayout
         android:id="@+id/pin_delete_option_view"
@@ -39,7 +40,8 @@
             android:layout_height="30dp"
             android:text="@string/delete"
             android:textSize="@dimen/small_text_size"
-            android:fontFamily="@font/segoeui"
+            android:fontFamily="@font/raleway_semibold"
+            android:textColor="?attr/backgroundColor"
             android:gravity="center"/>
     </FrameLayout>
 </LinearLayout>

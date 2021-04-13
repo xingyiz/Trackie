@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <corners android:radius="5dp"></corners>
+    <gradient
+        android:gradientRadius="1500dp"
+        android:endColor="?attr/colorControlHighlight"
+        android:startColor="?attr/backgroundColor"
+        android:centerColor="?attr/colorControlHighlight"
+        android:type="radial"
+        />
+    <stroke android:color="@color/white"
+        android:width="@dimen/cardview_default_radius"></stroke>
+
+</shape>

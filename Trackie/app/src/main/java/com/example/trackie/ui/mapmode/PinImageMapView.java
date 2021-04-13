@@ -1,6 +1,7 @@
 package com.example.trackie.ui.mapmode;
 
 import android.content.Context;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -41,7 +42,6 @@ public class PinImageMapView extends SubsamplingScaleImageView {
 
     public PinImageMapView(Context context) {
         this(context, null);
-        initialise();
     }
 
     public PinImageMapView(Context context, AttributeSet attr) {
@@ -76,6 +76,11 @@ public class PinImageMapView extends SubsamplingScaleImageView {
         if (unconfirmedPoint != null && !mapPoints.isEmpty()) mapPoints.remove(unconfirmedPoint);
         mapPoints.add(point);
         unconfirmedPoint = point;
+        invalidate();
+    }
+
+    public void setMappedPoints(List<PointF> mappedPoints) {
+        this.mapPoints = mappedPoints;
         invalidate();
     }
 
@@ -163,6 +168,11 @@ public class PinImageMapView extends SubsamplingScaleImageView {
         return unconfirmedPoint;
     }
 
+    protected void setUnconfirmedPoint(PointF unconfirmedPoint) {
+        this.unconfirmedPoint = unconfirmedPoint;
+        invalidate();
+    }
+
     private void createPinPopUpOptions(int pointX, int pointY) {
         LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         final View mOptionsView = inflater.inflate(R.layout.pin_options_layout, null);
@@ -173,13 +183,21 @@ public class PinImageMapView extends SubsamplingScaleImageView {
 
         mOptionsView.measure(MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED),
                 MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED));
-        popUp.showAtLocation((View) getParent(), Gravity.NO_GRAVITY, pointX - (mOptionsView.getMeasuredWidth() / 2),
-                pointY + mOptionsView.getMeasuredHeight() - (pinBitmap.getHeight() / 2));
+        if (getContext().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
+            popUp.showAtLocation((View) getParent(), Gravity.NO_GRAVITY, pointX - (mOptionsView.getMeasuredWidth() / 2),
+                    pointY + mOptionsView.getMeasuredHeight() - (pinBitmap.getHeight() / 2));
+        } else {
+            popUp.showAtLocation((View) getParent(), Gravity.NO_GRAVITY, pointX - (mOptionsView.getMeasuredWidth() / 2),
+                    pointY - mOptionsView.getMeasuredHeight() - (pinBitmap.getHeight() / 2));
+        }
 
         FrameLayout pinDeleteSelector = (FrameLayout) mOptionsView.findViewById(R.id.pin_delete_option_view);
         pinDeleteSelector.setOnClickListener(v -> {
             if (selectedPoint != null) {
                 mapPoints.remove(selectedPoint);
+                if (selectedPoint.equals(unconfirmedPoint)) {
+                    unconfirmedPoint = null;
+                }
                 pinOptionsController.onDeletePinData(selectedPoint);
                 dismissSelectedPoint(popUp);
             }
@@ -208,7 +226,7 @@ public class PinImageMapView extends SubsamplingScaleImageView {
         }, 150);
     }
 
-    public interface PinOptionsController {
+    protected interface PinOptionsController {
         void onViewPinData(PointF selectedPoint);
         void onDeletePinData(PointF selectedPoint);
     }

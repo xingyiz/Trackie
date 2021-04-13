@@ -9,17 +9,20 @@
     android:layout_marginRight="35dp"
     android:layout_marginTop="50dp"
     android:layout_marginBottom="50dp"
-    android:background="?attr/colorOnPrimary">
+    android:background="@drawable/popup_bg2"
+    >
+
 
     <TextView
         android:id="@+id/pin_point_label_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="14dp"
-        android:fontFamily="@font/bsegoeui"
+        android:layout_marginStart="@dimen/alert_text_size"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:fontFamily="@font/opensans_bold"
         android:text="Pin Location : (x, y)"
         android:textSize="@dimen/button_text_size"
+        android:textColor="?attr/colorSecondary"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -27,11 +30,12 @@
         android:id="@+id/mapped_bssids_count_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="12dp"
+        android:layout_marginTop="14dp"
+        android:layout_marginEnd="@dimen/alert_text_size"
         android:text="BSSIDs mapped: 0"
         android:textSize="10sp"
-        android:fontFamily="@font/segoeui"
+        android:fontFamily="@font/opensans_reg"
+        android:textColor="?attr/colorSecondaryVariant"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -40,8 +44,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="6dp"
-        android:layout_marginEnd="12dp"
-        android:fontFamily="@font/segoeui"
+        android:layout_marginEnd="@dimen/alert_text_size"
+        android:fontFamily="@font/opensans_reg"
+        android:textColor="?attr/colorSecondaryVariant"
         android:text="Time mapped: --/--/--"
         android:textSize="10sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -51,8 +56,10 @@
         android:id="@+id/view_pin_data_popup_layout_divider1"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginTop="14dp"
-        android:background="?attr/colorPrimaryDark"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_marginHorizontal="@dimen/cardview_default_radius"
+        android:background="?attr/colorControlHighlight"
+        android:alpha="0.6"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/pin_point_label_textview" />
@@ -63,6 +70,7 @@
         android:layout_height="300dp"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
+        android:layout_marginHorizontal="@dimen/alert_text_size"
         app:layout_constraintBottom_toTopOf="@id/view_pin_data_popup_layout_divider2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -73,7 +81,9 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginBottom="0dp"
-        android:background="?attr/colorPrimaryDark"
+        android:background="?attr/colorControlHighlight"
+        android:alpha="0.6"
+        android:layout_marginHorizontal="@dimen/cardview_default_radius"
         app:layout_constraintTop_toBottomOf="@id/pin_data_info_recyclerview"
         app:layout_constraintBottom_toTopOf="@id/pull_up_exit_view_pin_data_view"
         app:layout_constraintEnd_toEndOf="parent"
@@ -85,4 +95,5 @@
         android:layout_height="35dp"
         app:layout_constraintTop_toBottomOf="@id/view_pin_data_popup_layout_divider2"
         app:layout_constraintBottom_toBottomOf="parent"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

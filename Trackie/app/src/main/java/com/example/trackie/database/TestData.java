@@ -1,6 +1,5 @@
 package com.example.trackie.database;
 
-import android.graphics.Point;
 import android.graphics.PointF;
 
 import com.google.firebase.Timestamp;

@@ -1,17 +1,22 @@
 package com.example.trackie.database;
 
+import android.content.Context;
 import android.net.Uri;
 
 import androidx.annotation.NonNull;
 
+import com.example.trackie.ui.Prefs;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.Timestamp;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.SetOptions;
+import com.google.firebase.firestore.WriteBatch;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -35,7 +40,9 @@ public class FloorplanHelper {
                                 if (task.isSuccessful()) {
                                     for (QueryDocumentSnapshot doc : task.getResult()) {
                                         FloorplanData floorplanData = doc.toObject(FloorplanData.class);
-                                        floorplanDataList.add(floorplanData);
+                                        if (!floorplanDataList.contains(floorplanData.getName())) {
+                                            floorplanDataList.add(floorplanData);
+                                        }
                                     }
                                     callback.onSuccess();
                                 } else {
@@ -56,24 +63,33 @@ public class FloorplanHelper {
     public static class RetrieveFloorplan implements FirestoreExecute {
         private String name;
         private String floorplanURL;
+        private Timestamp timestamp;
         private final FirebaseFirestore db = FirebaseFirestore.getInstance();
+        private int darkmode;
 
-        public RetrieveFloorplan(String name) {
+        public RetrieveFloorplan(String name, Context context) {
             this.name = name;
+            this.darkmode = Prefs.getDarkModeState(context) ? 1 : 0;
         }
 
         @Override
         public void execute(OnCompleteCallback callback) {
             try {
-                db.collection("Floorplans").document(name)
+                String floorplanName = name + darkmode;
+                db.collection("Floorplans").document(floorplanName)
                         .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                         if (task.isSuccessful()) {
                             DocumentSnapshot documentSnapshot = task.getResult();
                             FloorplanData floorplanData = documentSnapshot.toObject(FloorplanData.class);
+                            if (floorplanData == null) {
+                                callback.onFailure();
+                                return;
+                            }
                             name = floorplanData.getName();
                             floorplanURL = floorplanData.getFloorplan();
+                            timestamp = floorplanData.getTimestamp();
                             callback.onSuccess();
                         } else {
                             callback.onFailure();
@@ -88,6 +104,10 @@ public class FloorplanHelper {
         public String getFloorplanURL() {
             return floorplanURL;
         }
+
+        public Timestamp getTimestamp() {
+            return timestamp;
+        }
     }
 
     public static class UploadFloorplan implements FirestoreExecute {
@@ -95,20 +115,23 @@ public class FloorplanHelper {
         private String name;
         private Uri floorplan;
         private int darkmode;
+        private Timestamp timestamp;
 
         private final FirebaseStorage storage = FirebaseStorage.getInstance();
         private final FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-        public UploadFloorplan(String name, Uri floorplan, int darkmode) {
+        public UploadFloorplan(String name, Uri floorplan, int darkmode, Timestamp timestamp) {
             this.name = name;
             this.floorplan = floorplan;
             this.darkmode = darkmode;
+            this.timestamp = timestamp;
         }
 
         @Override
         public void execute(OnCompleteCallback callback) {
             try {
-                StorageReference ref = storage.getReference(name);
+                String floorplanName = name + darkmode;
+                StorageReference ref = storage.getReference(floorplanName);
                 ref.putFile(floorplan).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -116,8 +139,8 @@ public class FloorplanHelper {
                             @Override
                             public void onSuccess(Uri uri) {
                                 floorplan = uri;
-                                db.collection("Floorplans").document(name)
-                                        .set(new FloorplanData(name, floorplan.toString(), darkmode), SetOptions.merge())
+                                db.collection("Floorplans").document(floorplanName)
+                                        .set(new FloorplanData(name, floorplan.toString(), darkmode, timestamp), SetOptions.merge())
                                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
@@ -150,10 +173,17 @@ public class FloorplanHelper {
 
         @Override
         public void execute(OnCompleteCallback callback) {
+            WriteBatch writeBatch = db.batch();
             try {
-                db.collection("Floorplans").document(floorplanName)
-                        .delete()
-                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                DocumentReference dark = db.collection("Floorplans").document(floorplanName + "1");
+                DocumentReference light = db.collection("Floorplans").document(floorplanName + "0");
+                if (dark != null) {
+                    writeBatch.delete(dark);
+                }
+                if (light != null) {
+                    writeBatch.delete(light);
+                }
+                writeBatch.commit().addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()) {

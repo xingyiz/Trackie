@@ -9,6 +9,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="GET"
+        android:fontFamily="@font/opensans_semibold"
         android:layout_above="@id/set_button"
         android:layout_centerInParent="true"
         android:layout_marginTop="12dp"/>
@@ -20,6 +21,7 @@
         android:layout_marginTop="12dp"
         android:layout_above="@id/remove_button"
         android:text="SET"
+        android:fontFamily="@font/opensans_semibold"
         android:layout_centerInParent="true" />
 
     <ScrollView
@@ -29,15 +31,17 @@
         android:layout_centerInParent="true">
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/database_display"
+            android:fontFamily="@font/raleway_regular"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="hello" />
+            android:text="data: " />
     </ScrollView>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/remove_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/opensans_semibold"
         android:text="REMOVE"
         android:layout_centerInParent="true"
         android:layout_marginTop="12dp" />

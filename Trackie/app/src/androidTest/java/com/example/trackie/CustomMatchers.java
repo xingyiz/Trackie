@@ -5,8 +5,10 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.IBinder;
 import android.preference.Preference;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -16,6 +18,7 @@ import android.widget.ToggleButton;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.StringRes;
 import androidx.appcompat.widget.AppCompatButton;
+import androidx.test.espresso.Root;
 import androidx.test.espresso.matcher.BoundedMatcher;
 import androidx.test.espresso.matcher.PreferenceMatchers;
 import androidx.test.espresso.matcher.ViewMatchers;
@@ -167,6 +170,28 @@ public class CustomMatchers {
         public void describeTo(Description description) {
             description.appendText("Checking preferences of: ");
             description.appendText(toSearch);
+        }
+    }
+
+    public static class ToastMatcher extends TypeSafeMatcher<Root> {
+
+        @Override
+        public void describeTo(Description description) {
+            description.appendText("is toast");
+        }
+
+        @Override
+        public boolean matchesSafely(Root root) {
+            int type = root.getWindowLayoutParams().get().type;
+            if ((type == WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY)) {
+                IBinder windowToken = root.getDecorView().getWindowToken();
+                IBinder appToken = root.getDecorView().getApplicationWindowToken();
+                if (windowToken == appToken) {
+                    //means this window isn't contained by any other windows.\
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

@@ -13,8 +13,9 @@
         android:layout_height="match_parent"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:fontFamily="@font/segoeui"
+        android:fontFamily="@font/raleway_regular"
         android:textSize="@dimen/content_text_size"
+        android:textColor="?attr/colorSecondary"
         android:text="BSSID"/>
 
     <TextView
@@ -26,6 +27,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_weight="1"
-        android:fontFamily="@font/segoeui"/>
+        android:textColor="?attr/colorSecondary"
+        android:fontFamily="@font/raleway_regular"/>
 
 </LinearLayout>

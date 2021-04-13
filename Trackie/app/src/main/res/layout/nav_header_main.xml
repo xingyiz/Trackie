@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
         android:text="@string/app_name"
-        android:fontFamily="@font/bsegoeui"
+        android:fontFamily="@font/opensans_reg"
         android:textSize="20sp"
         android:textColor="?attr/colorOnPrimary"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
@@ -33,8 +33,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingTop="2dp"
+        android:id="@+id/nav_header_currentPrivs"
         android:text="@string/nav_header_subtitle"
-        android:fontFamily="@font/segoeui"
+        android:fontFamily="@font/raleway_regular"
         android:textSize="14sp"
         android:textColor="?attr/colorOnPrimary"/>
 

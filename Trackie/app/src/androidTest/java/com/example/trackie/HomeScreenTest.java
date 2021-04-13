@@ -1,10 +1,8 @@
 package com.example.trackie;
 
+import android.content.Context;
 import android.view.Gravity;
 
-import androidx.test.InstrumentationRegistry;
-import androidx.test.espresso.contrib.RecyclerViewActions;
-import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.rule.ActivityTestRule;
 
@@ -16,21 +14,21 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import static android.os.SystemClock.sleep;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.action.ViewActions.typeText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
-import static androidx.test.espresso.matcher.RootMatchers.isDialog;
-import static androidx.test.espresso.matcher.ViewMatchers.hasDescendant;
+import static androidx.test.espresso.contrib.DrawerActions.close;
+import static androidx.test.espresso.contrib.DrawerActions.open;
+import static androidx.test.espresso.contrib.DrawerMatchers.isClosed;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
-import static androidx.test.espresso.contrib.DrawerActions.*;
-import static androidx.test.espresso.contrib.DrawerMatchers.*;
-import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
 
 @RunWith(AndroidJUnit4.class)
 public class HomeScreenTest {
+    Context context;
 
     @Rule
     public ActivityTestRule<MainActivity> mHomeActivityTestRule =
@@ -39,16 +37,11 @@ public class HomeScreenTest {
 
     @Before
     public void yourSetUpFragment(){
-        Prefs.setCurrentLocation(mHomeActivityTestRule.getActivity().getApplicationContext(), "B2L2");
+        context = mHomeActivityTestRule.getActivity().getApplicationContext();
+        Prefs.setCurrentLocation(context, "B2L2");
+        Prefs.setAdminMode(context, false);
         mHomeActivityTestRule.getActivity()
                 .getFragmentManager().beginTransaction();
-    }
-
-    @Test
-    public void SetupScreen() throws Exception{
-        mHomeActivityTestRule.getActivity()
-                .getFragmentManager().beginTransaction();
-
     }
 
     @Test
@@ -82,11 +75,6 @@ public class HomeScreenTest {
                 .perform(click());
         onView(withId(R.id.locations_recycler_view))
                 .check(matches(isDisplayed()));
-        onView(ViewMatchers.withId(R.id.locations_recycler_view))
-                .perform(RecyclerViewActions.actionOnItem(
-                        hasDescendant(withText("CCL1")), click()
-                        )
-                );
     }
 
     @Test
@@ -120,8 +108,12 @@ public class HomeScreenTest {
     public void ClickMapModeButton() throws Exception{
         onView(withId(R.id.map_mode_button))
                 .perform(click());
-        onView(withId(R.id.map_mode_host_fragment))
-                .check(matches(isDisplayed()));
+       onView(withId(R.id.admin_pin))
+                .perform(click())
+                .perform(typeText("1234"));
+       onView(withId(R.id.admin_submit))
+               .perform(click());
+       onView(withId(R.id.confirm_mapping_click_button)).check(matches(isDisplayed()));
     }
 
     @Test
@@ -134,19 +126,11 @@ public class HomeScreenTest {
 
     @Test
     public void ClickSetLocationsButton() throws Exception{
+        sleep(100);
         onView(withId(R.id.set_location_button))
                 .perform(click());
         onView(withId(R.id.locations_recycler_view))
                 .check(matches(isDisplayed()));
-
-        onView(ViewMatchers.withId(R.id.locations_recycler_view))
-                .check(matches(isDisplayed()));
-
-        onView(ViewMatchers.withId(R.id.locations_recycler_view))
-                .perform(RecyclerViewActions.actionOnItem(
-                        hasDescendant(withText("B2L1")), click()
-                        )
-                );
     }
 
 }

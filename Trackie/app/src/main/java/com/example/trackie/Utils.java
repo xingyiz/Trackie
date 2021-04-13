@@ -1,31 +1,28 @@
 package com.example.trackie;
 
-import android.Manifest;
-import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.PointF;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiManager;
-import android.os.Build;
 import android.widget.Toast;
 
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-
-import com.example.trackie.database.MapData;
-
-import java.security.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+
+import android.graphics.PorterDuff;
+import android.view.MotionEvent;
+import android.view.View;
+
+import com.example.trackie.ui.Prefs;
+
+import org.apache.commons.codec.binary.Hex;
 
 public class Utils {
     public static String P_FILE = "com.example.trackie.ui.preferences";
@@ -80,4 +77,24 @@ public class Utils {
         return results;
     }
 
+    public static void buttonEffect(View button){
+        button.setOnTouchListener(new View.OnTouchListener() {
+
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN: {
+                        v.getBackground().setColorFilter(0xFFE661B1, PorterDuff.Mode.SRC_ATOP);
+                        v.invalidate();
+                        break;
+                    }
+                    case MotionEvent.ACTION_UP: {
+                        v.getBackground().clearColorFilter();
+                        v.invalidate();
+                        break;
+                    }
+                }
+                return false;
+            }
+        });
+    }
 }

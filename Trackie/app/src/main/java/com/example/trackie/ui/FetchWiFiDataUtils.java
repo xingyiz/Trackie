@@ -7,28 +7,22 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
-import android.graphics.PointF;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiManager;
 import android.os.Build;
-import android.os.Handler;
-import android.os.Looper;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.Window;
 import android.view.WindowManager;
 import android.widget.PopupWindow;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.example.trackie.R;
-import com.google.android.material.progressindicator.CircularProgressIndicator;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -97,11 +91,17 @@ public class FetchWiFiDataUtils {
         return false;
     }
 
-    // Helper function to create WiFiManager, scan the RSSI values and return the result
+    // Helper function to create broadcast receiver which will
+    // 1. Run on a seperate HandlerThread
+    // 2. Receive results from wifi manager while scanning
+    // 3. Stop scanning and null itself when the total number of scans required is reachedm
     private void initializeBroadcastReceiver() {
         if (!wifiManager.isWifiEnabled()) {
             Toast.makeText(context, "Please enable Wi-Fi", Toast.LENGTH_LONG).show();
         } else {
+            IntentFilter intentFilter = new IntentFilter();
+            intentFilter.addAction(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION);
+
             wifiReceiver = new BroadcastReceiver() {
                 @Override
                 public void onReceive(Context context, Intent intent) {
@@ -111,22 +111,20 @@ public class FetchWiFiDataUtils {
                         dataListener.onScanResultsReceived(results);
                         timesScanned++;
 
-                        if (timesScanned == timesToScan) {
+                        if (timesScanned == timesToScan || stopScanning) {
+
+                            // stop all scanning, perform steps to close handler thread and unregister receiver
                             dataListener.finishAllScanning();
-
-                            final Handler handler = new Handler(Looper.myLooper());
-                            handler.postDelayed(() -> {
-                                wifiReceiver.abortBroadcast();
-                                context.unregisterReceiver(wifiReceiver);
-                                wifiReceiver = null;
-
-                                if ( progressPopup != null){
-                                    progressPopup.dismiss();
-                                    progressPopup = null;
-                                }
-
-                            }, 1000);
+                            wifiReceiver.abortBroadcast();
+                            context.unregisterReceiver(wifiReceiver);
+                            wifiReceiver = null;
                             timesScanned = 0;
+
+                            if (progressPopup != null) {
+                                progressPopup.dismiss();
+                                progressPopup = null;
+                            }
+
                             // enable touch again after touch was disabled when scanning process screen shows
                             activity.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
                         } else {
@@ -143,8 +141,6 @@ public class FetchWiFiDataUtils {
                 }
             };
 
-            IntentFilter intentFilter = new IntentFilter();
-            intentFilter.addAction(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION);
             context.registerReceiver(wifiReceiver, intentFilter);
         }
     }
@@ -181,7 +177,7 @@ public class FetchWiFiDataUtils {
     }
 
     public void scanWiFiDataIndefinitely() {
-        this.timesToScan = 10000;
+        this.timesToScan = Integer.MAX_VALUE;
         startScanWifiData();
     }
 

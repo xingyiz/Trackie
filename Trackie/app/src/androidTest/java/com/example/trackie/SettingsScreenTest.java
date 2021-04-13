@@ -2,12 +2,14 @@ package com.example.trackie;
 
 import android.content.Context;
 
+import androidx.test.espresso.Espresso;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.android21buttons.fragmenttestrule.FragmentTestRule;
 import com.example.trackie.ui.Prefs;
 import com.example.trackie.ui.settings.SettingsFragment;
 
+import org.jetbrains.annotations.NotNull;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -47,7 +49,6 @@ public class SettingsScreenTest {
                 .perform(click())
                 .check(matches(isNotChecked()))
                 .check(matches(new CustomMatchers.BoolPrefsMatcher(CustomMatchers.DARK_MODE, false, context)));
-
     }
 
     @Test
@@ -58,22 +59,18 @@ public class SettingsScreenTest {
                 .check(matches(isChecked()))
                 .check(matches(new CustomMatchers.BoolPrefsMatcher(CustomMatchers.ACTIVE_SCANNING, true,context)));
 
-
         //unchecked
         onView(withId(R.id.toggle_active_scanning))
                 .perform(click())
                 .check(matches(isNotChecked()))
                 .check(matches(new CustomMatchers.BoolPrefsMatcher(CustomMatchers.ACTIVE_SCANNING, false, context)));
-
-
     }
 
     @Test
-    public void TestSetMeasuredRSSI() throws Exception{
-
-        String data = "55";
-
-        // set RSSI to 55 and check value in Prefs
+    public void TestMeasuredRSSI() throws Exception{
+        // set to 55 and check prefs
+        // change to -55 to pass
+        String data = "-55";
         onView(withId(R.id.RSSIEditText))
                 .perform(click())
                 .perform(typeTextIntoFocusedView(data));
@@ -81,7 +78,6 @@ public class SettingsScreenTest {
         onView(withId(R.id.RSSISetButton))
                 .perform(click())
                 .check(matches(new CustomMatchers.StringPrefsMatcher(CustomMatchers.MEASURED_RSSI, data, context)));
-
     }
 
     @Test

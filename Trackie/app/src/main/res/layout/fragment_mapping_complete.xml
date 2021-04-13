@@ -41,7 +41,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
-        android:fontFamily="@font/segoeui"
+        android:fontFamily="@font/opensans_reg"
         android:text="@string/mapping_complete"
         android:textAlignment="center"
         android:textColor="?attr/colorOnBackground"
@@ -58,7 +58,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
         android:src="@drawable/ic_keyboard_arrow_down_24px"
-        android:tint="?attr/colorControlHighlight"
+        app:tint="?attr/colorControlHighlight"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mapping_complete_textview" />

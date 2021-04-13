@@ -6,15 +6,18 @@ import android.graphics.PointF;
 import android.graphics.drawable.Drawable;
 import android.net.wifi.ScanResult;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Toast;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.CustomTarget;
@@ -24,12 +27,16 @@ import com.example.trackie.R;
 import com.example.trackie.Utils;
 import com.example.trackie.database.FloorplanHelper;
 import com.example.trackie.database.OnCompleteCallback;
+import com.example.trackie.database.StorageDownloader;
 import com.example.trackie.ui.FetchWiFiDataUtils;
+import com.example.trackie.ui.Prefs;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
+import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -43,8 +50,19 @@ import static android.content.Context.MODE_PRIVATE;
 public class TestingMainFragment extends Fragment {
 
     private TestImageMapView testImageMapView;
+    private Button alertTestingDiscrepencyButton;
+    private Button endTestingButton;
+
     private FetchWiFiDataUtils dataUtils;
     private TestWiFiDataListener testWiFiDataListener;
+
+    private ModelPrediction modelPrediction;
+    private ArrayList<String> goodBSSIDs;
+    private int size;
+    private PointF currentPoint;
+
+    private boolean retrievedBSSID = false;
+    private long startTime;
 
     public TestingMainFragment() {
         // Required empty public constructor
@@ -78,6 +96,34 @@ public class TestingMainFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        TestingViewModel testingViewModel = new ViewModelProvider(requireActivity()).get(TestingViewModel.class);
+
+        startTime = System.currentTimeMillis();
+
+        // long way first :(
+        StorageDownloader storageDownloader = new StorageDownloader(Prefs.getCurrentLocation(getContext()), getContext());
+        storageDownloader.execute(new OnCompleteCallback() {
+            @Override
+            public void onSuccess() {
+                goodBSSIDs = storageDownloader.getGoodBSSIDs();
+                retrievedBSSID = true;
+                String credentials = requireContext().getResources().getString(R.string.credentials_key);
+                modelPrediction = new ModelPrediction(credentials);
+                size = storageDownloader.getSize();
+                Toast.makeText(getContext(), "GOOD_BSSIDS file retrieved :)", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure() {
+                Toast.makeText(getContext(), "Getting GOOD_BSSIDS file failed", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onError() {
+                Toast.makeText(getContext(), "Getting GOOD_BSSIDS file errored", Toast.LENGTH_SHORT).show();
+            }
+        });
+
         return inflater.inflate(R.layout.fragment_testing_main, container, false);
     }
 
@@ -90,7 +136,7 @@ public class TestingMainFragment extends Fragment {
         SharedPreferences preferences = getContext().getSharedPreferences(Utils.P_FILE, MODE_PRIVATE);
         String floorplanName = preferences.getString(Utils.CURRENT_LOCATION_KEY, "nil");
         if (!floorplanName.equals(null)) {
-            FloorplanHelper.RetrieveFloorplan retrieveFloorplan = new FloorplanHelper.RetrieveFloorplan(floorplanName);
+            FloorplanHelper.RetrieveFloorplan retrieveFloorplan = new FloorplanHelper.RetrieveFloorplan(floorplanName, getContext());
             retrieveFloorplan.execute(new OnCompleteCallback() {
                 @Override
                 public void onSuccess() {
@@ -113,10 +159,12 @@ public class TestingMainFragment extends Fragment {
                 @Override
                 public void onFailure() {
                     Toast.makeText(getContext(), "Can't Retrieve Floorplan", Toast.LENGTH_SHORT).show();
+                    testImageMapView = null;
                 }
 
                 @Override
                 public void onError() {
+                    Toast.makeText(getContext(), "Error Retrieving Floorplan", Toast.LENGTH_SHORT).show();
                 }
             });
         }
@@ -125,19 +173,66 @@ public class TestingMainFragment extends Fragment {
         testWiFiDataListener = new TestWiFiDataListener();
         dataUtils = new FetchWiFiDataUtils(getActivity(), testWiFiDataListener, false);
         dataUtils.scanWiFiDataIndefinitely();
+
+        alertTestingDiscrepencyButton = view.findViewById(R.id.testing_discrepency_button);
+        alertTestingDiscrepencyButton.setOnClickListener(v -> {
+            System.out.println("WHAT WHAT WHAT");
+            if (currentPoint != null) {
+                testImageMapView.indicatePositionError(currentPoint);
+            }
+        });
+        endTestingButton = view.findViewById(R.id.end_testing_button);
+        endTestingButton.setOnClickListener(v -> {
+            long endTimeSeconds = (System.currentTimeMillis() - startTime) / 1000;
+            int endMinutes = (int) endTimeSeconds / 60;
+            int endSeconds = (int) endTimeSeconds % 60;
+            String timeTakenString = endMinutes + " m " + endSeconds + " s";
+            RatingDialogFragment ratingFragment = new RatingDialogFragment(testImageMapView.getErrorPoints().size(), timeTakenString);
+            FragmentTransaction ft = getParentFragmentManager().beginTransaction();
+            ft.addToBackStack(null);
+            ratingFragment.show(ft, "rating");
+        });
     }
 
     private class TestWiFiDataListener implements FetchWiFiDataUtils.FetchListener {
 
         @Override
         public void onScanResultsReceived(List<ScanResult> scanResults) {
-            // TODO: function which uses the data to get the location estimated by the algorithm
-            Random random = new Random();
+            if (testImageMapView == null) return;
 
-            PointF testPoint = new PointF(random.nextFloat() * testImageMapView.getSWidth(),
-                                          random.nextFloat() * testImageMapView.getSHeight());
-            testImageMapView.updateCurrentUserLocation(testPoint);
+            try {
+                System.out.println("Retrieved BSSID:" + retrievedBSSID);
+                if (retrievedBSSID) {
+                    List<List<Double>> inputData = preprocessInputData(scanResults);
+                    if (inputData == null) {
+                        Toast.makeText(getContext(), "Not at the right location!", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    modelPrediction.getPrediction(inputData, new ModelPrediction.OnReceivePredictionResultsCallback() {
+                        @Override
+                        public void onReceiveResults(double[] result) {
+                            PointF predictedPoint = new PointF((float) result[0] * testImageMapView.getSWidth(),
+                                    (float) result[1] * testImageMapView.getSHeight());
+                            testImageMapView.updateCurrentUserLocation(predictedPoint);
+                            currentPoint = predictedPoint;
+                        }
+
+                        @Override
+                        public void onError() {
+                            System.out.println("Failed to parse JSON prediction string. Check code under ModelPrediction.parsePredictionJSONForResult()");
+                        }
+                    });
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                try {
+                    Toast.makeText(getContext(), "Location has no saved BSSID values", Toast.LENGTH_SHORT).show();
+                } catch (Exception exception) {
+                    System.out.println("Could not make \"Location has no saved BSSID values\" toast!");
+                }
+            }
         }
+
 
         @Override
         public void onError(Throwable error) {
@@ -147,5 +242,49 @@ public class TestingMainFragment extends Fragment {
         public void finishAllScanning() {
 
         }
+    }
+
+    // preprocessing step which converts scanResults to list of rssi values
+    private List<List<Double>> preprocessInputData(List<ScanResult> scanResults) {
+        List<Double> inputData = new ArrayList<>(size * 2);
+        for (int i = 0; i < size * 2; i++) {
+            inputData.add(i, 0.0);
+        }
+
+        // get index from topBSSIDs, place RSSI in correct place
+        for (ScanResult scanResult : scanResults) {
+            for (int i = 0; i < size; i++) {
+                if (goodBSSIDs.get(i).equals(scanResult.BSSID)) {
+                    int index = goodBSSIDs.indexOf(scanResult.BSSID);
+//                    Toast.makeText(getContext(), goodBSSIDs.get(index), Toast.LENGTH_SHORT).show();
+                    inputData.set(index, 1.0);
+                    inputData.set(index + size, (double) scanResult.level / -100.0);
+                }
+            }
+        }
+
+        // for BSSIDs that are not found in scanResults, put -1 as RSSI
+        int missingBSSIDsCount = 0;
+        for (int i = 0; i < size; i++) {
+            if (inputData.get(i) == 0.0) {
+                missingBSSIDsCount++;
+                inputData.set(i + size, -1.0);
+            }
+        }
+
+        // return null if no suitable BSSIDs are found
+        if (missingBSSIDsCount == size) return null;
+
+        List<List<Double>> data = new ArrayList<>();
+        data.add(inputData);
+
+        return data;
+    }
+
+    // stop scanning when testing fragment is exited
+    @Override
+    public void onPause() {
+        super.onPause();
+        dataUtils.stopScanning();
     }
 }

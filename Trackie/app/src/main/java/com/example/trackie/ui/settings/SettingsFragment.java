@@ -1,10 +1,7 @@
 package com.example.trackie.ui.settings;
 
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.content.res.Configuration;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -121,6 +118,16 @@ public class SettingsFragment extends Fragment {
                 }
             }
         });
+
+        SwitchCompat TEST_B2L2_toggle = root.findViewById(R.id.toggle_TEST_B2L2MODE);
+        TEST_B2L2_toggle.setChecked(Prefs.getTEST_B2L2(getContext()));
+        TEST_B2L2_toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                Prefs.setTEST_B2L2(getContext(), isChecked);
+            }
+        });
+
 
         return root;
     }
