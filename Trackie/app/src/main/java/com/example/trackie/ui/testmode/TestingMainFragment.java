@@ -186,7 +186,7 @@ public class TestingMainFragment extends Fragment {
             long endTimeSeconds = (System.currentTimeMillis() - startTime) / 1000;
             int endMinutes = (int) endTimeSeconds / 60;
             int endSeconds = (int) endTimeSeconds % 60;
-            String timeTakenString = endMinutes + " m, " + endSeconds + " s";
+            String timeTakenString = endMinutes + " m " + endSeconds + " s";
             RatingDialogFragment ratingFragment = new RatingDialogFragment(testImageMapView.getErrorPoints().size(), timeTakenString);
             FragmentTransaction ft = getParentFragmentManager().beginTransaction();
             ft.addToBackStack(null);
@@ -203,7 +203,12 @@ public class TestingMainFragment extends Fragment {
             try {
                 System.out.println("Retrieved BSSID:" + retrievedBSSID);
                 if (retrievedBSSID) {
-                    modelPrediction.getPrediction(preprocessInputData(scanResults), new ModelPrediction.OnReceivePredictionResultsCallback() {
+                    List<List<Double>> inputData = preprocessInputData(scanResults);
+                    if (inputData == null) {
+                        Toast.makeText(getContext(), "Not at the right location!", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    modelPrediction.getPrediction(inputData, new ModelPrediction.OnReceivePredictionResultsCallback() {
                         @Override
                         public void onReceiveResults(double[] result) {
                             PointF predictedPoint = new PointF((float) result[0] * testImageMapView.getSWidth(),
@@ -259,16 +264,19 @@ public class TestingMainFragment extends Fragment {
         }
 
         // for BSSIDs that are not found in scanResults, put -1 as RSSI
+        int missingBSSIDsCount = 0;
         for (int i = 0; i < size; i++) {
             if (inputData.get(i) == 0.0) {
+                missingBSSIDsCount++;
                 inputData.set(i + size, -1.0);
             }
         }
 
+        // return null if no suitable BSSIDs are found
+        if (missingBSSIDsCount == size) return null;
+
         List<List<Double>> data = new ArrayList<>();
         data.add(inputData);
-
-//        Toast.makeText(getContext(), data.toString(), Toast.LENGTH_SHORT).show();
 
         return data;
     }

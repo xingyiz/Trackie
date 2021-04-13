@@ -44,11 +44,11 @@ public class RatingDialogFragment extends DialogFragment {
 
         String indicated_time_taken = getString(R.string.time_taken);
         testTimeTakenTextview = v.findViewById(R.id.testing_time_taken_textview);
-        testTimeTakenTextview.setText(indicated_time_taken + testTimeTaken);
+        testTimeTakenTextview.setText(indicated_time_taken + " " + testTimeTaken);
 
-        String _indicated_errors_text = getString(R.string._indicated_error_points);
+        String indicated_errors_text = getString(R.string.indicated_error_points);
         errorCountTextview = v.findViewById(R.id.indicated_error_points_count_textview);
-        errorCountTextview.setText(errorCount + _indicated_errors_text);
+        errorCountTextview.setText(errorCount + " " + indicated_errors_text);
 
         ratingText = v.findViewById(R.id.ratingText);
         ratingSubmit = v.findViewById(R.id.ratingSubmit);

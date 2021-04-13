@@ -30,9 +30,9 @@
     <string name="test_mode">Test Mode</string>
     <string name="end_testing">End Testing</string>
     <string name="testing_complete">Testing Complete!</string>
-    <string name="time_taken">Time Taken: </string>
+    <string name="time_taken">Time Taken:</string>
     <string name="overall_accuracy">Overall Testing Accuracy</string>
-    <string name="_indicated_error_points"> indicated error points</string>
+    <string name="indicated_error_points">indicated error points</string>
 
     <string name="upload_floorplan_here">Upload floorplan</string>
     <string name="confirm_floorplan">Confirm Floorplan</string>

@@ -9,14 +9,9 @@
     android:layout_marginRight="35dp"
     android:layout_marginTop="50dp"
     android:layout_marginBottom="50dp"
+    android:background="@drawable/popup_bg2"
     >
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@drawable/popup_bg2"
-        android:alpha="1"
-        />
 
     <TextView
         android:id="@+id/pin_point_label_textview"

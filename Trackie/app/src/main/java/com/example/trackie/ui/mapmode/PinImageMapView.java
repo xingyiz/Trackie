@@ -168,7 +168,7 @@ public class PinImageMapView extends SubsamplingScaleImageView {
         return unconfirmedPoint;
     }
 
-    public void setUnconfirmedPoint(PointF unconfirmedPoint) {
+    protected void setUnconfirmedPoint(PointF unconfirmedPoint) {
         this.unconfirmedPoint = unconfirmedPoint;
         invalidate();
     }
@@ -226,7 +226,7 @@ public class PinImageMapView extends SubsamplingScaleImageView {
         }, 150);
     }
 
-    public interface PinOptionsController {
+    protected interface PinOptionsController {
         void onViewPinData(PointF selectedPoint);
         void onDeletePinData(PointF selectedPoint);
     }
