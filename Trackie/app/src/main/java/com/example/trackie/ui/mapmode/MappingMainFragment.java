@@ -386,4 +386,8 @@ public class MappingMainFragment extends Fragment implements PinImageMapView.Pin
             }
         }
     }
+
+    public List<MapData> getMapDataList() {
+        return mapDataList;
+    }
 }
