@@ -113,7 +113,7 @@ public class FetchWiFiDataUtils {
 
                         if (timesScanned == timesToScan || stopScanning) {
 
-                            // stop all scanning, perform steps to close handler thread and unregister receiver
+                            // stop all scanning, perform steps to unregister receiver and null it
                             dataListener.finishAllScanning();
                             wifiReceiver.abortBroadcast();
                             context.unregisterReceiver(wifiReceiver);
@@ -156,10 +156,7 @@ public class FetchWiFiDataUtils {
         }
 
         // check if call to stop scanning was made before
-        if (stopScanning) {
-            stopScanning = false;
-            context.registerReceiver(wifiReceiver, intentFilter);
-        }
+        if (stopScanning) stopScanning = false;
         boolean success = false;
         if (Prefs.getActiveScanningEnabled(context)) {
             try {

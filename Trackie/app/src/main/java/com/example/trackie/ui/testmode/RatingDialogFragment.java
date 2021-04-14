@@ -18,14 +18,15 @@ import androidx.fragment.app.DialogFragment;
 import com.example.trackie.R;
 import com.example.trackie.database.FirestoreHelper;
 import com.example.trackie.database.OnCompleteCallback;
-import com.example.trackie.database.RatingData;
+import com.example.trackie.database.TestRatingData;
 
 public class RatingDialogFragment extends DialogFragment {
     private TextView errorCountTextview;
     private TextView testTimeTakenTextview;
-    private EditText ratingText;
+    private EditText ratingEditText;
     private String ratingTextProcessed;
-    private Button ratingSubmit;
+    private Button submitRatingButton;
+    private Button continueTestingButton;
     private RatingBar ratingBar;
 
     private int errorCount;
@@ -35,6 +36,7 @@ public class RatingDialogFragment extends DialogFragment {
         super();
         this.errorCount = numberOfErrors;
         this.testTimeTaken = testTimeTaken;
+        this.setCancelable(false);
     }
 
     @Nullable
@@ -50,21 +52,29 @@ public class RatingDialogFragment extends DialogFragment {
         errorCountTextview = v.findViewById(R.id.indicated_error_points_count_textview);
         errorCountTextview.setText(errorCount + " " + indicated_errors_text);
 
-        ratingText = v.findViewById(R.id.ratingText);
-        ratingSubmit = v.findViewById(R.id.ratingSubmit);
+        ratingEditText = v.findViewById(R.id.ratingText);
+        submitRatingButton = v.findViewById(R.id.submit_rating_button);
+        continueTestingButton = v.findViewById(R.id.continue_testing_button);
         ratingBar = v.findViewById(R.id.ratingBar);
 
-        ratingSubmit.setOnClickListener(new View.OnClickListener() {
+        continueTestingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (TextUtils.isEmpty(ratingText.getText().toString())) {
+                getParentFragmentManager().popBackStack();
+            }
+        });
+
+        submitRatingButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (TextUtils.isEmpty(ratingEditText.getText().toString())) {
                     ratingTextProcessed = "NIL";
                 } else {
-                    ratingTextProcessed = ratingText.getText().toString();
+                    ratingTextProcessed = ratingEditText.getText().toString();
                 }
 
                 FirestoreHelper.UploadRating uploadRating = new FirestoreHelper.UploadRating(getContext(),
-                        new RatingData(ratingTextProcessed, ratingBar.getRating()));
+                        new TestRatingData(ratingTextProcessed, ratingBar.getRating()));
                 uploadRating.execute(new OnCompleteCallback() {
                     @Override
                     public void onSuccess() {

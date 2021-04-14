@@ -1,6 +1,9 @@
 package com.example.trackie.ui;
 
+import android.app.FragmentManager;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.View;
 import android.widget.TextView;
 
@@ -8,12 +11,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.trackie.R;
+import com.example.trackie.ui.locations.LocationsFragment;
+import com.example.trackie.ui.locations.LocationsViewModel;
 import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity {
@@ -67,6 +73,8 @@ public class MainActivity extends AppCompatActivity {
                 || super.onSupportNavigateUp();
     }
 
+
+
     // Shows the system bars by removing all the flags
 // except for the ones that make the content appear under the system bars.
     private void showSystemUI() {
@@ -78,4 +86,6 @@ public class MainActivity extends AppCompatActivity {
                         | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
                         | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN );
     }
+
+
 }

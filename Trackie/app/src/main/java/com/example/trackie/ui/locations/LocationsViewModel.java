@@ -40,4 +40,9 @@ public class LocationsViewModel extends ViewModel {
             }
         });
     }
+
+    @Override
+    protected void onCleared() {
+        super.onCleared();
+    }
 }

@@ -6,31 +6,31 @@ import android.os.Parcelable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class RatingData implements MapRep, Parcelable {
+public class TestRatingData implements MapRep, Parcelable {
     private String ratingText;
     private float ratingStars;
 
-    public RatingData() {}
+    public TestRatingData() {}
 
-    public RatingData(String ratingText, float ratingStars) {
+    public TestRatingData(String ratingText, float ratingStars) {
         this.ratingText = ratingText;
         this.ratingStars = ratingStars;
     }
 
-    protected RatingData(Parcel in) {
+    protected TestRatingData(Parcel in) {
         ratingText = in.readString();
         ratingStars = in.readFloat();
     }
 
-    public static final Creator<RatingData> CREATOR = new Creator<RatingData>() {
+    public static final Creator<TestRatingData> CREATOR = new Creator<TestRatingData>() {
         @Override
-        public RatingData createFromParcel(Parcel in) {
-            return new RatingData(in);
+        public TestRatingData createFromParcel(Parcel in) {
+            return new TestRatingData(in);
         }
 
         @Override
-        public RatingData[] newArray(int size) {
-            return new RatingData[size];
+        public TestRatingData[] newArray(int size) {
+            return new TestRatingData[size];
         }
     };
 

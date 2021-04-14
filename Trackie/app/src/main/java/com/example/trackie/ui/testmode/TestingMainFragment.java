@@ -1,12 +1,12 @@
 package com.example.trackie.ui.testmode;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.PointF;
 import android.graphics.drawable.Drawable;
 import android.net.wifi.ScanResult;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
@@ -29,14 +30,13 @@ import com.example.trackie.database.FloorplanHelper;
 import com.example.trackie.database.OnCompleteCallback;
 import com.example.trackie.database.StorageDownloader;
 import com.example.trackie.ui.FetchWiFiDataUtils;
+import com.example.trackie.ui.MainActivity;
 import com.example.trackie.ui.Prefs;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
-import java.util.concurrent.TimeUnit;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -61,6 +61,7 @@ public class TestingMainFragment extends Fragment {
     private int size;
     private PointF currentPoint;
 
+    private boolean alreadyCheckedWrongLocation = false;
     private boolean retrievedBSSID = false;
     private long startTime;
 
@@ -183,6 +184,8 @@ public class TestingMainFragment extends Fragment {
         });
         endTestingButton = view.findViewById(R.id.end_testing_button);
         endTestingButton.setOnClickListener(v -> {
+            dataUtils.stopScanning();
+
             long endTimeSeconds = (System.currentTimeMillis() - startTime) / 1000;
             int endMinutes = (int) endTimeSeconds / 60;
             int endSeconds = (int) endTimeSeconds % 60;
@@ -195,22 +198,38 @@ public class TestingMainFragment extends Fragment {
     }
 
     private class TestWiFiDataListener implements FetchWiFiDataUtils.FetchListener {
-
+        private boolean updateMap = true;   // checker to stop background from moving when incorrect location alert dialog is shown
         @Override
         public void onScanResultsReceived(List<ScanResult> scanResults) {
             if (testImageMapView == null) return;
-
             try {
-                System.out.println("Retrieved BSSID:" + retrievedBSSID);
                 if (retrievedBSSID) {
                     List<List<Double>> inputData = preprocessInputData(scanResults);
-                    if (inputData == null) {
+                    if (inputData == null && updateMap) {    // check if no suitable BSSIDs are found - means user not at location
+                        updateMap = false;
+                        if (alreadyCheckedWrongLocation) return;
                         Toast.makeText(getContext(), "Not at the right location!", Toast.LENGTH_SHORT).show();
-                        return;
+                        new AlertDialog.Builder(getContext())
+                                .setTitle("Wrong Location!")
+                                .setMessage("Please change to the correct location")
+                                .setPositiveButton(android.R.string.ok, (dialog, which) -> {
+                                    dataUtils.stopScanning();
+                                    // open up locations selection from MainActivity
+                                    // (MainActivity responsible for handling switching of fragments to LocationsFragment)
+                                    Intent locationIntent = new Intent(getActivity(), MainActivity.class);
+                                    startActivity(locationIntent);
+                                })
+                                .setNegativeButton(R.string.cancel, (dialog, which) -> {
+                                    alreadyCheckedWrongLocation = true; // no need to show dialog fragment again
+                                    updateMap = true;
+                                    dataUtils.scanWiFiDataIndefinitely();
+                                }).show();
+
                     }
                     modelPrediction.getPrediction(inputData, new ModelPrediction.OnReceivePredictionResultsCallback() {
                         @Override
                         public void onReceiveResults(double[] result) {
+                            if (!updateMap) return;
                             PointF predictedPoint = new PointF((float) result[0] * testImageMapView.getSWidth(),
                                     (float) result[1] * testImageMapView.getSHeight());
                             testImageMapView.updateCurrentUserLocation(predictedPoint);
