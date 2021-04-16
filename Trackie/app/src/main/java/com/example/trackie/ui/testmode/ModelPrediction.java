@@ -107,8 +107,7 @@ public class ModelPrediction {
                 System.out.println("IOException: googlecredentials");
                 e.printStackTrace();
             }
-            HttpRequestFactory requestFactory =
-                    httpTransport.createRequestFactory(new HttpCredentialsAdapter(credential));
+            HttpRequestFactory requestFactory = httpTransport.createRequestFactory(new HttpCredentialsAdapter(credential));
             HttpRequest request = null;
             try {
                 request = requestFactory.buildRequest(method.getHttpMethod(), url, content);

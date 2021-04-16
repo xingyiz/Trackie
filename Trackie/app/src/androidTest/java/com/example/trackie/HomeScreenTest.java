@@ -116,21 +116,21 @@ public class HomeScreenTest {
        onView(withId(R.id.confirm_mapping_click_button)).check(matches(isDisplayed()));
     }
 
-    @Test
+    /*@Test
     public void ClickTestModeButton() throws Exception{
         onView(withId(R.id.test_mode_button))
                 .perform(click());
         onView(withId(R.id.test_mode_host_fragment))
                 .check(matches(isDisplayed()));
-    }
+    }*/
 
-    @Test
+    /*@Test
     public void ClickSetLocationsButton() throws Exception{
         sleep(100);
         onView(withId(R.id.set_location_button))
                 .perform(click());
         onView(withId(R.id.locations_recycler_view))
                 .check(matches(isDisplayed()));
-    }
+    }*/
 
 }
