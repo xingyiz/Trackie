@@ -48,12 +48,13 @@ public class LocationsScreenTest {
         }
     }
 
-    /*@Test
+    @Test
     public void clickOptions() throws Exception{
-        onView(withId(R.id.location_options_button))
-                .perform(click());
+        onView(withId(R.id.locations_recycler_view))
+                .perform(RecyclerViewActions.actionOnItemAtPosition(0, TestingUtils.clickOptionsRecycler(R.id.location_options_button)));
         onView(withText("Edit")).check(matches(isDisplayed()));
-    }*/
+
+    }
 
     private void clickItem(int i) {
         // get name of button to click
