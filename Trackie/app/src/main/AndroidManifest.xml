@@ -9,6 +9,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <application
         android:allowBackup="true"
@@ -31,7 +32,9 @@
             android:name=".ui.testmode.TestModeActivity"
             android:label="@string/test_mode"
             android:parentActivityName=".ui.MainActivity"
-            android:theme="@style/Theme.Trackie.NoActionBar"></activity>
+            android:theme="@style/Theme.Trackie.NoActionBar">
+
+        </activity>
         <activity
             android:name=".ui.mapmode.MapModeActivity"
             android:label="@string/map_mode"

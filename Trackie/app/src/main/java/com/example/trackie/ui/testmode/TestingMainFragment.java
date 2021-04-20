@@ -1,5 +1,6 @@
 package com.example.trackie.ui.testmode;
 
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -32,6 +33,10 @@ import com.example.trackie.database.StorageDownloader;
 import com.example.trackie.ui.FetchWiFiDataUtils;
 import com.example.trackie.ui.MainActivity;
 import com.example.trackie.ui.Prefs;
+import com.google.android.gms.location.ActivityRecognitionClient;
+import com.google.android.gms.location.DetectedActivity;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -98,6 +103,8 @@ public class TestingMainFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         TestingViewModel testingViewModel = new ViewModelProvider(requireActivity()).get(TestingViewModel.class);
+
+        Intent serviceIntent = new Intent(getContext(), TestUserLocation.class);
 
         startTime = System.currentTimeMillis();
 
@@ -197,50 +204,67 @@ public class TestingMainFragment extends Fragment {
         });
     }
 
+    // listener class which listens everytime wifi values are scanned
     private class TestWiFiDataListener implements FetchWiFiDataUtils.FetchListener {
         private boolean updateMap = true;   // checker to stop background from moving when incorrect location alert dialog is shown
+        private int scansMade = 0;          // track how many scans are done - once it hits 3, get the average of scanned data and submit to model
+        private List<List<Double>> scannedData = new ArrayList<List<Double>>();
+        private TestUserLocation testUserLocation = new TestUserLocation(getContext());
+
         @Override
         public void onScanResultsReceived(List<ScanResult> scanResults) {
+            System.out.println("user activity: "  + Prefs.getUserActivity(getContext()));
             if (testImageMapView == null) return;
             try {
                 if (retrievedBSSID) {
                     List<List<Double>> inputData = preprocessInputData(scanResults);
-                    if (inputData == null && updateMap) {    // check if no suitable BSSIDs are found - means user not at location
-                        updateMap = false;
-                        if (alreadyCheckedWrongLocation) return;
-                        Toast.makeText(getContext(), "Not at the right location!", Toast.LENGTH_SHORT).show();
-                        new AlertDialog.Builder(getContext())
-                                .setTitle("Wrong Location!")
-                                .setMessage("Please change to the correct location")
-                                .setPositiveButton(android.R.string.ok, (dialog, which) -> {
-                                    dataUtils.stopScanning();
-                                    // open up locations selection from MainActivity
-                                    // (MainActivity responsible for handling switching of fragments to LocationsFragment)
-                                    Intent locationIntent = new Intent(getActivity(), MainActivity.class);
-                                    startActivity(locationIntent);
-                                })
-                                .setNegativeButton(R.string.cancel, (dialog, which) -> {
-                                    alreadyCheckedWrongLocation = true; // no need to show dialog fragment again
-                                    updateMap = true;
-                                    dataUtils.scanWiFiDataIndefinitely();
-                                }).show();
 
+                    if (inputData == null) {    // check if no suitable BSSIDs are found - means user not at location
+                        if (updateMap) {
+                            updateMap = false;
+                            if (alreadyCheckedWrongLocation) return;
+                            new AlertDialog.Builder(getContext())
+                                    .setTitle("Wrong Location!")
+                                    .setMessage("Please change to the correct location")
+                                    .setPositiveButton(android.R.string.ok, (dialog, which) -> {
+                                        dataUtils.stopScanning();
+                                        // open up locations selection from MainActivity
+                                        // (MainActivity responsible for handling switching of fragments to LocationsFragment)
+                                        Intent locationIntent = new Intent(getActivity(), MainActivity.class);
+                                        startActivity(locationIntent);
+                                    })
+                                    .setNegativeButton(R.string.cancel, (dialog, which) -> {
+                                        alreadyCheckedWrongLocation = true; // no need to show dialog fragment again
+                                        updateMap = true;
+                                        dataUtils.scanWiFiDataIndefinitely();
+                                    }).show();
+                        } else return;
                     }
-                    modelPrediction.getPrediction(inputData, new ModelPrediction.OnReceivePredictionResultsCallback() {
-                        @Override
-                        public void onReceiveResults(double[] result) {
-                            if (!updateMap) return;
-                            PointF predictedPoint = new PointF((float) result[0] * testImageMapView.getSWidth(),
-                                    (float) result[1] * testImageMapView.getSHeight());
-                            testImageMapView.updateCurrentUserLocation(predictedPoint);
-                            currentPoint = predictedPoint;
-                        }
+                    scansMade++;
+                    Toast.makeText(getContext(), "scans made: " + scansMade, Toast.LENGTH_SHORT).show();
+                    scannedData.add(inputData.get(0));
+                    if (scansMade == 3) {       // set number of scans to make before getting prediction
+                        List<List<Double>> predictionInputData = getAverageListDouble(scannedData);
+                        modelPrediction.getPrediction(predictionInputData, new ModelPrediction.OnReceivePredictionResultsCallback() {
+                            @Override
+                            public void onReceiveResults(double[] result) {
+                                if (!updateMap) return;
+                                PointF predictedPoint = new PointF((float) result[0] * testImageMapView.getSWidth(),
+                                        (float) result[1] * testImageMapView.getSHeight());
+                                if (currentPoint != null) {
+                                    predictedPoint = testUserLocation.getAdjustedLocation(currentPoint, predictedPoint);
+                                }
+                                testImageMapView.updateCurrentUserLocation(predictedPoint);
+                                currentPoint = predictedPoint;
+                            }
 
-                        @Override
-                        public void onError() {
-                            System.out.println("Failed to parse JSON prediction string. Check code under ModelPrediction.parsePredictionJSONForResult()");
-                        }
-                    });
+                            @Override
+                            public void onError() {
+                                System.out.println("Failed to parse JSON prediction string. Check code under ModelPrediction.parsePredictionJSONForResult()");
+                            }
+                        });
+                        scansMade = 0;
+                    }
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -260,6 +284,21 @@ public class TestingMainFragment extends Fragment {
         @Override
         public void finishAllScanning() {
 
+        }
+
+        private List<List<Double>> getAverageListDouble(List<List<Double>> listOfDoubles) {
+            List<Double> averages = new ArrayList<>();
+            int listLength = listOfDoubles.get(0).size();
+            for (int i=0; i < listLength; i++) {
+                double sum = 0;
+                for (List<Double> list : listOfDoubles) {
+                    sum += list.get(i);
+                }
+                averages.add(sum / listOfDoubles.size());
+            }
+            List<List<Double>> result = new ArrayList<>();
+            result.add(averages);
+            return result;
         }
     }
 
@@ -296,6 +335,8 @@ public class TestingMainFragment extends Fragment {
 
         List<List<Double>> data = new ArrayList<>();
         data.add(inputData);
+
+        System.out.println("Input data looks like: "  + inputData);
 
         return data;
     }
