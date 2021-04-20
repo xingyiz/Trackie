@@ -115,8 +115,9 @@ public class TestingMainFragment extends Fragment {
             public void onSuccess() {
                 goodBSSIDs = storageDownloader.getGoodBSSIDs();
                 retrievedBSSID = true;
-                String credentials = requireContext().getResources().getString(R.string.credentials_key);
-                modelPrediction = new ModelPrediction(credentials);
+                String credentials = getString(R.string.credentials_key);
+                String legal_points = getString(R.string.LEGAL_POINTS);
+                modelPrediction = new ModelPrediction(credentials, legal_points);
                 size = storageDownloader.getSize();
                 Toast.makeText(getContext(), "GOOD_BSSIDS file retrieved :)", Toast.LENGTH_SHORT).show();
             }

@@ -1,7 +1,10 @@
 package com.example.trackie;
 
+import android.content.ClipData;
 import android.view.View;
+import android.widget.TextView;
 
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.test.espresso.PerformException;
 import androidx.test.espresso.UiController;
 import androidx.test.espresso.ViewAction;
@@ -172,6 +175,26 @@ public class TestingUtils {
             @Override
             public void perform(UiController uiController, final View view) {
                 uiController.loopMainThreadForAtLeast(millis);
+            }
+        };
+    }
+
+    public static ViewAction clickViewId(final int id) {
+        return new ViewAction() {
+            @Override
+            public Matcher<View> getConstraints() {
+                return null;
+            }
+
+            @Override
+            public String getDescription() {
+                return "Click on a child view with specified id.";
+            }
+
+            @Override
+            public void perform(UiController uiController, View view) {
+                View v = view.findViewById(id);
+                v.performClick();
             }
         };
     }

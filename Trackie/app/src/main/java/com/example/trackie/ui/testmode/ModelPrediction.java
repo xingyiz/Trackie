@@ -30,9 +30,11 @@ import java.util.Map;
 
 public class ModelPrediction {
     private String CREDENTIALS_KEY; // ENTER CREDENTIALS KEY HERE
+    private String LEGAL_POINTS;
 
-    public ModelPrediction(String credentials) {
+    public ModelPrediction(String credentials, String legal_points) {
         this.CREDENTIALS_KEY = credentials;
+        this.LEGAL_POINTS = legal_points;
     }
 
     public void getPrediction(List<List<Double>> inputData, OnReceivePredictionResultsCallback callback) {
@@ -76,8 +78,8 @@ public class ModelPrediction {
             String projectId = "trackiev2";
             // You should have already deployed a model and a version.
             // For reference, see https://cloud.google.com/ml-engine/docs/deploying-models.
-            String modelId = "B2L2_XT";
-            String versionId = "B2L2_XT3";
+            String modelId = "B2L2_XTC";
+            String versionId = "B2L2_XTC";
             param.set(
                     "name", String.format("projects/%s/models/%s/versions/%s", projectId, modelId, versionId));
 
@@ -107,8 +109,7 @@ public class ModelPrediction {
                 System.out.println("IOException: googlecredentials");
                 e.printStackTrace();
             }
-            HttpRequestFactory requestFactory =
-                    httpTransport.createRequestFactory(new HttpCredentialsAdapter(credential));
+            HttpRequestFactory requestFactory = httpTransport.createRequestFactory(new HttpCredentialsAdapter(credential));
             HttpRequest request = null;
             try {
                 request = requestFactory.buildRequest(method.getHttpMethod(), url, content);
@@ -128,7 +129,7 @@ public class ModelPrediction {
             System.out.println("Response: " + response);
 
             try {
-                callback.onReceiveResults(parsePredictionJSONForResult(response));
+                callback.onReceiveResults(parsePredictionJSONClassifier(response));
             } catch (JSONException e) {
                 e.printStackTrace();
                 callback.onError();
@@ -137,97 +138,6 @@ public class ModelPrediction {
             }
         }
     }
-
-    /*public double[] testParseInputJSon() {
-        try {
-            JSONObject json = new JSONObject("\"instances\" : [[1.0,\n" +
-                    "  1.0,\n" +
-                    "  1.0,\n" +
-                    "  1.0,\n" +
-                    "  1.0,\n" +
-                    "  1.0,\n" +
-                    "  1.0,\n" +
-                    "  1.0,\n" +
-                    "  1.0,\n" +
-                    "  1.0,\n" +
-                    "  1.0,\n" +
-                    "  1.0,\n" +
-                    "  1.0,\n" +
-                    "  1.0,\n" +
-                    "  1.0,\n" +
-                    "  1.0,\n" +
-                    "  1.0,\n" +
-                    "  1.0,\n" +
-                    "  1.0,\n" +
-                    "  1.0,\n" +
-                    "  1.0,\n" +
-                    "  1.0,\n" +
-                    "  1.0,\n" +
-                    "  1.0,\n" +
-                    "  1.0,\n" +
-                    "  1.0,\n" +
-                    "  1.0,\n" +
-                    "  1.0,\n" +
-                    "  1.0,\n" +
-                    "  1.0,\n" +
-                    "  1.0,\n" +
-                    "  1.0,\n" +
-                    "  1.0,\n" +
-                    "  1.0,\n" +
-                    "  1.0,\n" +
-                    "  1.0,\n" +
-                    "  1.0,\n" +
-                    "  1.0,\n" +
-                    "  1.0,\n" +
-                    "  0.6225,\n" +
-                    "  0.6733333333333333,\n" +
-                    "  0.68,\n" +
-                    "  0.675,\n" +
-                    "  0.76,\n" +
-                    "  0.716,\n" +
-                    "  0.7440000000000001,\n" +
-                    "  0.6125,\n" +
-                    "  0.6125,\n" +
-                    "  0.6125,\n" +
-                    "  0.6125,\n" +
-                    "  0.682,\n" +
-                    "  0.7020000000000001,\n" +
-                    "  0.7040000000000001,\n" +
-                    "  0.715,\n" +
-                    "  0.7040000000000001,\n" +
-                    "  0.856,\n" +
-                    "  0.855,\n" +
-                    "  0.858,\n" +
-                    "  0.856,\n" +
-                    "  0.8059999999999999,\n" +
-                    "  0.7225,\n" +
-                    "  0.775,\n" +
-                    "  0.81,\n" +
-                    "  0.7040000000000001,\n" +
-                    "  0.8525,\n" +
-                    "  0.76,\n" +
-                    "  0.8066666666666668,\n" +
-                    "  0.8533333333333333,\n" +
-                    "  0.856,\n" +
-                    "  0.865,\n" +
-                    "  0.8575,\n" +
-                    "  0.8625,\n" +
-                    "  0.7040000000000001,\n" +
-                    "  0.725,\n" +
-                    "  0.82,\n" +
-                    "  0.8079999999999999,\n" +
-                    "  0.8175,\n" +
-                    "  0.8125,\n" +
-                    "  0.8525]]}");
-            JSONArray jsonArray = json.getJSONArray("instances");
-            double[] result = new double[]{jsonArray.getJSONArray(0).getDouble(0),
-                    jsonArray.getJSONArray(0).getDouble(1)};
-            return result;
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }*/
 
     public double[] parsePredictionJSONForResult(String jsonResult) throws JSONException {
         try {
@@ -241,6 +151,17 @@ public class ModelPrediction {
             String error = json.getString("error");
             return new double[]{0.0, 0.0};
         }
+    }
+
+    public double[] parsePredictionJSONClassifier(String jsonResult) throws JSONException {
+        JSONObject json = new JSONObject(jsonResult);
+        JSONArray jsonArray = json.getJSONArray("predictions");
+        int result = jsonArray.getInt(0);
+
+        JSONObject legalPoints = new JSONObject(LEGAL_POINTS);
+        JSONArray legalPointsArray = legalPoints.getJSONArray("LEGAL_POINTS");
+        return new double[]{legalPointsArray.getJSONArray(result).getDouble(0),
+                legalPointsArray.getJSONArray(result).getDouble(1)};
     }
 
     protected interface OnReceivePredictionResultsCallback {

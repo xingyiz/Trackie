@@ -143,7 +143,7 @@ public class RSSITestFragment extends Fragment {
 
     @RequiresApi(api = Build.VERSION_CODES.R)
     private void scanSuccess() {
-        Toast.makeText(getContext(), "Scan Complete", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getContext(), "Scan Complete", Toast.LENGTH_SHORT).show();
         results = wifiManager.getScanResults();
 
         adapter = new RSSIAdapter(results, getContext(), oneMeterRSSI);
