@@ -1,5 +1,6 @@
 package com.example.trackie.ui.testmode;
 
+import android.graphics.PointF;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -20,6 +21,8 @@ import com.example.trackie.database.FirestoreHelper;
 import com.example.trackie.database.OnCompleteCallback;
 import com.example.trackie.database.TestRatingData;
 
+import java.util.List;
+
 public class RatingDialogFragment extends DialogFragment {
     private TextView errorCountTextview;
     private TextView testTimeTakenTextview;
@@ -29,12 +32,14 @@ public class RatingDialogFragment extends DialogFragment {
     private Button continueTestingButton;
     private RatingBar ratingBar;
 
+    private List<PointF> errorPoints;
     private int errorCount;
     private String testTimeTaken;
 
-    public RatingDialogFragment(int numberOfErrors, String testTimeTaken) {
+    public RatingDialogFragment(List<PointF> errorPoints, String testTimeTaken) {
         super();
-        this.errorCount = numberOfErrors;
+        this.errorPoints = errorPoints;
+        this.errorCount = errorPoints.size();
         this.testTimeTaken = testTimeTaken;
         this.setCancelable(false);
     }
@@ -74,7 +79,7 @@ public class RatingDialogFragment extends DialogFragment {
                 }
 
                 FirestoreHelper.UploadRating uploadRating = new FirestoreHelper.UploadRating(getContext(),
-                        new TestRatingData(ratingTextProcessed, ratingBar.getRating()));
+                        new TestRatingData(ratingTextProcessed, ratingBar.getRating(), errorPoints));
                 uploadRating.execute(new OnCompleteCallback() {
                     @Override
                     public void onSuccess() {

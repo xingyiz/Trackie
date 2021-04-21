@@ -198,7 +198,7 @@ public class TestingMainFragment extends Fragment {
             int endMinutes = (int) endTimeSeconds / 60;
             int endSeconds = (int) endTimeSeconds % 60;
             String timeTakenString = endMinutes + " m " + endSeconds + " s";
-            RatingDialogFragment ratingFragment = new RatingDialogFragment(testImageMapView.getErrorPoints().size(), timeTakenString);
+            RatingDialogFragment ratingFragment = new RatingDialogFragment(testImageMapView.getErrorPoints(), timeTakenString);
             FragmentTransaction ft = getParentFragmentManager().beginTransaction();
             ft.addToBackStack(null);
             ratingFragment.show(ft, "rating");
