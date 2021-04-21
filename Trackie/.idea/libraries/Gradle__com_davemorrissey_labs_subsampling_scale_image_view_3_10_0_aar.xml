@@ -4,6 +4,7 @@
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/31dca8cc81a730552c7879e252d137a6/jetified-subsampling-scale-image-view-3.10.0/annotations.zip!/" />
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/6738b1d26dd0fecba6e13f3b37d38477/jetified-subsampling-scale-image-view-3.10.0/annotations.zip!/" />
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/16da07deade7bc1d5249728f6cc981ce/jetified-subsampling-scale-image-view-3.10.0/annotations.zip!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/9d56c7f4cbb74c2caf00358a1fe2cc89/jetified-subsampling-scale-image-view-3.10.0/annotations.zip!/" />
     </ANNOTATIONS>
     <CLASSES>
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/31dca8cc81a730552c7879e252d137a6/jetified-subsampling-scale-image-view-3.10.0/jars/classes.jar!/" />
@@ -15,6 +16,9 @@
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/16da07deade7bc1d5249728f6cc981ce/jetified-subsampling-scale-image-view-3.10.0/AndroidManifest.xml" />
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/16da07deade7bc1d5249728f6cc981ce/jetified-subsampling-scale-image-view-3.10.0/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/16da07deade7bc1d5249728f6cc981ce/jetified-subsampling-scale-image-view-3.10.0/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/9d56c7f4cbb74c2caf00358a1fe2cc89/jetified-subsampling-scale-image-view-3.10.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/9d56c7f4cbb74c2caf00358a1fe2cc89/jetified-subsampling-scale-image-view-3.10.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/9d56c7f4cbb74c2caf00358a1fe2cc89/jetified-subsampling-scale-image-view-3.10.0/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.davemorrissey.labs/subsampling-scale-image-view/3.10.0/8375dcbd6f4743df5a52b0558454891f00790c6a/subsampling-scale-image-view-3.10.0-javadoc.jar!/" />

@@ -31,6 +31,8 @@ import com.google.firebase.Timestamp;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -110,10 +112,10 @@ public class AddLocationFragment extends Fragment {
         confirmFloorplanButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Date currentTime = Calendar.getInstance().getTime();
-                // SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy hh:mm");
-                // String outputDateString = dateFormat.format(currentTime);
-                // Toast.makeText(getActivity(), "Time is: " + outputDateString, Toast.LENGTH_SHORT).show();
+//                 Date currentTime = Calendar.getInstance().getTime();
+//                 SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy hh:mm");
+//                 String outputDateString = dateFormat.format(currentTime);
+//                 Toast.makeText(getActivity(), "Time is: " + outputDateString, Toast.LENGTH_SHORT).show();
                 // set upload to database code here
                 int darkmode = checkBox.isChecked() ? 1 : 0;
                 FloorplanHelper.UploadFloorplan uploadFloorplan = new FloorplanHelper.UploadFloorplan(

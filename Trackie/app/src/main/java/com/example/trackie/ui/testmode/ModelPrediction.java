@@ -129,7 +129,7 @@ public class ModelPrediction {
             System.out.println("Response: " + response);
 
             try {
-                callback.onReceiveResults(parsePredictionJSONClassifier(response));
+                callback.onReceiveResults(parsePredictionJSONForResult(response, "classification"));
             } catch (JSONException e) {
                 e.printStackTrace();
                 callback.onError();
@@ -139,29 +139,37 @@ public class ModelPrediction {
         }
     }
 
-    public double[] parsePredictionJSONForResult(String jsonResult) throws JSONException {
+    public double[] parsePredictionJSONForResult(String jsonResult, String type) throws JSONException {
+        double[] result;
         try {
-            JSONObject json = new JSONObject(jsonResult);
-            JSONArray jsonArray = json.getJSONArray("predictions");
-            double[] result = new double[]{jsonArray.getJSONArray(0).getDouble(0),
-                    jsonArray.getJSONArray(0).getDouble(1)};
-            return result;
+            switch (type) {
+                case "regression":
+                        JSONObject json = new JSONObject(jsonResult);
+                        JSONArray jsonArray = json.getJSONArray("predictions");
+                        result = new double[]{jsonArray.getJSONArray(0).getDouble(0),
+                                jsonArray.getJSONArray(0).getDouble(1)};
+
+                case "classfication":
+                        JSONObject json2 = new JSONObject(jsonResult);
+                        JSONArray jsonArray2 = json2.getJSONArray("predictions");
+                        int result2 = jsonArray2.getInt(0);
+
+                        JSONObject legalPoints = new JSONObject(LEGAL_POINTS);
+                        JSONArray legalPointsArray = legalPoints.getJSONArray("LEGAL_POINTS");
+                        result = new double[]{legalPointsArray.getJSONArray(result2).getDouble(0),
+                                legalPointsArray.getJSONArray(result2).getDouble(1)};
+                    break;
+
+                default:
+                    throw new IllegalStateException("Unexpected value: " + type);
+            }
         } catch (Exception e) {
             JSONObject json = new JSONObject(jsonResult);
             String error = json.getString("error");
             return new double[]{0.0, 0.0};
         }
-    }
 
-    public double[] parsePredictionJSONClassifier(String jsonResult) throws JSONException {
-        JSONObject json = new JSONObject(jsonResult);
-        JSONArray jsonArray = json.getJSONArray("predictions");
-        int result = jsonArray.getInt(0);
-
-        JSONObject legalPoints = new JSONObject(LEGAL_POINTS);
-        JSONArray legalPointsArray = legalPoints.getJSONArray("LEGAL_POINTS");
-        return new double[]{legalPointsArray.getJSONArray(result).getDouble(0),
-                legalPointsArray.getJSONArray(result).getDouble(1)};
+        return result;
     }
 
     protected interface OnReceivePredictionResultsCallback {
