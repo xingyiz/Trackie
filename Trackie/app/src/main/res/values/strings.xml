@@ -38,4 +38,5 @@
     <string name="confirm_floorplan">Confirm Floorplan</string>
     <string name="data_upload_success">Data upload success!</string>
     <string name="no_data">No data to upload!</string>
+    <string name="credentials_key">Credentials Key</string>
 </resources>

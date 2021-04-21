@@ -1,5 +1,7 @@
 package com.example.trackie.ui.testmode;
 
+import android.net.wifi.ScanResult;
+
 import com.google.api.client.http.ByteArrayContent;
 import com.google.api.client.http.GenericUrl;
 import com.google.api.client.http.HttpContent;
@@ -35,14 +37,17 @@ public class ModelPrediction {
         this.CREDENTIALS_KEY = credentials;
     }
 
-    public void getPrediction(List<List<Double>> inputData, OnReceivePredictionResultsCallback callback) {
+    public ModelPrediction(ArrayList<String> goodBSSIDs, int size) {
+    }
+
+    public void getPrediction(List<ScanResult> inputData, OnReceivePredictionResultsCallback callback) {
         String inputJSON = createInputInstanceJSONFrom2DArray(inputData);
         SendPredictionThread thread = new SendPredictionThread(inputJSON, callback);
         thread.start();
     }
 
-    private String createInputInstanceJSONFrom2DArray(List<List<Double>> inputArray) {
-        Map<String, List<List<Double>>> map = new HashMap<>();
+    private String createInputInstanceJSONFrom2DArray(List<ScanResult> inputArray) {
+        Map<String, List<ScanResult>> map = new HashMap<>();
         map.put("instances", inputArray);
         JSONObject json = new JSONObject(map);
         return json.toString();

@@ -197,10 +197,10 @@ public class FetchWiFiDataUtils {
         TextView timesScannedTextview = progressPopupView.findViewById(R.id.scanning_times_scanned_textview);
         timesScannedTextview.setText(context.getString(R.string.times_scanned) + ": " + timesScanned);
         progressPopup = new PopupWindow(progressPopupView, WindowManager.LayoutParams.WRAP_CONTENT,
-                                                    WindowManager.LayoutParams.WRAP_CONTENT, false);
+                WindowManager.LayoutParams.WRAP_CONTENT, false);
         // disable touch in case user clicks back while scanning
         activity.getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
-                                      WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
         progressPopup.setOutsideTouchable(false);
         progressPopup.showAtLocation(progressPopupView, Gravity.CENTER, 0, 0);
     }
