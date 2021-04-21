@@ -3,6 +3,8 @@ package com.example.trackie.ui;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.google.android.gms.location.DetectedActivity;
+
 // Wrapper class for shared preferences
 public class Prefs {
     private static SharedPreferences preferences;
@@ -14,7 +16,8 @@ public class Prefs {
     public static String ACTIVE_SCANNING_KEY = "active_scanning_enabled";
     public static String NUMBER_OF_SCANS_KEY = "number_of_scans";
     public static String SAVED_MAPPING_KEY = "saved_mapping_key";
-    public static String ADMIN_MODE = "admin_mode";
+    public static String ADMIN_MODE_KEY = "admin_mode";
+    public static String CURRENT_USER_ACTIVITY_KEY = "user_activity_key";
 
     public static String TOGGLE_TEST_B2L2_KEY = "toggle_b2l2_key";
 
@@ -59,12 +62,12 @@ public class Prefs {
 
     public static boolean getAdminMode(Context context) {
         if (preferences == null) intializeSharedPref(context);
-        return preferences.getBoolean(ADMIN_MODE, false);
+        return preferences.getBoolean(ADMIN_MODE_KEY, false);
     }
 
     public static void setAdminMode(Context context, boolean adminMode) {
         if (preferences == null) intializeSharedPref(context);
-        editor.putBoolean(ADMIN_MODE, adminMode);
+        editor.putBoolean(ADMIN_MODE_KEY, adminMode);
         editor.apply();
     }
 
@@ -115,6 +118,17 @@ public class Prefs {
     public static void setTEST_B2L2(Context context, boolean isTESTB2L2) {
         if (preferences == null) intializeSharedPref(context);
         editor.putBoolean(TOGGLE_TEST_B2L2_KEY, isTESTB2L2);
+        editor.apply();
+    }
+
+    public static int getUserActivity(Context context) {
+        if (preferences == null) intializeSharedPref(context);
+        return preferences.getInt(CURRENT_USER_ACTIVITY_KEY, DetectedActivity.UNKNOWN);
+    }
+
+    public static void setUserActivity(Context context, int userActivity) {
+        if (preferences == null) intializeSharedPref(context);
+        editor.putInt(CURRENT_USER_ACTIVITY_KEY, userActivity);
         editor.apply();
     }
 

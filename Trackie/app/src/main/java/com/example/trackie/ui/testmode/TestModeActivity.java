@@ -1,5 +1,7 @@
 package com.example.trackie.ui.testmode;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
@@ -9,11 +11,12 @@ import android.view.WindowManager;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
 
 import com.example.trackie.R;
 
 public class TestModeActivity extends AppCompatActivity {
-
+    protected final static int PERMISSION_REQUEST_ACTIVITY_RECOGNITION = 22;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +45,6 @@ public class TestModeActivity extends AppCompatActivity {
             }
         }
     }
-
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();

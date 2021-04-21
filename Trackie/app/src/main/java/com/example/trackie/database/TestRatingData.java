@@ -1,20 +1,28 @@
 package com.example.trackie.database;
 
+import android.graphics.PointF;
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class TestRatingData implements MapRep, Parcelable {
     private String ratingText;
     private float ratingStars;
-
+    private List<PointF> errorPoints;
     public TestRatingData() {}
 
     public TestRatingData(String ratingText, float ratingStars) {
         this.ratingText = ratingText;
         this.ratingStars = ratingStars;
+    }
+
+    public TestRatingData(String ratingText, float ratingStars, List<PointF> errorPoints) {
+        this.ratingText = ratingText;
+        this.ratingStars = ratingStars;
+        this.errorPoints = errorPoints;
     }
 
     protected TestRatingData(Parcel in) {
@@ -59,6 +67,7 @@ public class TestRatingData implements MapRep, Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(ratingText);
         dest.writeFloat(ratingStars);
+        if (errorPoints != null) dest.writeList(errorPoints);
     }
 
     @Override
