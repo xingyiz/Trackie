@@ -16,8 +16,10 @@
  import org.junit.Test;
  import org.junit.runner.RunWith;
 
+ import static android.os.SystemClock.sleep;
  import static androidx.test.espresso.Espresso.onView;
  import static androidx.test.espresso.action.ViewActions.click;
+ import static androidx.test.espresso.action.ViewActions.swipeLeft;
  import static androidx.test.espresso.assertion.ViewAssertions.matches;
  import static androidx.test.espresso.matcher.ViewMatchers.assertThat;
  import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
@@ -37,9 +39,12 @@ public class LocationsScreenTest {
     @Before
     public void Setup() {
         context = mHomeActivityTestRule.getActivity().getApplicationContext();
+        Prefs.setCurrentLocation(context, "B2L2");
         mHomeActivityTestRule.getActivity()
                 .getFragmentManager().beginTransaction();
         navigateToScreen();
+
+        sleep(2000);
     }
 
     @Test
@@ -53,6 +58,15 @@ public class LocationsScreenTest {
                     .perform(click());
         }
 
+        assert Prefs.getCurrentLocation(context).equals("B2L2");
+
+    }
+
+    @Test
+    public void setB2L1() throws Exception{
+        String text = "B2L1";
+        setLoc(text);
+        assert text.equals(Prefs.getCurrentLocation(context));
     }
 
     @Test
@@ -61,6 +75,14 @@ public class LocationsScreenTest {
         setLoc(text);
         assert text.equals(Prefs.getCurrentLocation(context));
     }
+
+    @Test
+    public void setCCL1() throws Exception{
+        String text = "CCL1";
+        setLoc(text);
+        assert text.equals(Prefs.getCurrentLocation(context));
+    }
+
 
     @Test
     public void setLocation() throws Exception{
@@ -90,7 +112,7 @@ public class LocationsScreenTest {
 
     private void setLoc(String loc) {
         onView(withId(R.id.locations_recycler_view))
-                .perform(RecyclerViewActions.actionOnItem(withChild(withText("B2L2")), click()));
+                .perform(RecyclerViewActions.actionOnItem(withChild(withText(loc)), click()));
         onView(withId(android.R.id.button1))
                 .perform(click());
     }

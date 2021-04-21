@@ -46,7 +46,7 @@ public class MapModeScreenTest {
         onView(withId(R.id.map_mode_button))
                 .perform(click());
 
-        sleep(1500);
+        sleep(3000);
     }
 
     @Test
@@ -58,10 +58,21 @@ public class MapModeScreenTest {
     }
 
     @Test
+    public void ZoomInTest() throws Exception {
+        TestingUtils.ZoomInMap();
+
+    }
+
+    @Test
+    public void ZoomOutTest() throws Exception {
+        TestingUtils.ZoomOutMap();
+
+    }
+
+    @Test
     public void ScaleMapTest() throws Exception {
-        UiDevice myDevice = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation());
-        myDevice.findObject(new UiSelector().description("map image view")).pinchIn(50, 100); //to zoom in
-        myDevice.findObject(new UiSelector().description("map image view")).pinchOut(50, 100); //to zoom out
+      TestingUtils.ZoomInMap();
+      TestingUtils.ZoomOutMap();
     }
 
     @Test
