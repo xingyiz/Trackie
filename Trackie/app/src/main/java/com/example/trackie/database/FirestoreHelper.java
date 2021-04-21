@@ -131,13 +131,13 @@ public class FirestoreHelper {
 
     public static class UploadRating implements FirestoreExecute {
         private Context context;
-        private RatingData ratingData;
+        private TestRatingData testRatingData;
         private FirebaseFirestore db = FirebaseFirestore.getInstance();
         private String location;
 
-        public UploadRating(Context context, RatingData ratingData) {
+        public UploadRating(Context context, TestRatingData testRatingData) {
             this.context = context;
-            this.ratingData = ratingData;
+            this.testRatingData = testRatingData;
             location = Prefs.getCurrentLocation(context);
         }
 
@@ -145,7 +145,7 @@ public class FirestoreHelper {
         public void execute(OnCompleteCallback callback) {
             try {
                 db.collection("Ratings").document(location)
-                        .set(ratingData)
+                        .set(testRatingData)
                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {

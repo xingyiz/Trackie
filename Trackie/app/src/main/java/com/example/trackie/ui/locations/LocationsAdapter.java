@@ -116,77 +116,71 @@ public class LocationsAdapter extends RecyclerView.Adapter {
             }
         });
 
-        viewHolder.container.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-                builder.setMessage("Confirm Delete?")
-                        .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                FloorplanHelper.RemoveFloorplan removeFloorplan = new FloorplanHelper.RemoveFloorplan(floorplan);
-                                removeFloorplan.execute(new OnCompleteCallback() {
-                                    @Override
-                                    public void onSuccess() {
-                                        locationsViewModel.loadLocations();
-                                        Toast.makeText(context, "Remove Success: " + floorplan + " !", Toast.LENGTH_LONG).show();
-                                        locationsList.remove(position);
-                                        LocationsAdapter.this.notifyItemRemoved(position);
-                                    }
+        viewHolder.container.setOnLongClickListener(v -> {
+            AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+            builder.setMessage("Confirm Delete?")
+                    .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            FloorplanHelper.RemoveFloorplan removeFloorplan = new FloorplanHelper.RemoveFloorplan(floorplan);
+                            removeFloorplan.execute(new OnCompleteCallback() {
+                                @Override
+                                public void onSuccess() {
+                                    locationsViewModel.loadLocations();
+                                    Toast.makeText(context, "Remove Success: " + floorplan + " !", Toast.LENGTH_LONG).show();
+                                    locationsList.remove(position);
+                                    LocationsAdapter.this.notifyItemRemoved(position);
+                                }
 
-                                    @Override
-                                    public void onFailure() {
-                                        Toast.makeText(context, "Remove Failure: " + floorplan + " !", Toast.LENGTH_LONG).show();
-                                    }
+                                @Override
+                                public void onFailure() {
+                                    Toast.makeText(context, "Remove Failure: " + floorplan + " !", Toast.LENGTH_LONG).show();
+                                }
 
-                                    @Override
-                                    public void onError() {
-                                        Toast.makeText(context, "Remove Error: " + floorplan + " !", Toast.LENGTH_LONG).show();
-                                    }
-                                });
-                            }
-                        })
-                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.cancel();
-                            }
-                        });
-                AlertDialog dialog = builder.create();
-                dialog.show();
+                                @Override
+                                public void onError() {
+                                    Toast.makeText(context, "Remove Error: " + floorplan + " !", Toast.LENGTH_LONG).show();
+                                }
+                            });
+                        }
+                    })
+                    .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    });
+            AlertDialog dialog = builder.create();
+            dialog.show();
 
-                return true;
-            }
+            return true;
         });
 
-        viewHolder.overflowButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        viewHolder.overflowButton.setOnClickListener(view -> {
 
-                //creating a popup menu
-                PopupMenu popup = new PopupMenu(context, viewHolder.overflowButton);
-                //inflating menu from xml resource
-                popup.inflate(R.menu.locations_overflow_menu);
-                //adding click listener
-                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                    @Override
-                    public boolean onMenuItemClick(MenuItem item) {
-                        switch (item.getItemId()) {
-                            case R.id.locmenu_edit:
+            //creating a popup menu
+            PopupMenu popup = new PopupMenu(context, viewHolder.overflowButton);
+            //inflating menu from xml resource
+            popup.inflate(R.menu.locations_overflow_menu);
+            //adding click listener
+            popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                @Override
+                public boolean onMenuItemClick(MenuItem item) {
+                    switch (item.getItemId()) {
+                        case R.id.locmenu_edit:
 
-                                return true;
-                            case R.id.locmenu_delete:
+                            return true;
+                        case R.id.locmenu_delete:
 
-                                return true;
-                            default:
-                                return false;
-                        }
+                            return true;
+                        default:
+                            return false;
                     }
-                });
-                //displaying the popup
-                popup.show();
+                }
+            });
+            //displaying the popup
+            popup.show();
 
-            }
         });
     }
 
