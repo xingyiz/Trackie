@@ -14,6 +14,11 @@ import androidx.test.espresso.action.Press;
 import androidx.test.espresso.action.Tap;
 import androidx.test.espresso.util.HumanReadables;
 import androidx.test.espresso.util.TreeIterables;
+import androidx.test.platform.app.InstrumentationRegistry;
+import androidx.test.uiautomator.UiDevice;
+import androidx.test.uiautomator.UiObject2;
+import androidx.test.uiautomator.UiObjectNotFoundException;
+import androidx.test.uiautomator.UiSelector;
 
 import org.hamcrest.Matcher;
 
@@ -198,4 +203,15 @@ public class TestingUtils {
             }
         };
     }
+
+    public static void ZoomOutMap() throws UiObjectNotFoundException {
+        UiDevice myDevice = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation());
+        myDevice.findObject(new UiSelector().description("map image view")).pinchIn(50, 100); //to zoom out
+    }
+
+    public static void ZoomInMap() throws UiObjectNotFoundException {
+        UiDevice myDevice = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation());
+        myDevice.findObject(new UiSelector().description("map image view")).pinchOut(50, 100); // to zoom in
+    }
+
 }
