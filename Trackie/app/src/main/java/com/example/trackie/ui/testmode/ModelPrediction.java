@@ -1,5 +1,8 @@
 package com.example.trackie.ui.testmode;
 
+import android.content.Context;
+import android.widget.Toast;
+
 import com.example.trackie.ui.Prefs;
 import com.google.api.client.http.ByteArrayContent;
 import com.google.api.client.http.GenericUrl;
@@ -36,7 +39,9 @@ public class ModelPrediction {
     private String modelName;
     private String modelVersion;
 
-    public ModelPrediction(String credentials, String legal_points) {
+    private Context context;
+
+    public ModelPrediction(String credentials, String legal_points, Context context) {
         this.CREDENTIALS_KEY = credentials;
         this.LEGAL_POINTS = legal_points;
 
@@ -45,19 +50,19 @@ public class ModelPrediction {
 
         // set classification as default
         this.modelType = "clf";
-        this.modelName = "B2L2_XTC";
-        this.modelVersion = "B2L2_XTC256";
+        this.modelName = Prefs.getCurrentLocation(context) + "_XTC";
+        this.modelVersion = Prefs.getCurrentLocation(context) + "_XTC256";
     }
 
 
     public void setModel(String modelType) {
         this.modelType = modelType;
         if (modelType.equals("reg")) {
-            this.modelName = "B2L2_XT";
-            this.modelVersion = "B2L2_XT3";
+            this.modelName = Prefs.getCurrentLocation(context) + "_XT";
+            this.modelVersion = Prefs.getCurrentLocation(context) + "_XT3";
         } else if (modelType.equals("clf")) {
-            this.modelName = "B2L2_XTC";
-            this.modelVersion = "B2L2_XTC256";
+            this.modelName = Prefs.getCurrentLocation(context) + "_XTC";
+            this.modelVersion = Prefs.getCurrentLocation(context) + "_XTC256";
         }
     }
 
@@ -177,12 +182,12 @@ public class ModelPrediction {
                 int result2 = jsonArray2.getInt(0);
                 System.out.println("result2: " + result2);
 
-                System.out.println("LEGAL_POINTS MP; " + LEGAL_POINTS);
+                System.out.println("LEGAL_POINTS MP: " + LEGAL_POINTS);
                 JSONObject legalPoints = new JSONObject(LEGAL_POINTS);
                 JSONArray legalPointsArray = legalPoints.getJSONArray("LEGAL_POINTS");
                 result = new double[]{legalPointsArray.getJSONArray(result2).getDouble(0),
                         legalPointsArray.getJSONArray(result2).getDouble(1)};
-                System.out.println("CLF: " + result[0] + ", " + result[1]);
+                Toast.makeText(context, "CLF: " + result[0] + ", " + result[1], Toast.LENGTH_SHORT).show();
                 break;
 
             default:
