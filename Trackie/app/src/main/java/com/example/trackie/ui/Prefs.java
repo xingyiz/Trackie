@@ -17,9 +17,8 @@ public class Prefs {
     public static String NUMBER_OF_SCANS_KEY = "number_of_scans";
     public static String SAVED_MAPPING_KEY = "saved_mapping_key";
     public static String ADMIN_MODE_KEY = "admin_mode";
-    public static String CURRENT_USER_ACTIVITY_KEY = "user_activity_key";
-
     public static String TOGGLE_TEST_B2L2_KEY = "toggle_b2l2_key";
+    public static String MODEL_TYPE_KEY = "model_type_key";
 
     public static SharedPreferences intializeSharedPref(Context context) {
         preferences = context.getSharedPreferences(P_FILE, Context.MODE_PRIVATE);
@@ -121,15 +120,14 @@ public class Prefs {
         editor.apply();
     }
 
-    public static int getUserActivity(Context context) {
+    public static String getModelType(Context context) {
         if (preferences == null) intializeSharedPref(context);
-        return preferences.getInt(CURRENT_USER_ACTIVITY_KEY, DetectedActivity.UNKNOWN);
+        return preferences.getString(MODEL_TYPE_KEY, null);
     }
 
-    public static void setUserActivity(Context context, int userActivity) {
+    public static void setModelType(Context context, String model) {
         if (preferences == null) intializeSharedPref(context);
-        editor.putInt(CURRENT_USER_ACTIVITY_KEY, userActivity);
+        editor.putString(TOGGLE_TEST_B2L2_KEY, model);
         editor.apply();
     }
-
 }

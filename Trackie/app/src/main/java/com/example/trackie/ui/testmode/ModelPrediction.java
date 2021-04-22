@@ -1,5 +1,6 @@
 package com.example.trackie.ui.testmode;
 
+import com.example.trackie.ui.Prefs;
 import com.google.api.client.http.ByteArrayContent;
 import com.google.api.client.http.GenericUrl;
 import com.google.api.client.http.HttpContent;
@@ -31,10 +32,27 @@ import java.util.Map;
 public class ModelPrediction {
     private String CREDENTIALS_KEY; // ENTER CREDENTIALS KEY HERE
     private String LEGAL_POINTS;
+    private String modelName;
+    private String modelVersion;
 
     public ModelPrediction(String credentials, String legal_points) {
         this.CREDENTIALS_KEY = credentials;
         this.LEGAL_POINTS = legal_points;
+
+        // set classification as default
+        this.modelName = "B2L2_XTC";
+        this.modelVersion = "B2L2_XTC256";
+    }
+
+
+    public void setModel(String modelType) {
+        if (modelType.equals("regression")) {
+            this.modelName = "B2L2_XT";
+            this.modelVersion = "B2L2_XT3";
+        } else if (modelType.equals("clf")) {
+            this.modelName = "B2L2_XTC";
+            this.modelVersion = "B2L2_XTC256";
+        }
     }
 
     public void getPrediction(List<List<Double>> inputData, OnReceivePredictionResultsCallback callback) {
@@ -78,10 +96,8 @@ public class ModelPrediction {
             String projectId = "trackiev2";
             // You should have already deployed a model and a version.
             // For reference, see https://cloud.google.com/ml-engine/docs/deploying-models.
-            String modelId = "B2L2_XTC";
-            String versionId = "B2L2_XTC256";
             param.set(
-                    "name", String.format("projects/%s/models/%s/versions/%s", projectId, modelId, versionId));
+                    "name", String.format("projects/%s/models/%s/versions/%s", projectId, modelName, modelVersion));
 
             GenericUrl url =
                     new GenericUrl(UriTemplate.expand(api.getBaseUrl() + method.getPath(), param, true));
@@ -103,6 +119,7 @@ public class ModelPrediction {
             GoogleCredentials credential = null;
 
             try {
+                System.out.println("credential key: " + CREDENTIALS_KEY);
                 credential = GoogleCredentials.fromStream(
                         new ByteArrayInputStream(CREDENTIALS_KEY.getBytes(StandardCharsets.UTF_8)));
             } catch (IOException e) {

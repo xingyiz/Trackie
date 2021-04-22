@@ -138,6 +138,10 @@ public class TestingMainFragment extends Fragment {
                 retrievedBSSID = true;
                 String credentials = getString(R.string.credentials_key);
                 modelPrediction = new ModelPrediction(credentials, LEGAL_POINTS);
+                String modelType = Prefs.getModelType(getContext());
+                if (modelType == null) {
+                    modelPrediction.setModel(modelType);
+                }
                 size = storageDownloader.getSize();
                 Toast.makeText(getContext(), "GOOD_BSSIDS file retrieved :)", Toast.LENGTH_SHORT).show();
             }
@@ -234,7 +238,6 @@ public class TestingMainFragment extends Fragment {
 
         @Override
         public void onScanResultsReceived(List<ScanResult> scanResults) {
-            System.out.println("user activity: "  + Prefs.getUserActivity(getContext()));
             if (testImageMapView == null) return;
             try {
                 if (retrievedBSSID) {
@@ -272,9 +275,10 @@ public class TestingMainFragment extends Fragment {
                                 if (!updateMap) return;
                                 PointF predictedPoint = new PointF((float) result[0] * testImageMapView.getSWidth(),
                                         (float) result[1] * testImageMapView.getSHeight());
-                                if (currentPoint != null) {
-                                    predictedPoint = testUserLocation.getAdjustedLocation(currentPoint, predictedPoint);
-                                }
+//                                if (currentPoint != null) {
+//                                    predictedPoint = testUserLocation.getAdjustedLocation(currentPoint, predictedPoint);
+//                                }
+
                                 testImageMapView.updateCurrentUserLocation(predictedPoint);
                                 currentPoint = predictedPoint;
                             }
