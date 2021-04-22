@@ -202,7 +202,7 @@ public class DatabaseTestFragment extends Fragment {
         }*/
 
     public void getBSSIDs() {
-        StorageDownloader storageDownloader = new StorageDownloader(Prefs.getCurrentLocation(getContext()), getContext());
+        StorageDownloader storageDownloader = new StorageDownloader(Prefs.getCurrentLocation(getContext()) + "_good_ssids2.txt", "ssids", getContext());
         storageDownloader.execute(new OnCompleteCallback() {
             @Override
             public void onSuccess() {
