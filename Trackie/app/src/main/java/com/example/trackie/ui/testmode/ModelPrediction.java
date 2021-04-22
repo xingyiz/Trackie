@@ -157,10 +157,8 @@ public class ModelPrediction {
 
             try {
                 callback.onReceiveResults(parsePredictionJSONForResult(response, modelType));
-            } catch (JSONException e) {
+            } catch (JSONException | NullPointerException e) {
                 e.printStackTrace();
-                callback.onError();
-            } catch (NullPointerException e) {
                 callback.onError();
             }
         }
@@ -187,7 +185,6 @@ public class ModelPrediction {
                 JSONArray legalPointsArray = legalPoints.getJSONArray("LEGAL_POINTS");
                 result = new double[]{legalPointsArray.getJSONArray(result2).getDouble(0),
                         legalPointsArray.getJSONArray(result2).getDouble(1)};
-                Toast.makeText(context, "CLF: " + result[0] + ", " + result[1], Toast.LENGTH_SHORT).show();
                 break;
 
             default:
