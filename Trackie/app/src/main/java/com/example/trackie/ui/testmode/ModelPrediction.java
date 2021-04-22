@@ -1,6 +1,7 @@
 package com.example.trackie.ui.testmode;
 
 import android.content.Context;
+import android.widget.Toast;
 
 import com.example.trackie.ui.Prefs;
 import com.google.api.client.http.ByteArrayContent;
@@ -181,12 +182,12 @@ public class ModelPrediction {
                 int result2 = jsonArray2.getInt(0);
                 System.out.println("result2: " + result2);
 
-                System.out.println("LEGAL_POINTS MP; " + LEGAL_POINTS);
+                System.out.println("LEGAL_POINTS MP: " + LEGAL_POINTS);
                 JSONObject legalPoints = new JSONObject(LEGAL_POINTS);
                 JSONArray legalPointsArray = legalPoints.getJSONArray("LEGAL_POINTS");
                 result = new double[]{legalPointsArray.getJSONArray(result2).getDouble(0),
                         legalPointsArray.getJSONArray(result2).getDouble(1)};
-                System.out.println("CLF: " + result[0] + ", " + result[1]);
+                Toast.makeText(context, "CLF: " + result[0] + ", " + result[1], Toast.LENGTH_SHORT).show();
                 break;
 
             default:

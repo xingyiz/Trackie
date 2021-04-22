@@ -65,10 +65,12 @@ public class TestingMainFragment extends Fragment {
     private ArrayList<String> goodBSSIDs;
     private int size;
     private String LEGAL_POINTS;
+    private boolean GOT_LEGAL_POINTS = false;
+    private boolean GOT_BSSIDS = false;
+    private int TOTAL_SCANS = 3;
     private PointF currentPoint;
 
     private boolean alreadyCheckedWrongLocation = false;
-    private boolean retrievedBSSID = false;
     private long startTime;
 
     public TestingMainFragment() {
@@ -115,6 +117,7 @@ public class TestingMainFragment extends Fragment {
             public void onSuccess() {
 //                System.out.println("GET LEGAL POINTS: " + getLegalPointegalPoints.getLEGAL_POINTS());
                 LEGAL_POINTS = getLegalPoints.getLEGAL_POINTS();
+                GOT_LEGAL_POINTS = true;
                 Toast.makeText(getContext(), "LEGAL_POINTS retrieval success!", Toast.LENGTH_SHORT).show();
             }
 
@@ -129,13 +132,6 @@ public class TestingMainFragment extends Fragment {
             }
         });
 
-        return inflater.inflate(R.layout.fragment_testing_main, container, false);
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
         // long way first :(
         String currentLocation = Prefs.getCurrentLocation(getContext());
         String suffix = currentLocation.equals("B2L2") ? "_good_ssids2.txt" : "_good_ssids.txt";
@@ -144,15 +140,19 @@ public class TestingMainFragment extends Fragment {
             @Override
             public void onSuccess() {
                 goodBSSIDs = storageDownloader.getGoodBSSIDs();
-                retrievedBSSID = true;
-                String credentials = getString(R.string.credentials_key);
-                modelPrediction = new ModelPrediction(credentials, LEGAL_POINTS, getContext());
-                String modelType = Prefs.getModelType(getContext());
-                if (modelType != null) {
-                    modelPrediction.setModel(modelType);
-                }
+                GOT_BSSIDS = true;
                 size = storageDownloader.getSize();
                 Toast.makeText(getContext(), "GOOD_BSSIDS file retrieved :)", Toast.LENGTH_SHORT).show();
+
+                if (GOT_LEGAL_POINTS) {
+                    String credentials = getString(R.string.credentials_key);
+                    modelPrediction = new ModelPrediction(credentials, LEGAL_POINTS, getContext());
+                    String modelType = Prefs.getModelType(getContext());
+                    if (modelType != null) {
+                        modelPrediction.setModel(modelType);
+                    }
+                    System.out.println("MODEL CREATED :DDDDDDDDDDDDDDD");
+                }
             }
 
             @Override
@@ -165,6 +165,13 @@ public class TestingMainFragment extends Fragment {
                 Toast.makeText(getContext(), "Getting GOOD_BSSIDS file errored", Toast.LENGTH_SHORT).show();
             }
         });
+
+        return inflater.inflate(R.layout.fragment_testing_main, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
         // Set up map view
         testImageMapView = view.findViewById(R.id.testing_indoor_map_view);
@@ -242,7 +249,7 @@ public class TestingMainFragment extends Fragment {
         public void onScanResultsReceived(List<ScanResult> scanResults) {
             if (testImageMapView == null) return;
             try {
-                if (retrievedBSSID) {
+                if (GOT_BSSIDS) {
                     List<List<Double>> inputData = preprocessInputData(scanResults);
 
                     if (inputData == null) {    // check if no suitable BSSIDs are found - means user not at location
@@ -269,7 +276,7 @@ public class TestingMainFragment extends Fragment {
                     scansMade++;
                     Toast.makeText(getContext(), "scans made: " + scansMade, Toast.LENGTH_SHORT).show();
                     scannedData.add(inputData.get(0));
-                    if (scansMade == 3) {       // set number of scans to make before getting prediction
+                    if (scansMade == TOTAL_SCANS) {       // set number of scans to make before getting prediction
                         List<List<Double>> predictionInputData = getAverageListDouble(scannedData);
                         modelPrediction.getPrediction(predictionInputData, new ModelPrediction.OnReceivePredictionResultsCallback() {
                             @Override
@@ -314,17 +321,32 @@ public class TestingMainFragment extends Fragment {
         }
 
         private List<List<Double>> getAverageListDouble(List<List<Double>> listOfDoubles) {
-            List<Double> averages = new ArrayList<>();
-            int listLength = listOfDoubles.get(0).size();
-            for (int i=0; i < listLength; i++) {
-                double sum = 0;
-                for (List<Double> list : listOfDoubles) {
-                    sum += list.get(i);
+            List<Double> averages = new ArrayList<>(size * 2);
+            for (int i = 0; i < size * 2; i++) {
+                averages.add(i, 0.0);
+            }
+
+            for (int i = 0; i < size; i++) {
+                List<Double> gotRSSI = new ArrayList<>();
+                for (List<Double> doubleList : listOfDoubles) {
+                    if (doubleList.get(i) == 1.0) {
+                        averages.set(i, 1.0);
+                        gotRSSI.add(doubleList.get(i + size));
+                    }
                 }
-                averages.add(sum / listOfDoubles.size());
+                if (gotRSSI.isEmpty()) {
+                    averages.set(i + size, -1.0);
+                } else {
+                    Double sum = 0.0;
+                    for (int j = 0; j < gotRSSI.size(); j++) {
+                        sum += gotRSSI.get(j);
+                    }
+                    averages.set(i + size, sum / gotRSSI.size());
+                }
             }
             List<List<Double>> result = new ArrayList<>();
             result.add(averages);
+            System.out.println("THIS IS RESULT: " + result);
             return result;
         }
     }
@@ -343,7 +365,7 @@ public class TestingMainFragment extends Fragment {
                     int index = goodBSSIDs.indexOf(scanResult.BSSID);
 //                    Toast.makeText(getContext(), goodBSSIDs.get(index), Toast.LENGTH_SHORT).show();
                     inputData.set(index, 1.0);
-                    inputData.set(index + size, (double) scanResult.level / -100.0);
+                    inputData.set(index + size, ((double) scanResult.level) / -100.0);
                 }
             }
         }
