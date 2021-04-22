@@ -19,6 +19,7 @@
  import static android.os.SystemClock.sleep;
  import static androidx.test.espresso.Espresso.onView;
  import static androidx.test.espresso.action.ViewActions.click;
+ import static androidx.test.espresso.action.ViewActions.longClick;
  import static androidx.test.espresso.action.ViewActions.swipeLeft;
  import static androidx.test.espresso.assertion.ViewAssertions.matches;
  import static androidx.test.espresso.matcher.ViewMatchers.assertThat;
@@ -101,6 +102,12 @@ public class LocationsScreenTest {
 
     }
 
+    @Test
+    public void testDelete() throws Exception{
+        holdLoc(0);
+        onView(withText("Confirm Delete?")).check(matches(isDisplayed()));
+    }
+
     private void setLoc(int i) {
         onView(withId(R.id.locations_recycler_view))
                 .perform(RecyclerViewActions.actionOnItemAtPosition(i, click()));
@@ -120,6 +127,12 @@ public class LocationsScreenTest {
     private void clickOptionButton(int i) {
         onView(withId(R.id.locations_recycler_view))
                 .perform(RecyclerViewActions.actionOnItemAtPosition(i, TestingUtils.clickViewId(R.id.location_options_button)));
+
+    }
+
+    private void holdLoc(int i) {
+        onView(withId(R.id.locations_recycler_view))
+                .perform(RecyclerViewActions.actionOnItemAtPosition(i, longClick()));
 
     }
 
