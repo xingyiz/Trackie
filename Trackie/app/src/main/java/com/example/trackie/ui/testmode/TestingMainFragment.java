@@ -113,7 +113,7 @@ public class TestingMainFragment extends Fragment {
         getLegalPoints.execute(new OnCompleteCallback() {
             @Override
             public void onSuccess() {
-                System.out.println("GET LEGAL POINTS: " + getLegalPoints.getLEGAL_POINTS());
+//                System.out.println("GET LEGAL POINTS: " + getLegalPointegalPoints.getLEGAL_POINTS());
                 LEGAL_POINTS = getLegalPoints.getLEGAL_POINTS();
                 Toast.makeText(getContext(), "LEGAL_POINTS retrieval success!", Toast.LENGTH_SHORT).show();
             }
