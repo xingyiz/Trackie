@@ -64,6 +64,7 @@ public class TestingMainFragment extends Fragment {
     private ModelPrediction modelPrediction;
     private ArrayList<String> goodBSSIDs;
     private int size;
+    private String LEGAL_POINTS;
     private PointF currentPoint;
 
     private boolean alreadyCheckedWrongLocation = false;
@@ -108,16 +109,35 @@ public class TestingMainFragment extends Fragment {
 
         startTime = System.currentTimeMillis();
 
+        StorageDownloader getLegalPoints = new StorageDownloader("LEGAL_POINTS.json", "legal_points", getContext());
+        getLegalPoints.execute(new OnCompleteCallback() {
+            @Override
+            public void onSuccess() {
+                System.out.println("GET LEGAL POINTS: " + getLegalPoints.getLEGAL_POINTS());
+                LEGAL_POINTS = getLegalPoints.getLEGAL_POINTS();
+                Toast.makeText(getContext(), "LEGAL_POINTS retrieval success!", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure() {
+                Toast.makeText(getContext(), "LEGAL_POINTS retrieval failed!", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onError() {
+                Toast.makeText(getContext(), "LEGAL_POINTS retrieval error!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
         // long way first :(
-        StorageDownloader storageDownloader = new StorageDownloader(Prefs.getCurrentLocation(getContext()), getContext());
+        StorageDownloader storageDownloader = new StorageDownloader(Prefs.getCurrentLocation(getContext()) + "_good_ssids2.txt", "ssids", getContext());
         storageDownloader.execute(new OnCompleteCallback() {
             @Override
             public void onSuccess() {
                 goodBSSIDs = storageDownloader.getGoodBSSIDs();
                 retrievedBSSID = true;
                 String credentials = getString(R.string.credentials_key);
-                String legal_points = getString(R.string.LEGAL_POINTS);
-                modelPrediction = new ModelPrediction(credentials, legal_points);
+                modelPrediction = new ModelPrediction(credentials, LEGAL_POINTS);
                 size = storageDownloader.getSize();
                 Toast.makeText(getContext(), "GOOD_BSSIDS file retrieved :)", Toast.LENGTH_SHORT).show();
             }

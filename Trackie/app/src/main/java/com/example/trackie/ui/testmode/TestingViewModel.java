@@ -19,7 +19,7 @@ public class TestingViewModel extends ViewModel {
     public TestingViewModel() {}
 
     public void loadGoodBSSIDs(String name, Context context) {
-        StorageDownloader storageDownloader = new StorageDownloader(name, context);
+        StorageDownloader storageDownloader = new StorageDownloader(name, "ssids", context);
         storageDownloader.execute(new OnCompleteCallback() {
             @Override
             public void onSuccess() {

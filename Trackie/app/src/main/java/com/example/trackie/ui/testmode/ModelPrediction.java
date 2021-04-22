@@ -79,7 +79,7 @@ public class ModelPrediction {
             // You should have already deployed a model and a version.
             // For reference, see https://cloud.google.com/ml-engine/docs/deploying-models.
             String modelId = "B2L2_XTC";
-            String versionId = "B2L2_XTC";
+            String versionId = "B2L2_XTC256";
             param.set(
                     "name", String.format("projects/%s/models/%s/versions/%s", projectId, modelId, versionId));
 
@@ -129,7 +129,7 @@ public class ModelPrediction {
             System.out.println("Response: " + response);
 
             try {
-                callback.onReceiveResults(parsePredictionJSONForResult(response, "classification"));
+                callback.onReceiveResults(parsePredictionJSONForResult(response, "clf"));
             } catch (JSONException e) {
                 e.printStackTrace();
                 callback.onError();
@@ -141,32 +141,30 @@ public class ModelPrediction {
 
     public double[] parsePredictionJSONForResult(String jsonResult, String type) throws JSONException {
         double[] result;
-        try {
-            switch (type) {
-                case "regression":
-                        JSONObject json = new JSONObject(jsonResult);
-                        JSONArray jsonArray = json.getJSONArray("predictions");
-                        result = new double[]{jsonArray.getJSONArray(0).getDouble(0),
-                                jsonArray.getJSONArray(0).getDouble(1)};
+        switch (type) {
+            case "regression":
+                JSONObject json = new JSONObject(jsonResult);
+                JSONArray jsonArray = json.getJSONArray("predictions");
+                result = new double[]{jsonArray.getJSONArray(0).getDouble(0),
+                        jsonArray.getJSONArray(0).getDouble(1)};
+                break;
 
-                case "classfication":
-                        JSONObject json2 = new JSONObject(jsonResult);
-                        JSONArray jsonArray2 = json2.getJSONArray("predictions");
-                        int result2 = jsonArray2.getInt(0);
+            case "clf":
+                JSONObject json2 = new JSONObject(jsonResult);
+                JSONArray jsonArray2 = json2.getJSONArray("predictions");
+                int result2 = jsonArray2.getInt(0);
+                System.out.println("result2: " + result2);
 
-                        JSONObject legalPoints = new JSONObject(LEGAL_POINTS);
-                        JSONArray legalPointsArray = legalPoints.getJSONArray("LEGAL_POINTS");
-                        result = new double[]{legalPointsArray.getJSONArray(result2).getDouble(0),
-                                legalPointsArray.getJSONArray(result2).getDouble(1)};
-                    break;
+                System.out.println("LEGAL_POINTS MP; " + LEGAL_POINTS);
+                JSONObject legalPoints = new JSONObject(LEGAL_POINTS);
+                JSONArray legalPointsArray = legalPoints.getJSONArray("LEGAL_POINTS");
+                result = new double[]{legalPointsArray.getJSONArray(result2).getDouble(0),
+                        legalPointsArray.getJSONArray(result2).getDouble(1)};
+                System.out.println("CLF: " + result[0] + ", " + result[1]);
+                break;
 
-                default:
-                    throw new IllegalStateException("Unexpected value: " + type);
-            }
-        } catch (Exception e) {
-            JSONObject json = new JSONObject(jsonResult);
-            String error = json.getString("error");
-            return new double[]{0.0, 0.0};
+            default:
+                throw new IllegalStateException("Unexpected value: " + type);
         }
 
         return result;
