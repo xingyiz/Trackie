@@ -51,7 +51,7 @@ public class SettingsScreenTest {
                 .check(matches(new CustomMatchers.BoolPrefsMatcher(CustomMatchers.DARK_MODE, false, context)));
     }
 
-    @Test
+    /*@Test
     public void TestSetActiveScanning() throws Exception{
         //checked
         onView(withId(R.id.toggle_active_scanning))
@@ -65,7 +65,7 @@ public class SettingsScreenTest {
                 .check(matches(isNotChecked()))
                 .check(matches(new CustomMatchers.BoolPrefsMatcher(CustomMatchers.ACTIVE_SCANNING, false, context)));
     }
-
+*/
     @Test
     public void TestMeasuredRSSI() throws Exception{
         // set to 55 and check prefs

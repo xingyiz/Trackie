@@ -96,7 +96,7 @@ public class LocationsScreenTest {
     }
 
     @Test
-    public void clickOptions() throws Exception{
+    public void clickOptions() {
         clickOptionButton(0);
         onView(withText("Edit")).check(matches(isDisplayed()));
 
