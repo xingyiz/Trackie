@@ -85,7 +85,7 @@ public class Prefs {
 
     public static int getNumberOfScans(Context context) {
         if (preferences == null) intializeSharedPref(context);
-        return preferences.getInt(NUMBER_OF_SCANS_KEY, 1);
+        return preferences.getInt(NUMBER_OF_SCANS_KEY, 5);
     }
 
     public static void setNumberOfScans(Context context, int numberOfScans) {
