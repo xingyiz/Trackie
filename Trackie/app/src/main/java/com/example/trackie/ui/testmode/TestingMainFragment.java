@@ -129,6 +129,13 @@ public class TestingMainFragment extends Fragment {
             }
         });
 
+        return inflater.inflate(R.layout.fragment_testing_main, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
         // long way first :(
         StorageDownloader storageDownloader = new StorageDownloader(Prefs.getCurrentLocation(getContext()) + "_good_ssids2.txt", "ssids", getContext());
         storageDownloader.execute(new OnCompleteCallback() {
@@ -156,13 +163,6 @@ public class TestingMainFragment extends Fragment {
                 Toast.makeText(getContext(), "Getting GOOD_BSSIDS file errored", Toast.LENGTH_SHORT).show();
             }
         });
-
-        return inflater.inflate(R.layout.fragment_testing_main, container, false);
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
 
         // Set up map view
         testImageMapView = view.findViewById(R.id.testing_indoor_map_view);
