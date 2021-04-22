@@ -16,6 +16,10 @@
         android:layout_marginTop="24dp"
         android:layout_marginEnd="32dp"
         android:hint="Enter Location Name"
+        app:counterEnabled="true"
+        app:counterMaxLength="16"
+        app:errorEnabled="true"
+        android:focusable="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
