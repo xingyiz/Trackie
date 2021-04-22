@@ -168,6 +168,7 @@ public class ModelPrediction {
 
     public double[] parsePredictionJSONForResult(String jsonResult, String type) throws JSONException {
         double[] result;
+        System.out.println("JSONRESULT: " + jsonResult);
         switch (type) {
             case "reg":
                 JSONObject json = new JSONObject(jsonResult);
@@ -187,7 +188,6 @@ public class ModelPrediction {
                 JSONArray legalPointsArray = legalPoints.getJSONArray("LEGAL_POINTS");
                 result = new double[]{legalPointsArray.getJSONArray(result2).getDouble(0),
                         legalPointsArray.getJSONArray(result2).getDouble(1)};
-                Toast.makeText(context, "CLF: " + result[0] + ", " + result[1], Toast.LENGTH_SHORT).show();
                 break;
 
             default:

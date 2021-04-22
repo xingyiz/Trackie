@@ -297,7 +297,9 @@ public class TestingMainFragment extends Fragment {
                                 System.out.println("Failed to parse JSON prediction string. Check code under ModelPrediction.parsePredictionJSONForResult()");
                             }
                         });
+                        // reset number of scans and collected wifi data so far back to original state
                         scansMade = 0;
+                        scannedData = new ArrayList<List<Double>>();
                     }
                 }
             } catch (Exception e) {
