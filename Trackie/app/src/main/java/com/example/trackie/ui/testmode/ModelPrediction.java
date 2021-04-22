@@ -146,7 +146,7 @@ public class ModelPrediction {
             System.out.println("Response: " + response);
 
             try {
-                callback.onReceiveResults(parsePredictionJSONForResult(response, "clf"));
+                callback.onReceiveResults(parsePredictionJSONForResult(response, "reg"));
             } catch (JSONException e) {
                 e.printStackTrace();
                 callback.onError();
@@ -159,7 +159,7 @@ public class ModelPrediction {
     public double[] parsePredictionJSONForResult(String jsonResult, String type) throws JSONException {
         double[] result;
         switch (type) {
-            case "regression":
+            case "reg":
                 JSONObject json = new JSONObject(jsonResult);
                 JSONArray jsonArray = json.getJSONArray("predictions");
                 result = new double[]{jsonArray.getJSONArray(0).getDouble(0),
