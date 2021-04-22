@@ -122,7 +122,6 @@ public class ModelPrediction {
             GoogleCredentials credential = null;
 
             try {
-                System.out.println("credential key: " + CREDENTIALS_KEY);
                 credential = GoogleCredentials.fromStream(
                         new ByteArrayInputStream(CREDENTIALS_KEY.getBytes(StandardCharsets.UTF_8)));
             } catch (IOException e) {
