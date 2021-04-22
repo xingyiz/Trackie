@@ -3,7 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <group android:checkableBehavior="single">
+    <group
+        android:id="@+id/main_functions"
+        android:checkableBehavior="single">
         <item
             android:id="@+id/nav_home"
             android:icon="@drawable/ic_map_24px"
@@ -17,6 +19,11 @@
             android:icon="@drawable/ic_settings_24px"
             android:title="@string/menu_settings" />
 
+
+    </group>
+    <group
+        android:id="@+id/test_functions"
+        android:checkableBehavior="single">
         <item
             android:id="@+id/nav_database"
             android:icon="@drawable/ic_baseline_cloud_24"
@@ -26,5 +33,6 @@
             android:id="@+id/nav_test_rssi"
             android:icon="@drawable/ic_menu_slideshow"
             android:title="RSSI Test"/>
+
     </group>
 </menu>
