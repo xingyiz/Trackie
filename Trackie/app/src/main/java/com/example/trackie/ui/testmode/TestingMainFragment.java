@@ -111,27 +111,6 @@ public class TestingMainFragment extends Fragment {
 
         startTime = System.currentTimeMillis();
 
-        StorageDownloader getLegalPoints = new StorageDownloader(Prefs.getCurrentLocation(getContext()) + "_LEGAL_POINTS.json", "legal_points", getContext());
-        getLegalPoints.execute(new OnCompleteCallback() {
-            @Override
-            public void onSuccess() {
-//                System.out.println("GET LEGAL POINTS: " + getLegalPointegalPoints.getLEGAL_POINTS());
-                LEGAL_POINTS = getLegalPoints.getLEGAL_POINTS();
-                GOT_LEGAL_POINTS = true;
-                Toast.makeText(getContext(), "LEGAL_POINTS retrieval success!", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onFailure() {
-                Toast.makeText(getContext(), "LEGAL_POINTS retrieval failed!", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onError() {
-                Toast.makeText(getContext(), "LEGAL_POINTS retrieval error!", Toast.LENGTH_SHORT).show();
-            }
-        });
-
         // long way first :(
         String currentLocation = Prefs.getCurrentLocation(getContext());
         String suffix = currentLocation.equals("B2L2") ? "_good_ssids2.txt" : "_good_ssids.txt";
@@ -144,15 +123,36 @@ public class TestingMainFragment extends Fragment {
                 size = storageDownloader.getSize();
                 Toast.makeText(getContext(), "GOOD_BSSIDS file retrieved :)", Toast.LENGTH_SHORT).show();
 
-                if (GOT_LEGAL_POINTS) {
-                    String credentials = getString(R.string.credentials_key);
-                    modelPrediction = new ModelPrediction(credentials, LEGAL_POINTS, getContext());
-                    String modelType = Prefs.getModelType(getContext());
-                    if (modelType != null) {
-                        modelPrediction.setModel(modelType);
+                StorageDownloader getLegalPoints = new StorageDownloader(Prefs.getCurrentLocation(getContext()) + "_LEGAL_POINTS.json", "legal_points", getContext());
+                getLegalPoints.execute(new OnCompleteCallback() {
+                    @Override
+                    public void onSuccess() {
+//                System.out.println("GET LEGAL POINTS: " + getLegalPointegalPoints.getLEGAL_POINTS());
+                        LEGAL_POINTS = getLegalPoints.getLEGAL_POINTS();
+                        GOT_LEGAL_POINTS = true;
+                        Toast.makeText(getContext(), "LEGAL_POINTS retrieval success!", Toast.LENGTH_SHORT).show();
+
+                        if (GOT_LEGAL_POINTS) {
+                            String credentials = getString(R.string.credentials_key);
+                            modelPrediction = new ModelPrediction(credentials, LEGAL_POINTS, getContext());
+                            String modelType = Prefs.getModelType(getContext());
+                            if (modelType != null) {
+                                modelPrediction.setModel(modelType);
+                            }
+                            System.out.println("MODEL CREATED :DDDDDDDDDDDDDDD");
+                        }
                     }
-                    System.out.println("MODEL CREATED :DDDDDDDDDDDDDDD");
-                }
+
+                    @Override
+                    public void onFailure() {
+                        Toast.makeText(getContext(), "LEGAL_POINTS retrieval failed!", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onError() {
+                        Toast.makeText(getContext(), "LEGAL_POINTS retrieval error!", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
 
             @Override
@@ -298,6 +298,7 @@ public class TestingMainFragment extends Fragment {
                             }
                         });
                         scansMade = 0;
+                        scannedData = new ArrayList<>();
                     }
                 }
             } catch (Exception e) {
