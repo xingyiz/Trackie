@@ -113,7 +113,7 @@ public class TestingMainFragment extends Fragment {
         getLegalPoints.execute(new OnCompleteCallback() {
             @Override
             public void onSuccess() {
-                System.out.println("GET LEGAL POINTS: " + getLegalPoints.getLEGAL_POINTS());
+//                System.out.println("GET LEGAL POINTS: " + getLegalPointegalPoints.getLEGAL_POINTS());
                 LEGAL_POINTS = getLegalPoints.getLEGAL_POINTS();
                 Toast.makeText(getContext(), "LEGAL_POINTS retrieval success!", Toast.LENGTH_SHORT).show();
             }
@@ -128,6 +128,13 @@ public class TestingMainFragment extends Fragment {
                 Toast.makeText(getContext(), "LEGAL_POINTS retrieval error!", Toast.LENGTH_SHORT).show();
             }
         });
+
+        return inflater.inflate(R.layout.fragment_testing_main, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
         // long way first :(
         StorageDownloader storageDownloader = new StorageDownloader(Prefs.getCurrentLocation(getContext()) + "_good_ssids2.txt", "ssids", getContext());
@@ -156,13 +163,6 @@ public class TestingMainFragment extends Fragment {
                 Toast.makeText(getContext(), "Getting GOOD_BSSIDS file errored", Toast.LENGTH_SHORT).show();
             }
         });
-
-        return inflater.inflate(R.layout.fragment_testing_main, container, false);
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
 
         // Set up map view
         testImageMapView = view.findViewById(R.id.testing_indoor_map_view);

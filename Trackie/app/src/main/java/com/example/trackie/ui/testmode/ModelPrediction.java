@@ -40,6 +40,9 @@ public class ModelPrediction {
         this.CREDENTIALS_KEY = credentials;
         this.LEGAL_POINTS = legal_points;
 
+        // THIS IS AN IMPT LINE, DO NOT REMOVE
+        System.out.println("MODEL PRED: " + LEGAL_POINTS);
+
         // set classification as default
         this.modelType = "clf";
         this.modelName = "B2L2_XTC";
@@ -122,7 +125,6 @@ public class ModelPrediction {
             GoogleCredentials credential = null;
 
             try {
-                System.out.println("credential key: " + CREDENTIALS_KEY);
                 credential = GoogleCredentials.fromStream(
                         new ByteArrayInputStream(CREDENTIALS_KEY.getBytes(StandardCharsets.UTF_8)));
             } catch (IOException e) {
