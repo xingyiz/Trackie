@@ -94,4 +94,43 @@ public class SettingsScreenTest {
 
     }
 
+    @Test (expected = NumberFormatException.class)
+    public void InvalidNumScans1() throws Exception {
+        String data = "abc";
+
+      onView(withId(R.id.number_of_scans_edittext))
+                .perform(click())
+                .perform(typeTextIntoFocusedView(data));
+
+      onView(withId(R.id.number_of_scans_set_button))
+              .perform(click())
+              .check(matches(new CustomMatchers.StringPrefsMatcher(CustomMatchers.NUM_OF_SCANS, data, context )));
+    }
+
+    @Test (expected = AssertionError.class)
+    public void InvalidNumScans2() throws Exception{
+        String data = "100";
+
+        onView(withId(R.id.number_of_scans_edittext))
+                .perform(click())
+                .perform(typeTextIntoFocusedView(data));
+
+        onView(withId(R.id.number_of_scans_set_button))
+                .perform(click())
+                .check(matches(new CustomMatchers.StringPrefsMatcher(CustomMatchers.NUM_OF_SCANS, data, context )));
+    }
+
+    @Test
+    public void ModelMode() throws Exception{
+
+        onView(withId(R.id.toggle_ML_Mode))
+                .perform(click())
+                .check(matches(new CustomMatchers.StringPrefsMatcher(CustomMatchers.ML_MODEL, CustomMatchers.ML_REG, context)));
+
+        onView(withId(R.id.toggle_ML_Mode))
+                .perform(click())
+                .check(matches(new CustomMatchers.StringPrefsMatcher(CustomMatchers.ML_MODEL, CustomMatchers.ML_CLF, context)));
+
+    }
+
 }

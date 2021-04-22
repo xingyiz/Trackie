@@ -8,6 +8,8 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.InputFilter;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +36,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.InvalidPropertiesFormatException;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -96,6 +99,21 @@ public class AddLocationFragment extends Fragment {
         confirmFloorplanButton = (Button) view.findViewById(R.id.confirm_floorplan_button);
         checkBox = view.findViewById(R.id.upload_floorplan_checkbox);
 
+        locationNameEditText.setFilters(new InputFilter[] { new InputFilter.LengthFilter(16) });
+/*
+
+        locationNameEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+              @Override
+              public void onFocusChange(View v, boolean hasFocus) {
+                  int len = locationNameEditText.getText().toString().length();
+                  if (len > 16) {
+                      locationNameEditText.setError("Name is too long!");
+                  }
+              }
+        });
+*/
+
+
         uploadFloorplanImageView.setVisibility(View.INVISIBLE);
         uploadFloorplanButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -116,30 +134,36 @@ public class AddLocationFragment extends Fragment {
 //                 SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy hh:mm");
 //                 String outputDateString = dateFormat.format(currentTime);
 //                 Toast.makeText(getActivity(), "Time is: " + outputDateString, Toast.LENGTH_SHORT).show();
-                // set upload to database code here
-                int darkmode = checkBox.isChecked() ? 1 : 0;
-                FloorplanHelper.UploadFloorplan uploadFloorplan = new FloorplanHelper.UploadFloorplan(
-                        locationNameEditText.getText().toString(), filePath, darkmode, new Timestamp(new Date()));
-                uploadFloorplan.execute(new OnCompleteCallback() {
-                    @Override
-                    public void onSuccess() {
-                        locationsViewModel.loadLocations();
-                        Toast.makeText(getContext(), "Upload Success", Toast.LENGTH_SHORT).show();
-                    }
+                if (locationNameEditText.getText().toString().length() > 16) {
+                    // fail, dont upload
+                    Toast.makeText(getActivity(), "Name is too long!", Toast.LENGTH_SHORT).show();
+                } else {
 
-                    @Override
-                    public void onFailure() {
-                        Toast.makeText(getContext(), "Upload Failure", Toast.LENGTH_SHORT).show();
-                    }
+                    // set upload to database code here
+                    int darkmode = checkBox.isChecked() ? 1 : 0;
+                    FloorplanHelper.UploadFloorplan uploadFloorplan = new FloorplanHelper.UploadFloorplan(
+                            locationNameEditText.getText().toString(), filePath, darkmode, new Timestamp(new Date()));
+                    uploadFloorplan.execute(new OnCompleteCallback() {
+                        @Override
+                        public void onSuccess() {
+                            locationsViewModel.loadLocations();
+                            Toast.makeText(getContext(), "Upload Success", Toast.LENGTH_SHORT).show();
+                        }
 
-                    @Override
-                    public void onError() {
+                        @Override
+                        public void onFailure() {
+                            Toast.makeText(getContext(), "Upload Failure", Toast.LENGTH_SHORT).show();
+                        }
 
-                    }
-                });
+                        @Override
+                        public void onError() {
 
-                getActivity().onBackPressed();
+                        }
+                    });
 
+                    getActivity().onBackPressed();
+
+                }
             }
         });
     }

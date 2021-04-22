@@ -17,8 +17,10 @@ public class Prefs {
     public static String NUMBER_OF_SCANS_KEY = "number_of_scans";
     public static String SAVED_MAPPING_KEY = "saved_mapping_key";
     public static String ADMIN_MODE_KEY = "admin_mode";
-    public static String TOGGLE_TEST_B2L2_KEY = "toggle_b2l2_key";
+
     public static String MODEL_TYPE_KEY = "model_type_key";
+    public static String MODEL_REGRESSION = "reg";
+    public static String MODEL_CLASSIFICATION = "clf";
 
     public static SharedPreferences intializeSharedPref(Context context) {
         preferences = context.getSharedPreferences(P_FILE, Context.MODE_PRIVATE);
@@ -83,7 +85,7 @@ public class Prefs {
 
     public static int getNumberOfScans(Context context) {
         if (preferences == null) intializeSharedPref(context);
-        return preferences.getInt(NUMBER_OF_SCANS_KEY, 1);
+        return preferences.getInt(NUMBER_OF_SCANS_KEY, 5);
     }
 
     public static void setNumberOfScans(Context context, int numberOfScans) {
@@ -109,25 +111,14 @@ public class Prefs {
         editor.apply();
     }
 
-    public static boolean getTEST_B2L2(Context context) {
-        if (preferences == null) intializeSharedPref(context);
-        return preferences.getBoolean(TOGGLE_TEST_B2L2_KEY, false);
-    }
-
-    public static void setTEST_B2L2(Context context, boolean isTESTB2L2) {
-        if (preferences == null) intializeSharedPref(context);
-        editor.putBoolean(TOGGLE_TEST_B2L2_KEY, isTESTB2L2);
-        editor.apply();
-    }
-
     public static String getModelType(Context context) {
         if (preferences == null) intializeSharedPref(context);
-        return preferences.getString(MODEL_TYPE_KEY, "clf");
+        return preferences.getString(MODEL_TYPE_KEY, MODEL_CLASSIFICATION);
     }
 
     public static void setModelType(Context context, String model) {
         if (preferences == null) intializeSharedPref(context);
-        editor.putString(TOGGLE_TEST_B2L2_KEY, model);
+        editor.putString(MODEL_TYPE_KEY, model);
         editor.apply();
     }
 }

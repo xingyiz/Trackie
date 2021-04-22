@@ -3,6 +3,7 @@ package com.example.trackie;
 import android.content.Context;
 import android.view.Gravity;
 
+import androidx.test.espresso.NoMatchingViewException;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.rule.ActivityTestRule;
 
