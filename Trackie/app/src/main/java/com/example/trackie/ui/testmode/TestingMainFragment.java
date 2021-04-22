@@ -139,7 +139,7 @@ public class TestingMainFragment extends Fragment {
                 String credentials = getString(R.string.credentials_key);
                 modelPrediction = new ModelPrediction(credentials, LEGAL_POINTS);
                 String modelType = Prefs.getModelType(getContext());
-                if (modelType == null) {
+                if (modelType != null) {
                     modelPrediction.setModel(modelType);
                 }
                 size = storageDownloader.getSize();
