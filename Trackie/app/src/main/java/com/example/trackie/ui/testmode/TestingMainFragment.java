@@ -109,7 +109,7 @@ public class TestingMainFragment extends Fragment {
 
         startTime = System.currentTimeMillis();
 
-        StorageDownloader getLegalPoints = new StorageDownloader("LEGAL_POINTS.json", "legal_points", getContext());
+        StorageDownloader getLegalPoints = new StorageDownloader(Prefs.getCurrentLocation(getContext()) + "_LEGAL_POINTS.json", "legal_points", getContext());
         getLegalPoints.execute(new OnCompleteCallback() {
             @Override
             public void onSuccess() {
@@ -137,14 +137,16 @@ public class TestingMainFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         // long way first :(
-        StorageDownloader storageDownloader = new StorageDownloader(Prefs.getCurrentLocation(getContext()) + "_good_ssids2.txt", "ssids", getContext());
+        String currentLocation = Prefs.getCurrentLocation(getContext());
+        String suffix = currentLocation.equals("B2L2") ? "_good_ssids2.txt" : "_good_ssids.txt";
+        StorageDownloader storageDownloader = new StorageDownloader(currentLocation + suffix, "ssids", getContext());
         storageDownloader.execute(new OnCompleteCallback() {
             @Override
             public void onSuccess() {
                 goodBSSIDs = storageDownloader.getGoodBSSIDs();
                 retrievedBSSID = true;
                 String credentials = getString(R.string.credentials_key);
-                modelPrediction = new ModelPrediction(credentials, LEGAL_POINTS);
+                modelPrediction = new ModelPrediction(credentials, LEGAL_POINTS, getContext());
                 String modelType = Prefs.getModelType(getContext());
                 if (modelType != null) {
                     modelPrediction.setModel(modelType);
