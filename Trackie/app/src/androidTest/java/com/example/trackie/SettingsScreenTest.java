@@ -94,4 +94,9 @@ public class SettingsScreenTest {
 
     }
 
+    @Test
+    public void ModelMode() throws Exception{
+
+    }
+
 }
