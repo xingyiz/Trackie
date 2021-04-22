@@ -138,7 +138,7 @@ public class SettingsFragment extends Fragment {
                 MLModeToggle.setChecked(true);
                 break;
             case ("clf"):
-                MLModeToggle.setText("Classificaton");
+                MLModeToggle.setText("Classification");
                 MLModeToggle.setChecked(false);
                 break;
         }

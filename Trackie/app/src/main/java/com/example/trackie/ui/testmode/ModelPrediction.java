@@ -157,10 +157,8 @@ public class ModelPrediction {
 
             try {
                 callback.onReceiveResults(parsePredictionJSONForResult(response, modelType));
-            } catch (JSONException e) {
+            } catch (JSONException | NullPointerException e) {
                 e.printStackTrace();
-                callback.onError();
-            } catch (NullPointerException e) {
                 callback.onError();
             }
         }
