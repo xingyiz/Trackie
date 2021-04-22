@@ -38,6 +38,9 @@ public class CustomMatchers {
     public static final String LOCATION = "Location";
     public static final String DARK_MODE = "DarkMode";
     public static final String ACTIVE_SCANNING = "ActiveScanning";
+    public static final String ML_MODEL = "model";
+    public static final String ML_REG = "reg";
+    public static final String ML_CLF = "clf";
 
 
     public static class DrawableMatcher extends TypeSafeMatcher<View> {
@@ -124,6 +127,8 @@ public class CustomMatchers {
                    return scans == Prefs.getNumberOfScans(context);
                case "Location":
                    return dataStored.equals(Prefs.getCurrentLocation(context));
+               case ML_MODEL:
+                   return dataStored.equals(Prefs.getModelType(context));
                default:
                    return false;
            }
@@ -161,6 +166,7 @@ public class CustomMatchers {
                     return dataStored.equals(Prefs.getDarkModeState(context));
                 case "ActiveScanning":
                     return dataStored.equals(Prefs.getActiveScanningEnabled(context));
+
                 default:
                     return false;
             }

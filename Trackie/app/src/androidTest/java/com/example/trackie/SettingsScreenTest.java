@@ -97,6 +97,14 @@ public class SettingsScreenTest {
     @Test
     public void ModelMode() throws Exception{
 
+        onView(withId(R.id.toggle_ML_Mode))
+                .perform(click())
+                .check(matches(new CustomMatchers.StringPrefsMatcher(CustomMatchers.ML_MODEL, CustomMatchers.ML_REG, context)));
+
+        onView(withId(R.id.toggle_ML_Mode))
+                .perform(click())
+                .check(matches(new CustomMatchers.StringPrefsMatcher(CustomMatchers.ML_MODEL, CustomMatchers.ML_CLF, context)));
+
     }
 
 }
