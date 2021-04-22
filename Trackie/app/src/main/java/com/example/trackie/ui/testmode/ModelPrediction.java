@@ -32,6 +32,7 @@ import java.util.Map;
 public class ModelPrediction {
     private String CREDENTIALS_KEY; // ENTER CREDENTIALS KEY HERE
     private String LEGAL_POINTS;
+    private String modelType;
     private String modelName;
     private String modelVersion;
 
@@ -40,13 +41,15 @@ public class ModelPrediction {
         this.LEGAL_POINTS = legal_points;
 
         // set classification as default
+        this.modelType = "clf";
         this.modelName = "B2L2_XTC";
         this.modelVersion = "B2L2_XTC256";
     }
 
 
     public void setModel(String modelType) {
-        if (modelType.equals("regression")) {
+        this.modelType = modelType;
+        if (modelType.equals("reg")) {
             this.modelName = "B2L2_XT";
             this.modelVersion = "B2L2_XT3";
         } else if (modelType.equals("clf")) {
@@ -146,7 +149,7 @@ public class ModelPrediction {
             System.out.println("Response: " + response);
 
             try {
-                callback.onReceiveResults(parsePredictionJSONForResult(response, "clf"));
+                callback.onReceiveResults(parsePredictionJSONForResult(response, modelType));
             } catch (JSONException e) {
                 e.printStackTrace();
                 callback.onError();
@@ -159,7 +162,7 @@ public class ModelPrediction {
     public double[] parsePredictionJSONForResult(String jsonResult, String type) throws JSONException {
         double[] result;
         switch (type) {
-            case "regression":
+            case "reg":
                 JSONObject json = new JSONObject(jsonResult);
                 JSONArray jsonArray = json.getJSONArray("predictions");
                 result = new double[]{jsonArray.getJSONArray(0).getDouble(0),
