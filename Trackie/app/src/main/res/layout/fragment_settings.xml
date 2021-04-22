@@ -199,7 +199,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:text="TEST"
+            android:text="Test Mode Model"
             android:textSize="20sp"
             app:layout_constraintTop_toBottomOf="@id/number_of_scans_set_button"
             tools:layout_editor_absoluteX="8dp"
@@ -212,11 +212,11 @@
             android:layout_marginTop="@dimen/activity_vertical_margin">
 
             <androidx.appcompat.widget.SwitchCompat
-                android:id="@+id/toggle_TEST_B2L2MODE"
+                android:id="@+id/toggle_ML_Mode"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:paddingHorizontal="@dimen/switch_padding"
-                android:text="TESTING AT B1L2 RN"
+                android:text="Classification"
                 android:textColor="?attr/colorOnBackground"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.cardview.widget.CardView>

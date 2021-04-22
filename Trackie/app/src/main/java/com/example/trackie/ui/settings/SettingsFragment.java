@@ -24,6 +24,9 @@ import com.example.trackie.R;
 import com.example.trackie.ui.Prefs;
 
 public class SettingsFragment extends Fragment {
+
+    Context context;
+
     boolean buttonState;
 
     private SettingsViewModel settingsViewModel;
@@ -34,6 +37,10 @@ public class SettingsFragment extends Fragment {
     SwitchCompat activeScanningSwitch;
     EditText numberOfScansEditText;
     Button numberOfScansButton;
+
+    // Test Mode Models
+    SwitchCompat MLModeToggle;
+    SwitchCompat regressionToggle;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -48,6 +55,7 @@ public class SettingsFragment extends Fragment {
             }
         });
 
+        context = root.getContext();
         buttonState = Prefs.getDarkModeState(getContext());
 
         darkModeSwitch = root.findViewById(R.id.toggle_dark_mode);
@@ -119,12 +127,35 @@ public class SettingsFragment extends Fragment {
             }
         });
 
-        SwitchCompat TEST_B2L2_toggle = root.findViewById(R.id.toggle_TEST_B2L2MODE);
-        TEST_B2L2_toggle.setChecked(Prefs.getTEST_B2L2(getContext()));
-        TEST_B2L2_toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        MLModeToggle = root.findViewById(R.id.toggle_ML_Mode);
+        String model = Prefs.getModelType(context);
+
+        // Create view on instantiated
+        // reg is true, clf is false
+            switch (model) {
+            case ("reg"):
+                MLModeToggle.setText("Regression");
+                MLModeToggle.setChecked(true);
+                break;
+            case ("clf"):
+                MLModeToggle.setText("Classificaton");
+                MLModeToggle.setChecked(false);
+                break;
+        }
+
+        MLModeToggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                Prefs.setTEST_B2L2(getContext(), isChecked);
+                if (isChecked) {
+                    MLModeToggle.setText("Regression");
+                    MLModeToggle.setChecked(true);
+                    Prefs.setModelType(context, "reg");
+
+                } else {
+                    MLModeToggle.setText("Classificaton");
+                    MLModeToggle.setChecked(false);
+                    Prefs.setModelType(context, "clf");
+                }
             }
         });
 
@@ -136,4 +167,5 @@ public class SettingsFragment extends Fragment {
         InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(editText.getWindowToken(), InputMethodManager.RESULT_UNCHANGED_SHOWN);
     }
+
 }
