@@ -122,7 +122,7 @@ public class Prefs {
 
     public static String getModelType(Context context) {
         if (preferences == null) intializeSharedPref(context);
-        return preferences.getString(MODEL_TYPE_KEY, null);
+        return preferences.getString(MODEL_TYPE_KEY, "clf");
     }
 
     public static void setModelType(Context context, String model) {
