@@ -8,6 +8,7 @@ import android.graphics.PointF;
 import android.graphics.drawable.Drawable;
 import android.net.wifi.ScanResult;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -276,6 +277,7 @@ public class TestingMainFragment extends Fragment {
                     scansMade++;
                     Toast.makeText(getContext(), "scans made: " + scansMade, Toast.LENGTH_SHORT).show();
                     scannedData.add(inputData.get(0));
+                    Handler handler = new Handler();
                     if (scansMade == TOTAL_SCANS) {       // set number of scans to make before getting prediction
                         List<List<Double>> predictionInputData = getAverageListDouble(scannedData);
                         modelPrediction.getPrediction(predictionInputData, new ModelPrediction.OnReceivePredictionResultsCallback() {
