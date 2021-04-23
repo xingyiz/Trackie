@@ -107,14 +107,19 @@ public class FetchWiFiDataUtils {
                 public void onReceive(Context context, Intent intent) {
                     boolean success = intent.getBooleanExtra(WifiManager.EXTRA_RESULTS_UPDATED, false);
                     if (success) {
-                        try {
-                            Thread.sleep(1000);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
+
                         results = wifiManager.getScanResults();
                         dataListener.onScanResultsReceived(results);
                         timesScanned++;
+
+                        if (timesScanned == 3) {
+                            try {
+                                Thread.sleep(5000);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                            timesScanned = 0;
+                        }
 
                         if (timesScanned == timesToScan || stopScanning) {
 

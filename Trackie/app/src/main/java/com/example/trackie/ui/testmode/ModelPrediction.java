@@ -20,12 +20,22 @@ import com.google.api.services.discovery.model.RestMethod;
 import com.google.auth.http.HttpCredentialsAdapter;
 import com.google.auth.oauth2.GoogleCredentials;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.impl.client.HttpClients;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -68,9 +78,105 @@ public class ModelPrediction {
 
     public void getPrediction(List<List<Double>> inputData, OnReceivePredictionResultsCallback callback) {
         String inputJSON = createInputInstanceJSONFrom2DArray(inputData);
-        SendPredictionThread thread = new SendPredictionThread(inputJSON, callback);
-        thread.start();
+
+        if (Prefs.getCurrentLocation(context).equals("B2L2") && this.modelType.equals("clf")) {
+            SendPredictionThread2 thread = new SendPredictionThread2(inputJSON, callback);
+            thread.start();
+        } else {
+            SendPredictionThread thread = new SendPredictionThread(inputJSON, callback);
+            thread.start();
+        }
+
+//        SendPredictionThread thread = new SendPredictionThread(inputJSON, callback);
+//        thread.start();
     }
+
+    private class SendPredictionThread2 extends Thread {
+        private String inputJSON;
+        private OnReceivePredictionResultsCallback callback;
+
+        public SendPredictionThread2(String inputJSON, OnReceivePredictionResultsCallback callback) {
+            this.inputJSON = inputJSON;
+            this.callback = callback;
+        }
+
+        @Override
+        public void run() {
+            HttpTransport httpTransport = null;
+            httpTransport = new NetHttpTransport();
+            GsonFactory gsonFactory = GsonFactory.getDefaultInstance();
+            Discovery discovery = new Discovery.Builder(httpTransport, gsonFactory, null).build();
+            RestDescription api = null;
+            try {
+                api = discovery.apis().getRest("ml", "v1").execute();
+            } catch (IOException e) {
+                System.out.println("IO Exception restdescription");
+                e.printStackTrace();
+            }
+            RestMethod method = api.getResources().get("projects").getMethods().get("predict");
+
+            JsonSchema param = new JsonSchema();
+            String projectId = "trackiev2";
+            // You should have already deployed a model and a version.
+            // For reference, see https://cloud.google.com/ml-engine/docs/deploying-models.
+            param.set(
+                    "name", String.format("projects/%s/models/%s/versions/%s", projectId, modelName, modelVersion));
+
+            GenericUrl url =
+                    new GenericUrl(UriTemplate.expand(api.getBaseUrl() + method.getPath(), param, true));
+
+            String contentType = "application/json";
+            HttpContent content = ByteArrayContent.fromString(contentType, inputJSON);
+
+            try {
+                System.out.println("Content length: " + content.getLength());
+//                System.out.println("Input JSON string: " + inputJSON);
+            } catch (IOException e) {
+                System.out.println("IO Exception: Couldnt get content length");
+                e.printStackTrace();
+            }
+
+            List<String> scopes = new ArrayList<>();
+            scopes.add("https://www.googleapis.com/auth/cloud-platform");
+
+            GoogleCredentials credential = null;
+
+            try {
+                credential = GoogleCredentials.fromStream(
+                        new ByteArrayInputStream(CREDENTIALS_KEY.getBytes(StandardCharsets.UTF_8)));
+            } catch (IOException e) {
+                System.out.println("IOException: googlecredentials");
+                e.printStackTrace();
+            }
+            HttpRequestFactory requestFactory = httpTransport.createRequestFactory(new HttpCredentialsAdapter(credential));
+            HttpRequest request = null;
+            try {
+                GenericUrl url2 = new GenericUrl("http://10.12.191.77:443/pred");
+                request = requestFactory.buildRequest(method.getHttpMethod(), url2, content);
+            } catch (IOException e) {
+                System.out.println("IOException: Build request failed");
+                e.printStackTrace();
+            }
+
+            System.out.println("Request: " + request);
+            String response = null;
+            try {
+                response = request.execute().parseAsString();
+            } catch (IOException e) {
+                System.out.println("IOException: fail to execute request");
+                e.printStackTrace();
+            }
+            System.out.println("Response: " + response);
+
+            try {
+                callback.onReceiveResults(parsePredictionJSONForResult(response, modelType));
+            } catch (JSONException | NullPointerException e) {
+                e.printStackTrace();
+                callback.onError();
+            }
+        }
+    }
+
 
     private String createInputInstanceJSONFrom2DArray(List<List<Double>> inputArray) {
         Map<String, List<List<Double>>> map = new HashMap<>();
