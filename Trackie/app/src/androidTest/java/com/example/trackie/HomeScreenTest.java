@@ -126,7 +126,7 @@ public class HomeScreenTest {
     }
 
     @Test
-    public void ClickSetLocationsButton() throws Exception{
+    public void ClickSetLocationsButton() throws Exception {
         sleep(100);
         onView(withId(R.id.set_location_button))
                 .perform(click());
