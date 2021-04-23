@@ -112,15 +112,6 @@ public class FetchWiFiDataUtils {
                         dataListener.onScanResultsReceived(results);
                         timesScanned++;
 
-                        if (timesScanned == 3) {
-                            try {
-                                Thread.sleep(5000);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
-                            timesScanned = 0;
-                        }
-
                         if (timesScanned == timesToScan || stopScanning) {
 
                             // stop all scanning, perform steps to unregister receiver and null it
